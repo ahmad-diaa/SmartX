@@ -1,2 +1,2 @@
-class APIKeysController < ApplicationController
+class ApiKeysController < ApplicationController
 end

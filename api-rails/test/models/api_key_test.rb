@@ -2,7 +2,6 @@ require 'test_helper'
 require 'minitest/mock'
 
 class ApiKeyTest < ActiveSupport::TestCase
-  
   test "generates access token" do
     joe = users(:joe)
     api_key = ApiKey.create(scope: 'session', user_id: joe.id)
