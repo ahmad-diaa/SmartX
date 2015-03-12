@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :api_keys, except: [:new, :edit]
-  resources :users, except: [:new, :edit]
+  resources :users, except: [:new, :edit, :destroy]
+  post 'session' => 'session#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
