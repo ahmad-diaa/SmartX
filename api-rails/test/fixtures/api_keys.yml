@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  access_token: MyString
+  scope: MyString
+  expired_at: 2015-03-12 03:38:51
+  created_at: 2015-03-12 03:38:51
+
+two:
+  user_id: 
+  access_token: MyString
+  scope: MyString
+  expired_at: 2015-03-12 03:38:51
+  created_at: 2015-03-12 03:38:51
+  
+joe_session:
+  user: joe
+  access_token: <%= SecureRandom.hex %>
+  scope: 'session'
+  expired_at: <%= 4.hours.from_now %>
+
+jane_api:
+  user: jane
+  access_token: <%= SecureRandom.hex %>
+  scope: 'api'
+  expired_at: <%= 30.days.from_now %>
