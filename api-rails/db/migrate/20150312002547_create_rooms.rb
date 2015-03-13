@@ -5,7 +5,7 @@ class CreateRooms < ActiveRecord::Migration
       t.string :room_id, null: false
       t.string :name
       t.string :photo
-t.references :user, index: true
+      t.references :user, index: true
 
       t.timestamps
 

@@ -5,21 +5,27 @@ class API::V1::RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all
-
+    @user = User.find(params[:user_id])
+    @rooms = @user.rooms.all
+    
     render json: @rooms if stale?(etag: @rooms.all, last_modified: @rooms.maximum(:updated_at))
   end
 
   # GET /rooms/1
   # GET /rooms/1.json
   def show
+    @user=User.find(params[:user_id])
+    @room=@user.rooms.find(params[:room_id])
     render json: @room if stale?(@room)
   end
 
+
   # POST /rooms
   # POST /rooms.json
-  def create
-    @room = Room.new(room_params)
+   def create
+    
+     @user=User.find(params[:user_id])
+    @room = @user.rooms.create(room_params)
 
     if @room.save
       render json: @room, status: :created
@@ -41,6 +47,8 @@ class API::V1::RoomsController < ApplicationController
   # DELETE /rooms/1
   # DELETE /rooms/1.json
   def destroy
+    @user = User.find(params[:user_id])
+    @room = @user.room.find(params[:room_id])
     @room.destroy
 
     head :no_content

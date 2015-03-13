@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :room, dependent: :destroy
+	has_many :rooms, dependent: :destroy
 	has_secure_password    
 	validates :name,  presence: true, length: { maximum: 25 }, uniqueness: { case_sensitive: false }
 	validates :password,  presence: true, length: { minimum: 6}
