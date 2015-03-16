@@ -7,12 +7,13 @@ Rails.application.routes.draw do
       put     "/users/:id", to: "users#update"
       delete  "/users/:id", to: "users#destroy"
 
-      # post  "/users/:id/rooms", to:"rooms#create" 
+      #post  "/users/rooms", to:"rooms#create" 
       # get     "/users/:id/rooms",     to: "rooms#index"
       # #post    "/users/rooms/",     to: "rooms#create"
       # get     "/users/:id/rooms/:id", to: "rooms#show"
       # put     "/users/:id/rooms", to: "rooms#update"
       # delete  "/users/:id/rooms", to: "rooms#destroy"
+      #resources :rooms
 
       resources :users do
        resources :rooms, param: :room_id

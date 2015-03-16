@@ -2,9 +2,9 @@ package models;
 
 
 public class Room {
-    private String id;
+    private String id ="12";
     private String name;
-    private String photo;
+    private String photo = "Photo";
 
     public String get_roomName() {
         return name;

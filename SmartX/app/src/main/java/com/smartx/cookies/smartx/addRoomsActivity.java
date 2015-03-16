@@ -1,7 +1,6 @@
 package com.smartx.cookies.smartx;
-
+import android.content.*;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import models.Room;
-import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -24,7 +22,7 @@ public class addRoomsActivity extends Activity{ //implements View.OnClickListene
     EditText roomName;
     TextView testRooms;
     public int count;
-    String ENDPOINT = "http://192.168.1.106:3000/";
+    String ENDPOINT = "http://192.168.1.5:3000/";
     int userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +47,21 @@ public class addRoomsActivity extends Activity{ //implements View.OnClickListene
         myAPI api = adapter.create(myAPI.class);
        // System.out.print("Respond2");
       //  api.addRoom(roomName.getText().toString(), "soora", userID +"", new Callback<Room> () {
-            api.addRoom(userID +"", room, new Callback<Room>(){
-
+           // api.addRoom("12", room.get_roomName(),"Photo" ,new Callback<Room>(){
+       api.addRoom((userID+""),room.get_id(),room.get_roomName(),room.getPhoto(),new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {
+    startActivity(new Intent(getApplicationContext(),About_us.class));
 
 
             }
 
             @Override
             public void failure(RetrofitError error) {
+                error.printStackTrace();
 //                throw error;
-                startActivity(new Intent(getApplicationContext(),About_us.class));
+//                startActivity(new Intent(getApplicationContext(),About_us.class));
 
             }
         });
