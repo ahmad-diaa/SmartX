@@ -12,47 +12,73 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/roomName"
-        android:layout_marginBottom="41dp"
-        android:layout_above="@+id/addRoomButton"
+        android:layout_row="0"
+        android:layout_column="2"
+        android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/addRoomButton"
         android:layout_alignStart="@+id/addRoomButton"
-        android:layout_row="0"
-        android:layout_column="2" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rooms:"
-        android:id="@+id/testRooms"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/roomName"
-        android:layout_alignEnd="@+id/roomName"
-        android:layout_row="0"
-        android:layout_column="1" />
+        android:layout_marginTop="58dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Room"
         android:id="@+id/addRoomButton"
-        android:layout_alignBaseline="@+id/testRooms"
-        android:layout_alignBottom="@+id/testRooms"
-        android:layout_centerHorizontal="true"
         android:nestedScrollingEnabled="true"
         android:onClick="addRoomButton"
         android:layout_row="6"
-        android:layout_column="2" />
+        android:layout_column="2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="123dp" />
 
     <TextView android:text="Name" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/roomNameLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="44dp"
-        android:layout_marginStart="44dp"
-        android:layout_alignBottom="@+id/roomName"
         android:layout_row="0"
-        android:layout_column="0" />
+        android:layout_column="0"
+        android:layout_alignBottom="@+id/roomName"
+        android:layout_toLeftOf="@+id/textView2"
+        android:layout_toStartOf="@+id/textView2"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/RoomID"
+        android:layout_row="0"
+        android:layout_column="2"
+        android:layout_below="@+id/roomName"
+        android:layout_alignLeft="@+id/roomName"
+        android:layout_alignStart="@+id/roomName"
+        android:layout_marginTop="71dp" />
+
+    <TextView
+        android:text="Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_alignBottom="@+id/RoomID"
+        android:layout_toLeftOf="@+id/RoomID"
+        android:layout_toStartOf="@+id/RoomID"
+        android:layout_below="@+id/RoomID"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:text="Controller ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/roomIDLabel"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_above="@+id/textView2"
+        android:layout_alignLeft="@+id/roomNameLabel"
+        android:layout_alignStart="@+id/roomNameLabel" />
 
 </RelativeLayout>
 <!-- From: file:/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/src/main/res/layout/activity_addrooms.xml -->

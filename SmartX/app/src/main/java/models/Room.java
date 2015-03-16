@@ -2,7 +2,7 @@ package models;
 
 
 public class Room {
-    private String id ="12";
+    private String id ;
     private String name;
     private String photo = "Photo";
 
@@ -42,9 +42,12 @@ public class Room {
         this.id = id;
     }
 
-    public Room(String roomName) {
+    public Room(String roomName ,String roomID) {
 
         name = roomName;
+        id  = roomID;
+
+
     }
 
     public Room() {

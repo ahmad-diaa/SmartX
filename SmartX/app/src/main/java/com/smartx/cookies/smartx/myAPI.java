@@ -20,8 +20,8 @@ public interface myAPI {
                Callback<User> callback);
     @FormUrlEncoded
     @POST("/api/v1/users/{userID}/rooms/")
-    void addRoom(@Path("userID") String id,@Field("room[room_id]") String room_id, @Field("room[name]") String name
-            ,@Field("room[photo]") String photo, Callback<Room> callback);
+    void addRoom(@Path("userID") String id, @Field("room[name]") String name
+            ,@Field("room[photo]") String photo,@Field("room[room_id]") String room_id ,Callback<Room> callback);
 //    @FormUrlEncoded
 //    @POST("/api/v1/users/2/rooms")
 //    void addRoom(@Field("room[room_id]") String id,@Field("room[name]") String roomName, @Field("room[photo]") String photo

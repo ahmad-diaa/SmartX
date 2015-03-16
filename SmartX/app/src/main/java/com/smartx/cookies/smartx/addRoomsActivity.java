@@ -1,13 +1,12 @@
 package com.smartx.cookies.smartx;
-import android.content.*;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import models.Room;
 import retrofit.Callback;
@@ -19,8 +18,9 @@ import retrofit.client.Response;
 public class addRoomsActivity extends Activity{ //implements View.OnClickListener{
 
     Button addRoomButton;
+    EditText roomID;
     EditText roomName;
-    TextView testRooms;
+//    TextView testRooms;
     public int count;
     String ENDPOINT = "http://192.168.1.5:3000/";
     int userID;
@@ -33,7 +33,9 @@ public class addRoomsActivity extends Activity{ //implements View.OnClickListene
         addRoomButton = (Button) findViewById(R.id.addRoomButton);
        // addRoomButton.setOnClickListener(this);
         roomName = (EditText) findViewById(R.id.roomName);
-        testRooms = (TextView) findViewById(R.id.testRooms);
+        roomID = (EditText) findViewById(R.id.RoomID);
+
+//        testRooms = (TextView) findViewById(R.id.testRooms);
        // dbHandler = new DBHandler(this, null, null, 1);
         printDatabase();
     }
@@ -41,14 +43,14 @@ public class addRoomsActivity extends Activity{ //implements View.OnClickListene
     public void addRoomButton(View v){
         Button addRoomButton = (Button) v;
      //  dbHandler = new DBHandler(this, null, null, 1);
-        Room room = new Room(roomName.getText().toString());
+        Room room = new Room(roomName.getText().toString(),roomID.toString());
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
         myAPI api = adapter.create(myAPI.class);
        // System.out.print("Respond2");
       //  api.addRoom(roomName.getText().toString(), "soora", userID +"", new Callback<Room> () {
            // api.addRoom("12", room.get_roomName(),"Photo" ,new Callback<Room>(){
-       api.addRoom((userID+""),room.get_id(),room.get_roomName(),room.getPhoto(),new Callback<Room>() {
+       api.addRoom((userID+""),room.get_roomName(),room.getPhoto(),room.get_id(),new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {
