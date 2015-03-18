@@ -16,7 +16,9 @@ Rails.application.routes.draw do
       #resources :rooms
 
       resources :users do
-       resources :rooms, param: :room_id
+       resources :rooms, param: :room_id do 
+        resources :devices 
+      end
       end
     end
   end
