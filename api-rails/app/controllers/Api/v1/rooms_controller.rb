@@ -5,6 +5,7 @@ class API::V1::RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
+
     @user = User.find(params[:user_id])
     @rooms = @user.rooms.all
     
@@ -62,6 +63,6 @@ class API::V1::RoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
-      params.require(:room).permit(:room_id,:name)
+      params.require(:room).permit(:room_id,:name,:user_id)
     end
 end

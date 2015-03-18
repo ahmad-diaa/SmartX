@@ -14,7 +14,8 @@ Rails.application.routes.draw do
       # put     "/users/:id/rooms", to: "rooms#update"
       # delete  "/users/:id/rooms", to: "rooms#destroy"
       #resources :rooms
-
+      get "/types/:name",  to: "types#index"
+      resources :types
       resources :users do
        resources :rooms, param: :room_id do 
         resources :devices 

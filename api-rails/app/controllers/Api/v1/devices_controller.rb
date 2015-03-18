@@ -62,7 +62,7 @@ class API::V1::DevicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
-      params.require(:device).permit(:name)
+      params.require(:device).permit(:name,:user_id,:room_id)
     end
 end
 

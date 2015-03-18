@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318131318) do
+ActiveRecord::Schema.define(version: 20150318152456) do
 
   create_table "devices", force: true do |t|
     t.integer  "user_id"
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(version: 20150318131318) do
 
   add_index "rooms", ["room_id"], name: "index_rooms_on_room_id", unique: true
   add_index "rooms", ["user_id"], name: "index_rooms_on_user_id"
+
+  create_table "types", force: true do |t|
+    t.string   "name"
+    t.string   "brand"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name",            null: false
