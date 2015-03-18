@@ -20,4 +20,4 @@
           android:singleLine="true"
           android:layout_margin="3dip"
           android:layout_width="match_parent"
-          android:layout_height="wrap_content" /><!-- From: file:/Users/zamzamy/Documents/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/layout/abc_simple_dropdown_hint.xml -->
+          android:layout_height="wrap_content" /><!-- From: file:/Users/youmna/smartx1/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/layout/abc_simple_dropdown_hint.xml -->
