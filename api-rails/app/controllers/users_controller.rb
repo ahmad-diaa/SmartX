@@ -3,7 +3,8 @@ class UsersController < ApplicationController
 
   # Returns list of users. This requires authorization
   def index
-    render json: User.all
+    @users =  User.all
+    render json: @users if stale?(etag: @users.all, last_modified: @users.maximum(:updated_at))
   end
 
   def show
