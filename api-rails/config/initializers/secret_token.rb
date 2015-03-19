@@ -16,4 +16,4 @@
 # Using secret_token for rails3 compatibility. Change to secret_key_base
 # to avoid deprecation warning.
 # Can be safely removed in a rails3 api-only application.
-Easycontacts::Application.config.secret_token = 'd708ac3e7cadc5b03ddff24e0462d276a8bc64464b0fd0c3286cf3f2add14f6da368c77197dc85384664d1c74012f7b23e2b4cb8e615dbb035d4f9fae89afda6'
+ApiRails::Application.config.secret_token = '521b3e26f73a6dca04b415414a7e1b739f9eeaa4f0e70563406ed289d50a7a816a440abdc435c64ba970c8ffbdbbd140fd8cfd0a77806a0cee6c6d3646b53e7d'
