@@ -25,7 +25,7 @@ public class LoginActivity extends ActionBarActivity {
     Button btnLogin;
     Button btn;
     Button btn2;
-    String ENDPOINT = "http://192.168.1.5:3000/";
+    String ENDPOINT = "http://192.168.1.127:3000/";
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
 
@@ -38,23 +38,6 @@ public class LoginActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_login);
 
-        btn = (Button)findViewById(R.id.button);
-        btn.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this,About_us.class));
-            }
-
-        });
-
-        btn2 = (Button)findViewById(R.id.button2);
-        btn2.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this, DBHandler.device.class));
-            }
-
-        });
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new Button.OnClickListener() {

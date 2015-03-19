@@ -2,67 +2,67 @@
 <items version="2" >
 
     <item
-        jar="/Users/youmna/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a681c044244d9fc375198588297a39ba78028423">
-        <dex dex="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-6f5d9ecd0bd2c333f50d8541306cb11a499bb00b.jar" />
-    </item>
-    <item
-        jar="/Users/youmna/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.2.0/c0b52915a48fa91b1b94a28d4a2997bac5f524df/okio-1.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c0b52915a48fa91b1b94a28d4a2997bac5f524df">
-        <dex dex="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/pre-dexed/debug/okio-1.2.0-18a5b5531e0cd8000a16601434daa7ab2741116c.jar" />
-    </item>
-    <item
-        jar="/Users/youmna/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-urlconnection/2.0.0/afe8399d352713b66e597e9670c741d1e60ae923/okhttp-urlconnection-2.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="afe8399d352713b66e597e9670c741d1e60ae923">
-        <dex dex="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-2.0.0-1fd5e294222bcb6adf3f8fb5e7c118acda81ed25.jar" />
-    </item>
-    <item
-        jar="/Users/youmna/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-cfd30945297a8fb26aed1ba4774e083f8619012f.jar" />
-    </item>
-    <item
-        jar="/Users/youmna/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.2.0/959c454243581fdf730abfd4f4745441724bcf2c/okhttp-2.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="959c454243581fdf730abfd4f4745441724bcf2c">
-        <dex dex="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/pre-dexed/debug/okhttp-2.2.0-344c3a0b1aad0caad1e741238dabdf7f38aa36a4.jar" />
-    </item>
-    <item
-        jar="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-1e99e8e97f441b7df5f3252d238985bdccbd4a09.jar" />
-    </item>
-    <item
-        jar="/Users/youmna/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
+        jar="/Users/zamzamy/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/pre-dexed/debug/gson-2.3.1-0c9dd8d1e4103ce7493a4b5b1c5ca5650af966ae.jar" />
+        <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/gson-2.3.1-feb056304c37be676c2955c15e6559beadef7f3e.jar" />
     </item>
     <item
-        jar="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/pre-dexed/debug/classes-29b677fc664c27e8f412c697f1b268a494bade29.jar" />
-    </item>
-    <item
-        jar="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jar="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/build/intermediates/pre-dexed/debug/classes-46adcefe0aa56a2109e66a402986d9e3cc4eeac2.jar" />
+        <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/classes-d81c594ddf7ab2842eb7d463002c2b6d377bc0c9.jar" />
+    </item>
+    <item
+        jar="/Users/zamzamy/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.2.0/c0b52915a48fa91b1b94a28d4a2997bac5f524df/okio-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c0b52915a48fa91b1b94a28d4a2997bac5f524df">
+        <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/okio-1.2.0-c456d3727639ca7ad8c9a54b16e81ca7f3bc5789.jar" />
+    </item>
+    <item
+        jar="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/classes-69b2f551a9cbc21c158063b5d6ad1764716f68de.jar" />
+    </item>
+    <item
+        jar="/Users/zamzamy/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-06463a58e98a525fb129e5aafc9efe2001d17d33.jar" />
+    </item>
+    <item
+        jar="/Users/zamzamy/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp/2.2.0/959c454243581fdf730abfd4f4745441724bcf2c/okhttp-2.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="959c454243581fdf730abfd4f4745441724bcf2c">
+        <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/okhttp-2.2.0-45aa2abc1be892c81d06300900265cb21322bca7.jar" />
+    </item>
+    <item
+        jar="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-32ca1134c6b86cb8b80e225ee4dc32e5f6005a1b.jar" />
+    </item>
+    <item
+        jar="/Users/zamzamy/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.9.0/a681c044244d9fc375198588297a39ba78028423/retrofit-1.9.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a681c044244d9fc375198588297a39ba78028423">
+        <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-02a00f8f3f6c963d48a162942eed0565b77155c5.jar" />
+    </item>
+    <item
+        jar="/Users/zamzamy/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-urlconnection/2.0.0/afe8399d352713b66e597e9670c741d1e60ae923/okhttp-urlconnection-2.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="afe8399d352713b66e597e9670c741d1e60ae923">
+        <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-2.0.0-80b1f54a7811c8d36e267f62d68fb568f3568642.jar" />
     </item>
 
 </items>

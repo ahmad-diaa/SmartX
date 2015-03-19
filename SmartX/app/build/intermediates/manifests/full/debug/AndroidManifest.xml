@@ -15,7 +15,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Holo.NoActionBar" >
         <activity
             android:name="com.smartx.cookies.smartx.LoginActivity"
             android:label="@string/app_name" >
@@ -48,6 +48,14 @@
         <activity
             android:name="com.smartx.cookies.smartx.DBHandler$device"
             android:label="@string/title_activity_device" >
+        </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.addDevice"
+            android:label="@string/title_activity_device" >
+        </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.AddDevices"
+            android:label="@string/title_activity_add_devices" >
         </activity>
     </application>
 
