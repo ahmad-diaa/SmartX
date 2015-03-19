@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <resources>
     <string name="app_name">SmartX</string>
 
@@ -10,3 +11,17 @@
     <string name="title_activity_about_us">About_us</string>
     <string name="title_activity_device">device</string>
 </resources>
+=======
+<resources>
+    <string name="app_name">SmartX</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="Login">Sign In</string>
+    <string name="Username">Name</string>
+    <string name="title_activity_about_us">About_us</string>
+    <string name="title_activity_device">device</string>
+</resources>
+>>>>>>> SX1_user_can_login

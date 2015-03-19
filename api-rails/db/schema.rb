@@ -11,6 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20150312002547) do
+
+  create_table "rooms", id: false, force: true do |t|
+    t.string   "room_id",    null: false
+    t.string   "name"
+    t.string   "photo"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rooms", ["room_id"], name: "index_rooms_on_room_id", unique: true
+  add_index "rooms", ["user_id"], name: "index_rooms_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "name",            null: false
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest"
+=======
 ActiveRecord::Schema.define(version: 20150312125223) do
 
   create_table "api_keys", force: true do |t|
@@ -28,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150312125223) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+>>>>>>> SX1_user_can_login
   end
 
 end
