@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'state_machine', '0.9.3'
 
 gem 'strong_parameters'
 

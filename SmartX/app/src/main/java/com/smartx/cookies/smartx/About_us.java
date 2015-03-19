@@ -1,9 +1,6 @@
 package com.smartx.cookies.smartx;
 
-<<<<<<< HEAD
 import android.content.SharedPreferences;
-=======
->>>>>>> SX1_user_can_login
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -14,20 +11,15 @@ import android.widget.TextView;
 
 
 public class About_us extends ActionBarActivity {
-<<<<<<< HEAD
-    public static final String sharedPrefs = "MySharedPrefs";
-=======
 
->>>>>>> SX1_user_can_login
+    public static final String sharedPrefs = "MySharedPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
         TextView Text1 = (TextView) findViewById(R.id.hyperlink);
-<<<<<<< HEAD
-       SharedPreferences settings = getSharedPreferences(sharedPrefs, 0);
-=======
->>>>>>> SX1_user_can_login
+        SharedPreferences settings = getSharedPreferences(sharedPrefs, 0);
         Text1.setText(
                 Html.fromHtml(
                         "<a href=\"https://www.facebook.com/SmartXSolutions\">Facebook Page</a> "));
