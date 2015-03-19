@@ -6,8 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.smartx.cookies.smartx.MainActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
 
 </RelativeLayout>
-<!-- From: file:/Users/youmna/Desktop/h/SmartX-SX19_add_room/SmartX/app/src/main/res/layout/activity_main.xml -->
+<!-- From: file:/Users/zamzamy/Documents/new/SmartX/app/src/main/res/layout/activity_main.xml -->
