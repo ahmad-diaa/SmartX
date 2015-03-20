@@ -221,7 +221,7 @@ public class LoginActivity extends ActionBarActivity {
     Button btnLogin;
     Button btn;
     Button btn2;
-    String ENDPOINT = "http://192.168.1.4:3000/";
+    String ENDPOINT = "http://84.233.101.134:3000/";
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";

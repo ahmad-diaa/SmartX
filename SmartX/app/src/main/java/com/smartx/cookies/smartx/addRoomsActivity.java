@@ -1,6 +1,7 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,7 +23,7 @@ public class addRoomsActivity extends Activity { //implements View.OnClickListen
     EditText roomName;
     //    TextView testRooms;
     public int count;
-    String ENDPOINT = "http://192.168.1.4:3000/";
+    String ENDPOINT = "http://84.233.101.134:3000/";
     int userID;
 
     @Override
@@ -55,6 +56,7 @@ public class addRoomsActivity extends Activity { //implements View.OnClickListen
         api.addRoom((userID + ""), room.get_roomName(), room.getPhoto(), room.get_id(), new Callback<Room>() {
             @Override
             public void success(Room room, Response response) {
+                startActivity(new Intent(getApplicationContext(),About_us.class));
 
             }
 
