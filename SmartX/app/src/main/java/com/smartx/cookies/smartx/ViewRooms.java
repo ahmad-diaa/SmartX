@@ -63,7 +63,7 @@ public class ViewRooms extends ListActivity{
                 roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());
                 i--;
                 }
-    
+
                 CustomListAdapter adapter=new CustomListAdapter(ViewRooms.this, roomNames, roomImages);
                 setListAdapter(adapter);
 
