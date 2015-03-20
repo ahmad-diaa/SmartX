@@ -9,7 +9,6 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/roomName"
         android:layout_row="0"
@@ -46,9 +45,8 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/RoomID"
+        android:id="@+id/RoomIDText"
         android:layout_row="0"
         android:layout_column="2"
         android:layout_below="@+id/roomName"
@@ -63,10 +61,10 @@
         android:id="@+id/textView2"
         android:layout_row="0"
         android:layout_column="0"
-        android:layout_alignBottom="@+id/RoomID"
-        android:layout_toLeftOf="@+id/RoomID"
-        android:layout_toStartOf="@+id/RoomID"
-        android:layout_below="@+id/RoomID"
+        android:layout_alignBottom="@+id/RoomIDText"
+        android:layout_toLeftOf="@+id/RoomIDText"
+        android:layout_toStartOf="@+id/RoomIDText"
+        android:layout_below="@+id/RoomIDText"
         android:layout_gravity="center" />
 
     <TextView

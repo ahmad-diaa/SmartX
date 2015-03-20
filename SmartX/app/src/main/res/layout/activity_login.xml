@@ -39,26 +39,5 @@
         android:layout_centerHorizontal="true"
         android:onClick="onClick"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:onClick="onClick"
-        android:layout_below="@+id/btnLogin"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="51dp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:onClick="onClick"
-        android:id="@+id/button2"
-        android:layout_alignTop="@+id/button"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
 
 </RelativeLayout>

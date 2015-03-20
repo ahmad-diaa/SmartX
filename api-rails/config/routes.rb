@@ -1,19 +1,6 @@
 Rails.application.routes.draw do
-  namespace :api, :defaults => {:format => :json} do
-    namespace :v1 do
-      get     "/users",     to: "users#index"
-      post    "/users",     to: "users#create"
-      get     "/users/:id", to: "users#show"
-      put     "p-0p/users/:id", to: "users#update"
-      delete  "/users/:id", to: "users#destroy"
+    post 'session' => 'session#create'
 
-      #post  "/users/rooms", to:"rooms#create" 
-      # get     "/users/:id/rooms",     to: "rooms#index"
-      # #post    "/users/rooms/",     to: "rooms#create"
-      # get     "/users/:id/rooms/:id", to: "rooms#show"
-      # put     "/users/:id/rooms", to: "rooms#update"
-      # delete  "/users/:id/rooms", to: "rooms#destroy"
-      #resources :rooms
       get "/types/:name",  to: "types#index"
       resources :types
       resources :users do
@@ -22,5 +9,5 @@ Rails.application.routes.draw do
       end
       end
     end
-  end
-end
+#   end
+# end

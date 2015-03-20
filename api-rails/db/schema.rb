@@ -13,6 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20150318152456) do
 
+  create_table "api_keys", force: true do |t|
+    t.integer  "user_id"
+    t.string   "access_token"
+    t.string   "scope"
+    t.datetime "expired_at"
+    t.datetime "created_at"
+  end
+
+  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
+
   create_table "devices", force: true do |t|
     t.integer  "user_id"
     t.integer  "room_id"
@@ -46,11 +56,10 @@ ActiveRecord::Schema.define(version: 20150318152456) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "name",            null: false
-    t.string   "password"
+    t.string   "name"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
   end
 
 end

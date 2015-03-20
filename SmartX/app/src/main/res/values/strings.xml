@@ -13,4 +13,6 @@
     <string name="type_title">Select Device</string>
     <string name="title_activity_add_devices">Add Devices</string>
     <string name="spinner_title1">Select Device Type</string>
+    <string name="title_activity_view_rooms">ViewRooms</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
