@@ -43,6 +43,10 @@
             android:name=".viewDevices"
             android:label="@string/title_activity_view_devices" >
         </activity>
+        <activity
+            android:name=".addDevices"
+            android:label="@string/title_activity_add_devices" >
+        </activity>
     </application>
 
 </manifest>

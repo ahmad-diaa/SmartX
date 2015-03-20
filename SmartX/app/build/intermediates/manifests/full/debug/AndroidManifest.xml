@@ -45,6 +45,10 @@
             android:name="com.smartx.cookies.smartx.device"
             android:label="@string/title_activity_device" >
         </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.viewDevices"
+            android:label="@string/title_activity_view_devices" >
+        </activity>
     </application>
 
 </manifest>

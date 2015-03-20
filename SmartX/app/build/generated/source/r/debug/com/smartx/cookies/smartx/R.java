@@ -1314,8 +1314,9 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_settings=0x7f09004a;
+        public static final int action_settings=0x7f09004d;
         public static final int activity_chooser_view_content=0x7f090021;
+        public static final int addDevice=0x7f09004a;
         public static final int always=0x7f090016;
         public static final int beginning=0x7f090013;
         public static final int btnLogin=0x7f090047;
@@ -1326,6 +1327,8 @@ containing a value of this type.
         public static final int collapseActionView=0x7f090017;
         public static final int decor_content_parent=0x7f09002f;
         public static final int default_activity_button=0x7f090024;
+        public static final int device_name=0x7f09004b;
+        public static final int device_type=0x7f09004c;
         public static final int dialog=0x7f09001b;
         public static final int disableHome=0x7f09000c;
         public static final int dropdown=0x7f09001c;
@@ -1408,13 +1411,16 @@ containing a value of this type.
         public static final int activity_device=0x7f040018;
         public static final int activity_login=0x7f040019;
         public static final int activity_main=0x7f04001a;
-        public static final int support_simple_spinner_dropdown_item=0x7f04001b;
+        public static final int activity_view_devices=0x7f04001b;
+        public static final int mylist=0x7f04001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f04001d;
     }
     public static final class menu {
         public static final int menu_about_us=0x7f0d0000;
         public static final int menu_device=0x7f0d0001;
         public static final int menu_login=0x7f0d0002;
         public static final int menu_main=0x7f0d0003;
+        public static final int menu_view_devices=0x7f0d0004;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -1447,6 +1453,7 @@ containing a value of this type.
         public static final int title_activity_device=0x7f0b0016;
         public static final int title_activity_login=0x7f0b0017;
         public static final int title_activity_main=0x7f0b0018;
+        public static final int title_activity_view_devices=0x7f0b0019;
     }
     public static final class style {
         /**  Customize your theme here. 

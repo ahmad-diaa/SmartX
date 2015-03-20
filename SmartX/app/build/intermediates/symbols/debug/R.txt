@@ -346,8 +346,9 @@ int id action_menu_presenter 0x7f090003
 int id action_mode_bar 0x7f09002e
 int id action_mode_bar_stub 0x7f09002d
 int id action_mode_close_button 0x7f090020
-int id action_settings 0x7f09004a
+int id action_settings 0x7f09004d
 int id activity_chooser_view_content 0x7f090021
+int id addDevice 0x7f09004a
 int id always 0x7f090016
 int id beginning 0x7f090013
 int id btnLogin 0x7f090047
@@ -358,6 +359,8 @@ int id checkbox 0x7f090029
 int id collapseActionView 0x7f090017
 int id decor_content_parent 0x7f09002f
 int id default_activity_button 0x7f090024
+int id device_name 0x7f09004b
+int id device_type 0x7f09004c
 int id dialog 0x7f09001b
 int id disableHome 0x7f09000c
 int id dropdown 0x7f09001c
@@ -436,11 +439,14 @@ int layout activity_about_us 0x7f040017
 int layout activity_device 0x7f040018
 int layout activity_login 0x7f040019
 int layout activity_main 0x7f04001a
-int layout support_simple_spinner_dropdown_item 0x7f04001b
+int layout activity_view_devices 0x7f04001b
+int layout mylist 0x7f04001c
+int layout support_simple_spinner_dropdown_item 0x7f04001d
 int menu menu_about_us 0x7f0d0000
 int menu menu_device 0x7f0d0001
 int menu menu_login 0x7f0d0002
 int menu menu_main 0x7f0d0003
+int menu menu_view_devices 0x7f0d0004
 int mipmap ic_launcher 0x7f030000
 int mipmap smartlogo 0x7f030001
 int mipmap smartxlogo 0x7f030002
@@ -469,6 +475,7 @@ int string title_activity_about_us 0x7f0b0015
 int string title_activity_device 0x7f0b0016
 int string title_activity_login 0x7f0b0017
 int string title_activity_main 0x7f0b0018
+int string title_activity_view_devices 0x7f0b0019
 int style AppTheme 0x7f0c0000
 int style Base_TextAppearance_AppCompat 0x7f0c0001
 int style Base_TextAppearance_AppCompat_Body1 0x7f0c0002

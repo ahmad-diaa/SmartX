@@ -33,7 +33,6 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
 
 public class LoginActivity extends ActionBarActivity {
-    DBHandler db =new DBHandler(this);
     Button btnLogin;
     Button btn;
     Button btn2;

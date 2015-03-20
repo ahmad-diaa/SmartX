@@ -10,4 +10,5 @@
     <string name="title_activity_about_us">About_us</string>
     <string name="title_activity_device">device</string>
     <string name="title_activity_view_devices">viewDevices</string>
+    <string name="title_activity_add_devices">addDevices</string>
 </resources>
