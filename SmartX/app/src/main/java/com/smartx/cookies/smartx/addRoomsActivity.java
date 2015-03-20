@@ -22,7 +22,7 @@ public class addRoomsActivity extends Activity { //implements View.OnClickListen
     EditText roomName;
     //    TextView testRooms;
     public int count;
-    String ENDPOINT = "http://192.168.1.5:3000/";
+    String ENDPOINT = "http://192.168.1.4:3000/";
     int userID;
 
     @Override

@@ -221,7 +221,7 @@ public class LoginActivity extends ActionBarActivity {
     Button btnLogin;
     Button btn;
     Button btn2;
-    String ENDPOINT = "http://192.168.43.230:3000/";
+    String ENDPOINT = "http://192.168.1.4:3000/";
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
@@ -279,8 +279,14 @@ public class LoginActivity extends ActionBarActivity {
                         api.getFeed(session.getId(), new Callback<models.User>() {
                             @Override
                             public void success(models.User user, Response response) {
-                                startActivity(new Intent(getApplicationContext(), About_us.class));
-
+                                String Name = user.getName();
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putInt("userID", user.getID());//Integer.parseInt(response.getHeaders().toString()));
+                                editor.putString("Name", Name);
+                                //response.getBody().in()
+                                editor.commit();
+                                startActivity(new Intent(getApplicationContext(),addRoomsActivity.class));
                             }
 
                             @Override
