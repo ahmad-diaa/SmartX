@@ -27,9 +27,10 @@ ActiveRecord::Schema.define(version: 20150318152456) do
   add_index "devices", ["user_id"], name: "index_devices_on_user_id"
 
   create_table "rooms", id: false, force: true do |t|
-    t.integer  "user_id"
     t.string   "room_id",    null: false
     t.string   "name"
+    t.string   "photo"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

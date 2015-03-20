@@ -13,12 +13,15 @@
 
     <application
         android:allowBackup="true"
+        android:configChanges="keyboardHidden|orientation"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.NoActionBar" >
         <activity
             android:name="com.smartx.cookies.smartx.LoginActivity"
-            android:label="@string/app_name" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,15 +30,21 @@
         </activity>
         <activity
             android:name="com.smartx.cookies.smartx.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.smartx.cookies.smartx.About_us"
-            android:label="@string/app_name" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.smartx.cookies.smartx.addRoomsActivity"
-            android:label="@string/app_name" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
         </activity>
 
         <!-- <activity android:name=".About_us" -->
@@ -45,14 +54,6 @@
         <!-- <category android:name = "android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
 
-        <activity
-            android:name="com.smartx.cookies.smartx.DBHandler$device"
-            android:label="@string/title_activity_device" >
-        </activity>
-        <activity
-            android:name="com.smartx.cookies.smartx.addDevice"
-            android:label="@string/title_activity_device" >
-        </activity>
         <activity
             android:name="com.smartx.cookies.smartx.AddDevices"
             android:label="@string/title_activity_add_devices" >
