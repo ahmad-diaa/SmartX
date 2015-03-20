@@ -15,12 +15,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class addRoomsActivity extends Activity{ //implements View.OnClickListener{
-
+public class addRoomsActivity extends Activity{
     Button addRoomButton;
     EditText roomID;
     EditText roomName;
-    //    TextView testRooms;
     public int count;
     String ENDPOINT = "http://192.168.25.27:3000/";
     int userID;
@@ -35,7 +33,6 @@ public class addRoomsActivity extends Activity{ //implements View.OnClickListene
         final SharedPreferences  mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID=(mSharedPreference.getInt("userID", 1));
         addRoomButton = (Button) findViewById(R.id.addRoomButton);
-        // addRoomButton.setOnClickListener(this);
 
     }
     public int randomIcon(){
@@ -47,14 +44,10 @@ public class addRoomsActivity extends Activity{ //implements View.OnClickListene
         roomID = (EditText) findViewById(R.id.RoomIDText);
 
         Button addRoomButton = (Button) v;
-        //  dbHandler = new DBHanxler(this, null, null, 1);
         Room room = new Room(roomName.getText().toString(),roomID.getText().toString());
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
         myAPI api = adapter.create(myAPI.class);
-        // System.out.print("Respond2");
-        //  api.addRoom(roomName.getText().toString(), "soora", userID +"", new Callback<Room> () {
-            // api.addRoom("12", room.get_roomName(),"Photo" ,new Callback<Room>(){
         room.setPhoto(photos[randomIcon()] + "");
 
         api.addRoom((userID+""),room.get_roomName(),room.getPhoto(),room.get_id(),new Callback<Room>() {
@@ -71,9 +64,6 @@ public class addRoomsActivity extends Activity{ //implements View.OnClickListene
             public void failure(RetrofitError error) {
                 error.printStackTrace();
                 startActivity(new Intent(getApplicationContext(), About_us.class));
-//                throw error;
-//                startActivity(new Intent(getApplicationContext(),About_us.class));
-
             }
         });
     }

@@ -39,11 +39,9 @@ public class ViewRooms extends ListActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_view_rooms);
-       // addRoomB = (Button) findViewById(R.id.addRoomB);
         final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID=(mSharedPreference.getInt("userID", 1));
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-       // final ListView ListView = (ListView) findViewById(R.id.listview);
         myAPI api = adapter.create(myAPI.class);
         api.viewRooms(userID +"", new Callback<List<Room>>() {
 
@@ -52,7 +50,6 @@ public class ViewRooms extends ListActivity{
 
                 String[] roomNames = new String[rooms.size()];
                 final Integer[] roomImages = new Integer[rooms.size()];
-  //              List<HashMap<String,String>> aList = new ArrayList<HashMap<String,String>>();
 
                 Iterator<Room> iterator = rooms.iterator();
                 Iterator<Room> iterator2 = rooms.iterator();
@@ -97,11 +94,6 @@ public class ViewRooms extends ListActivity{
         inflater.inflate(R.menu.menu_view_rooms, menu);
         return true;
     }
-//    public void onListItemClick(ListView lv ,View view,int position,int imgid) {
-//
-//        String Slecteditem= (String)getListAdapter().getItem(position);
-//        Toast.makeText(this, Slecteditem, Toast.LENGTH_SHORT).show();
-//    }
 
 
 }
