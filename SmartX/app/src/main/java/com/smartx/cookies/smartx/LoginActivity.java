@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class LoginActivity extends ActionBarActivity {
     Button btnLogin;
     Button btn;
     Button btn2;
-    String ENDPOINT = "http://84.233.100.168:3000/";
+    String ENDPOINT = "http://84.233.102.39:3000/";
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
@@ -83,17 +85,22 @@ public class LoginActivity extends ActionBarActivity {
                                 String Name = user.getName();
                                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                                 SharedPreferences.Editor editor = prefs.edit();
-                                editor.putInt("userID", user.getID());//Integer.parseInt(response.getHeaders().toString()));
+                                editor.putInt("userID", user.getID());
                                 editor.putString("Name", Name);
-                                //response.getBody().in()
                                 editor.commit();
-                                startActivity(new Intent(getApplicationContext(),addRoomsActivity.class));
+                                startActivity(new Intent(getApplicationContext(),ViewRooms.class));
                             }
 
                             @Override
                             public void failure(RetrofitError error) {
-                                throw error;
+//                                Log.i("ahmad  :", error.getMessage());
+//                                if(error.getMessage().equals("401 Unauthorized"))
+//                                {
+//                                    Toast.makeText(getApplicationContext(),"Wrong Username/Password",Toast.LENGTH_LONG);
+//                                }
+                                Toast.makeText(getApplicationContext(),"Make sure you are online",Toast.LENGTH_LONG).show();
 
+//
                             }
                         });
 
@@ -101,7 +108,14 @@ public class LoginActivity extends ActionBarActivity {
 
                     @Override
                     public void failure(RetrofitError error) {
-                        throw error;
+                        Log.i("ahmad", error.getMessage());
+                        if(error.getMessage().contains("401 Unauthorized"))
+                        {
+                            Toast.makeText(getApplicationContext(),"Wrong Username/Password",Toast.LENGTH_LONG).show();
+                        }else
+                        {
+                            Toast.makeText(getApplicationContext(),"Make sure you are online.\nIf this problem proceeds, contact us.",Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 

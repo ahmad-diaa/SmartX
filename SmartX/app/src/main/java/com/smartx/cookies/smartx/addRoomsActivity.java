@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import models.Room;
 import retrofit.Callback;
@@ -20,8 +22,8 @@ public class addRoomsActivity extends Activity{
     Button addRoomButton;
     EditText roomID;
     EditText roomName;
-    public int count;
-    String ENDPOINT = "http://84.233.100.168:3000/";
+    public int count = -1;
+    String ENDPOINT = "http://84.233.102.39:3000/";
     int userID;
     int[] photos = new int[]{ R.drawable.one ,
             R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
@@ -38,7 +40,7 @@ public class addRoomsActivity extends Activity{
 
     }
     public int randomIcon(){
-        return ((int)(Math.random() * (9)));
+        return (count + 1)%9 ;
     }
 
     public void addRoomButton(View v) {
@@ -66,7 +68,8 @@ public class addRoomsActivity extends Activity{
             @Override
             public void failure(RetrofitError error) {
 
-                throw error;
+                Log.i("Dalia" , error.getMessage());
+                Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
             }
         });
     }

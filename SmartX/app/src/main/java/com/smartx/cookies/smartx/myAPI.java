@@ -10,6 +10,7 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 
 /**
@@ -34,5 +35,10 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/")
     void viewRooms(@Path("userID") String id, Callback<List<Room>> callback);
 
+    @FormUrlEncoded
+    @PUT("/users/{userID}/")
+    void changePassword(@Path("userID") String id, @Field ("user[password]") String password, Callback<User> callback);
 
+    @GET("/users/{userID}/")
+    void getUser (@Path("userID") String id, Callback <User> callback);
 }
