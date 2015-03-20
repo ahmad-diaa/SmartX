@@ -1,11 +1,14 @@
 package com.smartx.cookies.smartx;
 
 
+import java.util.List;
+
 import models.Room;
 import models.User;
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
+import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
@@ -22,6 +25,11 @@ public interface myAPI {
     @POST("/api/v1/users/{userID}/rooms/")
     void addRoom(@Path("userID") String id, @Field("room[name]") String name
             ,@Field("room[photo]") String photo,@Field("room[room_id]") String room_id ,Callback<Room> callback);
+
+
+    @GET("/api/v1/users/{userID}/rooms/")
+    void viewRooms(@Path("userID") String id, Callback <List<Room>> callback);
+
 //    @FormUrlEncoded
 //    @POST("/api/v1/users/2/rooms")
 //    void addRoom(@Field("room[room_id]") String id,@Field("room[name]") String roomName, @Field("room[photo]") String photo

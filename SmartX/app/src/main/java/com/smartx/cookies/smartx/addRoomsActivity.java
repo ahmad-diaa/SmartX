@@ -20,41 +20,49 @@ public class addRoomsActivity extends Activity{ //implements View.OnClickListene
     Button addRoomButton;
     EditText roomID;
     EditText roomName;
-//    TextView testRooms;
+    //    TextView testRooms;
     public int count;
-    String ENDPOINT = "http://192.168.1.5:3000/";
+    String ENDPOINT = "http://192.168.25.27:3000/";
     int userID;
+    int[] photos = new int[]{ R.drawable.one ,
+            R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
+            R.drawable.six ,R.drawable.seven ,R.drawable.eight ,R.drawable.nine};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addrooms);
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        final SharedPreferences  mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID=(mSharedPreference.getInt("userID", 1));
         addRoomButton = (Button) findViewById(R.id.addRoomButton);
-       // addRoomButton.setOnClickListener(this);
-        roomName = (EditText) findViewById(R.id.roomName);
-        roomID = (EditText) findViewById(R.id.RoomID);
+        // addRoomButton.setOnClickListener(this);
 
-//        testRooms = (TextView) findViewById(R.id.testRooms);
-       // dbHandler = new DBHandler(this, null, null, 1);
-        printDatabase();
+    }
+    public int randomIcon(){
+        return (1 + (int)(Math.random() * ((9 - 1) + 1)));
     }
 
-    public void addRoomButton(View v){
+    public void addRoomButton(View v) {
+        roomName = (EditText) findViewById(R.id.roomName);
+        roomID = (EditText) findViewById(R.id.RoomIDText);
+
         Button addRoomButton = (Button) v;
-     //  dbHandler = new DBHandler(this, null, null, 1);
-        Room room = new Room(roomName.getText().toString(),roomID.toString());
+        //  dbHandler = new DBHanxler(this, null, null, 1);
+        Room room = new Room(roomName.getText().toString(),roomID.getText().toString());
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
         myAPI api = adapter.create(myAPI.class);
-       // System.out.print("Respond2");
-      //  api.addRoom(roomName.getText().toString(), "soora", userID +"", new Callback<Room> () {
-           // api.addRoom("12", room.get_roomName(),"Photo" ,new Callback<Room>(){
-       api.addRoom((userID+""),room.get_roomName(),room.getPhoto(),room.get_id(),new Callback<Room>() {
+        // System.out.print("Respond2");
+        //  api.addRoom(roomName.getText().toString(), "soora", userID +"", new Callback<Room> () {
+            // api.addRoom("12", room.get_roomName(),"Photo" ,new Callback<Room>(){
+        room.setPhoto(photos[randomIcon()] + "");
+
+        api.addRoom((userID+""),room.get_roomName(),room.getPhoto(),room.get_id(),new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {
-    startActivity(new Intent(getApplicationContext(),About_us.class));
+
+                startActivity(new Intent(getApplicationContext(), ViewRooms.class));
 
 
             }
@@ -62,57 +70,15 @@ public class addRoomsActivity extends Activity{ //implements View.OnClickListene
             @Override
             public void failure(RetrofitError error) {
                 error.printStackTrace();
+                startActivity(new Intent(getApplicationContext(), About_us.class));
 //                throw error;
 //                startActivity(new Intent(getApplicationContext(),About_us.class));
 
             }
         });
-     //   addRoomToDB(room);
-        // printDatabase();
     }
-
-//    public void addRoomToDB(Room room){
-//
-//        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-//
-//        myAPI api = adapter.create(myAPI.class);
-//        System.out.print("Respond2");
-//        api.addRoom(Name, Pass, new Callback<User>() {
-//
-//
-//            @Override
-//            public void success(User user, Response response) {
-//                startActivity(new Intent(LoginActivity.this,About_us.class));
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//                throw error;
-//
-//            }
-//        });
-//
-//
-//
-//    }
-
-
-
-    //to delete FOR LATER!
-//    public void deleteRoomButton(View view){
-//        String inputText =buckysInput.getText().toString();
-//        dbHandler.deleteRoom();
-//    }
 
     public void printDatabase(){
-       // String dbString = dbHandler.databaseToString();
-     //   testRooms.setText(dbString);
         roomName.setText("");
     }
-//
-//    @Override
-//    public void onClick(View v) {
-//        Room room = new Room(roomName.getText().toString());
-//        dbHandler.addRoom(room);
-//    }
 }
