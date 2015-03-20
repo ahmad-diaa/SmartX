@@ -1,6 +1,9 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Application;
+
+
+import android.app.Application;
 import android.test.ApplicationTestCase;
 
 /**

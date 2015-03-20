@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :rooms, dependent: :destroy
+  has_many :api_keys
 	has_secure_password    
 	validates :name,  presence: true, length: { maximum: 25 }, uniqueness: { case_sensitive: false }
 	validates :password,  presence: true, length: { minimum: 6}
@@ -7,5 +8,10 @@ class User < ActiveRecord::Base
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
+  end
+    def session_api_key
+    api_keys.active.session.first_or_create
+
+
   end
 end

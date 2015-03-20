@@ -11,13 +11,15 @@ import android.widget.TextView;
 
 
 public class About_us extends ActionBarActivity {
+
     public static final String sharedPrefs = "MySharedPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
         TextView Text1 = (TextView) findViewById(R.id.hyperlink);
-       SharedPreferences settings = getSharedPreferences(sharedPrefs, 0);
+        SharedPreferences settings = getSharedPreferences(sharedPrefs, 0);
         Text1.setText(
                 Html.fromHtml(
                         "<a href=\"https://www.facebook.com/SmartXSolutions\">Facebook Page</a> "));

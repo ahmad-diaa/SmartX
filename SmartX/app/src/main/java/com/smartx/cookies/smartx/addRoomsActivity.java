@@ -1,4 +1,5 @@
 package com.smartx.cookies.smartx;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,11 +21,12 @@ public class addRoomsActivity extends Activity{
     EditText roomID;
     EditText roomName;
     public int count;
-    String ENDPOINT = "http://192.168.25.27:3000/";
+    String ENDPOINT = "http://84.233.100.168:3000/";
     int userID;
     int[] photos = new int[]{ R.drawable.one ,
             R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
             R.drawable.six ,R.drawable.seven ,R.drawable.eight ,R.drawable.nine};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,7 @@ public class addRoomsActivity extends Activity{
 
     }
     public int randomIcon(){
-        return (1 + (int)(Math.random() * ((9 - 1) + 1)));
+        return ((int)(Math.random() * (9)));
     }
 
     public void addRoomButton(View v) {
@@ -50,8 +52,9 @@ public class addRoomsActivity extends Activity{
         myAPI api = adapter.create(myAPI.class);
         room.setPhoto(photos[randomIcon()] + "");
 
-        api.addRoom((userID+""),room.get_roomName(),room.getPhoto(),room.get_id(),new Callback<Room>() {
 
+
+        api.addRoom((userID + ""), room.get_roomName(), room.getPhoto(), room.get_id(), new Callback<Room>() {
             @Override
             public void success(Room room, Response response) {
 
@@ -62,13 +65,10 @@ public class addRoomsActivity extends Activity{
 
             @Override
             public void failure(RetrofitError error) {
-                error.printStackTrace();
-                startActivity(new Intent(getApplicationContext(), About_us.class));
+
+                throw error;
             }
         });
     }
 
-    public void printDatabase(){
-        roomName.setText("");
-    }
 }

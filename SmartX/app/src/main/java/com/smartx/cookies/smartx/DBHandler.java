@@ -88,14 +88,15 @@ public class DBHandler extends SQLiteOpenHelper {
     public static class device extends ActionBarActivity {
 
         Spinner spinner;
-        String[] elements = {"TV","Radio","Fridge"};
+        String[] elements = {"TV", "Radio", "Fridge"};
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_device);
-            ArrayAdapter<String> adapter = new ArrayAdapter <String> (this, android.R.layout.simple_spinner_item,elements);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, elements);
 
-            spinner = (Spinner)findViewById(R.id.spinner1);
+            spinner = (Spinner) findViewById(R.id.spinner1);
             spinner.setAdapter(adapter);
 
         }
