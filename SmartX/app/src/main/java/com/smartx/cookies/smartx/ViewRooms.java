@@ -31,7 +31,7 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity{
 
-    String ENDPOINT = "http://84.233.102.39:3000/";
+    String ENDPOINT = "http://84.233.102.220:3000/";
     int userID;
     Button addRoomB;
 
@@ -69,7 +69,8 @@ public class ViewRooms extends ListActivity{
 
             @Override
             public void failure(RetrofitError error) {
-                startActivity(new Intent(getApplicationContext(), About_us.class));
+               throw error;
+                //startActivity(new Intent(getApplicationContext(), About_us.class));
 
             }
         });

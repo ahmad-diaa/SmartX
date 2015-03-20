@@ -40,12 +40,12 @@ public interface myAPI {
 
             ,@Field("room[photo]") String photo,@Field("room[room_id]") String room_id ,Callback<Room> callback);
 
-    @GET("/api/v1/types/{name}")
+    @GET("/types/{name}")
     void requestBrands(@Path("name") String device, Callback<List<Type>> types);
 
     @FormUrlEncoded
 
-    @POST("/api/v1/users/{user_id}/rooms/{room_id}/devices")
+    @POST("/users/{user_id}/rooms/{room_id}/devices")
     void addDevice(@Field("device[name]") String name,
                    @Field("device[user_id]") String userID, @Field("device[room_id]") String roomID,@Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
 

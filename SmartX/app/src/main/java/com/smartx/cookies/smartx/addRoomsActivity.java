@@ -24,7 +24,7 @@ public class addRoomsActivity extends Activity{
     EditText roomName;
 
     public int count = -1;
-    String ENDPOINT = "http://84.233.102.39:3000/";
+    String ENDPOINT = "http://84.233.102.220:3000/";
     int userID;
     int[] photos = new int[]{ R.drawable.one ,
             R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
