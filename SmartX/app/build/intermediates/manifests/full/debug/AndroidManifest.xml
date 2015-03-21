@@ -42,12 +42,13 @@
         <!-- </intent-filter> -->
 
         <activity
-            android:name="com.smartx.cookies.smartx.device"
-            android:label="@string/title_activity_device" >
+            android:name="com.smartx.cookies.smartx.viewDevices"
+            android:exported="true"
+            android:label="@string/title_activity_view_devices" >
         </activity>
         <activity
-            android:name="com.smartx.cookies.smartx.viewDevices"
-            android:label="@string/title_activity_view_devices" >
+            android:name="com.smartx.cookies.smartx.addDevices"
+            android:label="@string/title_activity_add_devices" >
         </activity>
     </application>
 

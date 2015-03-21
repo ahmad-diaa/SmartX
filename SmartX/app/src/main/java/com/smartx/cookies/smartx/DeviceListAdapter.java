@@ -16,27 +16,29 @@ import android.widget.TextView;
 
 public class DeviceListAdapter extends ArrayAdapter<String> {
 
+
     private final Activity context;
     private final String[] device_name;
     private final String[] device_type;
-    Button addRoom;
-    public DeviceListAdapter(Activity context, String[] device_name, String[] device_type) {
+
+    public DeviceListAdapter(Activity context, String[] device_name, String [] device_type) {
         super(context, R.layout.mylist, device_name);
         // TODO Auto-generated constructor stub
 
         this.context=context;
-        this.device_name=device_name;
+        //this.device_name=device_name;
+        this.device_name = new String[1];
+        device_name[0] = "TV";
         this.device_type=device_type;
+
     }
 
     public View getView(int position,View view,ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
         View rowView=inflater.inflate(R.layout.mylist, null ,true);
-        TextView deviceName = (TextView) rowView.findViewById(R.id.device_name);
-        TextView deviceType = (TextView) rowView.findViewById(R.id.device_type);
+        TextView txtTitle = (TextView) rowView.findViewById(R.id.deviceName);
 
-        deviceName.setText(device_name[position]);
-        deviceType.setText(device_type[position]);
+        txtTitle.setText(device_name[position]);
         return rowView;
 
     };

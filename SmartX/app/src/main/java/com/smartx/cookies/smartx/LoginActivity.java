@@ -58,7 +58,6 @@ public class LoginActivity extends ActionBarActivity {
         btn2.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this,device.class));
             }
 
         });

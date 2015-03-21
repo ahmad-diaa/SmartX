@@ -5,6 +5,24 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+
+    # Search
+    #@users = @users.search(params[:q]) if params[:q]
+
+    # Filter for relationship
+    #@users = @users.relationship(params[:relationship]) if params[:relationship]
+
+    # Order by
+    #@users = @users.order(params[:order].gsub(':', ' ')) if params[:order]
+
+    # Pagination
+    #if (params[:offset] && params[:limit])
+    #  @users = @users.page(1).per(params[:limit]).padding(params[:offset])
+    #else
+    #  @users = @users.page(1).per(25)
+    #end
+
+
     render json: @users if stale?(etag: @users.all, last_modified: @users.maximum(:updated_at))
   end
 
@@ -35,6 +53,7 @@ class UsersController < ApplicationController
       render json: @user.errors, status: :unprocessable_entity
     end
   end
+
 
   # DELETE /users/1
   # DELETE /users/1.json

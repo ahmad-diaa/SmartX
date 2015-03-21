@@ -1314,21 +1314,25 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_settings=0x7f09004d;
+        public static final int action_settings=0x7f090052;
         public static final int activity_chooser_view_content=0x7f090021;
-        public static final int addDevice=0x7f09004a;
+        public static final int addDeviceButton=0x7f090048;
         public static final int always=0x7f090016;
         public static final int beginning=0x7f090013;
-        public static final int btnLogin=0x7f090047;
-        public static final int button=0x7f090048;
-        public static final int button2=0x7f090049;
-        public static final int button3=0x7f090044;
+        public static final int brand_spinner=0x7f090044;
+        public static final int brandtitle=0x7f090045;
+        public static final int btnLogin=0x7f09004e;
+        public static final int button=0x7f09004f;
+        public static final int button2=0x7f090050;
+        public static final int button3=0x7f09004b;
         public static final int checkbox=0x7f090029;
         public static final int collapseActionView=0x7f090017;
         public static final int decor_content_parent=0x7f09002f;
         public static final int default_activity_button=0x7f090024;
-        public static final int device_name=0x7f09004b;
-        public static final int device_type=0x7f09004c;
+        public static final int deviceName=0x7f090046;
+        public static final int device_name=0x7f090047;
+        public static final int device_spinner=0x7f090042;
+        public static final int device_type=0x7f090051;
         public static final int dialog=0x7f09001b;
         public static final int disableHome=0x7f09000c;
         public static final int dropdown=0x7f09001c;
@@ -1367,14 +1371,15 @@ containing a value of this type.
         public static final int showCustom=0x7f09000f;
         public static final int showHome=0x7f090010;
         public static final int showTitle=0x7f090011;
-        public static final int spinner1=0x7f090042;
+        public static final int spinner1=0x7f090049;
+        public static final int spinnertitle=0x7f090043;
         public static final int split_action_bar=0x7f090007;
         public static final int submit_area=0x7f09003c;
         public static final int tabMode=0x7f09000b;
-        public static final int textView=0x7f090043;
+        public static final int textView=0x7f09004a;
         public static final int title=0x7f090027;
-        public static final int txtPassword=0x7f090046;
-        public static final int txtUserName=0x7f090045;
+        public static final int txtPassword=0x7f09004d;
+        public static final int txtUserName=0x7f09004c;
         public static final int up=0x7f090008;
         public static final int useLogo=0x7f090012;
         public static final int withText=0x7f09001a;
@@ -1408,19 +1413,21 @@ containing a value of this type.
         public static final int abc_search_view=0x7f040015;
         public static final int abc_simple_dropdown_hint=0x7f040016;
         public static final int activity_about_us=0x7f040017;
-        public static final int activity_device=0x7f040018;
-        public static final int activity_login=0x7f040019;
-        public static final int activity_main=0x7f04001a;
-        public static final int activity_view_devices=0x7f04001b;
-        public static final int mylist=0x7f04001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f04001d;
+        public static final int activity_add_devices=0x7f040018;
+        public static final int activity_device=0x7f040019;
+        public static final int activity_login=0x7f04001a;
+        public static final int activity_main=0x7f04001b;
+        public static final int activity_view_devices=0x7f04001c;
+        public static final int mylist=0x7f04001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f04001e;
     }
     public static final class menu {
         public static final int menu_about_us=0x7f0d0000;
-        public static final int menu_device=0x7f0d0001;
-        public static final int menu_login=0x7f0d0002;
-        public static final int menu_main=0x7f0d0003;
-        public static final int menu_view_devices=0x7f0d0004;
+        public static final int menu_add_devices=0x7f0d0001;
+        public static final int menu_device=0x7f0d0002;
+        public static final int menu_login=0x7f0d0003;
+        public static final int menu_main=0x7f0d0004;
+        public static final int menu_view_devices=0x7f0d0005;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -1450,10 +1457,11 @@ containing a value of this type.
         public static final int app_name=0x7f0b0013;
         public static final int hello_world=0x7f0b0014;
         public static final int title_activity_about_us=0x7f0b0015;
-        public static final int title_activity_device=0x7f0b0016;
-        public static final int title_activity_login=0x7f0b0017;
-        public static final int title_activity_main=0x7f0b0018;
-        public static final int title_activity_view_devices=0x7f0b0019;
+        public static final int title_activity_add_devices=0x7f0b0016;
+        public static final int title_activity_device=0x7f0b0017;
+        public static final int title_activity_login=0x7f0b0018;
+        public static final int title_activity_main=0x7f0b0019;
+        public static final int title_activity_view_devices=0x7f0b001a;
     }
     public static final class style {
         /**  Customize your theme here. 

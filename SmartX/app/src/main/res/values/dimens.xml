@@ -1,16 +1,5 @@
 <resources>
-    <string name="app_name">SmartX</string>
-
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="Login">Sign In</string>
-    <string name="Username">Name</string>
-    <string name="title_activity_about_us">About_us</string>
-    <string name="title_activity_device">device</string>
-    <string name="device">Add Device</string>
-    <string name="spinner_title">Select Device Type</string>
-    <string name="type_title">Select Device</string>
-    <string name="title_activity_add_devices">Add Devices</string>
-    <string name="spinner_title1">Select Device Type</string>
+        <!-- Default screen margins, per the Android Design guidelines. -->
+        <dimen name="activity_horizontal_margin">16dp</dimen>
+        <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>
