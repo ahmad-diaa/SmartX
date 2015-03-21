@@ -3,17 +3,20 @@
     android:layout_height="fill_parent"
     android:orientation="horizontal"
     android:nestedScrollingEnabled="true">
+    <!--android:id="@+id/device_name"-->
+
     <ImageView
-        android:id="@+id/device_name"
+        android:id="@+id/imageroom"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"/>
+    <!--android:id="@+id/device_type"-->
 
     <TextView
-        android:id="@+id/device_type"
+        android:id="@+id/nameroom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"

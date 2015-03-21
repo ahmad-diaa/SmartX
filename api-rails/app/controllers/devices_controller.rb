@@ -1,8 +1,9 @@
 class DevicesController < ApplicationController
+  #Returns list of devices in a specific room knowing she belongs to which user. 
   # GET /devices
   # GET /devices.json
   def index
-    @user=User.find(params[:user_id])
+    @user=  User.find(params[:user_id])
     @room = @user.rooms.find(params[:room_room_id])
     @devices = @room.devices.all
 
@@ -10,6 +11,7 @@ class DevicesController < ApplicationController
 
     render json: @devices if stale?(etag: @devices.all, last_modified: @devices.maximum(:updated_at))
   end
+  #Returns device with given id knowing he belongs to which user and room.
 
   # GET /devices/1
   # GET /devices/1.json
@@ -19,6 +21,7 @@ class DevicesController < ApplicationController
      @device= @room.devices.find(params[:id])
     render json: @device if stale?(@device)
   end
+#Creates a new device in a specific room knowing she belongs to which user.
 
   # POST /devices
   # POST /devices.json
@@ -34,6 +37,7 @@ class DevicesController < ApplicationController
       render json: @device.errors, status: :unprocessable_entity
     end
   end
+#Updates device parameters with given id knowing he belongs to which user and room.
 
   # PATCH/PUT /devices/1
   # PATCH/PUT /devices/1.json
@@ -47,6 +51,7 @@ class DevicesController < ApplicationController
       render json: @device.errors, status: :unprocessable_entity
     end
   end
+#Deletes device with given id knowing he belongs to which user and room.
 
   # DELETE /devices/1
   # DELETE /devices/1.json
@@ -60,9 +65,8 @@ class DevicesController < ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def device_params
-      params.require(:device).permit(:name,:user_id,:room_id)
+      params.require(:device).permit(:name,:user_id,:room_id, :type_name, :type_brand)
     end
 end
 

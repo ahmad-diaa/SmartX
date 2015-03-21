@@ -1,4 +1,5 @@
 class TypesController < ApplicationController
+  #Returns types with same name as the given name parameter. 
 
   # GET /types
   # GET /types.json
@@ -6,7 +7,8 @@ class TypesController < ApplicationController
     @types = Type.where( :name => params[:name] )
     render json: @types if stale?(etag: @types.all, last_modified: @types.maximum(:updated_at))
  	end
-  
+   #Creates a new type with type parameters.
+
   # POST /types
   # POST /types.json
   def create
@@ -19,6 +21,7 @@ class TypesController < ApplicationController
     end
   end
 
+# Deletes a specific user given his id.
 
   # DELETE /types/1
   # DELETE /types/1.json
@@ -29,7 +32,6 @@ class TypesController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
     def type_params
     params.require(:type).permit(:name,:brand)	
 end

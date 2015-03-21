@@ -1,11 +1,14 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,109 +25,143 @@ import java.util.List;
 
 import models.Device;
 import models.Type;
+import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.http.POST;
+import retrofit.http.Path;
 
 
-public class addDevices extends ActionBarActivity {
+public class AddDevices extends Activity implements AdapterView.OnItemSelectedListener {
+    int userID;
+    int roomID;
+    Spinner device_spinner;
+    List<String> brands;
+    Spinner brand_spinner;
+    ArrayAdapter<String> dataAdapter2;
+    String ENDPOINT = "http://192.168.1.4:3000/";
+    int brand_spinner_id = 2131296325;
+    int device_spinner_id = 2131296323;
+
+    EditText device_name;
+    Button addDeviceButton;
+    myAPI api;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_devices);
+
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
+        roomID = (mSharedPreference.getInt("roomID", 1));
+        device_name = (EditText) findViewById(R.id.device_name);
+
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        api = adapter.create(myAPI.class);
+
+        // Spinner element
+        device_spinner = (Spinner) findViewById(R.id.device_spinner);
+
+        device_spinner.setOnItemSelectedListener(this);
+
+        List<String> devices = new ArrayList<String>();
+        devices.add("None");
+        devices.add("TV");
+        devices.add("Fridge");
+        devices.add("Air Conditioner");
+        devices.add("Plug");
+        devices.add("Lamp");
+        devices.add("Set-top Box");
+        devices.add("Projector");
+        devices.add("DVD Player");
+        devices.add("Blu-ray Player");
 
 
-    public class AddDevices extends Activity implements AdapterView.OnItemSelectedListener {
-        int userID;
-        int roomID;
-        Spinner device_spinner;
-        List<String> brands;
-        Spinner brand_spinner;
-        ArrayAdapter<String> dataAdapter2;
-        String ENDPOINT = "http://172.20.10.4:3000/";
-        AdapterView parent;
-        EditText device_name;
-        Button addDeviceButton;
-        myAPI api;
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, devices);
+        device_spinner.setSelection(0);
 
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_add_devices);
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-            final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-            userID = (mSharedPreference.getInt("userID", 1));
-            roomID = (mSharedPreference.getInt("roomID", 1));
+        // attaching data adapter to spinner
+        device_spinner.setAdapter(dataAdapter);
+
+        ////////////////////////////////////NEW SPINNER/////////////////////////////////////////////////
+
+        brand_spinner = (Spinner) findViewById(R.id.brand_spinner);
+        brand_spinner.setOnItemSelectedListener(this);
+
+        brands = new ArrayList<String>();
+
+        dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, brands);
 
 
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        brand_spinner.setEnabled(false);
+        brand_spinner.setClickable(false);
+        brand_spinner.setAdapter(dataAdapter2);
 
-            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-            api = adapter.create(myAPI.class);
+        addDeviceButton = (Button) findViewById(R.id.addDeviceButton);
+        addDeviceButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ((device_spinner.getSelectedItem().toString().equals("None")) ||
+                        (brand_spinner.getSelectedItem().toString().equals("None"))
+                        ) {
+                    Toast.makeText(getApplicationContext(), "Please Fill in the Blank spaces", Toast.LENGTH_LONG).show();
+                } else {
+                    Device device = new Device(device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), roomID, userID);
+                    api.addDevice(device.getName() + " ", device.getRoomID() + "", device.getName(), device.getType(), device.getBrand(), new Callback<Device>() {
 
-            // Spinner element
-            device_spinner = (Spinner) findViewById(R.id.device_spinner);
+                        @Override
+                        public void success(Device device, Response response) {
 
-            device_spinner.setOnItemSelectedListener(this);
-
-            List<String> devices = new ArrayList<String>();
-            devices.add("None");
-            devices.add("TV");
-            devices.add("Fridge");
-            devices.add("Air Conditioner");
-            devices.add("Plug");
-            devices.add("Lamp");
-
-            // Creating adapter for spinner
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, devices);
-            device_spinner.setSelection(0);
-
-            // Drop down layout style - list view with radio button
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-            // attaching data adapter to spinner
+                            startActivity(new Intent(getApplicationContext(), viewDevices.class));
 
 
-            device_spinner.setAdapter(dataAdapter);
+                        }
 
-            ////////////////////////////////////NEW SPINNER/////////////////////////////////////////////////
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(getApplicationContext(), "Cannot Add A Device!",Toast.LENGTH_LONG).show();
+                            throw error;
 
-            brand_spinner = (Spinner) findViewById(R.id.brand_spinner);        //List<String> type = ale gay mn l db
-            brand_spinner.setOnItemSelectedListener(this);
-
-            brands = new ArrayList<String>();
-
-            dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, brands);
+                        }
 
 
-            dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            brand_spinner.setEnabled(false);
-            brand_spinner.setClickable(false);
-            brand_spinner.setAdapter(dataAdapter2);
+                    });
 
 
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onItemSelected(final AdapterView parent, View view, int position,
+                               long id) {
 
 
-        }
+        //noinspection ResourceType
+        if (parent.getId() == device_spinner_id) {
 
-        @Override
-        public void onItemSelected(final AdapterView parent, View view, int position, long id) {
-            // Log.i("First Line in Method: ", "________" + parent.toString());
-            this.parent = parent;
+
             if (position > 0) {
+                parent.setSelection(position);
                 String item = parent.getItemAtPosition(position).toString();
 
                 // Showing selected spinner item
                 Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
 
-//            if (parent.getSelectedItem().toString().equals("TV") || parent.getSelectedItem().toString().equals("Lamp") || parent.getSelectedItem().toString().equals("Fridge")
-                //                  || parent.getSelectedItem().toString().equals("Air Conditioner") || parent.getSelectedItem().toString().equals("Plug")) {
                 dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, brands);
-
-
                 api.requestBrands(item, new Callback<List<Type>>() {
                     @Override
                     public void success(List<Type> types, Response response) {
-
-                        //brands.add("None");
-                        //brand_spinner.setSelection(0);
-
+                        brands.add("None");
                         Iterator<Type> iterator = types.iterator();
 
                         while (iterator.hasNext()) {
@@ -132,79 +169,50 @@ public class addDevices extends ActionBarActivity {
 
                             String s = iterator.next().getBrand();
                             brands.add(s);
+                            Log.i("Brand name", s);
 
 
                         }
-                        //brands.add("Other");
+
 
                         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         brand_spinner.setEnabled(true);
                         brand_spinner.setClickable(true);
                         brand_spinner.setAdapter(dataAdapter2);
+
                     }
 
 
                     @Override
                     public void failure(RetrofitError error) {
                         throw error;
-                        // Toast.makeText(parent.getContext(), "An error has occured", Toast.LENGTH_LONG).show();
-                        // startActivity(new Intent(getApplicationContext(), About_us.class));
+
 
                     }
 
                 });
-            } //else if(parent.getSelectedItem().toString().equals("None")){
+                if (parent.getSelectedItem().toString().equals("None")) {
+                    brands.clear();
+                    dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, brands);
+                    dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    brand_spinner.setEnabled(false);
+                    brand_spinner.setClickable(false);
+                    brand_spinner.setAdapter(dataAdapter2);
 
-            //}
-            //else {
-
-            //}
-            //}
-
-            else{
-                // Toast.makeText(parent.getContext(), "Select Device", Toast.LENGTH_LONG).show();
+                }
+            } else {
 
 
             }
+            brands.clear();
         }
-
-
-
-
-        public void addDeviceButton(View v) {
-            addDeviceButton = (Button) v;
-
-            Device device = new Device(device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), roomID, userID);
-
-            //myAPI api = adapter.create(myAPI.class);
-            // System.out.print("Respond2");
-            //  api.addRoom(roomName.getText().toString(), "soora", userID +"", new Callback<Room> () {
-            // api.addRoom("12", room.get_roomName(),"Photo" ,new Callback<Room>(){
-            api.addDevice(device.getUserID() + "", device.getRoomID() + "", device.getName(), device.getUserID() + "", device.getRoomID() + "", device.getType(), device.getBrand(), new Callback<Device>() {
-
-                @Override
-                public void success(Device device, Response response) {
-                    startActivity(new Intent(getApplicationContext(), About_us.class));
-
-
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    Toast.makeText(parent.getContext(), "An error has occured", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), About_us.class));
-
-
-
-                }
-            });
-        }
-
-        public void onNothingSelected(AdapterView arg0) {
-            addDeviceButton.setEnabled(false);
-        }
-
-
 
     }
+
+
+    public void onNothingSelected(AdapterView arg0) {
+
+    }
+
+
 }

@@ -26,13 +26,12 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity{
 
-    String ENDPOINT = "http://192.168.1.15:3000/";
+    String ENDPOINT = "http://192.168.1.4:3000/";
     int userID;
     int roomID;
     Button addDevice;
     String [] deviceNames;
     String [] deviceType;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +40,17 @@ public class viewDevices extends ListActivity{
         setContentView(R.layout.activity_view_devices);
         final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID=(mSharedPreference.getInt("userID",1));
-        roomID=(mSharedPreference.getInt("roomID", 2));
+        roomID=(mSharedPreference.getInt("roomID", 1));
+        addDevice = (Button) findViewById(R.id.addDevice);
+        addDevice.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(viewDevices.this, AddDevices.class));
+            }
+        });
 
-        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+
+                final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         api.viewDevices(userID +"",roomID + "", new Callback<List<Device>>() {
 
@@ -59,7 +66,6 @@ public class viewDevices extends ListActivity{
                 int i = devices.size() - 1;
                 while(i>= 0 & iterator.hasNext()){
                     deviceNames[i] = iterator.next().getName();
-                   // deviceType[i] = iterator2.next().getType();
                     i--;
                 }
 
