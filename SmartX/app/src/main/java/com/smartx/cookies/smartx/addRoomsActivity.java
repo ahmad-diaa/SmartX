@@ -24,7 +24,7 @@ public class addRoomsActivity extends Activity{
     EditText roomName;
 
     public static int count = -1;
-    String ENDPOINT = "http://192.168.1.13:3000/";
+    String ENDPOINT = "http://192.168.1.4:3000/";
     int userID;
     int[] photos = new int[]{ R.drawable.one ,
             R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
@@ -42,7 +42,7 @@ public class addRoomsActivity extends Activity{
     }
     public int randomIcon(){
          count = (count + 1)%9 ;
-            return count;
+         return count;
     }
 
     public void addRoomButton(View v) {
@@ -66,9 +66,7 @@ public class addRoomsActivity extends Activity{
 
             @Override
             public void failure(RetrofitError error) {
-                Log.i("Dalia" , error.getMessage());
-                Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
-
+            Toast.makeText(getApplicationContext(), "Cannot add room!", Toast.LENGTH_LONG).show();
             }
         });
     }

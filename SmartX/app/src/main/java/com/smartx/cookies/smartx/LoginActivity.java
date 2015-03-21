@@ -1,3 +1,4 @@
+
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
@@ -28,7 +29,7 @@ public class LoginActivity extends Activity {
     Button btnLogin;
     //TextView aboutlogin;
 
-    String ENDPOINT = "http://192.168.1.13:3000/";
+    String ENDPOINT = "http://192.168.1.4:3000/";
     
     List<User> userList;
     SharedPreferences Data;
@@ -65,6 +66,7 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+
                 EditText username = (EditText) findViewById(R.id.txtUserName);
                 EditText password = (EditText) findViewById(R.id.txtPassword);
                 String Name = username.getText().toString();
@@ -84,6 +86,7 @@ public class LoginActivity extends Activity {
                         myAPI api = adapter.create(myAPI.class);
 
                         api.getFeed(session.getId(), new Callback<models.User>() {
+
                             @Override
                             public void success(models.User user, Response response) {
                                 String Name = user.getName();
@@ -105,11 +108,19 @@ public class LoginActivity extends Activity {
                         });
 
                     }
+                    EditText username = (EditText) findViewById(R.id.txtUserName);
+                    EditText password = (EditText) findViewById(R.id.txtPassword);
 
                     @Override
                     public void failure(RetrofitError error) {
-                        Log.i("ahmad", error.getMessage());
-                        if(error.getMessage().contains("401 Unauthorized"))
+                        if(username == null || username.getText().equals(""))
+                        {
+                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
+                        }else if(password == null || password.getText().equals(""))
+                        {
+                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
+                        }
+                        else if(error.getMessage().contains("401 Unauthorized"))
                         {
                             Toast.makeText(getApplicationContext(),"Wrong Username/Password",Toast.LENGTH_LONG).show();
                         }else
@@ -155,5 +166,6 @@ public class LoginActivity extends Activity {
 
 
     }
+
 
 }

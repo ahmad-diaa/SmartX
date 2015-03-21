@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-    post 'session' => 'session#create'
 
+    post 'session' => 'session#create'
       get "/types/:name",  to: "types#index"
       resources :types
       resources :users do
@@ -9,5 +9,4 @@ Rails.application.routes.draw do
       end
       end
     end
-#   end
-# end
+

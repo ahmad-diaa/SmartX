@@ -1,5 +1,5 @@
 class Room < ActiveRecord::Base
-	 self.primary_key = 'room_id'
+	self.primary_key = 'room_id'
 	belongs_to :user
 	has_many :devices,dependent: :destroy
 

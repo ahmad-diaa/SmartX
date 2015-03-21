@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
 	
 	before_action :set_room, only: [:show, :update, :destroy]
+#Returns list of rooms for a specific user. 
 
   # GET /rooms
   # GET /rooms.json
@@ -10,6 +11,7 @@ class RoomsController < ApplicationController
     
     render json: @rooms if stale?(etag: @rooms.all, last_modified: @rooms.maximum(:updated_at))
   end
+#Returns room with a given room id for a specific user. 
 
   # GET /rooms/1
   # GET /rooms/1.json
@@ -18,6 +20,7 @@ class RoomsController < ApplicationController
     @room=@user.rooms.find(params[:room_id])
     render json: @room if stale?(@room)
   end
+#Creates room with room parameters for a specific user.
 
 
   # POST /rooms
@@ -33,6 +36,7 @@ class RoomsController < ApplicationController
       render json: @room.errors, status: :unprocessable_entity
     end
   end
+#Updates room with given room id for specific user.
 
   # PATCH/PUT /rooms/1
   # PATCH/PUT /rooms/1.json
@@ -43,11 +47,13 @@ class RoomsController < ApplicationController
       render json: @room.errors, status: :unprocessable_entity
     end
   end
+#Deletes room with given room id for a specific user.
 
   # DELETE /rooms/1
   # DELETE /rooms/1.json
   def destroy
     @user = User.find(params[:user_id])
+
     @room = @user.room.find(params[:room_id])
     @room.destroy
 
@@ -62,6 +68,7 @@ class RoomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
-      params.require(:room).permit(:room_id,:name,:photo)
+
+      params.require(:room).permit(:room_id,:name,:photo, :user_id)
     end
 end
