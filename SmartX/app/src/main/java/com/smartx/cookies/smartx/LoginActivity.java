@@ -6,12 +6,15 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -23,10 +26,10 @@ import retrofit.client.Response;
 
 public class LoginActivity extends Activity {
     Button btnLogin;
-    Button btn;
-    Button btn2;
+    //TextView aboutlogin;
 
-    String ENDPOINT = "http://84.233.102.220:3000/";
+    String ENDPOINT = "http://192.168.1.13:3000/";
+    
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
@@ -40,6 +43,22 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
 
+        TextView aboutlogin = (TextView) findViewById(R.id.aboutlogin);
+        SpannableString content = new SpannableString("About");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        aboutlogin.setText(content);
+
+
+        aboutlogin.setOnClickListener(new TextView.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(LoginActivity.this,About_us.class));
+            }
+
+        });
+
+
+
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new Button.OnClickListener() {
@@ -50,7 +69,6 @@ public class LoginActivity extends Activity {
                 EditText password = (EditText) findViewById(R.id.txtPassword);
                 String Name = username.getText().toString();
                 String Pass = password.getText().toString();
-
 
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 

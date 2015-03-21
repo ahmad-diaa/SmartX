@@ -23,8 +23,8 @@ public class addRoomsActivity extends Activity{
     EditText roomID;
     EditText roomName;
 
-    public int count = -1;
-    String ENDPOINT = "http://84.233.102.220:3000/";
+    public static int count = -1;
+    String ENDPOINT = "http://192.168.1.13:3000/";
     int userID;
     int[] photos = new int[]{ R.drawable.one ,
             R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
@@ -41,7 +41,8 @@ public class addRoomsActivity extends Activity{
 
     }
     public int randomIcon(){
-        return (count + 1)%9 ;
+         count = (count + 1)%9 ;
+            return count;
     }
 
     public void addRoomButton(View v) {

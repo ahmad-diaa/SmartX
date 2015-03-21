@@ -13,7 +13,8 @@
         android:textSize="23dp"
         android:layout_marginTop="117dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffff4608" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -30,6 +31,7 @@
         android:text="New Password"
         android:id="@+id/textView4"
         android:textSize="23dp"
+        android:textColor="#ffff4608"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/textView3"
         android:layout_alignEnd="@+id/textView3" />
@@ -52,7 +54,8 @@
         android:textSize="23dp"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/passwordNew"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffff4608" />
 
     <EditText
         android:layout_width="wrap_content"

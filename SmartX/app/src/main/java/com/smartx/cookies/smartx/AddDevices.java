@@ -41,7 +41,7 @@ public class AddDevices extends Activity implements AdapterView.OnItemSelectedLi
     List<String> brands;
     Spinner brand_spinner;
     ArrayAdapter<String> dataAdapter2;
-    String ENDPOINT = "http://84.233.102.220:3000/";
+    String ENDPOINT = "http://192.168.1.13:3000/";
     int brand_spinner_id = 2131296325;
     int device_spinner_id = 2131296323;
 
@@ -142,8 +142,7 @@ public class AddDevices extends Activity implements AdapterView.OnItemSelectedLi
     public void onItemSelected(final AdapterView parent, View view, int position,
                                long id) {
 
-        Log.i("ID of device: ", id+" ");
-        Log.i("ANA HENAAAAAAAAAA", " ");
+
         //noinspection ResourceType
         if (parent.getId() == device_spinner_id) {
 
