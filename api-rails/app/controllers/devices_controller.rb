@@ -4,7 +4,7 @@ class DevicesController < ApplicationController
   # GET /devices.json
   def index
     @user=  User.find(params[:user_id])
-    @room = @user.rooms.find(params[:room_room_id])
+    @room = @user.rooms.find(params[:room_id])
     @devices = @room.devices.all
 
 
@@ -17,8 +17,8 @@ class DevicesController < ApplicationController
   # GET /devices/1.json
   def show
     @user=User.find(params[:user_id])
-     @room=@user.rooms.find(params[:room_room_id])
-     @device= @room.devices.find(params[:id])
+     @room=@user.rooms.find(params[:room_id])
+     @device= @room.devices.find(params[:device_id])
     render json: @device if stale?(@device)
   end
 #Creates a new device in a specific room knowing she belongs to which user.
@@ -28,9 +28,9 @@ class DevicesController < ApplicationController
   def create
     
      @user=User.find(params[:user_id])
-     @room=@user.rooms.find(params[:room_room_id])
+     @room=@user.rooms.find(params[:room_id])
      @device= @room.devices.create(device_params)
-    @device.user_id= @room.user_id
+     @device.user_id= @room.user_id
     if @device.save
       render json: @device, status: :created
     else
@@ -43,8 +43,8 @@ class DevicesController < ApplicationController
   # PATCH/PUT /devices/1.json
   def update
      @user=User.find(params[:user_id])
-     @room=@user.rooms.find(params[:room_room_id])
-     @device= @room.devices.find(params[:id])
+     @room=@user.rooms.find(params[:room_id])
+     @device= @room.devices.find(params[:device_id])
     if @device.update(device_params)
       head :no_content
     else
@@ -57,8 +57,8 @@ class DevicesController < ApplicationController
   # DELETE /devices/1.json
   def destroy
    @user=User.find(params[:user_id])
-     @room=@user.rooms.find(params[:room_room_id])
-     @device= @room.devices.find(params[:id])
+     @room=@user.rooms.find(params[:room_id])
+     @device= @room.devices.find(params[:device_id])
     @device.destroy
     head :no_content
   end
@@ -66,7 +66,7 @@ class DevicesController < ApplicationController
   private
 
     def device_params
-      params.require(:device).permit(:name,:user_id,:room_id, :type_name, :type_brand)
+      params.require(:device).permit(:name,:device_id,:user_id,:room_id, :status)
     end
 end
 

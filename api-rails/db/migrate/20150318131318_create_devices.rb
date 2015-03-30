@@ -1,15 +1,16 @@
 class CreateDevices < ActiveRecord::Migration
   def change
-    create_table :devices do |t|
+    create_table :devices, id:false do |t|
       t.integer :user_id
-      t.string :room_id
-      t.string :type_name
-      t.string :type_brand
+      t.integer :room_id
+      t.string :device_id, null: false
+      t.string :status
       t.string :name
 t.references :room, index: true
 t.references :user, index: true
       t.timestamps
     end
+    add_index :devices, :device_id, unique: true
     add_foreign_key :devices, :rooms
     add_foreign_key :devices, :users
   end

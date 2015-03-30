@@ -34,14 +34,14 @@ import retrofit.http.POST;
 import retrofit.http.Path;
 
 
-public class AddDevices extends Activity implements AdapterView.OnItemSelectedListener {
+public class addDevices extends Activity implements AdapterView.OnItemSelectedListener {
     int userID;
     int roomID;
     Spinner device_spinner;
     List<String> brands;
     Spinner brand_spinner;
     ArrayAdapter<String> dataAdapter2;
-    String ENDPOINT = "http://192.168.1.4:3000/";
+    String ENDPOINT = "http://196.205.152.124/";
     int brand_spinner_id = 2131296325;
     int device_spinner_id = 2131296323;
 

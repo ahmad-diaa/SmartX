@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318152456) do
+ActiveRecord::Schema.define(version: 20150318131318) do
 
   create_table "api_keys", force: true do |t|
     t.integer  "user_id"
@@ -23,41 +23,33 @@ ActiveRecord::Schema.define(version: 20150318152456) do
 
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
 
-  create_table "devices", force: true do |t|
+  create_table "devices", id: false, force: true do |t|
     t.integer  "user_id"
     t.integer  "room_id"
-    t.string   "type_name"
-    t.string   "type_brand"
+    t.string   "device_id",  null: false
+    t.string   "status"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "devices", ["device_id"], name: "index_devices_on_device_id", unique: true
   add_index "devices", ["room_id"], name: "index_devices_on_room_id"
   add_index "devices", ["user_id"], name: "index_devices_on_user_id"
 
-  create_table "rooms", id: false, force: true do |t|
-    t.string   "room_id",    null: false
-    t.string   "name"
-    t.string   "photo"
+  create_table "rooms", force: true do |t|
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "rooms", ["room_id"], name: "index_rooms_on_room_id", unique: true
-  add_index "rooms", ["user_id"], name: "index_rooms_on_user_id"
-
-  create_table "types", force: true do |t|
     t.string   "name"
-    t.string   "brand"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "rooms", ["user_id"], name: "index_rooms_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "password_digest"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

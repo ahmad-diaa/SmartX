@@ -17,7 +17,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1.json
   def show
     @user=User.find(params[:user_id])
-    @room=@user.rooms.find(params[:room_id])
+    @room=@user.rooms.find(params[:id])
     render json: @room if stale?(@room)
   end
 #Creates room with room parameters for a specific user.
@@ -54,7 +54,7 @@ class RoomsController < ApplicationController
   def destroy
     @user = User.find(params[:user_id])
 
-    @room = @user.room.find(params[:room_id])
+    @room = @user.room.find(params[:id])
     @room.destroy
 
     head :no_content
@@ -63,12 +63,12 @@ class RoomsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_room
-      @room = Room.find(params[:room_id])
+      @room = Room.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def room_params
 
-      params.require(:room).permit(:room_id,:name,:photo, :user_id)
+      params.require(:room).permit(:name, :user_id)
     end
 end
