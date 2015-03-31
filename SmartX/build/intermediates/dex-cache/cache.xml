@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Amir\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\Amir\Documents\GitHub\SmartX\SmartX\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-284f1033b9f16c20518d505b9c05715b76085050.jar" />
-    </item>
-    <item
         jar="C:\Users\Amir\Documents\GitHub\SmartX\SmartX\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -63,6 +56,13 @@
         revision="21.1.2"
         sha1="afe8399d352713b66e597e9670c741d1e60ae923">
         <dex dex="C:\Users\Amir\Documents\GitHub\SmartX\SmartX\app\build\intermediates\pre-dexed\debug\okhttp-urlconnection-2.0.0-2c45974cc197f7d69bd2ff76b9a16404ad45ae18.jar" />
+    </item>
+    <item
+        jar="C:\Users\Amir\AppData\Local\Android\sdk1\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="C:\Users\Amir\Documents\GitHub\SmartX\SmartX\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-418d3b311014e06d28c89f9fcd3d7ee213f7f8f0.jar" />
     </item>
 
 </items>

@@ -29,7 +29,7 @@ public class LoginActivity extends Activity {
     Button btnLogin;
     //TextView aboutlogin;
 
-    String ENDPOINT = "http://196.205.152.124/";
+    String ENDPOINT = "http://62.135.126.24:3000/";
     
     List<User> userList;
     SharedPreferences Data;
