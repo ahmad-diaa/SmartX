@@ -13,12 +13,21 @@
 
     <application
         android:allowBackup="true"
+        android:configChanges="keyboardHidden|orientation"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:largeHeap="true"
+        android:theme="@android:style/Theme.Holo.NoActionBar" >
+        <activity
+            android:name="com.smartx.cookies.smartx.viewDevices"
+            android:exported="true"
+            android:label="@string/title_activity_view_devices" >
+        </activity>
         <activity
             android:name="com.smartx.cookies.smartx.LoginActivity"
-            android:label="@string/app_name" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,24 +36,82 @@
         </activity>
         <activity
             android:name="com.smartx.cookies.smartx.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.smartx.cookies.smartx.About_us"
-            android:label="@string/app_name" >
-        </activity>
-
-        <!-- <activity android:name=".About_us" -->
-        <!-- android:label="@string/app_name" -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name = "android.intent.action.MAIN" /> -->
-        <!-- <category android:name = "android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
+            android:label="@string/app_name" />
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:configChanges="keyboardHidden|orientation|screenSize" -->
 
         <activity
-            android:name="com.smartx.cookies.smartx.device"
-            android:label="@string/title_activity_device" >
+            android:name="com.smartx.cookies.smartx.addRoomsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.AddDevices"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_add_devices"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.ViewRooms"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="View Rooms"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.Settings"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 
-</manifest>
+</manifest> <!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!-- <manifest xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- package="com.smartx.cookies.smartx" > -->
+<!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+<!-- <uses-permission android:name="android.permission.INTERNET" /> -->
+<!-- <application -->
+<!-- android:allowBackup="true" -->
+<!-- android:icon="@mipmap/ic_launcher" -->
+<!-- android:label="@string/app_name" -->
+<!-- android:theme="@style/AppTheme" > -->
+<!-- <activity -->
+<!-- android:name=".LoginActivity" -->
+<!-- android:label="@string/app_name" > -->
+<!-- <intent-filter> -->
+<!-- <action android:name="android.intent.action.MAIN" /> -->
+<!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+<!-- </intent-filter> -->
+<!-- </activity> -->
+<!-- <activity -->
+<!-- android:name=".MainActivity" -->
+<!-- android:label="@string/title_activity_main" > -->
+<!-- </activity> -->
+<!-- <activity -->
+<!-- android:name=".About_us" -->
+<!-- android:label="@string/app_name" > -->
+<!-- </activity> -->
+<!-- &lt;!&ndash; <activity android:name=".About_us" &ndash;&gt; -->
+<!-- &lt;!&ndash; android:label="@string/app_name" &ndash;&gt; -->
+<!-- &lt;!&ndash; <intent-filter> &ndash;&gt; -->
+<!-- &lt;!&ndash; <action android:name = "android.intent.action.MAIN" /> &ndash;&gt; -->
+<!-- &lt;!&ndash; <category android:name = "android.intent.category.LAUNCHER" /> &ndash;&gt; -->
+<!-- &lt;!&ndash; </intent-filter> &ndash;&gt; -->
+<!-- <activity -->
+<!-- android:name=".viewDevices" -->
+<!-- android:label="@string/title_activity_view_devices" -->
+<!-- android:exported="true" -->
+<!-- > -->
+<!-- </activity> -->
+<!-- <activity -->
+<!-- android:name=".addDevices" -->
+<!-- android:label="@string/title_activity_add_devices" > -->
+<!-- </activity> -->
+<!-- </application> -->
+<!-- </manifest> -->
+<!-- ======= -->

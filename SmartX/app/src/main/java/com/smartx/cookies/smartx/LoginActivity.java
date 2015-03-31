@@ -1,25 +1,22 @@
+
 package com.smartx.cookies.smartx;
 
-import android.net.NetworkInfo;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-
-
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.database.Cursor;
-import android.widget.Toast;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -27,27 +24,33 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.converter.GsonConverter;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.POST;
 
-public class LoginActivity extends ActionBarActivity {
-    DBHandler db =new DBHandler(this);
+public class LoginActivity extends Activity {
     Button btnLogin;
-    Button btn;
-    Button btn2;
-    String ENDPOINT = "http://172.20.10.4:3000/";
+    //TextView aboutlogin;
+
+    String ENDPOINT = "http://196.205.152.124/";
+    
     List<User> userList;
+    SharedPreferences Data;
+    public static final String sharedPrefs = "MySharedPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Data = getSharedPreferences(sharedPrefs, 0);
 
 
         setContentView(R.layout.activity_login);
 
-        btn = (Button)findViewById(R.id.button);
-        btn.setOnClickListener(new Button.OnClickListener(){
+
+        TextView aboutlogin = (TextView) findViewById(R.id.aboutlogin);
+        SpannableString content = new SpannableString("About");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        aboutlogin.setText(content);
+
+
+        aboutlogin.setOnClickListener(new TextView.OnClickListener(){
             @Override
             public void onClick(View v){
                 startActivity(new Intent(LoginActivity.this,About_us.class));
@@ -55,95 +58,81 @@ public class LoginActivity extends ActionBarActivity {
 
         });
 
-        btn2 = (Button)findViewById(R.id.button2);
-        btn2.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this,device.class));
-            }
 
-        });
+
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new Button.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-
-                                            System.out.print("yalla bina!!!!");
-
-                                            EditText username = (EditText) findViewById(R.id.txtUserName);
-                                            EditText password = (EditText) findViewById(R.id.txtPassword);
-                                            String Name = username.getText().toString();
-                                            String Pass = password.getText().toString();
-
-                                            System.out.print("Respond1");
-
-                                            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-
-                                            myAPI api = adapter.create(myAPI.class);
-                                            System.out.print("Respond2");
-                                            api.login(Name, Pass, new Callback<User>() {
+            @Override
+            public void onClick(View v) {
 
 
-                                                @Override
-                                                public void success(User user, Response response) {
-                                                    startActivity(new Intent(LoginActivity.this,About_us.class));
-                                                }
+                EditText username = (EditText) findViewById(R.id.txtUserName);
+                EditText password = (EditText) findViewById(R.id.txtPassword);
+                String Name = username.getText().toString();
+                String Pass = password.getText().toString();
 
-                                                @Override
-                                                public void failure(RetrofitError error) {
-throw error;
+                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
-                                                }
-                                            });
+                myAPI api = adapter.create(myAPI.class);
+                api.login(Name, Pass, new Callback<Session>() {
+                    @Override
+                    public void success(Session session, Response response) {
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putInt("userID", session.getId());
+                        editor.commit();
+                        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+                        myAPI api = adapter.create(myAPI.class);
 
+                        api.getFeed(session.getId(), new Callback<models.User>() {
 
+                            @Override
+                            public void success(models.User user, Response response) {
+                                String Name = user.getName();
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putInt("userID", user.getID());
+                                editor.putString("Name", Name);
+                                editor.commit();
+                                startActivity(new Intent(getApplicationContext(),ViewRooms.class));
+                            }
 
+                            @Override
+                            public void failure(RetrofitError error) {
 
-
-
-
-
-
-                                            // Cursor c = db.showUser(Name);
-
-
-/*                                            if (c != null) {
-                                                if (c.moveToFirst()) {
-                                                    String   p = c.getString(c.getColumnIndex("password"));
-
-                                                    if (Pass.equals(p)) {
-
-                                                        // Login
-                                                        Intent i = new Intent(v.getContext(),MainActivity.class);
-                                                        startActivity(i);
-                                                        return;
-                                                    } else {
-
-                                                        Toast.makeText(getApplicationContext(), "Incorrect password",
-                                                                Toast.LENGTH_LONG).show();
-                                                        password.setText("");
-                                                        return;
-                                                    }
+                                Toast.makeText(getApplicationContext(),"Make sure you are online",Toast.LENGTH_LONG).show();
 
 
+                            }
+                        });
 
-                                                }
-                                            }
-                                            Toast.makeText(getApplicationContext(), "Username does not exist",
-                                                    Toast.LENGTH_LONG).show();
-                                            c.close();
-                                        }
-*/
+                    }
+                    EditText username = (EditText) findViewById(R.id.txtUserName);
+                    EditText password = (EditText) findViewById(R.id.txtPassword);
 
+                    @Override
+                    public void failure(RetrofitError error) {
+                        if(username == null || username.getText().equals(""))
+                        {
+                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
+                        }else if(password == null || password.getText().equals(""))
+                        {
+                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
+                        }
+                        else if(error.getMessage().contains("401 Unauthorized"))
+                        {
+                            Toast.makeText(getApplicationContext(),"Wrong Username/Password",Toast.LENGTH_LONG).show();
+                        }else
+                        {
+                            Toast.makeText(getApplicationContext(),"Make sure you are online.\nIf this problem proceeds, contact us.",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
-                                        }
-    });
+            }
+        });
     }
-
-
-
-
 
 
     @Override
@@ -168,7 +157,7 @@ throw error;
         return super.onOptionsItemSelected(item);
     }
 
-    private void requestData(String uri){
+    private void requestData(String uri) {
 
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
@@ -176,23 +165,7 @@ throw error;
         myAPI api = adapter.create(myAPI.class);
 
 
+    }
 
-//     //   api.getFeed(new Callback<List<User>>() {
-//
-//
-//            @Override
-//            public void success(List<User> users, Response response) {
-//
-//                userList = users;
-//
-//            }
-//
-//            @Override
-//            public void failure(RetrofitError error) {
-//
-//            }
-//        });
-
-}
 
 }

@@ -1,0 +1,94 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.smartx.cookies.smartx.addDevices">
+
+
+
+
+    <!-- Spinner Element -->
+    <Spinner
+        android:id="@+id/device_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:prompt="@string/spinner_title"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="83dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Device Type"
+        style="@style/Base.TextAppearance.AppCompat.Widget.DropDownItem"
+        android:textColor="#ffff4608"
+        android:id="@+id/spinnertitle"
+        android:layout_alignLeft="@+id/device_spinner"
+        android:layout_alignStart="@+id/device_spinner"
+        android:layout_alignTop="@id/device_spinner"
+
+        android:layout_marginTop="-20dp"
+
+    />
+
+    <Spinner
+        android:id="@+id/brand_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/type_title"
+        android:layout_below="@+id/brandtitle"
+        android:layout_alignLeft="@+id/device_spinner" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Device Brand"
+        style="@style/Base.TextAppearance.AppCompat.Widget.DropDownItem"
+        android:id="@+id/brandtitle"
+        android:textColor="#ffff4608"
+        android:layout_marginTop="58dp"
+        android:layout_below="@+id/device_spinner"
+        android:layout_alignLeft="@+id/device_spinner"
+        android:layout_alignStart="@+id/device_spinner" />
+
+    <TextView
+        style="@style/Base.TextAppearance.AppCompat.Widget.DropDownItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Device Name"
+        android:id="@+id/deviceName"
+        android:textColor="#ffff4608"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/brand_spinner"
+        android:layout_alignLeft="@+id/brand_spinner"
+        android:layout_alignStart="@+id/brand_spinner" />
+
+    <EditText
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/device_name"
+        android:layout_below="@+id/deviceName"
+        android:layout_alignLeft="@+id/deviceName"
+        android:layout_alignStart="@+id/deviceName"
+        android:maxLength="20"
+
+
+
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Device"
+        android:id="@+id/addDeviceButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="12dp"
+        android:textColor="#ffffffff" />
+
+</RelativeLayout>
