@@ -23,10 +23,8 @@ class RoomsController < ApplicationController
   # POST /rooms
   # POST /rooms.json
    def create
-    
-     @user=User.find(params[:user_id])
+    @user=User.find(params[:user_id])
     @room = @user.rooms.create(room_params)
-
     if @room.save
       render json: @room, status: :created
     else
@@ -52,19 +50,17 @@ class RoomsController < ApplicationController
     @user = User.find(params[:user_id])
     @room = @user.room.find(params[:id])
     @room.destroy
-
     head :no_content
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_room
-      @room = Room.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_room
+    @room = Room.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def room_params
-
-      params.require(:room).permit(:name, :user_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def room_params
+    params.require(:room).permit(:name, :user_id)
+  end
 end

@@ -1,6 +1,5 @@
 package models;
 
-
 public class Room {
     private String id ;
     private String name;
@@ -43,11 +42,8 @@ public class Room {
     }
 
     public Room(String roomName ,String roomID) {
-
         name = roomName;
         id  = roomID;
-
-
     }
 
     public Room() {
