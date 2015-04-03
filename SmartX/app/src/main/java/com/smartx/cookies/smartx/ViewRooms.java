@@ -20,7 +20,7 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://192.168.43.249.:3000/";
+    String ENDPOINT = "http://192.168.43.249:3000/";
     int userID;
     Button addRoomB;
     Button renameRoom;

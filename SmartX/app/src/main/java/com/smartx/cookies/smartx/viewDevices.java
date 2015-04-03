@@ -21,7 +21,7 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity{
 
-    String ENDPOINT = "http://41.178.145.164:3000/";
+    String ENDPOINT = "http://192.168.43.249:3000/";
     int userID;
     int roomID;
     Button addDevice;
@@ -73,5 +73,8 @@ public class viewDevices extends ListActivity{
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_view_devices, menu);
         return true;
+    }
+    public void renameRoom(View v) {
+        startActivity(new Intent(this, renameRoomActivity.class));
     }
 }
