@@ -1,5 +1,7 @@
 package com.smartx.cookies.smartx;
 
+import android.widget.EditText;
+
 import java.util.List;
 import models.Device;
 import models.Room;
@@ -29,7 +31,7 @@ public interface myAPI {
 
     @FormUrlEncoded
     @PUT("/users/{userID}/rooms/{room_id}")
-    void renameRoom(@Path("userID") String id, @Field("room[name]") String name ,@Field("room[room_id]") String room_id ,Callback<Room> callback);
+    void renameRoom(@Path("userID") String id,@Path("room_id") String roomid,@Field("room[name]") EditText name , Callback<List<Room>> callback);
 
     @GET("/users/{userID}/rooms/{roomID}/devices")
     void viewDevices(@Path("userID") String id,@Path("roomID") String rid, Callback<List<Device>> callback);
@@ -48,6 +50,7 @@ public interface myAPI {
     @PUT("/users/{userID}/")
     void changePassword(@Path("userID") String id, @Field ("user[password]") String password, Callback<User> callback);
 
-    @GET("/users/{userID}/")
-    void getUser (@Path("userID") String id, Callback <User> callback);
+
+
+
 }
