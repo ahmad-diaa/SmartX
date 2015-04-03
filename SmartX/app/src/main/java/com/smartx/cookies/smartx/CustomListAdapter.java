@@ -1,11 +1,6 @@
 package com.smartx.cookies.smartx;
 
-/**
- * Created by Dalia on 3/19/2015.
- */
-
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +15,10 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     private final String[] itemname;
     private final Integer[] imgid;
     Button addRoom;
+
     public CustomListAdapter(Activity context, String[] itemname, Integer[] imgid) {
         super(context, R.layout.mylist, itemname);
         // TODO Auto-generated constructor stub
-
         this.context=context;
         this.itemname=itemname;
         this.imgid=imgid;
@@ -34,11 +29,9 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         View rowView=inflater.inflate(R.layout.mylist, null ,true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.nameroom);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageroom);
-
         txtTitle.setText(itemname[position]);
         imageView.setImageResource(imgid[position]);
         return rowView;
-
     };
 }
 

@@ -22,7 +22,6 @@ class ApplicationController < ActionController::API
 
     # allows our tests to pass
     bearer ||= request.headers["rack.session"].try(:[], 'Authorization')
-
     if bearer.present?
       bearer.split.last
     else

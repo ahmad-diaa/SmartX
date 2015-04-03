@@ -1,8 +1,5 @@
-package com.smartx.cookies.smartx;
+package models;
 
-/**
- * Created by youmna on 3/18/15.
- */
 public class Session {
     private String access_token;
     private int user_id;

@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
 
     post 'session' => 'session#create'
-      get "/types/:name",  to: "types#index"
-      resources :types
       resources :users do
-       resources :rooms, param: :room_id do 
-        resources :devices 
+       resources :rooms do 
+        resources :devices, param: :device_id 
       end
       end
     end
