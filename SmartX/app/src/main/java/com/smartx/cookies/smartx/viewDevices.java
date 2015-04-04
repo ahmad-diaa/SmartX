@@ -45,7 +45,7 @@ public class viewDevices extends ListActivity{
 
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.viewDevices(userID +"",roomID + "", new Callback<List<Device>>() {
+        api.viewDevices(userID +"","1", new Callback<List<Device>>() {
 
             @Override
             public void success(List<Device> devices, Response response) {
@@ -75,6 +75,6 @@ public class viewDevices extends ListActivity{
         return true;
     }
     public void renameRoom(View v) {
-        startActivity(new Intent(this, renameRoomActivity.class));
+        startActivity(new Intent(this, RenameRoomActivity.class));
     }
 }

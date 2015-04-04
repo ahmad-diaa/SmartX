@@ -27,11 +27,11 @@ public interface myAPI {
 
     @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
-    void addRoom(@Path("userID") String id, @Field("room[name]") String name ,@Field("room[photo]") String photo,@Field("room[room_id]") String room_id ,Callback<Room> callback);
+    void addRoom(@Path("userID") String id, @Field("room[name]") String name , @Field("room[id]") String room_id ,Callback<Room> callback);
 
     @FormUrlEncoded
-    @PUT("/users/{userID}/rooms/{room_id}")
-    void renameRoom(@Path("userID") String id,@Path("room_id") String roomid,@Field("room[name]") EditText name , Callback<List<Room>> callback);
+    @PUT("/users/{userID}/rooms/{id}")
+    void renameRoom(@Path("userID") String id,@Path("id") String roomID, @Field("room[name]") String name , Callback<Room> callback);
 
     @GET("/users/{userID}/rooms/{roomID}/devices")
     void viewDevices(@Path("userID") String id,@Path("roomID") String rid, Callback<List<Device>> callback);
@@ -41,15 +41,17 @@ public interface myAPI {
 
     @FormUrlEncoded
     @POST("/users/{user_id}/rooms/{room_id}/devices")
-    void addDevice(@Path("user_id") String userid, @Path("room_id") String roomid, @Field("device[name]") String name,@Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
+    void addDevice(@Path("user_id") String userID, @Path("room_id") String roomID, @Field("device[name]") String name,@Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
 
     @GET("/users/{userID}/rooms/")
     void viewRooms(@Path("userID") String id, Callback<List<Room>> callback);
 
+    @GET("/users/{userID}/")
+    void getUser(@Path("userID") String id, Callback<User>callback);
+
     @FormUrlEncoded
     @PUT("/users/{userID}/")
     void changePassword(@Path("userID") String id, @Field ("user[password]") String password, Callback<User> callback);
-
 
 
 
