@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_above="@+id/addRoomB">
+        android:layout_above="@+id/viewBy">
     </ListView>
 
     <Button
@@ -22,5 +22,14 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:onClick="addRoom" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="View By.."
+        android:id="@+id/viewBy"
+        android:layout_above="@+id/addRoomB"
+        android:layout_centerHorizontal="true"
+        android:onClick="viewByType" />
 
 </RelativeLayout>
