@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.app.ListActivity;
+
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+
 import models.Room;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -20,15 +27,27 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://41.178.145.164:3000/";
+    String ENDPOINT = "http://192.168.1.10:3000/";
+    EditText editSearch;
     int userID;
     Button addRoomB;
+    public static int count = -1;
+    CustomListAdapter adapter2;
+    int[] photos = new int[]{ R.drawable.one ,
+            R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
+            R.drawable.six ,R.drawable.seven ,R.drawable.eight ,R.drawable.nine};
+
+    public int randomIcon(){
+        count++;
+        count = (count + 1)%9 ;
+        return count;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_rooms);
-
+        count = -1;
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
 
@@ -38,19 +57,44 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void success(List<Room> rooms, Response response) {
-                String[] roomNames = new String[rooms.size()];
-                final Integer[] roomImages = new Integer[rooms.size()];
+                ArrayList<String> roomNames = new ArrayList<String>();
                 Iterator<Room> iterator = rooms.iterator();
-                Iterator<Room> iterator2 = rooms.iterator();
+                ArrayList <Integer>  iconRooms = new ArrayList<Integer>();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-                    roomNames[i] = iterator.next().get_roomName();
-                    roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());
+                    roomNames.add(iterator.next().get_roomName());
+                    iconRooms.add(photos[randomIcon()]);
                     i--;
                 }
-                CustomListAdapter adapter = new CustomListAdapter(ViewRooms.this, roomNames, roomImages);
-                setListAdapter(adapter);
+                adapter2 =  new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
+                setListAdapter(adapter2);
+                editSearch = (EditText) findViewById(R.id.search);
+
+                // Capture Text in EditText
+
+                editSearch.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void afterTextChanged(Editable arg0) {
+                        // TODO Auto-generated method stub
+                        String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
+                        adapter2.filter(text);
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence arg0, int arg1,
+                                                  int arg2, int arg3) {
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                              int arg3) {
+                        // TODO Auto-generated method stub
+                    }
+                });
             }
+
 
             @Override
             public void failure(RetrofitError error) {

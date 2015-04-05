@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     tools:context="{relativePackage}.${activityClass}" >
 
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <requestFocus />
+    </EditText>
+
     <ListView
         android:id="@+id/android:list"
         android:layout_width="match_parent"

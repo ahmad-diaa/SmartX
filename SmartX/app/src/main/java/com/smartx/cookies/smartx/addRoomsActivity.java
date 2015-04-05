@@ -19,12 +19,9 @@ public class addRoomsActivity extends Activity{
     Button addRoomButton;
     EditText roomID;
     EditText roomName;
-    public static int count = -1;
-    String ENDPOINT = "http://41.178.145.164:3000/";
+    String ENDPOINT = "http://192.168.1.10:3000/";
     int userID;
-    int[] photos = new int[]{ R.drawable.one ,
-            R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
-            R.drawable.six ,R.drawable.seven ,R.drawable.eight ,R.drawable.nine};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +32,6 @@ public class addRoomsActivity extends Activity{
         addRoomButton = (Button) findViewById(R.id.addRoomButton);
     }
 
-    public int randomIcon(){
-         count = (count + 1)%9 ;
-         return count;
-    }
-
     public void addRoomButton(View v) {
         roomName = (EditText) findViewById(R.id.roomName);
         roomID = (EditText) findViewById(R.id.RoomIDText);
@@ -47,8 +39,7 @@ public class addRoomsActivity extends Activity{
         Room room = new Room(roomName.getText().toString(),roomID.getText().toString());
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        room.setPhoto(photos[randomIcon()] + "");
-        api.addRoom((userID + ""), room.get_roomName(), room.getPhoto(), room.get_id(), new Callback<Room>() {
+        api.addRoom((userID + ""), room.get_roomName(), new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {
