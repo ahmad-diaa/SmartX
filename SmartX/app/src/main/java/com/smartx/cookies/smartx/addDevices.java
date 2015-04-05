@@ -30,7 +30,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     List<String> brands;
     Spinner brand_spinner;
     ArrayAdapter<String> dataAdapter2;
-    String ENDPOINT = "172.20.10.2";
+    String ENDPOINT = "197.161.15.4";
     int brand_spinner_id = 2131296325;
     int device_spinner_id = 2131296323;
     EditText device_name;

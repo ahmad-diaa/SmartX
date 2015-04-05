@@ -20,7 +20,7 @@ public class addRoomsActivity extends Activity{
     EditText roomID;
     EditText roomName;
     public static int count = -1;
-    String ENDPOINT = "172.20.10.2";
+    String ENDPOINT = "197.161.15.4";
     int userID;
     int[] photos = new int[]{ R.drawable.one ,
             R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,

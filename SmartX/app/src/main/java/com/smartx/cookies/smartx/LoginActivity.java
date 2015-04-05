@@ -27,7 +27,7 @@ public class LoginActivity extends Activity {
     Button btnLogin;
     //TextView aboutlogin;
     String Pass;
-    String ENDPOINT = "172.20.10.2";
+    String ENDPOINT = "197.161.15.4";
     
     List<User> userList;
     SharedPreferences Data;
