@@ -20,9 +20,10 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://41.178.145.164:3000/";
+    String ENDPOINT = "172.20.10.2";
     int userID;
     Button addRoomB;
+    Button changePasswordB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,10 @@ public class ViewRooms extends ListActivity {
 
     public void addRoom(View v) {
         startActivity(new Intent(this, addRoomsActivity.class));
+    }
+
+    public void changePassword (View v) {
+        startActivity(new Intent(this, changePassword.class));
     }
 
     @Override

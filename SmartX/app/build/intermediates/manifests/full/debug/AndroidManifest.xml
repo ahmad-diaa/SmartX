@@ -68,6 +68,10 @@
             android:name="com.smartx.cookies.smartx.Settings"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.changePassword"
+            android:label="@string/title_activity_change_password" >
+        </activity>
     </application>
 
 </manifest> <!-- <?xml version="1.0" encoding="utf-8"?> -->

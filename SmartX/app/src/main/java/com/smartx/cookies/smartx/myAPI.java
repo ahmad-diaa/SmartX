@@ -24,6 +24,10 @@ public interface myAPI {
     public void getFeed(@Path("id") int id, Callback<User> callback);
 
     @FormUrlEncoded
+    @PUT("/users/{userID}/")
+    void changePassword(@Path("userID") String id, @Field ("user[password]") String password, Callback<User> callback);
+
+    @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
     void addRoom(@Path("userID") String id, @Field("room[name]") String name ,@Field("room[photo]") String photo,@Field("room[room_id]") String room_id ,Callback<Room> callback);
 
@@ -35,14 +39,10 @@ public interface myAPI {
 
     @FormUrlEncoded
     @POST("/users/{user_id}/rooms/{room_id}/devices")
-    void addDevice(@Path("user_id") String userid, @Path("room_id") String roomid, @Field("device[name]") String name,@Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
+    void addDevice(@Path("user_id") String user_id, @Path("room_id") String roomid, @Field("device[name]") String name,@Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
 
     @GET("/users/{userID}/rooms/")
     void viewRooms(@Path("userID") String id, Callback<List<Room>> callback);
-
-    @FormUrlEncoded
-    @PUT("/users/{userID}/")
-    void changePassword(@Path("userID") String id, @Field ("user[password]") String password, Callback<User> callback);
 
     @GET("/users/{userID}/")
     void getUser (@Path("userID") String id, Callback <User> callback);

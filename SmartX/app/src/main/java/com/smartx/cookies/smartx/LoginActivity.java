@@ -26,8 +26,8 @@ import retrofit.client.Response;
 public class LoginActivity extends Activity {
     Button btnLogin;
     //TextView aboutlogin;
-
-    String ENDPOINT = "http://41.178.145.164:3000/";
+    String Pass;
+    String ENDPOINT = "172.20.10.2";
     
     List<User> userList;
     SharedPreferences Data;
@@ -68,7 +68,7 @@ public class LoginActivity extends Activity {
                 EditText username = (EditText) findViewById(R.id.txtUserName);
                 EditText password = (EditText) findViewById(R.id.txtPassword);
                 String Name = username.getText().toString();
-                String Pass = password.getText().toString();
+                Pass = password.getText().toString();
 
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
@@ -92,6 +92,8 @@ public class LoginActivity extends Activity {
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putInt("userID", user.getID());
                                 editor.putString("Name", Name);
+                                editor.putString("password", Pass);
+
                                 editor.commit();
                                 startActivity(new Intent(getApplicationContext(),ViewRooms.class));
                             }
