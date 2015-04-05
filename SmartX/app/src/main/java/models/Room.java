@@ -1,27 +1,15 @@
 package models;
 
 public class Room {
-    private String id ;
+    private int id ;
     private String name;
     private String photo = "Photo";
-
-    public String get_roomName() {
-        return name;
-    }
-
-    public void set_roomName(String roomName) {
-        this.name = roomName;
-    }
-
-    public String get_id() {
-        return id;
-    }
 
     public void setPhoto(String photo) {
         this.photo = photo;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -37,13 +25,12 @@ public class Room {
         this.name = name;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Room(String roomName ,String roomID) {
+    public Room(String roomName) {
         name = roomName;
-        id  = roomID;
     }
 
     public Room() {

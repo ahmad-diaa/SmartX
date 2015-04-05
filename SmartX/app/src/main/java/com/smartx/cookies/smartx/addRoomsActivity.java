@@ -17,7 +17,6 @@ import retrofit.client.Response;
 
 public class addRoomsActivity extends Activity{
     Button addRoomButton;
-    EditText roomID;
     EditText roomName;
     public static int count = -1;
     String ENDPOINT = "http://192.168.1.2:3000/";
@@ -42,22 +41,25 @@ public class addRoomsActivity extends Activity{
 
     public void addRoomButton(View v) {
         roomName = (EditText) findViewById(R.id.roomName);
-        roomID = (EditText) findViewById(R.id.RoomIDText);
-        Button addRoomButton = (Button) v;
-        Room room = new Room(roomName.getText().toString(),roomID.getText().toString());
+        Room room = new Room(roomName.getText().toString());
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         room.setPhoto(photos[randomIcon()] + "");
-        api.addRoom((userID + ""), room.get_roomName(), room.getPhoto(), room.get_id(), new Callback<Room>() {
+        api.addRoom((userID + ""), room.getName(), room.getPhoto(), room.getId()+"", new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(addRoomsActivity.this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("roomID",room.getId());
+                editor.commit();
                 startActivity(new Intent(getApplicationContext(), ViewRooms.class));
             }
 
             @Override
             public void failure(RetrofitError error) {
             Toast.makeText(getApplicationContext(), "Cannot add room!", Toast.LENGTH_LONG).show();
+            throw error;
             }
         });
     }

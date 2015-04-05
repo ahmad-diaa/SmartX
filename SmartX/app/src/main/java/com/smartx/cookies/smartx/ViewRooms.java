@@ -42,7 +42,7 @@ public class ViewRooms extends ListActivity {
                 Iterator<Room> iterator = rooms.iterator();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-                    roomNames[i] = iterator.next().get_roomName();
+                    roomNames[i] = iterator.next().getName();
               //      roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());  commented only to overcome error
                     i--;
                 }
