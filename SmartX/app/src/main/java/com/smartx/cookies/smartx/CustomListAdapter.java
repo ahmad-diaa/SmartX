@@ -15,8 +15,8 @@ import java.util.Locale;
 public class CustomListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
-    private final ArrayList<String> itemname;
-    private final ArrayList<Integer> imgid;
+    private final ArrayList<String> itemName;
+    private final ArrayList<Integer> imgId;
 
     private ArrayList<String> tempItemname;
     private ArrayList<Integer> tempImgid;
@@ -25,8 +25,8 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     public CustomListAdapter(Activity context, ArrayList<String> itemname, ArrayList<Integer> imgid) {
         super(context, R.layout.mylist, itemname);
         this.context = context;
-        this.itemname = itemname;
-        this.imgid = imgid;
+        this.itemName = itemname;
+        this.imgId = imgid;
         tempImgid = new ArrayList<Integer>();
         tempItemname = new ArrayList<String>();
         tempImgid.addAll(imgid);
@@ -38,23 +38,29 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.mylist, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.nameroom);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageroom);
-        txtTitle.setText(itemname.get(position));
-        imageView.setImageResource(imgid.get(position));
+        txtTitle.setText(itemName.get(position));
+        imageView.setImageResource(imgId.get(position));
         return rowView;
     }
 
     ;
 
+    /**
+     * Filter the list of rooms (itemName) matching a certain word
+     *
+     * @param charText string to filter with
+     */
+
     public void filter(String charText) {
 
         charText = charText.toLowerCase(Locale.getDefault());
-        itemname.clear();
+        itemName.clear();
 
         for (int pos = 0; pos < tempItemname.size(); pos++) {
             String name = tempItemname.get(pos);
             if (name.startsWith(charText) || name.contains(" " + charText)) {
-                itemname.add(name);
-                imgid.add(tempImgid.get(pos));
+                itemName.add(name);
+                imgId.add(tempImgid.get(pos));
             }
         }
         notifyDataSetChanged();
