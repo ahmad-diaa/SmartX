@@ -47,5 +47,7 @@ public interface myAPI {
     @GET("/users/{userID}/")
     void getUser (@Path("userID") String id, Callback <User> callback);
 
+    @GET("/users/{userID}/rooms/1/devices/1/devices") //msh 3arfa msh 3arfa
+    void deviceType(@Path("userID") String id, Callback<List<Device>> callback);
 
 }

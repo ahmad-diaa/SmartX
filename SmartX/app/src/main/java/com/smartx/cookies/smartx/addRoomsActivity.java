@@ -23,7 +23,7 @@ public class addRoomsActivity extends Activity{
     EditText roomID;
     EditText roomName;
     public int count = -1;
-    String ENDPOINT = "http://192.168.1.106:3000/";
+    String ENDPOINT = "http://192.168.24.238:3000/";
     int userID;
 
     @Override
@@ -33,7 +33,6 @@ public class addRoomsActivity extends Activity{
         final SharedPreferences  mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID=(mSharedPreference.getInt("userID", 1));
         addRoomButton = (Button) findViewById(R.id.addRoomButton);
-
     }
 
     public void addRoomButton(View v) {

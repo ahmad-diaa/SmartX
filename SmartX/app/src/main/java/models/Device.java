@@ -7,6 +7,7 @@ public class Device {
     String brand;
     int roomID;
 
+
     public Device(){
 
     }

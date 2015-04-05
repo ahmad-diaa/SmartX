@@ -145,6 +145,7 @@
     <integer name="abc_max_action_buttons">2</integer>
     <!-- From: file:/C:/SIX/SE/smartxyarab/SmartX/app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="IP_address">192.168.24.238:3000</string>
     <string name="Login">Sign In</string>
     <string name="Username">Name</string>
     <!-- From: file:/C:/SIX/SE/smartxyarab/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
@@ -175,6 +176,7 @@
     <string name="title_activity_about_us">About_us</string>
     <string name="title_activity_add_devices">Add Devices</string>
     <string name="title_activity_device">device</string>
+    <string name="title_activity_device_list">DeviceList</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_settings">Settings</string>

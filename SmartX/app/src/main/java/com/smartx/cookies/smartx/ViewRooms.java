@@ -19,15 +19,17 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import models.Device;
 import models.Room;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
+//static array, getarray, setarray based on user's selection(?), reload view with different array on click
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://192.168.1.106:3000/";
+    String ENDPOINT = "http://192.168.24.238:3000/";
     int userID;
     Button addRoomB;
     int count = -1;
@@ -39,6 +41,7 @@ public class ViewRooms extends ListActivity {
         count++;
         return (count + 1)%9 ;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +57,11 @@ public class ViewRooms extends ListActivity {
             @Override
             public void success(List<Room> rooms, Response response) {
                 String[] roomNames = new String[rooms.size()];
-                final Integer[] roomImages = new Integer[rooms.size()];
                 Iterator<Room> iterator = rooms.iterator();
-                //Iterator<Room> iterator2 = rooms.iterator();
-                //ArrayList<Integer> photoss = new ArrayList<Integer>();
                 Integer [] iconRooms = new Integer[rooms.size()];
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
                     roomNames[i] = iterator.next().get_roomName();
-                    // roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());
                     iconRooms[i] = photos[randomIcon()];
                     i--;
                 }
@@ -95,6 +94,7 @@ public class ViewRooms extends ListActivity {
     public void viewByType(View v){
         showPopUp();
     }
+
     private void showPopUp() {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(
                 this);
@@ -103,10 +103,10 @@ public class ViewRooms extends ListActivity {
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.select_dialog_singlechoice);
-        arrayAdapter.add("TVs");
-        arrayAdapter.add("Air Conditioners");
-        arrayAdapter.add("Curtains");
-        arrayAdapter.add("Plugs");
+        arrayAdapter.add("TV");
+        arrayAdapter.add("Air Conditioner");
+        arrayAdapter.add("Curtain");
+        arrayAdapter.add("Plug");
         builderSingle.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
 
@@ -121,23 +121,15 @@ public class ViewRooms extends ListActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String strName = arrayAdapter.getItem(which);
-                        AlertDialog.Builder builderInner = new AlertDialog.Builder(
-                                ViewRooms.this);
-                        builderInner.setMessage(strName);
-                        builderInner.setTitle("Your Selected Item is");
-                        builderInner.setPositiveButton("Ok",
-                                new DialogInterface.OnClickListener() {
+                        final String strName = arrayAdapter.getItem(which);
+                        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                        SharedPreferences.Editor editor = mSharedPreference.edit();
+                        editor.putString("deviceType", "TV");
+                        editor.commit();
+                        startActivity(new Intent(getBaseContext(), deviceList.class));
 
-                                    @Override
-                                    public void onClick(
-                                            DialogInterface dialog,
-                                            int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        builderInner.show();
                     }
+
                 });
         builderSingle.show();
     }

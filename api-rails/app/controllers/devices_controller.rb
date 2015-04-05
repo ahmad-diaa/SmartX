@@ -7,6 +7,7 @@ class DevicesController < ApplicationController
     @room = @user.rooms.find(params[:room_id])
     @devices = @room.devices.all
     render json: @devices if stale?(etag: @devices.all, last_modified: @devices.maximum(:updated_at))
+  get_all_type
   end
 
   #Returns device with given id knowing he belongs to which user and room.
@@ -54,15 +55,25 @@ class DevicesController < ApplicationController
   def destroy
     @user=User.find(params[:user_id])
     @room=@user.rooms.find(params[:room_id])
-    @device= @room.devices.find(params[:device_id])
+    @device= @room.devices.find(params[:device_id]) 
     @device.destroy
     head :no_content
   end
+
+def get_all_type
+  # @user=User.find(params[:user_id])
+  # @type=devices.find(params[:name])
+  # @device= devices.find(params[:device_id])
+  # render json: @device if stale?(@device)
+    @devices = Device.all
+    @user=User.find(params[:user_id])
+    render json: @devices if stale?(etag: @devices.all, last_modified: @devices.maximum(:updated_at))
+end  
 
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def device_params
     params.require(:device).permit(:name,:device_id,:user_id,:room_id, :status)
-  end
+  end 
 end
 
