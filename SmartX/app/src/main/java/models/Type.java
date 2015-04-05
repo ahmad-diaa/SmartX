@@ -2,7 +2,6 @@ package models;
 
 public class Type {
     private String name;
-    private String brand;
 
     public String getName() {
         return name;
@@ -12,11 +11,4 @@ public class Type {
         this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setType(String brand) {
-        this.brand = brand;
-    }
 }

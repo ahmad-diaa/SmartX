@@ -22,7 +22,6 @@ public class ViewRooms extends ListActivity {
 
     String ENDPOINT = "http://192.168.1.2:3000/";
     int userID;
-    Button addRoomB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +40,10 @@ public class ViewRooms extends ListActivity {
                 String[] roomNames = new String[rooms.size()];
                 final Integer[] roomImages = new Integer[rooms.size()];
                 Iterator<Room> iterator = rooms.iterator();
-                Iterator<Room> iterator2 = rooms.iterator();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
                     roomNames[i] = iterator.next().get_roomName();
-                    roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());
+              //      roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());  commented only to overcome error
                     i--;
                 }
                 CustomListAdapter adapter = new CustomListAdapter(ViewRooms.this, roomNames, roomImages);

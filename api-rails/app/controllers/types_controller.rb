@@ -1,10 +1,10 @@
 class TypesController < ApplicationController
 
-  #Returns list of types with given name. 
+  #Returns list of types. 
   # GET /types
   # GET /types.json
   def index
-    @types = Type.where( :name => params[:name] )
+    @types = Type.all
     render json: @types if stale?(etag: @types.all, last_modified: @types.maximum(:updated_at))
   end
   

@@ -30,7 +30,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         TextView txtTitle = (TextView) rowView.findViewById(R.id.nameroom);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageroom);
         txtTitle.setText(itemname[position]);
-        imageView.setImageResource(imgid[position]);
+//        imageView.setImageResource(imgid[position]);    commented only to overcome error
         return rowView;
     };
 }
