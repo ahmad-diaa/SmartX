@@ -1,6 +1,14 @@
 class RoomsController < ApplicationController
 	
 	before_action :set_room, only: [:show, :update, :destroy]
+
+  #Returns room for a specific user with given name. 
+  def find 
+    @user = User.find(params[:user_id])
+    @room = @user.rooms.where(:name => params[:name])
+    render json: @room if stale?(etag: @room.all, last_modified: @room.maximum(:updated_at))
+  end
+
   #Returns list of rooms for a specific user. 
   # GET /rooms
   # GET /rooms.json
