@@ -1,9 +1,11 @@
 package com.smartx.cookies.smartx;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,14 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import models.*;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class changePassword extends ActionBarActivity {
+public class changePassword extends Activity {
     String oldPass;
     String originalPass;
     String newPass;
@@ -28,7 +29,7 @@ public class changePassword extends ActionBarActivity {
     EditText newPassword;
     EditText confirmPassword;
     int userID;
-    String ENDPOINT = "197.161.15.4";
+    String ENDPOINT = "http://192.168.1.6:3000/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +37,11 @@ public class changePassword extends ActionBarActivity {
         changePasswordB = (Button) findViewById(R.id.changePasswordButton);
         final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID=(mSharedPreference.getInt("userID", 1));
-        originalPass= (mSharedPreference.getString("password", "1"));
-        oldPassword = (EditText) findViewById(R.id.passwordOld);
-        newPassword = (EditText) findViewById(R.id.passwordNew);
-        confirmPassword = (EditText) findViewById(R.id.passwordConfirm);
+        originalPass= (mSharedPreference.getString("password", "123456"));
+
+        oldPassword = (EditText) findViewById(R.id.oldPassword);
+        newPassword = (EditText) findViewById(R.id.newPassword);
+        confirmPassword = (EditText) findViewById(R.id.confirmPassword);
 
     }
 
@@ -61,7 +63,7 @@ public class changePassword extends ActionBarActivity {
 
                 @Override
                 public void failure(RetrofitError error) {
-
+                    Log.d("msg", "yaraaaaaab");
                 }
             });
         }

@@ -16,7 +16,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class Settings extends ActionBarActivity {
-    String ENDPOINT = "197.161.15.4";
+    String ENDPOINT = "http://192.168.1.6:3000/";
     Button changePasswordB;
     int userID;
     String oldPasswordS;
@@ -33,8 +33,8 @@ public class Settings extends ActionBarActivity {
         changePasswordB = (Button) findViewById(R.id.changePasswordButton);
         final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID=(mSharedPreference.getInt("userID", 1));
-        EditText oldPassword = (EditText) findViewById(R.id.passwordOld);
-        EditText newPassword = (EditText) findViewById(R.id.passwordNew);
+        EditText oldPassword = (EditText) findViewById(R.id.oldPassword);
+        EditText newPassword = (EditText) findViewById(R.id.newPassword);
         EditText confirmPassword = (EditText) findViewById(R.id.passwordConfirm);
     }
 

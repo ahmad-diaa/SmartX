@@ -184,9 +184,7 @@
     <string name="type_title">Select Device</string>
     <!-- From: file:/home/ahmad/Desktop/sprint_1/SmartX/SmartX/app/src/main/res/values/styles.xml -->
     <eat-comment/>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"/>
     <!-- From: file:/home/ahmad/Desktop/sprint_1/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance">

@@ -26,9 +26,9 @@ import retrofit.client.Response;
 public class LoginActivity extends Activity {
     Button btnLogin;
     //TextView aboutlogin;
-    String Pass;
-    String ENDPOINT = "197.161.15.4";
-    
+    public String Pass;
+    String ENDPOINT = "http://192.168.1.6:3000/";
+
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
@@ -73,7 +73,10 @@ public class LoginActivity extends Activity {
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
                 myAPI api = adapter.create(myAPI.class);
+
+
                 api.login(Name, Pass, new Callback<Session>() {
+
                     @Override
                     public void success(Session session, Response response) {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
@@ -116,17 +119,10 @@ public class LoginActivity extends Activity {
                         if(username == null || username.getText().equals(""))
                         {
                             Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
-                        }else if(password == null || password.getText().equals(""))
-                        {
-                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
+                        }else {
+                            Toast.makeText(getApplicationContext(),"msh fahem ",Toast.LENGTH_LONG).show();
                         }
-                        else if(error.getMessage().contains("401 Unauthorized"))
-                        {
-                            Toast.makeText(getApplicationContext(),"Wrong Username/Password",Toast.LENGTH_LONG).show();
-                        }else
-                        {
-                            Toast.makeText(getApplicationContext(),"Make sure you are online.\nIf this problem proceeds, contact us.",Toast.LENGTH_LONG).show();
-                        }
+
                     }
                 });
 

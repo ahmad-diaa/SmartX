@@ -64,7 +64,10 @@
         </activity>
         <activity
             android:name=".changePassword"
-            android:label="@string/title_activity_change_password" >
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Change Password"
+            android:screenOrientation="portrait" >
+
         </activity>
     </application>
 
