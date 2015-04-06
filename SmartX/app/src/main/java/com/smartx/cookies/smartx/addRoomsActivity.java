@@ -44,11 +44,11 @@ public class addRoomsActivity extends Activity{
         roomName = (EditText) findViewById(R.id.roomName);
         roomID = (EditText) findViewById(R.id.RoomIDText);
         Button addRoomButton = (Button) v;
-        Room room = new Room(roomName.getText().toString(),roomID.getText().toString());
+        Room room = new Room(roomName.getText().toString());
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         room.setPhoto(photos[randomIcon()] + "");
-        api.addRoom((userID + ""), room.get_roomName(), room.getPhoto(), room.get_id(), new Callback<Room>() {
+        api.addRoom((userID + ""), room.getName(), room.getPhoto(), room.getId()+"", new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {

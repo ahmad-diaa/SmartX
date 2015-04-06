@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.app.ListActivity;
+import android.widget.Toast;
 import java.util.Iterator;
 import java.util.List;
 import models.Room;
@@ -42,8 +42,8 @@ public class ViewRooms extends ListActivity {
                 Iterator<Room> iterator = rooms.iterator();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-                    roomNames[i] = iterator.next().get_roomName();
-              //      roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());  commented only to overcome error
+                    roomNames[i] = iterator.next().getName();
+                    //      roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());  commented only to overcome error
                     i--;
                 }
                 CustomListAdapter adapter = new CustomListAdapter(ViewRooms.this, roomNames, roomImages);
@@ -59,13 +59,26 @@ public class ViewRooms extends ListActivity {
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("userID", userID);
-        editor.putInt("roomID", position);
-        editor.commit();
-        startActivity(new Intent(this, viewDevices.class));
-        this.setTitle("View Rooms");
+        Object o = this.getListAdapter().getItem(position);
+        String room = o.toString();
+        Toast.makeText(getApplicationContext(), room, Toast.LENGTH_LONG).show();
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        myAPI api = adapter.create(myAPI.class);
+        api.findRoom(userID+"",room,new Callback<List<Room>>() {
+            @Override
+            public void success(List<Room> rooms, Response response) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("roomID", rooms.get(0).getId());
+                editor.commit();
+                startActivity(new Intent(ViewRooms.this, viewDevices.class));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                throw error;
+            }
+        });
     }
 
     public void addRoom(View v) {
@@ -79,3 +92,6 @@ public class ViewRooms extends ListActivity {
         return true;
     }
 }
+
+
+
