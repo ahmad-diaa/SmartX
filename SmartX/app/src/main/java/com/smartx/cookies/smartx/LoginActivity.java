@@ -26,7 +26,7 @@ import retrofit.client.Response;
 public class LoginActivity extends Activity {
     Button btnLogin;
 
-    String ENDPOINT = "http://192.168.1.10:3000/";
+    String ENDPOINT = "http://192.168.1.7:3000/";
     
     List<User> userList;
     SharedPreferences Data;

@@ -27,19 +27,19 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://192.168.1.10:3000/";
+    String ENDPOINT = "http://192.168.1.7:3000/";
     EditText editSearch;
     int userID;
     Button addRoomB;
     public static int count = -1;
     CustomListAdapter adapter2;
-    int[] photos = new int[]{ R.drawable.one ,
-            R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
-            R.drawable.six ,R.drawable.seven ,R.drawable.eight ,R.drawable.nine};
+    int[] photos = new int[]{R.drawable.one,
+            R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
+            R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
 
-    public int randomIcon(){
+    public int randomIcon() {
         count++;
-        count = (count + 1)%9 ;
+        count = (count + 1) % 9;
         return count;
     }
 
@@ -59,14 +59,14 @@ public class ViewRooms extends ListActivity {
             public void success(List<Room> rooms, Response response) {
                 ArrayList<String> roomNames = new ArrayList<String>();
                 Iterator<Room> iterator = rooms.iterator();
-                ArrayList <Integer>  iconRooms = new ArrayList<Integer>();
+                ArrayList<Integer> iconRooms = new ArrayList<Integer>();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
                     roomNames.add(iterator.next().get_roomName());
                     iconRooms.add(photos[randomIcon()]);
                     i--;
                 }
-                adapter2 =  new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
+                adapter2 = new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
                 setListAdapter(adapter2);
                 editSearch = (EditText) findViewById(R.id.search);
 
