@@ -42,7 +42,9 @@
         </activity>
         <activity
             android:name="com.smartx.cookies.smartx.About_us"
-            android:label="@string/app_name" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <!-- android:screenOrientation="portrait" -->
         <!-- android:configChanges="keyboardHidden|orientation|screenSize" -->
 
@@ -53,7 +55,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.smartx.cookies.smartx.AddDevices"
+            android:name="com.smartx.cookies.smartx.addDevices"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_add_devices"
             android:screenOrientation="portrait" >
@@ -68,6 +70,11 @@
             android:name="com.smartx.cookies.smartx.Settings"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.TvClickerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_tv_clicker"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest> <!-- <?xml version="1.0" encoding="utf-8"?> -->

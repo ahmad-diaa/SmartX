@@ -1,18 +1,17 @@
 package com.smartx.cookies.smartx;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.app.ListActivity;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,7 +25,7 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity{
 
-    String ENDPOINT = "http://196.205.152.124/";
+    String ENDPOINT = "http://84.233.103.179:3000/";
     int userID;
     int roomID;
     Button addDevice;
@@ -52,7 +51,7 @@ public class viewDevices extends ListActivity{
 
                 final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.viewDevices(userID +"",roomID + "", new Callback<List<Device>>() {
+        api.viewDevices(1+"",1 + "", new Callback<List<Device>>() {
 
             @Override
             public void success(List<Device> devices, Response response) {
@@ -72,12 +71,16 @@ public class viewDevices extends ListActivity{
                 ArrayAdapter <String> adapter=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
 
+                startActivity(new Intent(getApplicationContext(),TvClickerActivity.class));
 
             }
 
             @Override
-            public void failure(RetrofitError error) {
+            public void failure(RetrofitError error)
+            {
                 Log.i("ya mosahhel", "no idea");
+                startActivity(new Intent(getApplicationContext(),TvClickerActivity.class));
+
             }
         });
 

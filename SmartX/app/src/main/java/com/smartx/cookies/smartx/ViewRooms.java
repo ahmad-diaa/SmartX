@@ -1,29 +1,16 @@
 package com.smartx.cookies.smartx;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.app.ListActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -36,7 +23,7 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://196.205.152.124/";
+    String ENDPOINT = "http://84.233.103.179:3000/";
     int userID;
     Button addRoomB;
 
@@ -85,6 +72,7 @@ public class ViewRooms extends ListActivity {
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("userID", userID);
@@ -92,7 +80,7 @@ public class ViewRooms extends ListActivity {
         editor.commit();
 
 
-        startActivity(new Intent(this, viewDevices.class));
+        startActivity(new Intent(this, TvClickerActivity.class));
         this.setTitle("View Rooms");
 
 

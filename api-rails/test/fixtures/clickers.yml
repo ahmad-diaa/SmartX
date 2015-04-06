@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  command: MyString
+  device_id: 
+  room_id: 
+  user_id: 
+
+two:
+  command: MyString
+  device_id: 
+  room_id: 
+  user_id: 

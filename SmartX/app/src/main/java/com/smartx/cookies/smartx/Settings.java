@@ -1,20 +1,15 @@
 package com.smartx.cookies.smartx;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import models.*;
 import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -23,7 +18,7 @@ import retrofit.client.Response;
 
 
 public class Settings extends ActionBarActivity {
-    String ENDPOINT = "http://196.205.152.124/";
+    String ENDPOINT = "http://84.233.103.179:3000/";
     Button changePasswordB;
     int userID;
     String oldPasswordS;

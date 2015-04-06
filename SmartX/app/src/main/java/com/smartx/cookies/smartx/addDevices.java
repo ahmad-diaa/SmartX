@@ -1,16 +1,11 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,13 +20,10 @@ import java.util.List;
 
 import models.Device;
 import models.Type;
-import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.http.POST;
-import retrofit.http.Path;
 
 
 public class addDevices extends Activity implements AdapterView.OnItemSelectedListener {
@@ -41,7 +33,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     List<String> brands;
     Spinner brand_spinner;
     ArrayAdapter<String> dataAdapter2;
-    String ENDPOINT = "http://196.205.152.124/";
+    String ENDPOINT = "http://84.233.103.179:3000/";
     int brand_spinner_id = 2131296325;
     int device_spinner_id = 2131296323;
 

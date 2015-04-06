@@ -1,17 +1,12 @@
 package com.smartx.cookies.smartx;
 
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.widget.AdapterView;
-
 import java.util.List;
 
 import models.Device;
-import java.util.List;
 import models.Room;
-import models.User;
 import models.Type;
+import models.User;
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -36,7 +31,7 @@ public interface myAPI {
 
     @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
-    void addRoom(@Path("userID") String id, @Field("room[name]") String name ,@Field("room[photo]") String photo,@Field("room[room_id]") String room_id ,Callback<Room> callback);
+    void addRoom(@Path("userID") String id, @Field("room[name]") String name ,@Field("room[photo]") String photo,Callback<Room> callback);
 
 
     @GET("/users/{userID}/rooms/{roomID}/devices")
@@ -44,6 +39,13 @@ public interface myAPI {
 
     @GET("/types/{name}")
     void requestBrands(@Path("name") String device, Callback<List<Type>> types);
+    @FormUrlEncoded
+    @POST("/users/{user_id}/rooms/{room_id}/devices/{device_id}/clickers")
+    void addClicker (@Path("user_id") String user_id, @Path("room_id") String room_id, @Path("device_id") String device_id,@Field("clicker[command]") String command , Callback <Clicker> callback);
+
+    @FormUrlEncoded
+    @PUT("/users/{user_id}/rooms/{room_id}/devices/{device_id}/clickers/{clicker_id}")
+    void ChangeCVT (@Path("Clicker_id") String Clicker_id,@Path("user_id") String user_id, @Path("room_id") String room_id, @Path("device_id") String device_id,@Field("clicker[command]") String command , Callback <Clicker> callback);
 
     @FormUrlEncoded
     @POST("/users/{user_id}/rooms/{room_id}/devices")
