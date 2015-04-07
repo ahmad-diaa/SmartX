@@ -1340,10 +1340,10 @@ containing a value of this type.
         public static final int brand_spinner=0x7f090045;
         public static final int brandtitle=0x7f090046;
         public static final int btnLogin=0x7f090051;
-        public static final int button=0x7f090061;
-        public static final int button2=0x7f090062;
-        public static final int button3=0x7f090063;
-        public static final int button4=0x7f090064;
+        public static final int button=0x7f090062;
+        public static final int button2=0x7f090063;
+        public static final int button3=0x7f090064;
+        public static final int button4=0x7f090065;
         public static final int changePasswordButton=0x7f09005e;
         public static final int checkbox=0x7f090029;
         public static final int collapseActionView=0x7f090017;
@@ -1368,7 +1368,7 @@ containing a value of this type.
         public static final int image=0x7f090023;
         public static final int imageView=0x7f09003f;
         public static final int imageView2=0x7f090053;
-        public static final int imageView3=0x7f090060;
+        public static final int imageView3=0x7f090061;
         public static final int imageroom=0x7f090069;
         public static final int keylogin=0x7f090055;
         public static final int laayout=0x7f090057;
@@ -1407,7 +1407,7 @@ containing a value of this type.
         public static final int switch1=0x7f09005f;
         public static final int tabMode=0x7f09000b;
         public static final int textView=0x7f09004e;
-        public static final int textView2=0x7f090065;
+        public static final int textView2=0x7f090060;
         public static final int textView3=0x7f090058;
         public static final int textView4=0x7f09005a;
         public static final int textView5=0x7f09005c;

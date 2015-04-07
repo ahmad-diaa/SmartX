@@ -8,7 +8,9 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 
+import models.Device;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -17,12 +19,12 @@ import retrofit.client.Response;
 
 public class TvClickerActivity extends Activity {
 
-    String ENDPOINT = "http://84.233.103.179:3000/";
+    String ENDPOINT = "http://192.168.1.4:3000/";
     int userID;
     int roomID;
     int deviceID;
     String command ="Tv";
-    int onAndOff =1;
+    int on_and_off =1;
     SharedPreferences mSharedPreference;
 
     @Override
@@ -33,21 +35,30 @@ public class TvClickerActivity extends Activity {
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
         deviceID = (mSharedPreference.getInt("deviceID", 1));
-        Clicker TvClicker = new Clicker("1","1","1",command);
+        final Clicker TvClicker = new Clicker("1","1","1",command);
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+
         myAPI api = adapter.create(myAPI.class);
 //        api.getClicker(TvClicker.getUser_id(),TvClicker.getRoom_id(),TvClicker.getDevice_id(),TvClicker.getCommand(),new Callback<Clicker>() {
-        api.addClicker("1","1","1",TvClicker.getCommand(),new Callback<Clicker>() {
+        api.get_clicker("2", "2", "3", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
+//                TvClicker.setDevice_id(clicker.getDevice_id());
+//                TvClicker.setCommand(clicker.getCommand());
+//                TvClicker.setRoom_id(clicker.getRoom_id());
+//                TvClicker.setUser_id(clicker.getUser_id());
+//                startActivity(new Intent(TvClickerActivity.this, About_us.class));
 
             }
 
             @Override
             public void failure(RetrofitError error) {
+//                startActivity(new Intent(TvClickerActivity.this, About_us.class));
+
 
             }
         });
+        check_previous_state();
         }
 
 
@@ -60,37 +71,107 @@ public class TvClickerActivity extends Activity {
     public void VolumeUP(View v){
         command = new String("TV/");
         command+="V/1";
-        ClickedButton();
+//        ClickedButton();
+        in_common();
     }
 
     public void VolumeDown(View v){
         command = new String("TV/V/0");
-        ClickedButton();
+//        ClickedButton();
+        in_common();
     }
 
     public void ChannelUP(View v){
         command = new String("TV/C/1");
-        ClickedButton();
+//        ClickedButton();
+        in_common();
+
     }
 
     public void ChannelDown(View v){
         command = new String("TV/C/0");
-        ClickedButton();
+//        ClickedButton();
+        in_common();
+
     }
     public void TurnOnandOff(View v){
-        command = new String("TV/"+1+"");
-        onAndOff++;
-        ClickedButton();
-    }
+        command = new String("TV/"+ on_and_off %2+"");
+        on_and_off++;
+//        ClickedButton();
+        if(on_and_off%2 !=0)
+            in_common();
 
+        change_device_status(on_and_off%2);
+
+    }
+    public void check_previous_state(){
+        Clicker TvClicker = new Clicker("2","2","3",command);
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        myAPI api = adapter.create(myAPI.class);
+        api.viewDevice("2","2","3",new Callback<Device>() {
+            @Override
+            public void success(Device device, Response response) {
+                Switch on_off = (Switch) findViewById(R.id.switch1);
+
+                if(device.getStatus().contains("0"))
+                    on_off.setChecked(false);
+                else
+                    on_off.setChecked(true);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+    public void change_device_status(int status){
+        Clicker TvClicker = new Clicker("2","2","3",command);
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        myAPI api = adapter.create(myAPI.class);
+        api.edit_device_status("2","2","3",status+"",new Callback<Clicker>() {
+            @Override
+            public void success(Clicker clicker, Response response) {
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                startActivity(new Intent(TvClickerActivity.this, About_us.class));
+
+            }
+        });
+    }
     public void ClickedButton() {
-//        Clicker TvClicker = new Clicker(mSharedPreference.getString("userID",""),mSharedPreference.getString("roomID",""),
+////        Clicker TvClicker = new Clicker(mSharedPreference.getString("userID",""),mSharedPreference.getString("roomID",""),
+////                mSharedPreference.getString("deviceID",""), command);
+//        Clicker TvClicker = new Clicker("2","2","3",command);
+//        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+//        myAPI api = adapter.create(myAPI.class);
+////        api.getClicker(TvClicker.getUser_id(),TvClicker.getRoom_id(),TvClicker.getDevice_id(),TvClicker.getCommand(),new Callback<Clicker>() {
+//        api.send_clicker_command("2", "2", "3", "32",command, new Callback<Clicker>() {
+//            @Override
+//            public void success(Clicker clicker, Response response) {
+////                startActivity(new Intent(TvClickerActivity.this, About_us.class));
+//
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error) {
+//                startActivity(new Intent(TvClickerActivity.this, About_us.class));
+//
+//            }
+//        });
+
+    }
+    public void in_common(){
+        //        Clicker TvClicker = new Clicker(mSharedPreference.getString("userID",""),mSharedPreference.getString("roomID",""),
 //                mSharedPreference.getString("deviceID",""), command);
-        Clicker TvClicker = new Clicker("1","1","0",command);
+        Clicker TvClicker = new Clicker("2","2","3",command);
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
 //        api.getClicker(TvClicker.getUser_id(),TvClicker.getRoom_id(),TvClicker.getDevice_id(),TvClicker.getCommand(),new Callback<Clicker>() {
-        api.ChangeCVT("16", "1", "1", "1", TvClicker.getCommand(), new Callback<Clicker>() {
+        api.send_clicker_command("2", "2", "3", "32",command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
 //                startActivity(new Intent(TvClickerActivity.this, About_us.class));
@@ -103,7 +184,6 @@ public class TvClickerActivity extends Activity {
 
             }
         });
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -21,7 +21,7 @@ public class addRoomsActivity extends Activity{
     Button addRoomButton;
     EditText roomName;
     public static int count = -1;
-    String ENDPOINT = "http://84.233.103.179:3000/";
+    String ENDPOINT = "http://192.168.1.4:3000/";
     int userID;
     int[] photos = new int[]{ R.drawable.one ,
             R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,

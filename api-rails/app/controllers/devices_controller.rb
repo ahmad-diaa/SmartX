@@ -42,6 +42,7 @@ class DevicesController < ApplicationController
     @room=@user.rooms.find(params[:room_id])
     @device= @room.devices.find(params[:device_id])
     if @device.update(device_params)
+      @device.status = params[:status]
       head :no_content
     else
       render json: @device.errors, status: :unprocessable_entity

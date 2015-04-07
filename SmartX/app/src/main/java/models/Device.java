@@ -8,6 +8,17 @@ public class Device {
     String type;
     String name;
     String brand;
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+
+        return status;
+    }
+
+    String status;
     int roomID;
 
     public Device(){

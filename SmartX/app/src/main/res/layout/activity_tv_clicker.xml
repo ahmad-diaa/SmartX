@@ -11,12 +11,11 @@
         android:layout_height="wrap_content"
         android:text="On/Off"
         android:id="@+id/switch1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="48dp"
         android:onClick="TurnOnandOff"
-        android:checked="false" />
+        android:checked="false"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -44,12 +43,10 @@
         android:layout_height="wrap_content"
         android:text="-"
         android:id="@+id/button2"
+        android:onClick="ChannelDown"
         android:layout_alignTop="@+id/imageView3"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="39dp"
-        android:layout_marginEnd="39dp"
-        android:onClick="ChannelDown" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
