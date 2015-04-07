@@ -14,7 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import models.Room;
+import models.*;
+import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -67,11 +68,9 @@ public class Settings extends ActionBarActivity {
             RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
             myAPI api = adapter.create(myAPI.class);
-            api.getUser(userID +"", new Callback<User>){
-
+            api.getUser(userID +"", new Callback<models.User>() {
                 @Override
                 public void success(User user, Response response) {
-
 
                 }
 
@@ -82,7 +81,7 @@ public class Settings extends ActionBarActivity {
             });
         }
         }
-    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

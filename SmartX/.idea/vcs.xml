@@ -1,11 +1,11 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="" />
-<<<<<<< HEAD
-=======
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
->>>>>>> SX1_user_can_login
+
   </component>
 </project>
+
 

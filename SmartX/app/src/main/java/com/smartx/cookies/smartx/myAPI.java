@@ -1,10 +1,17 @@
 package com.smartx.cookies.smartx;
 
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.widget.AdapterView;
+
 import java.util.List;
 
+import models.Device;
+import java.util.List;
 import models.Room;
 import models.User;
+import models.Type;
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -17,6 +24,7 @@ import retrofit.http.Path;
  * Created by zamzamy on 3/11/15.
  */
 public interface myAPI {
+
     @FormUrlEncoded
     @POST("/session")
     void login(@Field("session[name]") String username, @Field("session[password]") String password,
@@ -29,7 +37,17 @@ public interface myAPI {
     @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
     void addRoom(@Path("userID") String id, @Field("room[name]") String name
-            , @Field("room[photo]") String photo, @Field("room[room_id]") String room_id, Callback<Room> callback);
+
+            ,@Field("room[photo]") String photo,@Field("room[room_id]") String room_id ,Callback<Room> callback);
+
+    @GET("/types/{name}")
+    void requestBrands(@Path("name") String device, Callback<List<Type>> types);
+
+    @FormUrlEncoded
+
+    @POST("/users/{user_id}/rooms/{room_id}/devices")
+    void addDevice(@Field("device[name]") String name,
+                   @Field("device[user_id]") String userID, @Field("device[room_id]") String roomID,@Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
 
 
     @GET("/users/{userID}/rooms/")

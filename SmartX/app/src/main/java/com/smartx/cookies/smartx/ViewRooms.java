@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.app.ListActivity;
@@ -16,6 +19,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +35,7 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity{
 
-    String ENDPOINT = "http://84.233.102.39:3000/";
+    String ENDPOINT = "http://192.168.1.13:3000/";
     int userID;
     Button addRoomB;
 
@@ -41,7 +45,22 @@ public class ViewRooms extends ListActivity{
        setContentView(R.layout.activity_view_rooms);
         final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID=(mSharedPreference.getInt("userID", 1));
-        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+
+//        addDevice = (Button) findViewById(R.id.addDevice);
+//        addDevice.setOnClickListener(new Button.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(ViewRooms.this,AddDevices.class));
+//            }
+//
+//
+//                });
+
+
+
+
+
+                final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         api.viewRooms(userID +"", new Callback<List<Room>>() {
 
@@ -69,7 +88,8 @@ public class ViewRooms extends ListActivity{
 
             @Override
             public void failure(RetrofitError error) {
-                startActivity(new Intent(getApplicationContext(), About_us.class));
+               throw error;
+                //startActivity(new Intent(getApplicationContext(), About_us.class));
 
             }
         });
