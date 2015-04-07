@@ -8,5 +8,8 @@ class CreateNotes < ActiveRecord::Migration
 
       t.timestamps
     end
+	add_foreign_key :notes, :devices
+    add_foreign_key :notes, :rooms
+    add_foreign_key :notes, :users
   end
 end
