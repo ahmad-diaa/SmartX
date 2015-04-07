@@ -68,6 +68,18 @@
             android:name="com.smartx.cookies.smartx.Settings"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.ViewDeviceActivity"
+            android:label="@string/title_activity_view_device" >
+        </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.ViewNotesActivity"
+            android:label="@string/title_activity_view_notes" >
+        </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.AddNoteActivity"
+            android:label="@string/title_activity_add_note" >
+        </activity>
     </application>
 
 </manifest> <!-- <?xml version="1.0" encoding="utf-8"?> -->

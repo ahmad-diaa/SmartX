@@ -1,11 +1,13 @@
 package com.smartx.cookies.smartx;
 
 import java.util.List;
+
 import models.Device;
+import models.Note;
 import models.Room;
 import models.Session;
-import models.User;
 import models.Type;
+import models.User;
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -36,6 +38,15 @@ public interface myAPI {
     @FormUrlEncoded
     @POST("/users/{user_id}/rooms/{room_id}/devices")
     void addDevice(@Path("user_id") String userid, @Path("room_id") String roomid, @Field("device[name]") String name,@Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
+
+    @FormUrlEncoded
+    @POST("/users/{user_id}/rooms/{room_id}/devices/{device_device_id}/notes")
+    void addNote(@Path("user_id") String userid, @Path("room_id") String roomid,
+                 @Path("device_device_id") String deviceID,@Field("note[body]") String noteText, Callback<Note> callback);
+
+    @GET("/users/{user_id}/rooms/{room_id}/devices/{device_device_id}/notes")
+    void getNotes(@Path("user_id") String userid, @Path("room_id") String roomid, @Path("device_device_id") String deviceID,
+                  Callback<List<Note>> callback);
 
     @GET("/users/{userID}/rooms/")
     void viewRooms(@Path("userID") String id, Callback<List<Room>> callback);

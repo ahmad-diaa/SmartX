@@ -20,7 +20,7 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://41.178.145.164:3000/";
+    String ENDPOINT = "http://192.168.43.249:3000/";
     int userID;
     Button addRoomB;
 
@@ -39,13 +39,13 @@ public class ViewRooms extends ListActivity {
             @Override
             public void success(List<Room> rooms, Response response) {
                 String[] roomNames = new String[rooms.size()];
-                final Integer[] roomImages = new Integer[rooms.size()];
+                final Integer[] roomImages = new Integer[0];
                 Iterator<Room> iterator = rooms.iterator();
                 Iterator<Room> iterator2 = rooms.iterator();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
                     roomNames[i] = iterator.next().get_roomName();
-                    roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());
+//                    roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());
                     i--;
                 }
                 CustomListAdapter adapter = new CustomListAdapter(ViewRooms.this, roomNames, roomImages);

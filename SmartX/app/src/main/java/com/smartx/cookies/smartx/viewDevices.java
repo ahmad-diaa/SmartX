@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.app.ListActivity;
+import android.widget.ListView;
+
 import java.util.Iterator;
 import java.util.List;
 import models.Device;
@@ -21,7 +23,7 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity{
 
-    String ENDPOINT = "http://41.178.145.164:3000/";
+    String ENDPOINT = "http://192.168.43.249:3000/";
     int userID;
     int roomID;
     Button addDevice;
@@ -73,5 +75,10 @@ public class viewDevices extends ListActivity{
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_view_devices, menu);
         return true;
+    }
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        startActivity(new Intent(this, ViewDeviceActivity.class));
+        this.setTitle("View Rooms");
     }
 }
