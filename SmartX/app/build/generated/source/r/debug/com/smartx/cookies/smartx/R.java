@@ -1346,6 +1346,7 @@ containing a value of this type.
         public static final int collapseActionView=0x7f090017;
         public static final int decor_content_parent=0x7f09002f;
         public static final int default_activity_button=0x7f090024;
+        public static final int deviceListText=0x7f090052;
         public static final int deviceName=0x7f090047;
         public static final int device_name=0x7f090048;
         public static final int device_spinner=0x7f090043;
@@ -1407,7 +1408,6 @@ containing a value of this type.
         public static final int textView3=0x7f09005d;
         public static final int textView4=0x7f09005f;
         public static final int textView5=0x7f090061;
-        public static final int textView6=0x7f090052;
         public static final int title=0x7f090027;
         public static final int txtPassword=0x7f090055;
         public static final int txtUserName=0x7f090057;
@@ -1483,7 +1483,7 @@ containing a value of this type.
         public static final int user2=0x7f03000b;
     }
     public static final class string {
-        public static final int IP_address=0x7f0b0000;
+        public static final int IP=0x7f0b0000;
         public static final int Login=0x7f0b0001;
         public static final int Username=0x7f0b0002;
         public static final int abc_action_bar_home_description=0x7f0b0003;

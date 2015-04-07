@@ -378,6 +378,7 @@ int id checkbox 0x7f090029
 int id collapseActionView 0x7f090017
 int id decor_content_parent 0x7f09002f
 int id default_activity_button 0x7f090024
+int id deviceListText 0x7f090052
 int id deviceName 0x7f090047
 int id device_name 0x7f090048
 int id device_spinner 0x7f090043
@@ -439,7 +440,6 @@ int id textView2 0x7f090051
 int id textView3 0x7f09005d
 int id textView4 0x7f09005f
 int id textView5 0x7f090061
-int id textView6 0x7f090052
 int id title 0x7f090027
 int id txtPassword 0x7f090055
 int id txtUserName 0x7f090057
@@ -505,7 +505,7 @@ int mipmap smartwhite 0x7f030008
 int mipmap smartxlogo 0x7f030009
 int mipmap user 0x7f03000a
 int mipmap user2 0x7f03000b
-int string IP_address 0x7f0b0000
+int string IP 0x7f0b0000
 int string Login 0x7f0b0001
 int string Username 0x7f0b0002
 int string abc_action_bar_home_description 0x7f0b0003

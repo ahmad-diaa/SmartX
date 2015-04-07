@@ -3,7 +3,7 @@ package models;
 public class Room {
     private String id ;
     private String name;
-    private String photo = "Photo";
+    private String user_id;
 
     public String get_roomName() {
         return name;
@@ -17,20 +17,8 @@ public class Room {
         return id;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public String getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public String getPhoto() {
-        return photo;
     }
 
     public void setName(String name) {

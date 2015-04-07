@@ -1,12 +1,13 @@
 package com.smartx.cookies.smartx;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
@@ -23,10 +24,12 @@ import retrofit.client.Response;
 
 public class deviceList extends ListActivity {
 
-    String ENDPOINT = "http://192.168.24.238:3000/";
-    int userID;
+    String ENDPOINT = "http://192.168.1.106:3000/";
+    static int userID;
     String type;
-    
+    static ArrayList<String> deviceNames;
+    static ArrayList<Integer> deviceIds;
+    String[] deviceIDs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,48 +37,67 @@ public class deviceList extends ListActivity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         type = mSharedPreference.getString("deviceType", "TV");
         userID = (mSharedPreference.getInt("userID", 1));
+        deviceNames = new ArrayList<String>();
+        deviceIds = new ArrayList<Integer>();
+            final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        final myAPI api = adapter.create(myAPI.class);
+        final ArrayList<String> roomNameList = new ArrayList<String>();
 
-        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-        myAPI api = adapter.create(myAPI.class);
+        api.allDevices(userID +"",new Callback<List<Device>>() {
 
-            api.deviceType(userID+"", new Callback<List<Device>>() {
+                           @Override
+                           public void success(List<Device> devices, Response response) {
+                               Iterator<Device> iterator = devices.iterator();
+                               Iterator<Device> iterator2 = devices.iterator();
+
+                               while (iterator.hasNext()) {
+                                   if (type.equalsIgnoreCase(iterator2.next().getName())) {
+                                       api.getRoom(userID + "", iterator.next().getRoomID()+"", new Callback<Room>() {
+                                                   @Override
+                                                   public void success(Room room, Response response) {
+                                                       roomNameList.add(room.get_roomName());
+                                                       ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomNameList);
+                                                       setListAdapter(adapter2);
+
+                                                   }
+
+                                                   @Override
+                                                   public void failure(RetrofitError error) {
+                                                        //add toast
+                                                   }
+                                               });
+                               }
+                                   else {
+                                       iterator.next();
+                                   }
+                               }
+                           }
+
+                           @Override
+                           public void failure(RetrofitError error) {
+                               //add toast
+                           }
 
 
-            @Override
-            public void success(List<Device> devices, Response response) {
-                String[] deviceNames = new String[devices.size()];
-                Iterator<Device> iterator = devices.iterator();
-                Iterator<Device> iterator2 = devices.iterator();
-                int i = devices.size() - 1;
-                while (i >= 0 & iterator.hasNext()) {
-                    if (type.equalsIgnoreCase(iterator2.next().getName())) {
-                        deviceNames[i] = iterator.next().getName();
-                        i--;
-                    }
-                }
+                       }
+        );
 
-                ArrayAdapter <String> adapter=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
-                setListAdapter(adapter);
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
-            }
-        });
-
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomNameList);
+        setListAdapter(adapter2);
 
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+            // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_device_list, menu);
         return true;
 
     }
-
+    public void viewRoomsClicked(View v){
+        startActivity(new Intent(this,ViewRooms.class));
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

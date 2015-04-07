@@ -28,6 +28,7 @@
         android:id="@+id/viewRoomsButton"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/android:list"
-        android:layout_alignEnd="@+id/android:list" />
+        android:layout_alignEnd="@+id/android:list"
+        android:onClick="viewRoomsClicked" />
 
 </RelativeLayout>

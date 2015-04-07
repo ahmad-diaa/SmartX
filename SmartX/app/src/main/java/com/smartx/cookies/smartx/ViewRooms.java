@@ -26,20 +26,21 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
 //static array, getarray, setarray based on user's selection(?), reload view with different array on click
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://192.168.24.238:3000/";
+    String ENDPOINT = "http://192.168.1.106:3000/";
     int userID;
     Button addRoomB;
     int count = -1;
-    int[] photos = new int[]{ R.drawable.one ,
-            R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
-            R.drawable.six ,R.drawable.seven ,R.drawable.eight ,R.drawable.nine};
+    int[] photos = new int[]{R.drawable.one,
+            R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
+            R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
 
-    public int randomIcon(){
+    public int randomIcon() {
         count++;
-        return (count + 1)%9 ;
+        return (count + 1) % 9;
     }
 
     @Override
@@ -58,7 +59,7 @@ public class ViewRooms extends ListActivity {
             public void success(List<Room> rooms, Response response) {
                 String[] roomNames = new String[rooms.size()];
                 Iterator<Room> iterator = rooms.iterator();
-                Integer [] iconRooms = new Integer[rooms.size()];
+                Integer[] iconRooms = new Integer[rooms.size()];
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
                     roomNames[i] = iterator.next().get_roomName();
@@ -91,7 +92,7 @@ public class ViewRooms extends ListActivity {
         startActivity(new Intent(this, addRoomsActivity.class));
     }
 
-    public void viewByType(View v){
+    public void viewByType(View v) {
         showPopUp();
     }
 
@@ -124,7 +125,7 @@ public class ViewRooms extends ListActivity {
                         final String strName = arrayAdapter.getItem(which);
                         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                         SharedPreferences.Editor editor = mSharedPreference.edit();
-                        editor.putString("deviceType", "TV");
+                        editor.putString("deviceType", strName);
                         editor.commit();
                         startActivity(new Intent(getBaseContext(), deviceList.class));
 

@@ -18,20 +18,20 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class addRoomsActivity extends Activity{
+public class addRoomsActivity extends Activity {
     Button addRoomButton;
     EditText roomID;
     EditText roomName;
     public int count = -1;
-    String ENDPOINT = "http://192.168.24.238:3000/";
+    String ENDPOINT = "http://192.168.1.106:3000/";
     int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addrooms);
-        final SharedPreferences  mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID", 1));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
         addRoomButton = (Button) findViewById(R.id.addRoomButton);
     }
 
@@ -40,12 +40,11 @@ public class addRoomsActivity extends Activity{
         roomID = (EditText) findViewById(R.id.RoomIDText);
 
         Button addRoomButton = (Button) v;
-        Room room = new Room(roomName.getText().toString(),roomID.getText().toString());
+        Room room = new Room(roomName.getText().toString(), roomID.getText().toString());
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
         myAPI api = adapter.create(myAPI.class);
 //        room.setPhoto(photos[randomIcon()] + "");
-
 
 
         api.addRoom((userID + ""), room.get_roomName(), room.get_id(), new Callback<Room>() {
@@ -60,7 +59,7 @@ public class addRoomsActivity extends Activity{
             @Override
             public void failure(RetrofitError error) {
 
-                Log.i("Dalia" , error.getMessage());
+                Log.i("Dalia", error.getMessage());
                 Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
             }
         });

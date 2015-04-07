@@ -1,12 +1,13 @@
 package models;
 
 public class Device {
-    int userID;
+    int user_id;
     String type;
     String name;
     String brand;
-    int roomID;
-
+    int room_id;
+    String status;
+    String device_id;
 
     public Device(){
 
@@ -16,16 +17,16 @@ public class Device {
         this.type = type;
         this.name = name;
         this.brand = brand;
-        this.roomID = roomID;
-        this.userID=userID;
+        this.room_id = roomID;
+        this.user_id=userID;
     }
 
     public int getUserID() {
-        return userID;
+        return user_id;
     }
 
     public void setUserID(int userID) {
-        this.userID = userID;
+        this.user_id = userID;
     }
 
     public String getType() {
@@ -53,11 +54,11 @@ public class Device {
     }
 
     public int getRoomID() {
-        return roomID;
+        return room_id;
     }
 
     public void setRoomID(int roomID) {
-        this.roomID = roomID;
+        this.room_id = roomID;
     }
 
 
