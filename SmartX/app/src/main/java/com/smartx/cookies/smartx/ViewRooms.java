@@ -82,4 +82,5 @@ public class ViewRooms extends ListActivity {
         inflater.inflate(R.menu.menu_view_rooms, menu);
         return true;
     }
+
 }

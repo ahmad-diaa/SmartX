@@ -3,13 +3,13 @@ package com.smartx.cookies.smartx;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import models.Room;
 import retrofit.Callback;
@@ -24,14 +24,28 @@ public class RenameRoomActivity extends Activity {
     EditText roomName;
     int userID;
     int roomID;
+    String errorMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rename_room);
     }
+    public String getENDPOINT() {
 
+        return this.ENDPOINT;
+    }
+    public int getUserID() {
 
+        return this.userID;
+    }
+
+    public int getRoomID() {
+        return this.roomID;
+    }
+    public String getErrorMessage() {
+        return this.errorMessage;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -66,13 +80,17 @@ public class RenameRoomActivity extends Activity {
 
                 @Override
                 public void success(Room room, Response response) {
-                    startActivity(new Intent(getApplicationContext(),ViewRooms.class));
+                    errorMessage = "";
+                    startActivity(new Intent(getApplicationContext(),viewDevices.class));
 
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-                    throw error;
+                        errorMessage = "Room name cannot be blank";
+                        Toast.makeText(getApplicationContext(), "Room name cannot be blank", Toast.LENGTH_LONG).show();
+
+
                 }
             });
         }

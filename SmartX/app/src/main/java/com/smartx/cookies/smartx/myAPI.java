@@ -25,6 +25,9 @@ public interface myAPI {
     @GET("/users/{id}")
     public void getFeed(@Path("id") int id, Callback<User> callback);
 
+    @GET("/users/{userID}/rooms/{id}")
+    void getRoom(@Path("userID") String userID, @Path("id") String roomID, Callback<String> callback);
+
     @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
     void addRoom(@Path("userID") String id, @Field("room[name]") String name , @Field("room[id]") String room_id ,Callback<Room> callback);
