@@ -16,7 +16,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class Settings extends Activity {
-    String ENDPOINT = "http://192.168.1.7:3000/";
+    String ENDPOINT = "http://172.20.10.3:3000/";
     Button changePasswordB;
     int userID;
     String oldPasswordS;

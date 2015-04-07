@@ -1,6 +1,7 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,9 @@ import java.util.Locale;
 
 public class CustomListAdapter extends ArrayAdapter<String> {
 
-    private final Activity context;
-    private final ArrayList<String> itemName;
-    private final ArrayList<Integer> imgId;
+     Activity context;
+    public  ArrayList<String> itemName;
+    public  ArrayList<Integer> imgId;
 
     private ArrayList<String> tempItemname;
     private ArrayList<Integer> tempImgid;
@@ -55,11 +56,13 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
         charText = charText.toLowerCase(Locale.getDefault());
         itemName.clear();
+        imgId.clear();
 
+        Log.i(tempItemname.size() + " " , "malo ");
         for (int pos = 0; pos < tempItemname.size(); pos++) {
-            String name = tempItemname.get(pos);
+            String name = tempItemname.get(pos).toLowerCase();
             if (name.startsWith(charText) || name.contains(" " + charText)) {
-                itemName.add(name);
+                itemName.add(tempItemname.get(pos));
                 imgId.add(tempImgid.get(pos));
             }
         }

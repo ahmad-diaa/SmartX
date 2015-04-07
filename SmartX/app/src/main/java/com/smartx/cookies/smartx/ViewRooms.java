@@ -27,15 +27,26 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://192.168.1.7:3000/";
+    String ENDPOINT = "http://172.20.10.3:3000/";
     EditText editSearch;
     int userID;
     Button addRoomB;
-    public static int count = -1;
-    CustomListAdapter adapter2;
+    static int count = -1;
+    public CustomListAdapter adapter2;
     int[] photos = new int[]{R.drawable.one,
             R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
             R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
+    public ArrayList<String> roomNames;
+    public ArrayList<Integer> iconRooms;
+
+    public void setIconRooms(ArrayList<Integer> iconRooms) {
+        this.iconRooms = iconRooms;
+    }
+
+    public void setRoomNames(ArrayList<String> roomNames) {
+
+        this.roomNames = roomNames;
+    }
 
     public int randomIcon() {
         count++;
@@ -44,7 +55,7 @@ public class ViewRooms extends ListActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_rooms);
         count = -1;
@@ -57,9 +68,9 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void success(List<Room> rooms, Response response) {
-                ArrayList<String> roomNames = new ArrayList<String>();
+                roomNames = new ArrayList<String>();
                 Iterator<Room> iterator = rooms.iterator();
-                ArrayList<Integer> iconRooms = new ArrayList<Integer>();
+                iconRooms = new ArrayList<Integer>();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
                     roomNames.add(iterator.next().get_roomName());
