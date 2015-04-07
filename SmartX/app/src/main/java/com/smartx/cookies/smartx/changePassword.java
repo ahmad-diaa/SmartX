@@ -49,7 +49,16 @@ public class changePassword extends Activity {
     public void changePassword (View v) {
         oldPass = oldPassword.getText().toString();
         newPass = newPassword.getText().toString();
-        confPass = confirmPassword.getText().toString();
+        confPass = confirmPassword.getText().toString();if(!newPass.equals(confPass)){
+            Toast.makeText(getApplicationContext(),"Password and confirm password are not the same", Toast.LENGTH_LONG).show();
+        }
+        else if (newPass.length() < 6){
+            Toast.makeText(getApplicationContext(),"Please make sure your password at least 6 characters", Toast.LENGTH_LONG).show();
+        }
+        else if (!originalPass.equals(oldPass)) {
+            Toast.makeText(getApplicationContext(),"Please make sure you entered the correct password", Toast.LENGTH_LONG).show();
+
+        }
         if (newPass.equals(confPass) && originalPass.equals(oldPass)) {
             RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
             myAPI api = adapter.create(myAPI.class);
@@ -63,8 +72,10 @@ public class changePassword extends Activity {
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Log.d("msg", "yaraaaaaab");
-                }
+                         Toast.makeText(getApplicationContext(),"Make sure you are online",Toast.LENGTH_LONG).show();
+
+                    }
+
             });
         }
     }
