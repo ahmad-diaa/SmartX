@@ -31,6 +31,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     int roomID;
     Spinner device_spinner;
     List<String> brands;
+    List<String> universal_clicker;
     Spinner brand_spinner;
     ArrayAdapter<String> dataAdapter2;
     String ENDPOINT = "http://192.168.1.4:3000/";
@@ -69,6 +70,11 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         devices.add("Projector");
         devices.add("DVD Player");
         devices.add("Blu-ray Player");
+        //add any device that should have universal clicker
+        universal_clicker = new ArrayList<String>();
+        universal_clicker.add("TV");
+        universal_clicker.add("DVD PLAYER");
+        universal_clicker.add("BLU-RAY PLAYER");
 
 
         // Creating adapter for spinner
@@ -105,20 +111,32 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
                         ) {
                     Toast.makeText(getApplicationContext(), "Please Fill in the Blank spaces", Toast.LENGTH_LONG).show();
                 } else {
-                    Device device = new Device(device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), roomID, userID);
-                    api.addDevice(device.getName() + " ", device.getRoomID() + "", device.getName(), device.getType(), device.getBrand(), new Callback<Device>() {
+                    final Device new_device = new Device(userID, device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), "0", "0", roomID);
+                    api.addDevice(new_device.getName() + " ", new_device.getRoomID() + "", new_device.getName(), new_device.getType(), new_device.getBrand(), new Callback<Device>() {
 
                         @Override
                         public void success(Device device, Response response) {
+                            new_device.setDevice_id(device.getDevice_id());
+                            if (universal_clicker.contains(new_device.getName().toUpperCase()))
+                                api.addClicker(userID + "", roomID + "", device.getDevice_id(), device.getDevice_id() + "", new Callback<Clicker>() {
+                                    @Override
+                                    public void success(Clicker clicker, Response response) {
+                                        startActivity(new Intent(getApplicationContext(), viewDevices.class));
 
-                            startActivity(new Intent(getApplicationContext(), viewDevices.class));
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        Toast.makeText(getApplicationContext(), "An error occurred while adding a clicker!", Toast.LENGTH_LONG).show();
+                                    }
+                                });
 
 
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
-                            Toast.makeText(getApplicationContext(), "Cannot Add A Device!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Cannot Add A Device!", Toast.LENGTH_LONG).show();
                             throw error;
 
                         }

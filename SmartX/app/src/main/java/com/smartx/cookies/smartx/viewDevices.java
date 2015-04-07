@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -22,24 +21,24 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-
-public class viewDevices extends ListActivity{
+public class viewDevices extends ListActivity {
 
     String ENDPOINT = "http://192.168.1.4:3000/";
     int userID;
     int roomID;
     Button addDevice;
-    String [] deviceNames;
-    String [] deviceType;
+    String[] deviceNames;
+    String[] deviceType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
         setContentView(R.layout.activity_view_devices);
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID",1));
-        roomID=(mSharedPreference.getInt("roomID", 1));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
+        roomID = (mSharedPreference.getInt("roomID", 1));
         addDevice = (Button) findViewById(R.id.addDevice);
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -49,9 +48,9 @@ public class viewDevices extends ListActivity{
         });
 
 
-                final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.viewDevices(1+"",1 + "", new Callback<List<Device>>() {
+        api.viewDevices(1 + "", 1 + "", new Callback<List<Device>>() {
 
             @Override
             public void success(List<Device> devices, Response response) {
@@ -60,30 +59,27 @@ public class viewDevices extends ListActivity{
                 deviceNames = new String[devices.size()];
 
                 Iterator<Device> iterator = devices.iterator();
-                Iterator<Device> iterator2 = devices.iterator();
 
                 int i = devices.size() - 1;
-                while(i>= 0 & iterator.hasNext()){
-                    deviceNames[i] = iterator.next().getName();
+                while (i >= 0 & iterator.hasNext()) {
+                    Device current = iterator.next();
+                    deviceNames[i] = current.getName();
                     i--;
                 }
 
-                ArrayAdapter <String> adapter=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
 
-                startActivity(new Intent(getApplicationContext(),TvClickerActivity.class));
+                startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
 
             }
 
             @Override
-            public void failure(RetrofitError error)
-            {
-                Log.i("ya mosahhel", "no idea");
-                startActivity(new Intent(getApplicationContext(),TvClickerActivity.class));
+            public void failure(RetrofitError error) {
+                startActivity(new Intent(getApplicationContext(), viewDevices.class));
 
             }
         });
-
 
 
     }

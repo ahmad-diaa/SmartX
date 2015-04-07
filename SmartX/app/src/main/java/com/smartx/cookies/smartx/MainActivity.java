@@ -44,11 +44,10 @@
 //    }
 //}
 //=======
-        package com.smartx.cookies.smartx;
+package com.smartx.cookies.smartx;
 
-        import android.app.Activity;
-        import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 

@@ -29,7 +29,7 @@ public class Clicker {
         return clicker_id;
     }
 
-    public Clicker(String uid, String rid, String did, String c){
+    public Clicker(String uid, String rid, String did, String c) {
         user_id = uid;
         room_id = rid;
         device_id = did;

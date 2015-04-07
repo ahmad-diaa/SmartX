@@ -34,8 +34,8 @@ public class Settings extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         changePasswordB = (Button) findViewById(R.id.changePasswordButton);
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID", 1));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
         EditText oldPassword = (EditText) findViewById(R.id.passwordOld);
         EditText newPassword = (EditText) findViewById(R.id.passwordNew);
         EditText confirmPassword = (EditText) findViewById(R.id.passwordConfirm);
@@ -49,9 +49,8 @@ public class Settings extends ActionBarActivity {
         return true;
 
 
-
-
     }
+
     public void changePassword(View v) {
         oldPasswordS = oldPassword.getText().toString();
         newPasswordS = newPassword.getText().toString();
@@ -63,7 +62,7 @@ public class Settings extends ActionBarActivity {
             RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
             myAPI api = adapter.create(myAPI.class);
-            api.getUser(userID +"", new Callback<models.User>() {
+            api.getUser(userID + "", new Callback<models.User>() {
                 @Override
                 public void success(User user, Response response) {
 
@@ -75,7 +74,7 @@ public class Settings extends ActionBarActivity {
                 }
             });
         }
-        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

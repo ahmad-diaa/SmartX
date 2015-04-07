@@ -8,6 +8,27 @@ public class Device {
     String type;
     String name;
     String brand;
+    String device_id;
+
+    public Device(int userID, String type, String name, String brand, String device_id, String status, int roomID) {
+        this.userID = userID;
+        this.type = type;
+        this.name = name;
+        this.brand = brand;
+        this.device_id = device_id;
+        this.status = status;
+        this.roomID = roomID;
+    }
+
+    public void setDevice_id(String device_id) {
+
+        this.device_id = device_id;
+    }
+
+    public String getDevice_id() {
+
+        return device_id;
+    }
 
     public void setStatus(String status) {
         this.status = status;
@@ -24,14 +45,7 @@ public class Device {
     public Device(){
 
     }
-    public Device(String type, String name, String brand, int roomID, int userID) {
-        this.type = type;
-        this.name = name;
-        this.brand = brand;
-        this.roomID = roomID;
-        this.userID=userID;
 
-    }
 
     public int getUserID() {
         return userID;

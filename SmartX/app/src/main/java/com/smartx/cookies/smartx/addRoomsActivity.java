@@ -17,33 +17,34 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class addRoomsActivity extends Activity{
+public class addRoomsActivity extends Activity {
     Button addRoomButton;
     EditText roomName;
     public static int count = -1;
     String ENDPOINT = "http://192.168.1.4:3000/";
     int userID;
-    int[] photos = new int[]{ R.drawable.one ,
-            R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
-            R.drawable.six ,R.drawable.seven ,R.drawable.eight ,R.drawable.nine};
+    int[] photos = new int[]{R.drawable.one,
+            R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
+            R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addrooms);
-        final SharedPreferences  mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID", 1));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
         addRoomButton = (Button) findViewById(R.id.addRoomButton);
 
     }
-    public int randomIcon(){
-         count = (count + 1)%9 ;
-         return count;
+
+    public int randomIcon() {
+        count = (count + 1) % 9;
+        return count;
     }
 
     public void addRoomButton(View v) {
-                roomName = (EditText) findViewById(R.id.roomName);
+        roomName = (EditText) findViewById(R.id.roomName);
 
         Button addRoomButton = (Button) v;
         Room room = new Room(roomName.getText().toString());
@@ -62,7 +63,7 @@ public class addRoomsActivity extends Activity{
 
             @Override
             public void failure(RetrofitError error) {
-            Toast.makeText(getApplicationContext(), "Cannot add room!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Cannot add room!", Toast.LENGTH_LONG).show();
             }
         });
     }

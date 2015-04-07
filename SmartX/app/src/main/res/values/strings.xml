@@ -19,6 +19,7 @@
     <string name="title_activity_view_rooms">ViewRooms</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_tv_clicker">TvClickerActivity</string>
+    <string name="title_activity_add_clicker_">Add_clicker_Activity</string>
 </resources>
     <!---->
 <!--<resources>-->
