@@ -32,7 +32,6 @@ public class ViewRooms extends ListActivity {
     Button addRoomB;
     String[] roomNames;
     int count = -1;
-    String[] menuItems = {"Delete", "Rename"};
     int[] photos = new int[]{R.drawable.one,
             R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
             R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
@@ -119,8 +118,8 @@ public class ViewRooms extends ListActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle("Context menu");
-        menu.add(0, v.getId(), 0, "Rename");
-        menu.add(0, v.getId(), 0, "Delete");
+        menu.add(0, v.getId(), 0, "Rename Room");
+        menu.add(0, v.getId(), 0, "Delete Room");
     }
 
     @Override
