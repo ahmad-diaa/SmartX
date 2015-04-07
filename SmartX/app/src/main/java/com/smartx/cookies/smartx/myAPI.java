@@ -25,7 +25,7 @@ public interface myAPI {
 
     @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
-    void addRoom(@Path("userID") String id, @Field("room[name]") String name ,@Field("room[photo]") String photo,@Field("room[room_id]") String room_id ,Callback<Room> callback);
+    void addRoom(@Path("userID") String id, @Field("room[name]") String name, @Field("room[room_id]") String room_id ,Callback<Room> callback);
 
     @GET("/users/{userID}/rooms/{roomID}/devices")
     void viewDevices(@Path("userID") String id,@Path("roomID") String rid, Callback<List<Device>> callback);
@@ -46,4 +46,6 @@ public interface myAPI {
 
     @GET("/users/{userID}/")
     void getUser (@Path("userID") String id, Callback <User> callback);
+
+
 }

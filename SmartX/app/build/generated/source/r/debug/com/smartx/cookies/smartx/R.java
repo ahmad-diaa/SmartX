@@ -1327,14 +1327,14 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f09002e;
         public static final int action_mode_bar_stub=0x7f09002d;
         public static final int action_mode_close_button=0x7f090020;
-        public static final int action_settings=0x7f090066;
+        public static final int action_settings=0x7f090067;
         public static final int activity_chooser_view_content=0x7f090021;
         public static final int activity_login=0x7f090052;
         public static final int addDevice=0x7f090062;
         public static final int addDeviceButton=0x7f090049;
         public static final int addRoomB=0x7f090063;
         public static final int addRoomButton=0x7f09004c;
-        public static final int addroommenu=0x7f090067;
+        public static final int addroommenu=0x7f090068;
         public static final int always=0x7f090016;
         public static final int beginning=0x7f090013;
         public static final int bird=0x7f090042;
@@ -1357,6 +1357,7 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f090022;
         public static final int expanded_menu=0x7f090028;
         public static final int fbview=0x7f090041;
+        public static final int footer=0x7f090064;
         public static final int home=0x7f090004;
         public static final int homeAsUp=0x7f09000d;
         public static final int humanlogin=0x7f090057;
@@ -1365,13 +1366,13 @@ containing a value of this type.
         public static final int image=0x7f090023;
         public static final int imageView=0x7f09003f;
         public static final int imageView2=0x7f090056;
-        public static final int imageroom=0x7f090064;
+        public static final int imageroom=0x7f090065;
         public static final int keylogin=0x7f090058;
         public static final int laayout=0x7f09005a;
         public static final int listMode=0x7f090009;
         public static final int list_item=0x7f090025;
         public static final int middle=0x7f090015;
-        public static final int nameroom=0x7f090065;
+        public static final int nameroom=0x7f090066;
         public static final int never=0x7f090019;
         public static final int none=0x7f09000e;
         public static final int normal=0x7f09000a;
@@ -1450,8 +1451,9 @@ containing a value of this type.
         public static final int activity_settings=0x7f04001c;
         public static final int activity_view_devices=0x7f04001d;
         public static final int activity_view_rooms=0x7f04001e;
-        public static final int mylist=0x7f04001f;
-        public static final int support_simple_spinner_dropdown_item=0x7f040020;
+        public static final int lisitem=0x7f04001f;
+        public static final int mylist=0x7f040020;
+        public static final int support_simple_spinner_dropdown_item=0x7f040021;
     }
     public static final class menu {
         public static final int menu_about_us=0x7f0d0000;

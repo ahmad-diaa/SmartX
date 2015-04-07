@@ -20,7 +20,7 @@ public class addRoomsActivity extends Activity{
     EditText roomID;
     EditText roomName;
     public static int count = -1;
-    String ENDPOINT = "http://41.178.145.164:3000/";
+    String ENDPOINT = "http://172.20.10.4:3000/";
     int userID;
     int[] photos = new int[]{ R.drawable.one ,
             R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
@@ -48,7 +48,7 @@ public class addRoomsActivity extends Activity{
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         room.setPhoto(photos[randomIcon()] + "");
-        api.addRoom((userID + ""), room.get_roomName(), room.getPhoto(), room.get_id(), new Callback<Room>() {
+        api.addRoom((userID + ""), room.get_roomName(), room.get_id(), new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {
