@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+ resources :types
     post 'session' => 'session#create'
       resources :users do
        resources :rooms do 

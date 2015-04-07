@@ -17,6 +17,9 @@ import retrofit.http.Path;
 
 public interface myAPI {
 
+    @GET("/types")
+    void requestTypes(Callback<List<Type>> types);
+
     @FormUrlEncoded
     @POST("/session")
     void login(@Field("session[name]") String username, @Field("session[password]") String password, Callback<Session> callback);

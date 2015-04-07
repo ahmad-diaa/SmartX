@@ -22,6 +22,7 @@ import java.util.List;
 
 import models.Device;
 import models.Room;
+import models.Type;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -53,6 +54,8 @@ public class ViewRooms extends ListActivity {
 
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
+
+
         api.viewRooms(userID + "", new Callback<List<Room>>() {
 
             @Override
@@ -104,10 +107,30 @@ public class ViewRooms extends ListActivity {
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.select_dialog_singlechoice);
-        arrayAdapter.add("TV");
-        arrayAdapter.add("Air Conditioner");
-        arrayAdapter.add("Curtain");
-        arrayAdapter.add("Plug");
+//        arrayAdapter.add("TV");
+//        arrayAdapter.add("Air Conditioner");
+//        arrayAdapter.add("Curtain");
+//        arrayAdapter.add("Plug");
+
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        myAPI api = adapter.create(myAPI.class);
+
+
+        api.requestTypes(new Callback<List<Type>>() {
+            @Override
+            public void success(List<Type> types, Response response) {
+
+                Iterator<Type> iterator = types.iterator();
+                while (iterator.hasNext()) {
+                    String s = iterator.next().getName();
+                    arrayAdapter.add(s);
+                }
+            }
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+
         builderSingle.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
 

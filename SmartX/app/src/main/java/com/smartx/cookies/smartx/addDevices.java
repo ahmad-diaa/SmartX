@@ -41,7 +41,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_devices);
+        setContentView( R.layout.activity_add_devices);
 
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
@@ -95,7 +95,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
                         (brand_spinner.getSelectedItem().toString().equals("None"))) {
                     Toast.makeText(getApplicationContext(), "Please Fill in the Blank spaces", Toast.LENGTH_LONG).show();
                 } else {
-                    Device device = new Device(device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), roomID, userID);
+                    Device device = new Device(device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), roomID+"", userID);
                     api.addDevice(device.getName() + " ", device.getRoomID() + "", device.getName(), device.getType(), device.getBrand(), new Callback<Device>() {
 
                         @Override

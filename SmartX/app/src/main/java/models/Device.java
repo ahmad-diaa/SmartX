@@ -5,7 +5,7 @@ public class Device {
     String type;
     String name;
     String brand;
-    int room_id;
+    String room_id;
     String status;
     String device_id;
 
@@ -13,7 +13,7 @@ public class Device {
 
     }
 
-    public Device(String type, String name, String brand, int roomID, int userID) {
+    public Device(String type, String name, String brand, String roomID, int userID) {
         this.type = type;
         this.name = name;
         this.brand = brand;
@@ -53,11 +53,11 @@ public class Device {
         this.brand = brand;
     }
 
-    public int getRoomID() {
+    public String getRoomID() {
         return room_id;
     }
 
-    public void setRoomID(int roomID) {
+    public void setRoomID(String roomID) {
         this.room_id = roomID;
     }
 
