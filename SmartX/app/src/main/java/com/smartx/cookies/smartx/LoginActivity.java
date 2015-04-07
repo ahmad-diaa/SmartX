@@ -15,9 +15,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.okhttp.Call;
+
 import java.util.List;
 
 import models.Session;
+import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -27,11 +31,13 @@ public class LoginActivity extends Activity {
     Button btnLogin;
     //TextView aboutlogin;
 
-    String ENDPOINT = "http://41.178.145.164:3000/";
+    String ENDPOINT = "http://192.168.1.106:3000/";
     
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
+    int userID;
+    myAPI api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,17 +77,18 @@ public class LoginActivity extends Activity {
                 String Pass = password.getText().toString();
 
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+                api = adapter.create(myAPI.class);
 
-                myAPI api = adapter.create(myAPI.class);
                 api.login(Name, Pass, new Callback<Session>() {
                     @Override
                     public void success(Session session, Response response) {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putInt("userID", session.getId());
+                        userID = prefs.getInt("userID", 1);
                         editor.commit();
                         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-                        myAPI api = adapter.create(myAPI.class);
+                        api = adapter.create(myAPI.class);
 
                         api.getFeed(session.getId(), new Callback<models.User>() {
 
@@ -93,37 +100,49 @@ public class LoginActivity extends Activity {
                                 editor.putInt("userID", user.getID());
                                 editor.putString("Name", Name);
                                 editor.commit();
-                                startActivity(new Intent(getApplicationContext(),ViewRooms.class));
+
+                                api.getUser(userID + "", new Callback<User>() {
+                                    @Override
+                                    public void success(User user, Response response) {
+                                        if (user.getEmail() == null)
+                                            startActivity(new Intent(getApplicationContext(), addEmail.class ));
+                                        else {
+                                            startActivity(new Intent(getApplicationContext(), ViewRooms.class));
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+
+                                    }
+                                });
                             }
 
                             @Override
                             public void failure(RetrofitError error) {
 
-                                Toast.makeText(getApplicationContext(),"Make sure you are online",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
 
 
                             }
                         });
 
                     }
+
                     EditText username = (EditText) findViewById(R.id.txtUserName);
                     EditText password = (EditText) findViewById(R.id.txtPassword);
 
                     @Override
                     public void failure(RetrofitError error) {
-                        if(username == null || username.getText().equals(""))
-                        {
-                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
-                        }else if(password == null || password.getText().equals(""))
-                        {
-                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
-                        }
-                        else if(error.getMessage().contains("401 Unauthorized"))
-                        {
-                            Toast.makeText(getApplicationContext(),"Wrong Username/Password",Toast.LENGTH_LONG).show();
-                        }else
-                        {
-                            Toast.makeText(getApplicationContext(),"Make sure you are online.\nIf this problem proceeds, contact us.",Toast.LENGTH_LONG).show();
+                        if (username == null || username.getText().equals("")) {
+                            Toast.makeText(getApplicationContext(), "Username cannot be blank", Toast.LENGTH_LONG).show();
+                        } else if (password == null || password.getText().equals("")) {
+                            Toast.makeText(getApplicationContext(), "Username cannot be blank", Toast.LENGTH_LONG).show();
+                        } else if (error.getMessage().contains("401 Unauthorized")) {
+                            Toast.makeText(getApplicationContext(), "Wrong Username/Password", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

@@ -16,4 +16,4 @@
 <translate xmlns:android="http://schemas.android.com/apk/res/android"
            android:interpolator="@android:anim/decelerate_interpolator"
            android:fromYDelta="-50%p" android:toYDelta="0"
-           android:duration="@android:integer/config_mediumAnimTime"/><!-- From: file:/C:/Users/Amir/Documents/GitHub/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_in_top.xml -->
+           android:duration="@android:integer/config_mediumAnimTime"/><!-- From: file:/media/dalia/C6464E16464E081F/SIX/SE/smartxAddEmail/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_slide_in_top.xml -->
