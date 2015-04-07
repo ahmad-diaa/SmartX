@@ -36,8 +36,8 @@ public class UnitTest extends ActivityInstrumentationTestCase2<ViewRooms> {
         myRooms.setRoomNames(rooms);
         myRooms.setIconRooms(photos);
 
-        assertEquals(rooms, myRooms.roomNames);
-        assertEquals(photos, myRooms.iconRooms);
+        assertEquals(rooms, myRooms.getRoomNames());
+        assertEquals(photos, myRooms.getIconRooms());
 
         CustomListAdapter adapter2 = new CustomListAdapter(myRooms, rooms, photos);
         adapter2.filter("Kit");
@@ -50,18 +50,18 @@ public class UnitTest extends ActivityInstrumentationTestCase2<ViewRooms> {
         searchedRoomsPhotos.add(1);
         searchedRoomsPhotos.add(4);
 
-        assertEquals(searchedRooms, adapter2.itemName);
-        assertEquals(searchedRoomsPhotos, adapter2.imgId);
+        assertEquals(searchedRooms, adapter2.getItemName());
+        assertEquals(searchedRoomsPhotos, adapter2.getImgId());
 
         adapter2.filter("");
 
-        assertEquals(myRooms.roomNames, adapter2.itemName);
-        assertEquals(myRooms.iconRooms, adapter2.imgId);
+        assertEquals(myRooms.getRoomNames(), adapter2.getItemName());
+        assertEquals(myRooms.getIconRooms(), adapter2.getImgId());
 
         adapter2.filter("ahmed");
 
-        assertEquals(adapter2.itemName, new ArrayList<String>());
-        assertEquals(adapter2.imgId, new ArrayList<Integer>());
+        assertEquals(adapter2.getItemName(), new ArrayList<String>());
+        assertEquals(adapter2.getImgId(), new ArrayList<Integer>());
 
     }
 }

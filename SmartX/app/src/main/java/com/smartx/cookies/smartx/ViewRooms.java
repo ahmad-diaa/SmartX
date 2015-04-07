@@ -25,19 +25,53 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+
+/**
+ *
+ * ViewRooms.java
+ * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
+ *
+ * @author Dalia Maarek
+ */
+
+
 public class ViewRooms extends ListActivity {
 
     String ENDPOINT = "http://172.20.10.3:3000/";
-    EditText editSearch;
-    int userID;
+    private EditText editSearch;
+    private int userID;
     Button addRoomB;
     static int count = -1;
-    public CustomListAdapter adapter2;
-    int[] photos = new int[]{R.drawable.one,
+    private CustomListAdapter adapter2;
+    private int[] photos = new int[]{R.drawable.one,
             R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
             R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
-    public ArrayList<String> roomNames;
-    public ArrayList<Integer> iconRooms;
+    private ArrayList<String> roomNames;
+
+
+    public void setAdapter2(CustomListAdapter adapter2) {
+        this.adapter2 = adapter2;
+    }
+
+    public void setPhotos(int[] photos) {
+        this.photos = photos;
+    }
+
+
+    public CustomListAdapter getAdapter2() {
+        return adapter2;
+    }
+
+    public ArrayList<String> getRoomNames() {
+        return roomNames;
+    }
+
+    public ArrayList<Integer> getIconRooms() {
+        return iconRooms;
+    }
+
+    private ArrayList<Integer> iconRooms;
+
 
     public void setIconRooms(ArrayList<Integer> iconRooms) {
         this.iconRooms = iconRooms;
@@ -48,11 +82,17 @@ public class ViewRooms extends ListActivity {
         this.roomNames = roomNames;
     }
 
+    /**
+     * Gets the id of the photo to be assigned to the next room
+     *
+     * @return An integer number between 0 and 8
+     */
     public int randomIcon() {
-        count++;
+
         count = (count + 1) % 9;
         return count;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -114,8 +154,15 @@ public class ViewRooms extends ListActivity {
         });
     }
 
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+    /**
+     * opens the activity (ViewDevices) of the clicked room
+     * @param list      List of all rooms
+     * @param view      The clicked listview
+     * @param position  The position of the view in the list
+     * @param id        The row id of the item that was clicked
+     */
+    protected void onListItemClick(ListView list, View view, int position, long id) {
+        super.onListItemClick(list, view, position, id);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt("userID", userID);
@@ -125,10 +172,19 @@ public class ViewRooms extends ListActivity {
         this.setTitle("View Rooms");
     }
 
-    public void addRoom(View v) {
+    /**
+     * Starts the activity (addRoomsActivity) to create a new room
+     * @param view add room button
+     */
+    public void addRoom(View view) {
         startActivity(new Intent(this, addRoomsActivity.class));
     }
 
+    /**
+     * Creates the initial menu state
+     *
+     * @param menu Menu to be populated
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

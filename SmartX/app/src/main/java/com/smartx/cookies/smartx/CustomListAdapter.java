@@ -15,9 +15,26 @@ import java.util.Locale;
 
 public class CustomListAdapter extends ArrayAdapter<String> {
 
-     Activity context;
-    public  ArrayList<String> itemName;
-    public  ArrayList<Integer> imgId;
+    private Activity context;
+    private  ArrayList<String> itemName;
+
+    public ArrayList<String> getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(ArrayList<String> itemName) {
+        this.itemName = itemName;
+    }
+
+    public ArrayList<Integer> getImgId() {
+        return imgId;
+    }
+
+    public void setImgId(ArrayList<Integer> imgId) {
+        this.imgId = imgId;
+    }
+
+    private  ArrayList<Integer> imgId;
 
     private ArrayList<String> tempItemname;
     private ArrayList<Integer> tempImgid;
@@ -58,7 +75,6 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         itemName.clear();
         imgId.clear();
 
-        Log.i(tempItemname.size() + " " , "malo ");
         for (int pos = 0; pos < tempItemname.size(); pos++) {
             String name = tempItemname.get(pos).toLowerCase();
             if (name.startsWith(charText) || name.contains(" " + charText)) {
