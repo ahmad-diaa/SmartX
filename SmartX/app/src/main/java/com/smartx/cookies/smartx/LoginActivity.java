@@ -27,8 +27,8 @@ public class LoginActivity extends Activity {
     Button btnLogin;
     //TextView aboutlogin;
 
-    String ENDPOINT = "http://172.20.10.4:3000/";
-    
+ //   String ENDPOINT = "http://172.20.10.4:3000/";
+
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
@@ -69,8 +69,7 @@ public class LoginActivity extends Activity {
                 EditText password = (EditText) findViewById(R.id.txtPassword);
                 String Name = username.getText().toString();
                 String Pass = password.getText().toString();
-
-                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
 
                 myAPI api = adapter.create(myAPI.class);
                 api.login(Name, Pass, new Callback<Session>() {
@@ -80,7 +79,7 @@ public class LoginActivity extends Activity {
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putInt("userID", session.getId());
                         editor.commit();
-                        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+                        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
                         myAPI api = adapter.create(myAPI.class);
 
                         api.getFeed(session.getId(), new Callback<models.User>() {
@@ -158,7 +157,7 @@ public class LoginActivity extends Activity {
     private void requestData(String uri) {
 
 
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
 
         myAPI api = adapter.create(myAPI.class);
 

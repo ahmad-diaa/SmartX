@@ -41,7 +41,7 @@ public class AddDevices extends Activity implements AdapterView.OnItemSelectedLi
     List<String> brands;
     Spinner brand_spinner;
     ArrayAdapter<String> dataAdapter2;
-    String ENDPOINT = "http://172.20.10.4:3000/";
+   // String ENDPOINT = "http://172.20.10.4:3000/";
     int brand_spinner_id = 2131296325;
     int device_spinner_id = 2131296323;
 
@@ -58,7 +58,7 @@ public class AddDevices extends Activity implements AdapterView.OnItemSelectedLi
         roomID = (mSharedPreference.getInt("roomID", 1));
         device_name = (EditText) findViewById(R.id.device_name);
 
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         api = adapter.create(myAPI.class);
 
         // Spinner element

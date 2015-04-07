@@ -18,7 +18,7 @@
     <string name="spinner_title1">Select Device Type</string>
     <string name="title_activity_view_rooms">ViewRooms</string>
     <string name="title_activity_settings">Settings</string>
-    <!--<string name="ENDPOINT">http://41.178.145.164:3000/</string>-->
+    <string name="ENDPOINT">http://172.20.10.4:3000/</string>
 </resources>
     <!---->
 <!--<resources>-->

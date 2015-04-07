@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,21 +26,22 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
+    int i = 0;
 
-    String ENDPOINT = "http://172.20.10.4:3000/";
     int userID;
     Button addRoomB;
-    String [] roomNames;
+    String[] roomNames;
     int count = -1;
-    String [] menuItems = {"Delete", "Rename"};
-    int[] photos = new int[]{ R.drawable.one ,
-            R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
-            R.drawable.six ,R.drawable.seven ,R.drawable.eight ,R.drawable.nine};
+    String[] menuItems = {"Delete", "Rename"};
+    int[] photos = new int[]{R.drawable.one,
+            R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
+            R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
 
-    public int randomIcon(){
+    public int randomIcon() {
         count++;
-        return (count + 1)%9 ;
+        return (count + 1) % 9;
     }
+
     public CustomListAdapter getAdapter() {
         return adapter;
     }
@@ -58,7 +60,7 @@ public class ViewRooms extends ListActivity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
 
-        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.viewRooms(userID + "", new Callback<List<Room>>() {
 
@@ -69,7 +71,7 @@ public class ViewRooms extends ListActivity {
                 Iterator<Room> iterator = rooms.iterator();
                 //Iterator<Room> iterator2 = rooms.iterator();
                 //ArrayList<Integer> photoss = new ArrayList<Integer>();
-                Integer [] iconRooms = new Integer[rooms.size()];
+                Integer[] iconRooms = new Integer[rooms.size()];
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
                     roomNames[i] = iterator.next().get_roomName();
@@ -115,46 +117,21 @@ public class ViewRooms extends ListActivity {
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Context Menu");
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        menu.setHeaderTitle("Context menu");
         menu.add(0, v.getId(), 0, "Rename");
         menu.add(0, v.getId(), 0, "Delete");
-
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Rename") {
-            Toast.makeText(this, "Action 1 invoked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Rename Action Should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "Delete") {
-            Toast.makeText(this, "Action 2 invoked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else {
             return false;
         }
         return true;
     }
-
-
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v,
-//                                    ContextMenu.ContextMenuInfo menuInfo) {
-//        if (v.equals(this)) {
-//            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-//            menu.setHeaderTitle(roomNames[info.position]);
-//            for (int i = 0; i<menuItems.length; i++) {
-//                menu.add(Menu.NONE, i, i, menuItems[i]);
-//            }
-//        }
-//    }
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
-//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-//        int menuItemIndex = item.getItemId();
-//        String menuItemName = menuItems[menuItemIndex];
-//        String listItemName = roomNames[info.position];
-//
-//        TextView text = (TextView)findViewById(R.id.footer);
-//        text.setText(String.format("Selected %s for item %s", menuItemName, listItemName));
-//        return true;
-//    }
-
 }
