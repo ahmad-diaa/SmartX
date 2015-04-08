@@ -8,12 +8,10 @@ import com.smartx.cookies.smartx.AddNoteActivity;
 import com.smartx.cookies.smartx.R;
 
 /**
- * Created by maggiemoheb on 4/8/15.
+ * Purpose: This class is a test for AddNoteActivity.
+ * @author maggiemoheb.
  */
 
-/**
- * This class is a test for AddNoteActivity
- */
 public class AddNoteActivityTest extends ActivityInstrumentationTestCase2<AddNoteActivity> {
     private AddNoteActivity myActivity; // An instance of the AddNoteActivity
     private EditText noteBody;//An instance of the EditText field in AddNoteActivity

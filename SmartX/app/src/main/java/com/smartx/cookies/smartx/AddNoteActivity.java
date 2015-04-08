@@ -30,37 +30,58 @@ public class AddNoteActivity extends Activity {
     String Body = "";//The body of the note
     String errorMessage = "initial"; //error message which indicates if the adding ended up in success or failure
 
-    /*Getter for the user ID*/
+    /**
+     * Getter for the user ID
+     * @return userID
+     */
     public int getUserID() {
         return this.userID;
     }
 
-    /*Getter for the room ID*/
+    /**
+     * Getter for the room ID
+     * @return roomID
+     */
     public int getRoomID() {
         return this.roomID;
     }
 
-    /*Getter for the device ID*/
+    /**
+     * Getter for the device ID
+     * @return deviceID
+     */
     public String getDeviceID() {
         return this.deviceID;
     }
 
-    /*Getter for the ENDPOINT*/
+    /**
+     * Getter for the ENDPOINT
+     * @return ENDPOINT
+     */
     public String getENDPOINT() {
         return this.ENDPOINT;
     }
 
-    /*Getter for the error message*/
+    /**
+     * Getter for the error message
+     * @return errorMessage
+     */
     public String getErrorMessage() {
         return this.errorMessage;
     }
 
-    /*Getter for the body*/
+    /**
+     * Getter for the body
+     * @return Body
+     */
     public String getBody() {
         return this.Body;
     }
 
-    /*Setter for the body of the note*/
+    /**
+     * Setter for the body of the note
+     * @param s: The body is changed to the value of this String
+     */
     public void setBody(String s) {
         this.Body = s;
     }
@@ -98,6 +119,11 @@ public class AddNoteActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method us called whenever Add Note button is clicked.
+     * It puts what is written in EditText in the Body instance variable.
+     * @param view: It takes the view as a parameter.
+     */
     public void AddNote(View view) {
         EditText noteBody = (EditText) findViewById(R.id.noteText);
         Body = noteBody.getText().toString();
@@ -105,8 +131,8 @@ public class AddNoteActivity extends Activity {
 
     }
 
-    /**This method is called whenever adding a note to the database is needed (in the test and AddNote() method)
-      * It calls API.AddNote() method passing Body instance method in the method to be sent to rails to create a note
+    /**This method is called whenever adding a note to the database is needed (in the test and AddNote() method).
+      * It calls API.AddNote() method passing Body instance method in the method to be sent to rails to create a note.
       */
     public void sendNoteToRails() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
