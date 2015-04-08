@@ -16,7 +16,7 @@ import retrofit.http.Path;
 
 public interface myAPI {
 
-    @GET("/users/{userID}/rooms/{roomName}")
+    @GET("/v/users/{userID}/rooms/{roomName}")
     void findRoom(@Path("userID") String id,@Path("roomName") String name, Callback<List<Room>> callback);
 
     @FormUrlEncoded

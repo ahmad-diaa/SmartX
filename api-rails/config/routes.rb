@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-	get 'users/:user_id/rooms/:name'=>'rooms#find'
+	get 'v/users/:user_id/rooms/:name'=>'rooms#find'
     resources :types
     post 'session' => 'session#create'
       resources :users do
