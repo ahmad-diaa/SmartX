@@ -26,7 +26,7 @@ import retrofit.client.Response;
      @author Dalia Maarek
  */
 public class deviceList extends ListActivity {
-    private String ENDPOINT = "http://192.168.43.100:3000/";
+    private String ENDPOINT = "http://192.168.1.106:3000/";
     private static int userID;
     private String type;
     private ArrayList<String> roomNameList;

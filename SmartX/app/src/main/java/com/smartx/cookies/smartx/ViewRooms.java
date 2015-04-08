@@ -30,7 +30,7 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    private String ENDPOINT = "http://192.168.43.100:3000/";
+    private String ENDPOINT = "http://192.168.1.106:3000/";
     private int userID;
     private int count = -1;
     private ArrayList<String> roomNames;

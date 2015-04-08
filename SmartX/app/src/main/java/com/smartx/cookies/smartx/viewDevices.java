@@ -23,7 +23,7 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity {
 
-    private String ENDPOINT = "http://192.168.43.100:3000/";
+    private String ENDPOINT = "http://192.168.1.106:3000/";
     int userID;
     int roomID;
     Button addDevice;
