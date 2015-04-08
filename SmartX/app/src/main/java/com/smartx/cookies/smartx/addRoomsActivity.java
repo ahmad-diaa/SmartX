@@ -151,7 +151,7 @@ public class addRoomsActivity extends Activity{
      *
      * @param photos
      */
-    public void setUserID(int [] photos) {
+    public void setPhotos(int [] photos) {
         this.photos = photos;
     }
 
