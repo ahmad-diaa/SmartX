@@ -97,7 +97,7 @@ public class addRoomsActivity extends Activity{
                 new RestAdapter.Builder().setEndpoint(endpoint).build();
         myAPI api = adapter.create(myAPI.class);
         room.setPhoto(photos[randomIcon()] + "");
-        api.addRoom((userID + ""), room.getName(), room.getPhoto(), room.getId()+"", new Callback<Room>() {
+        api.addRoom((userID + ""), room.getName(), room.getPhoto(), new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {
