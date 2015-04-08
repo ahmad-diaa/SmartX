@@ -31,7 +31,7 @@ public class changePassword extends Activity {
     EditText newPassword;
     EditText confirmPassword;
     int userID;
-    String ENDPOINT = "http://192.168.1.3:3000/";
+    String ENDPOINT = "http://172.20.10.3:3000/";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);

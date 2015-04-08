@@ -30,14 +30,55 @@ import retrofit.client.Response;
   * @author Ahmad Abdalraheem
  */
 public class changeInfo extends Activity {
-    EditText emailtxt;
-    EditText phonetxt;
-    Button changeInfoB;
-    String email;
-    String phone;
-    String originalPass;
-    int userID;
-    String ENDPOINT = "http://192.168.1.3:3000/";
+     EditText emailtxt;
+     EditText phonetxt;
+     Button changeInfoB;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getOriginalPass() {
+        return originalPass;
+    }
+
+    public void setOriginalPass(String originalPass) {
+        this.originalPass = originalPass;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getENDPOINT() {
+        return ENDPOINT;
+    }
+
+    public void setENDPOINT(String ENDPOINT) {
+        this.ENDPOINT = ENDPOINT;
+    }
+
+    private String email;
+    private String phone;
+    private String originalPass;
+    private int userID;
+    String ENDPOINT = "http://172.20.10.3:3000/";
 
 
     @Override
