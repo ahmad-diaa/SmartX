@@ -53,7 +53,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.smartx.cookies.smartx.AddDevices"
+            android:name="com.smartx.cookies.smartx.addDevices"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_add_devices"
             android:screenOrientation="portrait" >
