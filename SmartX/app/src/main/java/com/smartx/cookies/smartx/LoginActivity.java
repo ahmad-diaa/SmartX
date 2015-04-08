@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.List;
 
 import models.Session;
@@ -25,13 +26,13 @@ import retrofit.client.Response;
 
 public class LoginActivity extends Activity {
     Button btnLogin;
-    //TextView aboutlogin;
 
-    String ENDPOINT = "http://41.178.145.164:3000/";
-    
+    String ENDPOINT = "http://192.168.2.35:3000/";
+
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +49,13 @@ public class LoginActivity extends Activity {
         aboutlogin.setText(content);
 
 
-        aboutlogin.setOnClickListener(new TextView.OnClickListener(){
+        aboutlogin.setOnClickListener(new TextView.OnClickListener() {
             @Override
-            public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this,About_us.class));
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, About_us.class));
             }
 
         });
-
 
 
         btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -93,37 +93,33 @@ public class LoginActivity extends Activity {
                                 editor.putInt("userID", user.getID());
                                 editor.putString("Name", Name);
                                 editor.commit();
-                                startActivity(new Intent(getApplicationContext(),ViewRooms.class));
+                                startActivity(new Intent(getApplicationContext(), ViewRooms.class));
                             }
 
                             @Override
                             public void failure(RetrofitError error) {
 
-                                Toast.makeText(getApplicationContext(),"Make sure you are online",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
 
 
                             }
                         });
 
                     }
+
                     EditText username = (EditText) findViewById(R.id.txtUserName);
                     EditText password = (EditText) findViewById(R.id.txtPassword);
 
                     @Override
                     public void failure(RetrofitError error) {
-                        if(username == null || username.getText().equals(""))
-                        {
-                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
-                        }else if(password == null || password.getText().equals(""))
-                        {
-                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
-                        }
-                        else if(error.getMessage().contains("401 Unauthorized"))
-                        {
-                            Toast.makeText(getApplicationContext(),"Wrong Username/Password",Toast.LENGTH_LONG).show();
-                        }else
-                        {
-                            Toast.makeText(getApplicationContext(),"Make sure you are online.\nIf this problem proceeds, contact us.",Toast.LENGTH_LONG).show();
+                        if (username == null || username.getText().equals("")) {
+                            Toast.makeText(getApplicationContext(), "Username cannot be blank", Toast.LENGTH_LONG).show();
+                        } else if (password == null || password.getText().equals("")) {
+                            Toast.makeText(getApplicationContext(), "Username cannot be blank", Toast.LENGTH_LONG).show();
+                        } else if (error.getMessage().contains("401 Unauthorized")) {
+                            Toast.makeText(getApplicationContext(), "Wrong Username/Password", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
