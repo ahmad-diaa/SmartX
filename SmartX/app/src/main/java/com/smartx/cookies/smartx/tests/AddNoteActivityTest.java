@@ -9,7 +9,6 @@ import com.smartx.cookies.smartx.R;
 
 /**
  * Purpose: This class is a test for AddNoteActivity.
- *
  * @author maggiemoheb.
  */
 
@@ -87,7 +86,7 @@ public class AddNoteActivityTest extends ActivityInstrumentationTestCase2<AddNot
     }
 
     /**
-     * Testing that the note added successfully if the note body is not empty.
+     * Testing that the note added successfully if the note body is not empty
      */
     public void testAddNoteSuccess() {
         myActivity.setBody("tester");
@@ -96,7 +95,7 @@ public class AddNoteActivityTest extends ActivityInstrumentationTestCase2<AddNot
     }
 
     /**
-     * Testing that the note failed to be added if the note body is empty.
+     * Testing that the note failed to be added if the note body is empty
      */
     public void testAddNoteFailure() {
         myActivity.setBody("");

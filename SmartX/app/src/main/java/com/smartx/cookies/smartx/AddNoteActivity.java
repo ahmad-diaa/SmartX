@@ -32,7 +32,6 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Getter for the user ID
-     *
      * @return userID
      */
     public int getUserID() {
@@ -41,7 +40,6 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Getter for the room ID
-     *
      * @return roomID
      */
     public int getRoomID() {
@@ -50,7 +48,6 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Getter for the device ID
-     *
      * @return deviceID
      */
     public String getDeviceID() {
@@ -59,7 +56,6 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Getter for the ENDPOINT
-     *
      * @return ENDPOINT
      */
     public String getENDPOINT() {
@@ -68,7 +64,6 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Getter for the error message
-     *
      * @return errorMessage
      */
     public String getErrorMessage() {
@@ -77,7 +72,6 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Getter for the body
-     *
      * @return Body
      */
     public String getBody() {
@@ -86,7 +80,6 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Setter for the body of the note
-     *
      * @param s: The body is changed to the value of this String
      */
     public void setBody(String s) {
@@ -129,7 +122,6 @@ public class AddNoteActivity extends Activity {
     /**
      * This method us called whenever Add Note button is clicked.
      * It puts what is written in EditText in the Body instance variable.
-     *
      * @param view: It takes the view as a parameter.
      */
     public void AddNote(View view) {
@@ -139,10 +131,9 @@ public class AddNoteActivity extends Activity {
 
     }
 
-    /**
-     * This method is called whenever adding a note to the database is needed (in the test and AddNote() method).
-     * It calls API.AddNote() method passing Body instance method in the method to be sent to rails to create a note.
-     */
+    /**This method is called whenever adding a note to the database is needed (in the test and AddNote() method).
+      * It calls API.AddNote() method passing Body instance method in the method to be sent to rails to create a note.
+      */
     public void sendNoteToRails() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
