@@ -31,7 +31,6 @@ public class changeInfo extends Activity {
     String phone;
     String originalPass;
     int userID;
-    String test;
     String ENDPOINT = "http://192.168.1.3:3000/";
 
 
