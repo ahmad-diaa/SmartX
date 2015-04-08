@@ -47,13 +47,13 @@ protected void setUp() throws Exception {
     public void testPreconditions() {
         assertNotNull("myActivity is null", myInfo);
         }
-    public void testRenameRoomSuccess() throws Exception {
+    public void testchangeInfoSuccess() throws Exception {
         myInfo.runOnUiThread(new Runnable() {
             public void run() {
                 emailtxt.setText("email@test.com");
+                phonetxt.setText("9565632323");
                 email= emailtxt.getText().toString();
                 phone = phonetxt.getText().toString();
-                phonetxt.setText("9565632323");
             }
         });
         myInfo.changeInfo(myInfo.getWindow().getDecorView());
