@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.util.Iterator;
 import java.util.List;
+
 import models.Room;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -27,12 +28,12 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    int i = 0;
-    int userID;
-    Button addRoomB;
-    String[] roomNames;
-    int count = -1;
-    int[] photos = new int[]{R.drawable.one,
+    private int i = 0;
+    private int userID;
+    private Button addRoomB;
+    private String[] roomNames;
+    private int count = -1;
+    private int[] photos = new int[]{R.drawable.one,
             R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
             R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
 
@@ -114,8 +115,9 @@ public class ViewRooms extends ListActivity {
 
     /**
      * Called when the context menu for this view is being built.
-     * @param menu The context menu that is being built.
-     * @param v The view for which the context menu is being built.
+     *
+     * @param menu     The context menu that is being built.
+     * @param v        The view for which the context menu is being built.
      * @param menuInfo Extra information about the item for which the context menu should be shown. This
      *                 information will vary depending on the class of v.
      */
@@ -132,9 +134,10 @@ public class ViewRooms extends ListActivity {
 
     /**
      * Executes commands found in the context menu
+     *
      * @param item The item clicked in the context menu
      * @return boolean true in case item clicked corresponds to an action and executed
-     *          else returns false in case
+     * else returns false in case
      */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
