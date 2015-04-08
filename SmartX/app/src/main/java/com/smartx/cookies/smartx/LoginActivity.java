@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import models.Session;
+import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -26,8 +27,8 @@ import retrofit.client.Response;
 public class LoginActivity extends Activity {
     Button btnLogin;
     //TextView aboutlogin;
-    public String Pass;
-    String ENDPOINT = "http://192.168.1.6:3000/";
+    private String Pass;
+    String ENDPOINT = "http://192.168.1.3:3000/";
 
     List<User> userList;
     SharedPreferences Data;
@@ -68,8 +69,7 @@ public class LoginActivity extends Activity {
                 EditText username = (EditText) findViewById(R.id.txtUserName);
                 EditText password = (EditText) findViewById(R.id.txtPassword);
                 String Name = username.getText().toString();
-                Pass = password.getText().toString();
-
+                setPass(password.getText().toString());
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
                 myAPI api = adapter.create(myAPI.class);
@@ -91,11 +91,15 @@ public class LoginActivity extends Activity {
                             @Override
                             public void success(models.User user, Response response) {
                                 String Name = user.getName();
+                                String email = user.getEmail();
+                                String phone = user.getPhone();
                                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                                 SharedPreferences.Editor editor = prefs.edit();
                                 editor.putInt("userID", user.getID());
                                 editor.putString("Name", Name);
-                                editor.putString("password", Pass);
+                                editor.putString("password", getPass());
+                                editor.putString("email", email);
+                                editor.putString("phone", phone);
 
                                 editor.commit();
                                 startActivity(new Intent(getApplicationContext(),ViewRooms.class));
@@ -129,7 +133,12 @@ public class LoginActivity extends Activity {
             }
         });
     }
-
+    public void setPass(String Pass) {
+        this.Pass = Pass ;
+    }
+    public String getPass (){
+         return this.Pass ;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

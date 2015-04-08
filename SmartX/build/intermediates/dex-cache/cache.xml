@@ -16,6 +16,13 @@
         <dex dex="/home/ahmad/Desktop/sprint_1/SmartX/SmartX/app/build/intermediates/pre-dexed/debug/gson-2.3.1-bca41d1cc1b343883ef99a178f9a7876466ff882.jar" />
     </item>
     <item
+        jar="/home/ahmad/Desktop/ghalta_w_nadman_3aleha/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/ahmad/Desktop/ghalta_w_nadman_3aleha/SmartX/SmartX/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-4429d30c4f2b0332b5d537646500e85d5c110384.jar" />
+    </item>
+    <item
         jar="/home/ahmad/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -28,6 +35,13 @@
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
         <dex dex="/home/ahmad/Desktop/sprint_1/SmartX/SmartX/app/build/intermediates/pre-dexed/debug/classes-77bba0102f4a006d27da49d88e1fde99351e08e1.jar" />
+    </item>
+    <item
+        jar="/home/ahmad/Desktop/ghalta_w_nadman_3aleha/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/ahmad/Desktop/ghalta_w_nadman_3aleha/SmartX/SmartX/app/build/intermediates/pre-dexed/debug/classes-182b8a853c788a3dfd23928c8101ad3e5b3b9cc1.jar" />
     </item>
     <item
         jar="/home/ahmad/Desktop/sprint_1/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
@@ -56,6 +70,13 @@
         revision="21.1.2"
         sha1="c0b52915a48fa91b1b94a28d4a2997bac5f524df">
         <dex dex="/home/ahmad/Desktop/sprint_1/SmartX/SmartX/app/build/intermediates/pre-dexed/debug/okio-1.2.0-1f76ba95ee7fbe0790915d033c4558087ca3f15a.jar" />
+    </item>
+    <item
+        jar="/home/ahmad/Desktop/ghalta_w_nadman_3aleha/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/ahmad/Desktop/ghalta_w_nadman_3aleha/SmartX/SmartX/app/build/intermediates/pre-dexed/debug/classes-2cacff936ec50d68e7f780982f4b9199b8c8f8b3.jar" />
     </item>
     <item
         jar="/home/ahmad/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp/okhttp-urlconnection/2.0.0/afe8399d352713b66e597e9670c741d1e60ae923/okhttp-urlconnection-2.0.0.jar"

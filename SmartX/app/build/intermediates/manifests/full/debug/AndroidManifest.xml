@@ -74,6 +74,10 @@
             android:label="Change Password"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.changeInfo"
+            android:label="@string/title_activity_change_info" >
+        </activity>
     </application>
 
 </manifest> <!-- <?xml version="1.0" encoding="utf-8"?> -->

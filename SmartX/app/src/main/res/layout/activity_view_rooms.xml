@@ -33,5 +33,14 @@
         android:layout_above="@+id/addRoomB"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <Button
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="Edit Information"
+    android:id="@+id/changeInfoB"
+    android:onClick="changeInfo"
+    android:layout_above="@+id/changePasswordB"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true" />
 
 </RelativeLayout>

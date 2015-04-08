@@ -28,6 +28,10 @@ public interface myAPI {
     void changePassword(@Path("userID") String id, @Field ("user[password]") String password, Callback<User> callback);
 
     @FormUrlEncoded
+    @PUT("/users/{userID}/")
+    void changeInfo(@Path("userID") String id, @Field("user[email]") String email,@Field ("user[password]") String password,@Field ("user[phone]") String phone,  Callback<User> callback);
+
+    @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
     void addRoom(@Path("userID") String id, @Field("room[name]") String name ,@Field("room[photo]") String photo,@Field("room[room_id]") String room_id ,Callback<Room> callback);
 

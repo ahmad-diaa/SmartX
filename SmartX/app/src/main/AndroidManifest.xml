@@ -67,7 +67,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="Change Password"
             android:screenOrientation="portrait" >
-
+        </activity>
+        <activity
+            android:name=".changeInfo"
+            android:label="@string/title_activity_change_info" >
         </activity>
     </application>
 

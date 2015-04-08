@@ -1,6 +1,7 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
@@ -29,14 +30,13 @@ public class changePassword extends Activity {
     EditText newPassword;
     EditText confirmPassword;
     int userID;
-    String ENDPOINT = "http://192.168.1.6:3000/";
-    @Override
+    String ENDPOINT = "http://192.168.1.3:3000/";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         changePasswordB = (Button) findViewById(R.id.changePasswordButton);
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID", 1));
+            final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            userID=(mSharedPreference.getInt("userID", 1));
         originalPass= (mSharedPreference.getString("password", "123456"));
 
         oldPassword = (EditText) findViewById(R.id.oldPassword);
@@ -68,6 +68,8 @@ public class changePassword extends Activity {
                 public void success(models.User user, Response response) {
                     Toast.makeText(getApplicationContext(), "Your password is successfully changed",
                             Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+
                 }
 
                 @Override
