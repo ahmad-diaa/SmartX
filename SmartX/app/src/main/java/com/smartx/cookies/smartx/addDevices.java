@@ -1,11 +1,16 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,12 +25,13 @@ import java.util.List;
 
 import models.Device;
 import models.Type;
+import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
-//import android.support.v7.app.ActionBarActivity;
+import retrofit.http.POST;
+import retrofit.http.Path;
 
 
 public class AddDevices extends Activity implements AdapterView.OnItemSelectedListener {
