@@ -43,7 +43,7 @@ public class ViewDeviceActivity extends Activity {
      * This method is called whenever Notes button is clicked
      * to show the notes on that device
      * It renders the ViewNotesActivity
-     * @param view It takes the view as a parameters
+     * @param view It takes the view as a parameter
      */
     public void getNotes(View view) {
         startActivity(new Intent(getApplicationContext(), ViewNotesActivity.class));
