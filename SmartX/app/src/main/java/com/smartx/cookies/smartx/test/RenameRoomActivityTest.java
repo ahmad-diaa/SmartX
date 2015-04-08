@@ -14,22 +14,31 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
+ * Purpose: tests the RenameRoomActivity
  * Created by maggiemoheb on 4/7/15.
  */
+
 public class RenameRoomActivityTest  extends ActivityInstrumentationTestCase2<RenameRoomActivity> {
 
-    private RenameRoomActivity myActivity;
-    private EditText roomName;
-    private Button rename_button;
-    private int userID;
-    private int roomID;
-    private String ENDPOINT;
-    private String errorMessage;
+    private RenameRoomActivity myActivity;//An instance of the RenameRoomActivity
+    private EditText roomName;//An instance of EditText field in the RenameRoomActivity
+    private Button rename_button; //An instance of EditText field in the RenameRoomActivity
+    private int userID;//The user ID of the RenameRoomActivity
+    private int roomID;//The room ID of the RenameRoomActivity
+    private String ENDPOINT;//The ENDPOINT of the RenameRoomActivity
+    private String errorMessage;//The errorMessage of the RenameRoomActivity
 
+    /**
+     * A constructor that matches the super constructor
+     */
     public RenameRoomActivityTest() {
         super(RenameRoomActivity.class);
     }
 
+    /**
+     * setUp() sets the instance variables to match those of the RenameRoomActivity it is testing
+     * @throws Exception
+     */
     protected void setUp() throws Exception {
         super.setUp();
         myActivity = getActivity();
@@ -41,11 +50,18 @@ public class RenameRoomActivityTest  extends ActivityInstrumentationTestCase2<Re
         errorMessage =myActivity.getErrorMessage();
     }
 
+    /**
+     * tests that myActivity and roomName are passed correctly
+     */
     public void testPreconditions() {
         assertNotNull("myActivity is null", myActivity);
         assertNotNull("Text Field is null", roomName);
     }
 
+    /**
+     * testRenameRoomSuccess() tests that the name is updated correctly when given the correct parameters
+     * @throws Exception
+     */
     public void testRenameRoomSuccess() throws Exception {
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
@@ -70,6 +86,11 @@ public class RenameRoomActivityTest  extends ActivityInstrumentationTestCase2<Re
             }
         });
     }
+
+    /**
+     * testRenameRoomFailure() tests that the room name will not be updated when passed wrong parameters (empty room name)
+     * @throws Exception
+     */
     public void testRenameRoomFailure() throws Exception {
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
