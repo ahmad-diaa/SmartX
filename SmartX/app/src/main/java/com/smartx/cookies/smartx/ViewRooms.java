@@ -36,7 +36,7 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://172.20.10.3:3000/";
+    String ENDPOINT = "http://192.168.2.35:3000/";
     private EditText editSearch;
     private int userID;
     Button addRoomB;
@@ -46,36 +46,61 @@ public class ViewRooms extends ListActivity {
             R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
             R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
     private ArrayList<String> roomNames;
+    private ArrayList<Integer> iconRooms;
 
-
+    /**
+     *
+     * @param adapter2 CustomListAdapter to set
+     */
     public void setAdapter2(CustomListAdapter adapter2) {
         this.adapter2 = adapter2;
     }
 
+    /**
+     *
+     * @param photos Array  of photos to set
+     */
     public void setPhotos(int[] photos) {
         this.photos = photos;
     }
 
-
+    /**
+     *
+     * @return the customListAdapter
+     */
     public CustomListAdapter getAdapter2() {
         return adapter2;
     }
 
+    /**
+     *
+     * @return ArrayList of all rooms
+     */
     public ArrayList<String> getRoomNames() {
         return roomNames;
     }
 
+    /**
+     *
+     * @return ArrayList of all devices
+     */
     public ArrayList<Integer> getIconRooms() {
         return iconRooms;
     }
 
-    private ArrayList<Integer> iconRooms;
 
-
+    /**
+     *
+     * @param iconRooms Arraylist of Rooms photos ids
+     */
     public void setIconRooms(ArrayList<Integer> iconRooms) {
         this.iconRooms = iconRooms;
     }
 
+    /**
+     *
+     * @param roomNames ArrayList of all rooms
+     */
     public void setRoomNames(ArrayList<String> roomNames) {
 
         this.roomNames = roomNames;

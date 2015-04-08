@@ -20,7 +20,7 @@ public class addRoomsActivity extends Activity {
     Button addRoomButton;
     EditText roomID;
     EditText roomName;
-    String ENDPOINT = "http://172.20.10.3:3000/";
+    String ENDPOINT = "http://192.168.2.35:3000/";
     int userID;
 
 
