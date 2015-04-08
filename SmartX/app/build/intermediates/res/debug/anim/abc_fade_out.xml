@@ -17,4 +17,8 @@
 <alpha xmlns:android="http://schemas.android.com/apk/res/android"
        android:interpolator="@android:anim/decelerate_interpolator"
        android:fromAlpha="1.0" android:toAlpha="0.0"
+<<<<<<< HEAD
        android:duration="@android:integer/config_mediumAnimTime" /><!-- From: file:/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_fade_out.xml -->
+=======
+       android:duration="@android:integer/config_mediumAnimTime" /><!-- From: file:/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/anim/abc_fade_out.xml -->
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f

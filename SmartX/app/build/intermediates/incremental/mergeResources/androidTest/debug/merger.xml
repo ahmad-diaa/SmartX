@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <merger version="3"><dataSet config="main"><source path="/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/src/androidTest/res"/><source path="/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/build/generated/res/rs/androidTest/debug"/><source path="/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/build/generated/res/generated/androidTest/debug"/></dataSet><mergedItems/></merger>
+=======
+<merger version="3"><dataSet config="main"><source path="/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/src/androidTest/res"/><source path="/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/build/generated/res/rs/androidTest/debug"/><source path="/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/build/generated/res/generated/androidTest/debug"/></dataSet><mergedItems/></merger>
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f

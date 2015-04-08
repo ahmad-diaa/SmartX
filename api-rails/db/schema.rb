@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150407100426) do
+=======
+ActiveRecord::Schema.define(version: 20150318131318) do
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
 
   create_table "api_keys", force: true do |t|
     t.integer  "user_id"
@@ -37,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150407100426) do
   add_index "devices", ["room_id"], name: "index_devices_on_room_id"
   add_index "devices", ["user_id"], name: "index_devices_on_user_id"
 
+<<<<<<< HEAD
   create_table "notes", force: true do |t|
     t.text     "body"
     t.integer  "device_id"
@@ -50,6 +55,8 @@ ActiveRecord::Schema.define(version: 20150407100426) do
   add_index "notes", ["room_id"], name: "index_notes_on_room_id"
   add_index "notes", ["user_id"], name: "index_notes_on_user_id"
 
+=======
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
   create_table "rooms", force: true do |t|
     t.integer  "user_id"
     t.string   "name"

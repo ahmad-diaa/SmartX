@@ -20,4 +20,8 @@
         android:layout_width="?attr/panelMenuListWidth"
         android:layout_height="wrap_content"
         android:background="?attr/panelBackground"/>
+<<<<<<< HEAD
 <!-- From: file:/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/layout/abc_expanded_menu_layout.xml -->
+=======
+<!-- From: file:/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/layout/abc_expanded_menu_layout.xml -->
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f

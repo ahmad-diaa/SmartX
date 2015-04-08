@@ -18,4 +18,8 @@
     <item android:state_accelerated="false" android:color="@color/background_material_light" />
     <item android:color="@android:color/transparent" />
 </selector>
+<<<<<<< HEAD
 <!-- From: file:/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_background_cache_hint_selector_material_light.xml -->
+=======
+<!-- From: file:/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/color/abc_background_cache_hint_selector_material_light.xml -->
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f

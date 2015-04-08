@@ -4,12 +4,22 @@
     android:layout_height="match_parent"
     tools:context="{relativePackage}.${activityClass}" >
 
+    <EditText
+        android:id="@+id/search"
+        android:singleLine="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <requestFocus />
+    </EditText>
+
     <ListView
         android:id="@+id/android:list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_above="@+id/addRoomB">
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/addRoomB"
+        android:layout_below="@+id/search">
     </ListView>
 
     <Button
@@ -17,10 +27,9 @@
         android:layout_height="wrap_content"
         android:text="Add Room"
         android:id="@+id/addRoomB"
+        android:onClick="addRoom"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="addRoom" />
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

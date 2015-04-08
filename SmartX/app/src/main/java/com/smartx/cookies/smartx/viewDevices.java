@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,10 +13,18 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.app.ListActivity;
+<<<<<<< HEAD
 import android.widget.ListView;
 
+=======
+import android.widget.EditText;
+
+import java.util.ArrayList;
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+
 import models.Device;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -23,11 +33,15 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity{
 
+<<<<<<< HEAD
     String ENDPOINT = "http://192.168.43.249:3000/";
+=======
+    String ENDPOINT = "http://172.20.10.3:3000/";
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
     int userID;
     int roomID;
     Button addDevice;
-    String [] deviceNames;
+    ArrayList<String> deviceNames;
     String [] deviceType;
 
     @Override
@@ -51,17 +65,19 @@ public class viewDevices extends ListActivity{
 
             @Override
             public void success(List<Device> devices, Response response) {
-                deviceNames = new String[devices.size()];
+                deviceNames = new ArrayList<String>();
                 Iterator<Device> iterator = devices.iterator();
                 Iterator<Device> iterator2 = devices.iterator();
                 int i = devices.size() - 1;
-                while(i>= 0 & iterator.hasNext()){
-                    deviceNames[i] = iterator.next().getName();
+                while (i >= 0 & iterator.hasNext()) {
+                    deviceNames.add(iterator.next().getName());
                     i--;
                 }
-                ArrayAdapter <String> adapter=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
-            }
+
+
+        }
 
             @Override
             public void failure(RetrofitError error) {

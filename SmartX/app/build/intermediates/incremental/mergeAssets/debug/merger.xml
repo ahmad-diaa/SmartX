@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <merger version="3"><dataSet config="21.0.3"><source path="/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/assets"/></dataSet><dataSet config="21.0.3"><source path="/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/assets"/></dataSet><dataSet config="main"><source path="/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/src/debug/assets"/></dataSet></merger>
+=======
+<merger version="3"><dataSet config="21.0.3"><source path="/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/assets"/></dataSet><dataSet config="21.0.3"><source path="/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/assets"/></dataSet><dataSet config="main"><source path="/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/src/debug/assets"/></dataSet></merger>
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f

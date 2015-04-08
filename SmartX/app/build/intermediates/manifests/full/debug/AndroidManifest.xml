@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.smartx.cookies.smartx"
+<<<<<<< HEAD
+=======
+    android:installLocation="preferExternal"
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -68,6 +72,7 @@
             android:name="com.smartx.cookies.smartx.Settings"
             android:label="@string/title_activity_settings" >
         </activity>
+<<<<<<< HEAD
         <activity
             android:name="com.smartx.cookies.smartx.ViewDeviceActivity"
             android:label="@string/title_activity_view_device" >
@@ -80,6 +85,8 @@
             android:name="com.smartx.cookies.smartx.AddNoteActivity"
             android:label="@string/title_activity_add_note" >
         </activity>
+=======
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
     </application>
 
 </manifest> <!-- <?xml version="1.0" encoding="utf-8"?> -->
