@@ -23,7 +23,7 @@ public class addRoomsActivity extends Activity {
     EditText roomID;
     EditText roomName;
     public int count = -1;
-    String ENDPOINT = "http://192.168.1.106:3000/";
+    private String ENDPOINT = "http://192.168.43.100:3000/";
     int userID;
 
     @Override

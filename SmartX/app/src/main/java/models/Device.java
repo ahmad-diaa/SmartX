@@ -13,12 +13,11 @@ public class Device {
 
     }
 
-    public Device(String type, String name, String brand, String roomID, int userID) {
-        this.type = type;
+    public Device(String device_id, String name, String roomID, int userID) {
         this.name = name;
-        this.brand = brand;
         this.room_id = roomID;
         this.user_id=userID;
+        this.device_id = device_id;
     }
 
     public int getUserID() {

@@ -9,14 +9,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.sql.Array;
+import java.util.ArrayList;
+
 public class CustomListAdapter extends ArrayAdapter<String> {
 
     private final Activity context;
-    private final String[] itemname;
-    private final Integer[] imgid;
+    private final ArrayList<String> itemname;
+    private final ArrayList<Integer> imgid;
     Button addRoom;
 
-    public CustomListAdapter(Activity context, String[] itemname, Integer[] imgid) {
+    public CustomListAdapter(Activity context, ArrayList<String> itemname, ArrayList<Integer> imgid) {
         super(context, R.layout.mylist, itemname);
         // TODO Auto-generated constructor stub
         this.context = context;
@@ -29,9 +32,9 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.mylist, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.nameroom);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageroom);
-        txtTitle.setText(itemname[position]);
-        int i = imgid[position];
-        imageView.setImageResource(imgid[position]);
+        txtTitle.setText(itemname.get(position));
+        int i = imgid.get(position);
+        imageView.setImageResource(imgid.get(position));
         return rowView;
     }
 

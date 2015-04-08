@@ -23,7 +23,7 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity {
 
-    String ENDPOINT = "http://192.168.1.106:3000/";
+    private String ENDPOINT = "http://192.168.43.100:3000/";
     int userID;
     int roomID;
     Button addDevice;
@@ -41,7 +41,7 @@ public class viewDevices extends ListActivity {
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(viewDevices.this, addDevices.class));
+                //   startActivity(new Intent(viewDevices.this, addDevices.class));
             }
         });
 

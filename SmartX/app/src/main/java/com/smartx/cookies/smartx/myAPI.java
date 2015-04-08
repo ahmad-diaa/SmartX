@@ -11,6 +11,7 @@ import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
@@ -40,6 +41,7 @@ public interface myAPI {
     @FormUrlEncoded
     @POST("/users/{user_id}/rooms/{room_id}/devices")
     void addDevice(@Path("user_id") String userid, @Path("room_id") String roomid, @Field("device[name]") String name, @Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
+
 
     @GET("/users/{userID}/rooms/")
     void viewRooms(@Path("userID") String id, Callback<List<Room>> callback);

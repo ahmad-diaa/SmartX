@@ -33,7 +33,11 @@ public class Room {
         name = roomName;
         id  = roomID;
     }
-
+    public Room(String roomName, String roomID, String user_id) {
+        name = roomName;
+        id = roomID;
+        this.user_id = user_id;
+    }
     public Room() {
     }
 }

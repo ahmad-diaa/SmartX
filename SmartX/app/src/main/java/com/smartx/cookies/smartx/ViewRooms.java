@@ -28,14 +28,15 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-//static array, getarray, setarray based on user's selection(?), reload view with different array on click
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://192.168.1.106:3000/";
-    int userID;
-    Button addRoomB;
-    int count = -1;
-    int[] photos = new int[]{R.drawable.one,
+    private String ENDPOINT = "http://192.168.43.100:3000/";
+    private int userID;
+    private int count = -1;
+    private ArrayList<String> roomNames;
+    CustomListAdapter cAdapter;
+    private ArrayList<Integer> iconRooms;
+    private int[] photos = new int[]{R.drawable.one,
             R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
             R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
 
@@ -44,8 +45,41 @@ public class ViewRooms extends ListActivity {
         return (count + 1) % 9;
     }
 
+    public CustomListAdapter getcAdapter() {
+        return cAdapter;
+    }
+
+    public void setcAdapter(CustomListAdapter cAdapter) {
+        this.cAdapter = cAdapter;
+    }
+
+    public ArrayList<String> getRoomNames() {
+        return roomNames;
+    }
+
+    public void setRoomNames(ArrayList<String> roomNames) {
+        this.roomNames = roomNames;
+    }
+
+    public ArrayList<Integer> getIconRooms() {
+        return iconRooms;
+    }
+
+    public void setIconRooms(ArrayList<Integer> iconRooms) {
+        this.iconRooms = iconRooms;
+    }
+
+    public int[] getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(int[] photos) {
+        this.photos = photos;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_rooms);
 
@@ -60,17 +94,17 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void success(List<Room> rooms, Response response) {
-                String[] roomNames = new String[rooms.size()];
+                roomNames = new ArrayList<String>();
                 Iterator<Room> iterator = rooms.iterator();
-                Integer[] iconRooms = new Integer[rooms.size()];
+                iconRooms = new ArrayList<Integer>();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-                    roomNames[i] = iterator.next().get_roomName();
-                    iconRooms[i] = photos[randomIcon()];
+                    roomNames.add(iterator.next().get_roomName());
+                    iconRooms.add(photos[randomIcon()]);
                     i--;
                 }
-                CustomListAdapter adapter = new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
-                setListAdapter(adapter);
+                cAdapter = new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
+                setListAdapter(cAdapter);
             }
 
             @Override
@@ -126,6 +160,7 @@ public class ViewRooms extends ListActivity {
                     arrayAdapter.add(s);
                 }
             }
+
             @Override
             public void failure(RetrofitError error) {
             }
