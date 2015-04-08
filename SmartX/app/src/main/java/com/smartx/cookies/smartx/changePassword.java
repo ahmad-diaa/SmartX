@@ -22,16 +22,65 @@ import retrofit.client.Response;
 
 
 public class changePassword extends Activity {
-    String oldPass;
-    String originalPass;
-    String newPass;
-    String confPass;
+    private String oldPass;
+    private String originalPass;
+
+    public String getOldPass() {
+        return oldPass;
+    }
+
+    public void setOldPass(String oldPass) {
+        this.oldPass = oldPass;
+    }
+
+    public String getOriginalPass() {
+        return originalPass;
+    }
+
+    public void setOriginalPass(String originalPass) {
+        this.originalPass = originalPass;
+    }
+
+    public String getNewPass() {
+        return newPass;
+    }
+
+    public void setNewPass(String newPass) {
+        this.newPass = newPass;
+    }
+
+    public String getConfPass() {
+        return confPass;
+    }
+
+    public void setConfPass(String confPass) {
+        this.confPass = confPass;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getENDPOINT() {
+        return ENDPOINT;
+    }
+
+    public void setENDPOINT(String ENDPOINT) {
+        this.ENDPOINT = ENDPOINT;
+    }
+
+    private String newPass;
+    private String confPass;
     Button changePasswordB;
     EditText oldPassword;
     EditText newPassword;
     EditText confirmPassword;
-    int userID;
-    String ENDPOINT = "http://172.20.10.3:3000/";
+    private int userID;
+    private String ENDPOINT = "http://172.20.10.3:3000/";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
@@ -67,6 +116,7 @@ public class changePassword extends Activity {
 
                 @Override
                 public void success(models.User user, Response response) {
+                    oldPass = newPass ;
                     Toast.makeText(getApplicationContext(), "Your password is successfully changed",
                             Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getApplicationContext(),LoginActivity.class));
