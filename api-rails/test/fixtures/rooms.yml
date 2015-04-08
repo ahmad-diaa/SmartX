@@ -2,12 +2,12 @@
 
 one:
   user_id: 1
-  room_id: MyString
-  name: MyString
+  room_id: 1
+  name: bedroom
   photo: MyString
 
 two:
   user_id: 1
-  room_id: MyString
-  name: MyString
+  room_id: 2
+  name: kitchen
   photo: MyString

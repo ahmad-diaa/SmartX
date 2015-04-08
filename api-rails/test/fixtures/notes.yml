@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  body: MyText
-  device_id: 
-  room_id: 
-  user_id: 
+  body: This is a test note 1
+  device_id: 1
+  room_id: 1
+  user_id: 1
 
 two:
-  body: MyText
-  device_id: 
-  room_id: 
-  user_id: 
+  body:	This is a test note 2
+  device_id: 1
+  room_id: 1
+  user_id: 1

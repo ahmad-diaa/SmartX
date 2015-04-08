@@ -2,12 +2,12 @@
 
 one:
   user_id: 1
-  room_id: MyString
+  room_id: 1
   type_id: 1
-  name: MyString
+  name: myTelevision
 
 two:
   user_id: 1
-  room_id: MyString
+  room_id: 1
   type_id: 1
-  name: MyString
+  name: myLamp
