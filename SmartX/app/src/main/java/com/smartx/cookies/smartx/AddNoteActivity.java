@@ -30,48 +30,43 @@ public class AddNoteActivity extends Activity {
     String Body = "";//The body of the note
     String errorMessage = "initial"; //error message which indicates if the adding ended up in success or failure
 
-
+    /*Getter for the user ID*/
     public int getUserID() {
-        /*Getter for the user ID*/
         return this.userID;
     }
 
+    /*Getter for the room ID*/
     public int getRoomID() {
-        /*Getter for the room ID*/
         return this.roomID;
     }
 
+    /*Getter for the device ID*/
     public String getDeviceID() {
-        /*Getter for the device ID*/
         return this.deviceID;
     }
 
+    /*Getter for the ENDPOINT*/
     public String getENDPOINT() {
-        /*Getter for the ENDPOINT*/
         return this.ENDPOINT;
     }
 
+    /*Getter for the error message*/
     public String getErrorMessage() {
-        /*Getter for the error message*/
         return this.errorMessage;
     }
 
+    /*Getter for the body*/
     public String getBody() {
-        /*Getter for the body*/
         return this.Body;
     }
 
+    /*Setter for the body of the note*/
     public void setBody(String s) {
-        /*Setter for the body of the note*/
         this.Body = s;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*This method is called when the app is run
-        * and it sets the value of the userID, roomID and deviceID
-        * from the shared preferences
-        * it also connects this class with the activity_add_note layout*/
         super.onCreate(savedInstanceState);
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
@@ -104,18 +99,16 @@ public class AddNoteActivity extends Activity {
     }
 
     public void AddNote(View view) {
-        /*This method is called when the button "Add Note" is clicked
-         * It sets the value of the body instance method with what is written in the EditText
-          * It calls the sendNoteToRails() method afterwards*/
         EditText noteBody = (EditText) findViewById(R.id.noteText);
         Body = noteBody.getText().toString();
         this.sendNoteToRails();
 
     }
 
+    /**This method is called whenever adding a note to the database is needed (in the test and AddNote() method)
+      * It calls API.AddNote() method passing Body instance method in the method to be sent to rails to create a note
+      */
     public void sendNoteToRails() {
-        /*This method is called whenever adding a note to the database is needed (in the test and AddNote() method)
-        * It calls API.AddNote() method passing Body instance method in the method to be sent to rails to create a note*/
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         if (Body.equals("")) {
