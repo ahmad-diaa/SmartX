@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -31,8 +32,8 @@ public class Settings extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         changePasswordB = (Button) findViewById(R.id.changePasswordButton);
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID", 1));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
         EditText oldPassword = (EditText) findViewById(R.id.passwordOld);
         EditText newPassword = (EditText) findViewById(R.id.passwordNew);
         EditText confirmPassword = (EditText) findViewById(R.id.passwordConfirm);
@@ -52,7 +53,7 @@ public class Settings extends Activity {
         if (newPassword.equals(confirmPassword)) {
             RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
             myAPI api = adapter.create(myAPI.class);
-            api.getUser(userID +"", new Callback<models.User>() {
+            api.getUser(userID + "", new Callback<models.User>() {
 
                 @Override
                 public void success(User user, Response response) {

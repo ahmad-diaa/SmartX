@@ -13,9 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import models.Device;
 import models.Type;
 import retrofit.Callback;
@@ -90,10 +92,9 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
             @Override
             public void onClick(View v) {
                 if ((device_spinner.getSelectedItem().toString().equals("None")) ||
-                    (brand_spinner.getSelectedItem().toString().equals("None")) ) {
+                        (brand_spinner.getSelectedItem().toString().equals("None"))) {
                     Toast.makeText(getApplicationContext(), "Please Fill in the Blank spaces", Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
                     Device device = new Device(device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), roomID, userID);
                     api.addDevice(device.getName() + " ", device.getRoomID() + "", device.getName(), device.getType(), device.getBrand(), new Callback<Device>() {
 
@@ -104,7 +105,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
 
                         @Override
                         public void failure(RetrofitError error) {
-                            Toast.makeText(getApplicationContext(), "Cannot Add A Device!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Cannot Add A Device!", Toast.LENGTH_LONG).show();
                             throw error;
                         }
                     });
@@ -153,8 +154,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
                     brand_spinner.setClickable(false);
                     brand_spinner.setAdapter(dataAdapter2);
                 }
-            }
-            else {
+            } else {
 
 
             }

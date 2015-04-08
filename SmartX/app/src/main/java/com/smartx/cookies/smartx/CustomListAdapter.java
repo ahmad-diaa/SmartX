@@ -16,7 +16,7 @@ import java.util.Locale;
 public class CustomListAdapter extends ArrayAdapter<String> {
 
     private Activity context;
-    private  ArrayList<String> itemName;
+    private ArrayList<String> itemName;
 
     public ArrayList<String> getItemName() {
         return itemName;
@@ -34,21 +34,21 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         this.imgId = imgId;
     }
 
-    private  ArrayList<Integer> imgId;
+    private ArrayList<Integer> imgId;
 
     private ArrayList<String> tempItemname;
     private ArrayList<Integer> tempImgid;
     Button addRoom;
 
-    public CustomListAdapter(Activity context, ArrayList<String> itemname, ArrayList<Integer> imgid) {
-        super(context, R.layout.mylist, itemname);
+    public CustomListAdapter(Activity context, ArrayList<String> itemName, ArrayList<Integer> imgId) {
+        super(context, R.layout.mylist, itemName);
         this.context = context;
-        this.itemName = itemname;
-        this.imgId = imgid;
+        this.itemName = itemName;
+        this.imgId = imgId;
         tempImgid = new ArrayList<Integer>();
         tempItemname = new ArrayList<String>();
-        tempImgid.addAll(imgid);
-        tempItemname.addAll(itemname);
+        tempImgid.addAll(imgId);
+        tempItemname.addAll(itemName);
     }
 
     public View getView(int position, View view, ViewGroup parent) {

@@ -27,7 +27,6 @@ import retrofit.client.Response;
 
 
 /**
- *
  * ViewRooms.java
  * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
  *
@@ -156,10 +155,11 @@ public class ViewRooms extends ListActivity {
 
     /**
      * opens the activity (ViewDevices) of the clicked room
-     * @param list      List of all rooms
-     * @param view      The clicked listview
-     * @param position  The position of the view in the list
-     * @param id        The row id of the item that was clicked
+     *
+     * @param list     List of all rooms
+     * @param view     The clicked listview
+     * @param position The position of the view in the list
+     * @param id       The row id of the item that was clicked
      */
     protected void onListItemClick(ListView list, View view, int position, long id) {
         super.onListItemClick(list, view, position, id);
@@ -174,6 +174,7 @@ public class ViewRooms extends ListActivity {
 
     /**
      * Starts the activity (addRoomsActivity) to create a new room
+     *
      * @param view add room button
      */
     public void addRoom(View view) {
