@@ -1,7 +1,6 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,13 +55,9 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.mylist, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.nameroom);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageroom);
-<<<<<<< HEAD
-        txtTitle.setText(itemname[position]);
-//        imageView.setImageResource(imgid[position]);
-=======
+
         txtTitle.setText(itemName.get(position));
         imageView.setImageResource(imgId.get(position));
->>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
         return rowView;
     }
 

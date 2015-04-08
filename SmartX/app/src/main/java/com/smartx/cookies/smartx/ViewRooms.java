@@ -36,14 +36,10 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-<<<<<<< HEAD
-    String ENDPOINT = "http://192.168.43.249:3000/";
-    int userID;
-=======
+
     String ENDPOINT = "http://172.20.10.3:3000/";
     private EditText editSearch;
     private int userID;
->>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
     Button addRoomB;
     static int count = -1;
     private CustomListAdapter adapter2;
@@ -112,23 +108,14 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void success(List<Room> rooms, Response response) {
-<<<<<<< HEAD
-                String[] roomNames = new String[rooms.size()];
-                final Integer[] roomImages = new Integer[0];
-=======
+
                 roomNames = new ArrayList<String>();
->>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
                 Iterator<Room> iterator = rooms.iterator();
                 iconRooms = new ArrayList<Integer>();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-<<<<<<< HEAD
-                    roomNames[i] = iterator.next().get_roomName();
-//                    roomImages[i] = Integer.parseInt(iterator2.next().getPhoto());
-=======
                     roomNames.add(iterator.next().get_roomName());
                     iconRooms.add(photos[randomIcon()]);
->>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
                     i--;
                 }
                 adapter2 = new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
