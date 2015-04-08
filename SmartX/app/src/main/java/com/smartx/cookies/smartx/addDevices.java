@@ -1,16 +1,11 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,23 +13,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import models.Device;
 import models.Type;
-import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.http.POST;
-import retrofit.http.Path;
 
 
-public class AddDevices extends Activity implements AdapterView.OnItemSelectedListener {
+
+public class addDevices extends Activity implements AdapterView.OnItemSelectedListener {
     int userID;
     int roomID;
     Spinner device_spinner;
@@ -213,38 +204,6 @@ Log.i("In succes part", " ");
         }
 
     }
-
-
-
-//            public void addDeviceButton(View v) {
-//                addDeviceButton = (Button) findViewById(R.id.addDeviceButton);
-//
-//                Device device = new Device(device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), roomID, userID);
-//
-//                //myAPI api = adapter.create(myAPI.class);
-//                // System.out.print("Respond2");
-//                //  api.addRoom(roomName.getText().toString(), "soora", userID +"", new Callback<Room> () {
-//                // api.addRoom("12", room.get_roomName(),"Photo" ,new Callback<Room>(){
-//                api.addDevice(device.getUserID() + "", device.getRoomID() + "", device.getName(), device.getUserID() + "", device.getRoomID() + "", device.getType(), device.getBrand(), new Callback<Device>() {
-//
-//                    @Override
-//                    public void success(Device device, Response response) {
-//                        startActivity(new Intent(getApplicationContext(), About_us.class));
-//
-//
-//                    }
-//
-//                    @Override
-//                    public void failure(RetrofitError error) {
-//                        throw error;
-//                        //Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
-//                       // startActivity(new Intent(getApplicationContext(), About_us.class));
-//
-//
-////
-//                    }
-//                });
-//            }
 
             public void onNothingSelected(AdapterView arg0) {
 
