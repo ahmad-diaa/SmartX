@@ -22,7 +22,13 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-
+/**
+  *
+  * changeInfo.java
+  * Purpose: user can edit his contact information (email and phone number)
+  *
+  * @author Ahmad Abdalraheem
+ */
 public class changeInfo extends Activity {
     EditText emailtxt;
     EditText phonetxt;
@@ -47,6 +53,10 @@ public class changeInfo extends Activity {
         originalPass= (mSharedPreference.getString("password", "123456"));
 
     }
+    /**
+     * it takes the input from the user to change his information,it toast whether the information is updated or not,
+     * @param v the view of the activity, it take the
+     */
    public void changeInfo (View v) {
        email = emailtxt.getText().toString();
        phone = phonetxt.getText().toString();
