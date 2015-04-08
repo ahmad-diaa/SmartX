@@ -27,8 +27,8 @@ public class AddNoteActivityTest extends ActivityInstrumentationTestCase2<AddNot
     public void setUp() throws Exception {
         super.setUp();
         myActivity = getActivity();
-        noteBody= (EditText)myActivity.findViewById(R.id.noteText);
-        addNote = (Button)myActivity.findViewById(R.id.button3);
+        noteBody = (EditText) myActivity.findViewById(R.id.noteText);
+        addNote = (Button) myActivity.findViewById(R.id.button3);
         this.ENDPOINT = myActivity.getENDPOINT();
         this.userID = myActivity.getUserID();
         this.roomID = myActivity.getRoomID();
@@ -50,22 +50,26 @@ public class AddNoteActivityTest extends ActivityInstrumentationTestCase2<AddNot
         assertNotNull("ENDPOINT is null", ENDPOINT);
 
     }
+
     public void testDeviceID() {
         assertNotNull("deviceID is null", deviceID);
 
     }
-    public void testBody(){
+
+    public void testBody() {
         assertNotNull("body is null", Body);
     }
+
     public void testAddNoteSuccess() {
-       myActivity.setBody("tester");
+        myActivity.setBody("tester");
         myActivity.sendNoteToRails();
-        assertEquals("",myActivity.getErrorMessage());
+        assertEquals("", myActivity.getErrorMessage());
     }
+
     public void testAddNoteFailure() {
         myActivity.setBody("");
         myActivity.sendNoteToRails();
-        assertEquals("Cannot add note!",myActivity.getErrorMessage());
+        assertEquals("Cannot add note!", myActivity.getErrorMessage());
     }
 
 

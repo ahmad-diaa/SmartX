@@ -6,7 +6,7 @@ class NotesController < ApplicationController
     	@device= @room.devices.find(params[:device_device_id])
     	@notes = @device.notes.all
     	render json: @notes if stale?(etag: @notes.all, last_modified: @notes.maximum(:updated_at))
-  end
+  	end
 
 	def show
 		@user=User.find(params[:user_id])
@@ -42,7 +42,7 @@ class NotesController < ApplicationController
 	 private
   # Never trust parameters from the scary internet, only allow the white list through.
   def note_params
-    params.require(:note).permit(:body,:device_id,:user_id,:room_id,:id)
+    params.require(:note).permit(:body,:device_device_id,:user_id,:room_id,:id)
   end
 
 end

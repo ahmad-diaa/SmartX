@@ -26,33 +26,41 @@ public class AddNoteActivity extends Activity {
     String Body = "";
     //boolean flag = true;
     String errorMessage = "initial";
+
     public int getUserID() {
         return this.userID;
     }
+
     public int getRoomID() {
-        return  this.roomID;
+        return this.roomID;
     }
+
     public String getDeviceID() {
         return this.deviceID;
     }
+
     public String getENDPOINT() {
         return this.ENDPOINT;
     }
+
     public String getErrorMessage() {
         return this.errorMessage;
     }
+
     public String getBody() {
         return this.Body;
     }
+
     public void setBody(String s) {
         this.Body = s;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID",1));
-        roomID=(mSharedPreference.getInt("roomID", 1));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
+        roomID = (mSharedPreference.getInt("roomID", 1));
 //        deviceID = (mSharedPreference.getString("deviceID","0"));
         setContentView(R.layout.activity_add_note);
     }
@@ -79,33 +87,34 @@ public class AddNoteActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void AddNote(View view) {
-        EditText noteBody = (EditText)findViewById(R.id.noteText);
+        EditText noteBody = (EditText) findViewById(R.id.noteText);
         Body = noteBody.getText().toString();
         this.sendNoteToRails();
 
     }
+
     public void sendNoteToRails() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        if(Body.equals("")) {
+        if (Body.equals("")) {
             errorMessage = "Cannot add note!";
-        }
-        else {
+        } else {
             errorMessage = "";
         }
-        api.addNote(userID + "", roomID + "", deviceID, Body,new Callback<Note>() {
+        api.addNote(userID + "", roomID + "", deviceID, Body, new Callback<Note>() {
             @Override
             public void success(Note note, Response response) {
-               // errorMessage = "";
-               // Log.i("success message", errorMessage);
-              //  flag = true;
+                // errorMessage = "";
+                // Log.i("success message", errorMessage);
+                //  flag = true;
                 startActivity(new Intent(getApplicationContext(), ViewNotesActivity.class));
             }
 
             @Override
             public void failure(RetrofitError error) {
-              //  flag = false;
+                //  flag = false;
                 //errorMessage = "Cannot add note!";
                 //Log.i("error message", errorMessage);
                 Toast.makeText(getApplicationContext(), "Cannot add note!", Toast.LENGTH_LONG).show();
