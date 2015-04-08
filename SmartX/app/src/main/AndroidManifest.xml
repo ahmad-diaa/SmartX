@@ -55,7 +55,7 @@
             >
         </activity>
         <activity
-            android:name=".AddDevices"
+            android:name=".addDevices"
             android:label="@string/title_activity_add_devices"
             android:screenOrientation="portrait"
         android:configChanges="keyboardHidden|orientation|screenSize"

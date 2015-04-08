@@ -34,7 +34,7 @@ import retrofit.http.POST;
 import retrofit.http.Path;
 
 
-public class AddDevices extends Activity implements AdapterView.OnItemSelectedListener {
+public class addDevices extends Activity implements AdapterView.OnItemSelectedListener {
     int userID;
     int roomID;
     Spinner device_spinner;

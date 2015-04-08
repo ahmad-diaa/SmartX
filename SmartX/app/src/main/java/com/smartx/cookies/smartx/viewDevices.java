@@ -39,7 +39,7 @@ public class viewDevices extends ListActivity{
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-        startActivity(new Intent(viewDevices.this, AddDevices.class));
+        startActivity(new Intent(viewDevices.this, addDevices.class));
             }
         });
 
