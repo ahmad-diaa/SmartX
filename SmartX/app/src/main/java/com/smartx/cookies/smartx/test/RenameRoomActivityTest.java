@@ -53,14 +53,13 @@ public class RenameRoomActivityTest  extends ActivityInstrumentationTestCase2<Re
 
             }
         });
-
         myActivity.renameRoom(myActivity.getWindow().getDecorView());
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         api.getRoom(userID + "", roomID + "", new Callback<String>() {
             @Override
             public void success(String s, Response response) {
-                assertEquals("newName", s);
+                assertEquals("some new name", s);
                 String check = myActivity.getErrorMessage();
                 assertEquals("",check);
             }

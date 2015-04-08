@@ -24,17 +24,19 @@ public class RenameRoomActivity extends Activity {
     EditText roomName;
     int userID;
     int roomID;
-    String errorMessage;
+    String errorMessage = "initial";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rename_room);
     }
+
     public String getENDPOINT() {
 
         return this.ENDPOINT;
     }
+
     public int getUserID() {
 
         return this.userID;
@@ -43,9 +45,11 @@ public class RenameRoomActivity extends Activity {
     public int getRoomID() {
         return this.roomID;
     }
+
     public String getErrorMessage() {
         return this.errorMessage;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -67,33 +71,39 @@ public class RenameRoomActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-        public void renameRoom(View view) {
-            roomName = (EditText) findViewById(R.id.rename_room);
-            String name = String.valueOf(roomName.getText());
-            final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-            userID = (mSharedPreference.getInt("userID", 1));
-            roomID = (mSharedPreference.getInt("roomID", 1));
 
-            final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-            myAPI api = adapter.create(myAPI.class);
-            api.renameRoom(userID + "", roomID + "", name, new Callback<Room>() {
+    public void renameRoom(View view) {
+        roomName = (EditText) findViewById(R.id.rename_room);
+        String name = String.valueOf(roomName.getText());
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
+        roomID = (mSharedPreference.getInt("roomID", 1));
 
-                @Override
-                public void success(Room room, Response response) {
-                    errorMessage = "";
-                    startActivity(new Intent(getApplicationContext(),viewDevices.class));
-
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                        errorMessage = "Room name cannot be blank";
-                        Toast.makeText(getApplicationContext(), "Room name cannot be blank", Toast.LENGTH_LONG).show();
-
-
-                }
-            });
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        myAPI api = adapter.create(myAPI.class);
+        if (name.equals("")) {
+            errorMessage = "Room name cannot be blank";
+        } else {
+            errorMessage = "";
         }
-  }
+        api.renameRoom(userID + "", roomID + "", name, new Callback<Room>() {
+
+            @Override
+            public void success(Room room, Response response) {
+
+                startActivity(new Intent(getApplicationContext(), viewDevices.class));
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+                Toast.makeText(getApplicationContext(), "Room name cannot be blank", Toast.LENGTH_LONG).show();
+
+
+            }
+        });
+    }
+}
 
 
