@@ -1,5 +1,7 @@
 class NotesController < ApplicationController
 
+	#It takes the user ID, room ID and device ID from the route 
+	#returns all notes of that specific device
 	def index
 		@user=User.find(params[:user_id])
     	@room=@user.rooms.find(params[:room_id])
@@ -8,6 +10,8 @@ class NotesController < ApplicationController
     	render json: @notes if stale?(etag: @notes.all, last_modified: @notes.maximum(:updated_at))
   	end
 
+	#It takes the user ID, room ID, device ID and note ID from the route 
+	#returns that specific note with all its parameter
 	def show
 		@user=User.find(params[:user_id])
     	@room=@user.rooms.find(params[:room_id])
