@@ -6,6 +6,7 @@ public class Device {
     String name;
     String brand;
     int roomID;
+    int id;
 
     public Device(){
 
@@ -59,5 +60,8 @@ public class Device {
         this.roomID = roomID;
     }
 
+    public int getId() {
+        return id;
+    }
 
 }
