@@ -5,7 +5,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.smartx.cookies.smartx.R;
-import com.smartx.cookies.smartx.RenameRoomActivity;
+import com.smartx.cookies.smartx.renameRoomActivity;
 import com.smartx.cookies.smartx.myAPI;
 
 import retrofit.Callback;
@@ -18,9 +18,9 @@ import retrofit.client.Response;
  * Created by maggiemoheb on 4/7/15.
  */
 
-public class RenameRoomActivityTest  extends ActivityInstrumentationTestCase2<RenameRoomActivity> {
+class renameRoomActivityTest  extends ActivityInstrumentationTestCase2<renameRoomActivity> {
 
-    private RenameRoomActivity myActivity;//An instance of the RenameRoomActivity
+    private renameRoomActivity myActivity;//An instance of the RenameRoomActivity
     private EditText roomName;//An instance of EditText field in the RenameRoomActivity
     private Button rename_button; //An instance of EditText field in the RenameRoomActivity
     private int userID;//The user ID of the RenameRoomActivity
@@ -31,8 +31,8 @@ public class RenameRoomActivityTest  extends ActivityInstrumentationTestCase2<Re
     /**
      * A constructor that matches the super constructor
      */
-    public RenameRoomActivityTest() {
-        super(RenameRoomActivity.class);
+    public renameRoomActivityTest() {
+        super(renameRoomActivity.class);
     }
 
     /**

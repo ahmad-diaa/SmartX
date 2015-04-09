@@ -3,6 +3,7 @@ package com.smartx.cookies.smartx;
 import android.widget.EditText;
 
 import java.util.List;
+
 import models.Device;
 import models.Room;
 import models.Session;
@@ -20,7 +21,7 @@ public interface myAPI {
 
     @FormUrlEncoded
     @POST("/session")
-    void login(@Field("session[name]") String username, @Field("session[password]") String password,Callback<Session> callback);
+    void login(@Field("session[name]") String username, @Field("session[password]") String password, Callback<Session> callback);
 
     @GET("/users/{id}")
     public void getFeed(@Path("id") int id, Callback<User> callback);
@@ -37,7 +38,7 @@ public interface myAPI {
     void renameRoom(@Path("userID") String id,@Path("id") String roomID, @Field("room[name]") String name , Callback<Room> callback);
 
     @GET("/users/{userID}/rooms/{roomID}/devices")
-    void viewDevices(@Path("userID") String id,@Path("roomID") String rid, Callback<List<Device>> callback);
+    void viewDevices(@Path("userID") String id, @Path("roomID") String rid, Callback<List<Device>> callback);
 
     @GET("/types/{name}")
     void requestBrands(@Path("name") String device, Callback<List<Type>> types);
@@ -54,8 +55,7 @@ public interface myAPI {
 
     @FormUrlEncoded
     @PUT("/users/{userID}/")
-    void changePassword(@Path("userID") String id, @Field ("user[password]") String password, Callback<User> callback);
-
-
+    void changePassword(@Path("userID") String id, @Field("user[password]") String password, Callback<User> callback);
 
 }
+

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,9 +22,9 @@ import retrofit.client.Response;
  * Purpose: renames a room
  * @author maggiemoheb
  */
-public class RenameRoomActivity extends Activity {
+public class renameRoomActivity extends Activity {
 
-    String ENDPOINT = "http://192.168.43.249:3000/";// The ENDPOINT to the server IP address
+    String ENDPOINT = "http://192.168.43.63:3000/";// The ENDPOINT to the server IP address
     EditText roomName;// EditText field to put the new name room in
     int userID;// the user ID of the session
     int roomID;// room ID to be renamed
@@ -116,13 +117,13 @@ public class RenameRoomActivity extends Activity {
             @Override
             public void success(Room room, Response response) {
 
-                startActivity(new Intent(getApplicationContext(), viewDevices.class));
+                startActivity(new Intent(getApplicationContext(), ViewRooms.class));
 
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                Log.i("aho", error.getMessage());
                 Toast.makeText(getApplicationContext(), "Room name cannot be blank", Toast.LENGTH_LONG).show();
 
 

@@ -1,22 +1,23 @@
 package com.smartx.cookies.smartx;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class Settings extends ActionBarActivity {
-    String ENDPOINT = "http://192.168.43.249:3000/";
+
+public class Settings extends Activity {
     Button changePasswordB;
     int userID;
     String oldPasswordS;
@@ -31,8 +32,8 @@ public class Settings extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         changePasswordB = (Button) findViewById(R.id.changePasswordButton);
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID", 1));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
         EditText oldPassword = (EditText) findViewById(R.id.passwordOld);
         EditText newPassword = (EditText) findViewById(R.id.passwordNew);
         EditText confirmPassword = (EditText) findViewById(R.id.passwordConfirm);
@@ -50,16 +51,17 @@ public class Settings extends ActionBarActivity {
         newPasswordS = newPassword.getText().toString();
         confirmPasswordS = confirmPassword.getText().toString();
         if (newPassword.equals(confirmPassword)) {
-            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
             myAPI api = adapter.create(myAPI.class);
-            api.getUser(userID +"", new Callback<models.User>() {
-
+            api.getUser(userID + "", new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
+
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
+
                 }
             });
         }
