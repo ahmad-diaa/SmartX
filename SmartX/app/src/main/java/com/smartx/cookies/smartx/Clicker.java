@@ -1,7 +1,8 @@
 package com.smartx.cookies.smartx;
 
 /**
- * Created by youmna on 4/3/15.
+ This class is the clickers' factory.
+ *@author  youmna
  */
 public class Clicker {
     int userId;//current userId
@@ -12,6 +13,10 @@ public class Clicker {
 
     public Clicker() {
     }
+/*
+clicker constructor creates a Clicker object
+@params userID ,RoomID ,deviceID, ClickerId and command
+*/
 
     public Clicker(int userId, int roomId, int deviceId, int clickerId, String command) {
         this.userId = userId;

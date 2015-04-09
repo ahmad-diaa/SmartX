@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 20150403124554) do
 
   create_table "clickers", force: true do |t|
     t.string   "command"
-    t.integer  "device_id"
-    t.integer  "room_id"
     t.integer  "user_id"
+    t.integer  "room_id"
+    t.integer  "device_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

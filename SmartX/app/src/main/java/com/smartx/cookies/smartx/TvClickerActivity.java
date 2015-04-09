@@ -16,9 +16,9 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/*
-This class creates an instance of a clicker that will allow the user to control a device.
-
+/**
+ *This class creates an instance of a clicker that will allow the user to control a device.
+ *@author youmna .
  */
 public class TvClickerActivity extends Activity {
     String ENDPOINT = "http://192.168.1.5:3000/";    // store the ip address and the port number to which the Tv_clicker is connected
@@ -29,7 +29,7 @@ public class TvClickerActivity extends Activity {
     String command;//store the current command
     int on_and_off = 2;//initial current state of device
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
-    Clicker TvClicker;
+    Clicker TvClicker = new Clicker();
 
     public int getClickerID() {
         return clickerID;
@@ -122,7 +122,7 @@ endPoint getter
      @param View
      */
     public void volumeUP(View v) {
-        command = new String("TV"+ "/");
+        command = new String(TvClicker.getClickerId() + "/");
         command += "V/1";
         send_a_command();
     }
@@ -133,7 +133,7 @@ endPoint getter
        @param View
       */
     public void volumeDown(View v) {
-        command = new String("TV"+ "/" + "V/0");
+        command = new String(TvClicker.getClickerId() + "/" + "V/0");
         send_a_command();
     }
 
@@ -143,7 +143,7 @@ endPoint getter
       @param View
      */
     public void nextChannel(View v) {
-        command = new String("TV"+ "/" + "/C/1");
+        command = new String(TvClicker.getClickerId() + "/" + "/C/1");
         send_a_command();
 
     }
@@ -154,7 +154,7 @@ endPoint getter
       @param View
      */
     public void previousChannel(View v) {
-        command = new String("TV" + "/" + "/C/0");
+        command = new String(TvClicker.getClickerId() + "/" + "/C/0");
         send_a_command();
 
     }
@@ -167,7 +167,7 @@ endPoint getter
           @param View
        */
     public void TurnOnOff(View v) {
-        command = new String("TV" + "/" + on_and_off % 2 + "");
+        command = new String(TvClicker.getClickerId() + "/" + on_and_off % 2 + "");
         on_and_off++;
         changeDeviceStatus(on_and_off % 2);
         if (on_and_off % 2 != 0)
@@ -183,7 +183,7 @@ endPoint getter
     public void checkPreviousState() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.viewDevice("2", "2", "3", new Callback<Device>() {
+        api.viewDevice("1", "1", "1", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -233,7 +233,7 @@ endPoint getter
     public void send_a_command() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.send_clicker_command("2", "2", "3", "32", command, new Callback<Clicker>() {
+        api.send_clicker_command("1", "1", "1", "1", command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("V/0")) {

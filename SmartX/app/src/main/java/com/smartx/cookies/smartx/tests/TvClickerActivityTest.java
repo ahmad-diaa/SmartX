@@ -18,7 +18,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by youmna on 4/7/15.
+ * The purpose of this class is to test TVClickerActivity
+ *@author youmna .
  */
 public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvClickerActivity> {
 
