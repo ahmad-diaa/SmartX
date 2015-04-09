@@ -8,12 +8,8 @@ import models.Room;
 import models.Type;
 import models.User;
 import retrofit.Callback;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.PUT;
-import retrofit.http.Path;
+import retrofit.http.*;
+
 
 /**
  * Created by zamzamy on 3/11/15.
@@ -32,7 +28,6 @@ public interface myAPI {
     @POST("/users/{userId}/rooms/")
     void addRoom(@Path("userId") String id, @Field("room[name]") String name, @Field("room[photo]") String photo, Callback<Room> callback);
 
-
     @GET("/users/{userId}/rooms/{roomId}/devices")
     void viewDevices(@Path("userId") String user_id, @Path("roomId") String room_id, Callback<List<Device>> callback);
 
@@ -49,19 +44,18 @@ public interface myAPI {
     @FormUrlEncoded
     @POST("/users/{userId}/rooms/{roomId}/devices/{deviceId}/clickers")
     void addClicker(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("clicker[command]") String command, Callback<Clicker> callback);
+    @FormUrlEncoded
 
     @GET("/users/{userId}/rooms/{roomId}/devices/{deviceId}/clickers")
     void getClicker(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String device_id, Callback<Clicker> callback);
 
-
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}")
-    void editDeviceStatus (@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String device_id, @Field("device[status]") String status, Callback<Clicker> callback);
+    void editDeviceStatus(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String device_id, @Field("device[status]") String status, Callback<Clicker> callback);
 
     @FormUrlEncoded
     @POST("/users/{userId}/rooms/{roomId}/devices")
     void addDevice(@Path("userId") String userId, @Path("roomId") String roomId, @Field("device[name]") String name, @Field("device[typeName]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
-
 
     @GET("/users/{userId}/rooms/")
     void viewRooms(@Path("userId") String id, Callback<List<Room>> callback);

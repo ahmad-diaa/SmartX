@@ -46,8 +46,8 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         setContentView(R.layout.activity_add_devices);
 
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID = (mSharedPreference.getInt("user_id", 1));
-        roomID = (mSharedPreference.getInt("room_id", 1));
+        userID = (mSharedPreference.getInt("userId", 1));
+        roomID = (mSharedPreference.getInt("roomId", 1));
         device_name = (EditText) findViewById(R.id.device_name);
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();

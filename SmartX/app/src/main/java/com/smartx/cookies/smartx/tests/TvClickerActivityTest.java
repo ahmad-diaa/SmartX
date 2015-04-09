@@ -36,9 +36,11 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
         super(TvClickerActivity.class);
     }
-/*
-initiate parameters and get activities
-  @throw*/
+
+    /*
+    initiate parameters and get activities
+    @throws exception
+      */
     protected void setUp() throws Exception {
         super.setUp();
         myActivity = getActivity();
@@ -49,11 +51,12 @@ initiate parameters and get activities
         volumeDown = (Button) myActivity.findViewById(R.id.button4);
 
         userID = myActivity.getUserID();
-        roomID = myActivity.getRoomID()==0?1:myActivity.getRoomID();
+        roomID = myActivity.getRoomID() == 0 ? 1 : myActivity.getRoomID();
         deviceID = myActivity.getDeviceID();
         clickerID = myActivity.getClickerID();
         ENDPOINT = myActivity.getENDPOINT();
     }
+
     /*
     verify that the test fixture has been set up correctly,
      and the objects that you want to test have been correctly instantiated or initialized
@@ -61,16 +64,16 @@ initiate parameters and get activities
     public void testPreconditions() {
         assertNotNull("myActivity is null", myActivity);
     }
-/*
-used to test if the clicker's current command changes when the channel "+" button is clicked
-and the device is turned on
-@throw
-*/
+   /*
+    used to test if the clicker's current command changes when the channel "+" button is clicked
+    and the device is turned on
+    @throws exception
+    */
 
     public void testNextChannelSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus(userID + "", roomID + "", deviceID + "", clickerID+"", new Callback<Clicker>() {
+        api.editDeviceStatus(userID + "", roomID + "", deviceID + "", clickerID + "", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
             }
@@ -82,7 +85,7 @@ and the device is turned on
         });
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
-            onOff.setChecked(true);
+                onOff.setChecked(true);
             }
         });
 
@@ -101,15 +104,16 @@ and the device is turned on
             }
         });
     }
-    /*
- test if the clicker's current command changes when the channel "-" button is clicked
-and the device is turned on
-@throw
-*/
+
+     /*
+    test if the clicker's current command changes when the channel "-" button is clicked
+    and the device is turned on
+    @throws exception
+      */
     public void testPreviousChannelSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus(userID + "", roomID + "", deviceID + "",clickerID+"" , new Callback<Clicker>() {
+        api.editDeviceStatus(userID + "", roomID + "", deviceID + "", clickerID + "", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
             }
@@ -140,24 +144,25 @@ and the device is turned on
             }
         });
     }
+
     /*
- test if the clicker's current command changes when the Volume "+" button is clicked
-and  the device is turned off
-@throw
-*/
+    test if the clicker's current command changes when the Volume "+" button is clicked
+    and  the device is turned off
+    @throws exception
+     */
     public void testVolumeUpFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-api.editDeviceStatus(userID + "", roomID + "", deviceID + "", "0", new Callback<Clicker>() {
-    @Override
-    public void success(Clicker clicker, Response response) {
-    }
+        api.editDeviceStatus(userID + "", roomID + "", deviceID + "", "0", new Callback<Clicker>() {
+            @Override
+            public void success(Clicker clicker, Response response) {
+            }
 
-    @Override
-    public void failure(RetrofitError error) {
+            @Override
+            public void failure(RetrofitError error) {
 
-    }
-});
+            }
+        });
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
                 onOff.setChecked(false);
@@ -180,11 +185,12 @@ api.editDeviceStatus(userID + "", roomID + "", deviceID + "", "0", new Callback<
             }
         });
     }
+
     /*
-used to test if the clicker's current command changes if the volume "-" button is clicked
-and  the device is turned off
-@throw
-*/
+    used to test if the clicker's current command changes if the volume "-" button is clicked
+    and  the device is turned off
+    @throws exception
+    */
     public void testVolumeDownFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
@@ -228,10 +234,12 @@ and  the device is turned off
             }
         });
     }
+
     /*
- test if the clicker's current command changes when the channel "+" button is clicked
- and the status = "0"@throw
-*/
+    test if the clicker's current command changes when the channel "+" button is clicked
+    and the status = "0"
+    @throws exception
+    */
     public void testNextChannelFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
@@ -266,12 +274,12 @@ and  the device is turned off
             }
         });
     }
+
     /*
- test the clicker's current command changes
-  when the channel "+" button is clicked
-and the device is turned on
-@throw
-*/
+   test the clicker's current command changes when the channel "+" button is clicked
+   and the device is turned on
+   @throws exception
+   */
     public void testPreviousChannelFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
@@ -306,12 +314,12 @@ and the device is turned on
             }
         });
     }
+
     /*
-test the clicker's current command changes
-when the volume "+" button is clicked
-and the device is turned on
-@throw
-*/
+     test the clicker's current command changes when the volume "+" button is clicked
+     and the device is turned on
+     @throws exception
+    */
     public void testVolumeUpSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
@@ -348,12 +356,12 @@ and the device is turned on
             }
         });
     }
+
     /*
-test the clicker's current command changes
-when the volume "-" button is clicked
-and the device is turned on
-@throw
-*/
+    test the clicker's current command changes when the volume "-" button is clicked
+    and the device is turned on
+    @throws exception
+    */
     public void testVolumeDownSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);

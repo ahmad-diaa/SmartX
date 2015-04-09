@@ -4,67 +4,102 @@ package com.smartx.cookies.smartx;
  * Created by youmna on 4/3/15.
  */
 public class Clicker {
-    int user_id;
-    int room_id;
-    int device_id;
-    int clicker_id;
-    String command;
+    int userId;//current userId
+    int roomId;//Current roomId
+    int deviceId;//current deviceId
+    int clickerId;//current clickerId
+    String command;//recently sent command
 
-public Clicker(){}
-    public Clicker(int user_id, int room_id, int device_id, int clicker_id, String command) {
-        this.user_id = user_id;
-        this.room_id = room_id;
-        this.device_id = device_id;
-        this.clicker_id = clicker_id;
+    public Clicker() {
+    }
+
+    public Clicker(int userId, int roomId, int deviceId, int clickerId, String command) {
+        this.userId = userId;
+        this.roomId = roomId;
+        this.deviceId = deviceId;
+        this.clickerId = clickerId;
         this.command = command;
     }
 
-    public void setClickerId(int clicker_id) {
+    /*
+    ClickerId setter
+    @params new clickerID
+     */
+    public void setClickerId(int clickerId) {
 
-        this.clicker_id = clicker_id;
+        this.clickerId = clickerId;
     }
 
+    /*
+    ClickerId getter
+    @return clickerID
+     */
     public int getClickerId() {
 
-        return clicker_id;
+        return clickerId;
     }
 
-    public Clicker(int userID, int roomID, int deviceID, String command) {
-        user_id = userID;
-        room_id = roomID;
-        device_id = deviceID;
-        this.command = command;
+    /*
+userId setter
+@params new userID
+ */
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public void setUserId(int user_id) {
-        this.user_id = user_id;
+    /*
+    roomId setter
+    @params new roomID
+     */
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
-    public void setRoomId(int room_id) {
-        this.room_id = room_id;
-    }
-
+    /*
+     userId getter
+     @return userID
+      */
     public int getUserId() {
 
-        return user_id;
+        return userId;
     }
 
+    /*
+     roomId getter
+     @return roomID
+      */
     public int getRoomId() {
-        return room_id;
+        return roomId;
     }
 
+       /*
+       deviceId setter
+       @params deviceID
+        */
     public void setDeviceId(int device_id) {
-        this.device_id = device_id;
+        this.deviceId = device_id;
     }
 
+       /*
+       command setter
+       @params command
+        */
     public void setCommand(String command) {
         this.command = command;
     }
 
+       /*
+       deviceId getter
+       @return deviceID
+        */
     public int getDeviceId() {
-        return device_id;
+        return deviceId;
     }
 
+      /*
+       command getter
+       @return command
+        */
     public String getCommand() {
         return command;
     }

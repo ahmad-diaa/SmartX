@@ -35,44 +35,51 @@ public class TvClickerActivity extends Activity {
         return clickerID;
     }
 
-
+/*
+endPoint getter
+@return string containing the endpoint
+ */
     public String getENDPOINT() {
         return ENDPOINT;
     }
+    /*
+    userId getter
+    @return  current userID
+     */
     public int getUserID() {
         return userID;
     }
-
+    /*
+    roomId getter
+        @return current RoomID
+         */
     public int getRoomID() {
         return roomID;
     }
-
+    /*
+     deviceId getter
+         @return current deviceID
+          */
     public int getDeviceID() {
         return deviceID;
     }
-
+    /*
+     command getter
+         @return recently sent command
+          */
     public String getCommand() {
         return command;
     }
-
+    /*
+     current status getter
+         @return current state of the selected device
+          */
     public int getOn_and_off() {
-        return on_and_off;
+        return on_and_off % 2;
     }
-
-    public SharedPreferences getSharedPreference() {
-        return mSharedPreference;
-    }
-
-    public Clicker getTvClicker() {
-        return TvClicker;
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /* This method is called when the app is run
-        and it is expected to create the a TV controller view
-        */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_clicker);
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -112,6 +119,7 @@ public class TvClickerActivity extends Activity {
     /*
     called  if the Volume "+" button in tv_clicker layout is clicked.
      It updates the current clicker command to the recently entered one by calling send_a_command method
+     @param View
      */
     public void volumeUP(View v) {
         command = new String(TvClicker.getClickerId() + "/");
@@ -122,6 +130,7 @@ public class TvClickerActivity extends Activity {
     /*
      called  if the Volume "-" button in tv_clicker layout is clicked.
       It updates the current clicker command to the recently entered one by calling send_a_command method
+       @param View
       */
     public void volumeDown(View v) {
         command = new String(TvClicker.getClickerId() + "/" + "V/0");
@@ -131,6 +140,7 @@ public class TvClickerActivity extends Activity {
     /*
     called  if the channel "+" button in tv_clicker layout is clicked.
      It updates the current clicker command to the recently entered one by calling send_a_command method
+      @param View
      */
     public void nextChannel(View v) {
         command = new String(TvClicker.getClickerId() + "/" + "/C/1");
@@ -141,6 +151,7 @@ public class TvClickerActivity extends Activity {
     /*
     called  if the channel "+" button in tv_clicker layout is clicked.
      It updates the current clicker command to the recently entered one by calling send_a_command method
+      @param View
      */
     public void previousChannel(View v) {
         command = new String(TvClicker.getClickerId() + "/" + "/C/0");
@@ -153,6 +164,7 @@ public class TvClickerActivity extends Activity {
        It updates the current device status to either on or off by calling changeDeviceStatus method
          if the device was turned off then the command wont be sent otherwise send_a_command method
          will send the current command to the Clicker
+          @param View
        */
     public void TurnOnOff(View v) {
         command = new String(TvClicker.getClickerId() + "/" + on_and_off % 2 + "");
@@ -164,10 +176,10 @@ public class TvClickerActivity extends Activity {
 
     }
 
-        /*
-        called  each time the tv_clicker layout is loaded to update the switch state to on or off according
-        to the device state before the Clicker was closed last time.
-         */
+    /*
+    called  each time the tv_clicker layout is loaded to update the switch state to on or off according
+    to the device state before the Clicker was closed last time.
+     */
     public void checkPreviousState() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
@@ -191,9 +203,11 @@ public class TvClickerActivity extends Activity {
             }
         });
     }
-        /*
-       changes the status of the device when switch is turned on/off
-         */
+
+    /*
+   changes the status of the device when switch is turned on/off
+    @param status of the device
+     */
     public void changeDeviceStatus(int status) {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
