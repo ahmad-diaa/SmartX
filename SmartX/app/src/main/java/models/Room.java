@@ -80,6 +80,8 @@ public class Room {
 
     /**
      * Constructor to create a room with given name
+     *
+     * @param roomName the name of the room.
      */
     public Room(String roomName) {
         name = roomName;
