@@ -36,6 +36,12 @@ public class Device {
 
     /**
      * Constructor to create a device with given parameters.
+     *
+     * @param name  the type of the device.
+     * @param roomID the id of the room to which the device belongs.
+     * @param userID the id of the user having the device.
+     * @param deviceID the primary key of device.
+     * @param status the status of the device: on or off.
      */
 
     public Device( String name, int roomID, int userID, String deviceID, String status) {
