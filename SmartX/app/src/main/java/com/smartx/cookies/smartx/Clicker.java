@@ -4,14 +4,14 @@ package com.smartx.cookies.smartx;
  * Created by youmna on 4/3/15.
  */
 public class Clicker {
-    String user_id;
-    String room_id;
-    String device_id;
-    String clicker_id;
+    int user_id;
+    int room_id;
+    int device_id;
+    int clicker_id;
     String command;
 
-
-    public Clicker(String user_id, String room_id, String device_id, String clicker_id, String command) {
+public Clicker(){}
+    public Clicker(int user_id, int room_id, int device_id, int clicker_id, String command) {
         this.user_id = user_id;
         this.room_id = room_id;
         this.device_id = device_id;
@@ -19,33 +19,41 @@ public class Clicker {
         this.command = command;
     }
 
-    public void setClicker_id(String clicker_id) {
+    public void setClickerId(int clicker_id) {
 
         this.clicker_id = clicker_id;
     }
 
-    public String getClicker_id() {
+    public int getClickerId() {
 
         return clicker_id;
     }
 
-    public Clicker(String uid, String rid, String did, String c) {
-        user_id = uid;
-        room_id = rid;
-        device_id = did;
-        command = c;
-
+    public Clicker(int userID, int roomID, int deviceID, String command) {
+        user_id = userID;
+        room_id = roomID;
+        device_id = deviceID;
+        this.command = command;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUserId(int user_id) {
         this.user_id = user_id;
     }
 
-    public void setRoom_id(String room_id) {
+    public void setRoomId(int room_id) {
         this.room_id = room_id;
     }
 
-    public void setDevice_id(String device_id) {
+    public int getUserId() {
+
+        return user_id;
+    }
+
+    public int getRoomId() {
+        return room_id;
+    }
+
+    public void setDeviceId(int device_id) {
         this.device_id = device_id;
     }
 
@@ -53,16 +61,7 @@ public class Clicker {
         this.command = command;
     }
 
-    public String getUser_id() {
-
-        return user_id;
-    }
-
-    public String getRoom_id() {
-        return room_id;
-    }
-
-    public String getDevice_id() {
+    public int getDeviceId() {
         return device_id;
     }
 

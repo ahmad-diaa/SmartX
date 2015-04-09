@@ -173,6 +173,7 @@
     <string name="spinner_title">Select Device Type</string>
     <string name="spinner_title1">Select Device Type</string>
     <string name="title_activity_about_us">About_us</string>
+    <string name="title_activity_add_clicker_">Add_clicker_Activity</string>
     <string name="title_activity_add_devices">Add Devices</string>
     <string name="title_activity_device">device</string>
     <string name="title_activity_login">LoginActivity</string>

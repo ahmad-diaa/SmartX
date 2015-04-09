@@ -18,7 +18,7 @@ import retrofit.client.Response;
 
 
 public class Settings extends ActionBarActivity {
-    String ENDPOINT = "http://192.168.1.4:3000/";
+    String ENDPOINT = "http://50.0.30.129:3000/";
     Button changePasswordB;
     int userID;
     String oldPasswordS;

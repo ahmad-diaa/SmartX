@@ -1,14 +1,21 @@
 class ClickersController < ApplicationController
   
-
+  #Returns Clicker that belongs to a specific device in a given room 
+  #that belongs to a certain user. 
+  # GET /devices
+  # GET /devices.json
     def index
     @user=User.find(params[:user_id])
     @room=@user.rooms.find(params[:room_id])
     @device =@room.devices.find(params[:device_device_id])
     @clickers= @device.clicker
     render json: @clickers if stale?(@clickers)
-
      end
+
+  #Returns Clicker that belongs to a specific device in a given room 
+  #that belongs to a certain user. 
+  # GET /devices/1
+  # GET /devices/1.json   
  def show
     @user=User.find(params[:user_id])
     @room=@user.rooms.find(params[:room_id])
@@ -16,6 +23,11 @@ class ClickersController < ApplicationController
     @clickers= @device.clicker
     render json: @clickers if stale?(@clickers)
   end
+
+  #Creates a new clicker that belongs to a specific device in a given room 
+  #that belongs to a certain user.
+  # POST /devices
+  # POST /devices.json
 	def create
     @user = User.find(params[:user_id])
     @room = @user.rooms.find(params[:room_id])
@@ -31,6 +43,9 @@ class ClickersController < ApplicationController
     end
   end
 
+#Updates dclicker parameters with given id 
+  # PATCH/PUT /devices/1
+  # PATCH/PUT /devices/1.json
  def update
     @user=User.find(params[:user_id])
     @room=@user.rooms.find(params[:room_id])

@@ -1461,14 +1461,15 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int menu_about_us=0x7f0d0000;
-        public static final int menu_add_devices=0x7f0d0001;
-        public static final int menu_device=0x7f0d0002;
-        public static final int menu_login=0x7f0d0003;
-        public static final int menu_main=0x7f0d0004;
-        public static final int menu_settings=0x7f0d0005;
-        public static final int menu_tv_clicker=0x7f0d0006;
-        public static final int menu_view_devices=0x7f0d0007;
-        public static final int menu_view_rooms=0x7f0d0008;
+        public static final int menu_add_clicker_=0x7f0d0001;
+        public static final int menu_add_devices=0x7f0d0002;
+        public static final int menu_device=0x7f0d0003;
+        public static final int menu_login=0x7f0d0004;
+        public static final int menu_main=0x7f0d0005;
+        public static final int menu_settings=0x7f0d0006;
+        public static final int menu_tv_clicker=0x7f0d0007;
+        public static final int menu_view_devices=0x7f0d0008;
+        public static final int menu_view_rooms=0x7f0d0009;
     }
     public static final class mipmap {
         public static final int bird=0x7f030000;
@@ -1509,15 +1510,16 @@ containing a value of this type.
         public static final int spinner_title=0x7f0b0015;
         public static final int spinner_title1=0x7f0b0016;
         public static final int title_activity_about_us=0x7f0b0017;
-        public static final int title_activity_add_devices=0x7f0b0018;
-        public static final int title_activity_device=0x7f0b0019;
-        public static final int title_activity_login=0x7f0b001a;
-        public static final int title_activity_main=0x7f0b001b;
-        public static final int title_activity_settings=0x7f0b001c;
-        public static final int title_activity_tv_clicker=0x7f0b001d;
-        public static final int title_activity_view_devices=0x7f0b001e;
-        public static final int title_activity_view_rooms=0x7f0b001f;
-        public static final int type_title=0x7f0b0020;
+        public static final int title_activity_add_clicker_=0x7f0b0018;
+        public static final int title_activity_add_devices=0x7f0b0019;
+        public static final int title_activity_device=0x7f0b001a;
+        public static final int title_activity_login=0x7f0b001b;
+        public static final int title_activity_main=0x7f0b001c;
+        public static final int title_activity_settings=0x7f0b001d;
+        public static final int title_activity_tv_clicker=0x7f0b001e;
+        public static final int title_activity_view_devices=0x7f0b001f;
+        public static final int title_activity_view_rooms=0x7f0b0020;
+        public static final int type_title=0x7f0b0021;
     }
     public static final class style {
         /**  Customize your theme here. 

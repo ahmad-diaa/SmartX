@@ -34,12 +34,11 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     List<String> universal_clicker;
     Spinner brand_spinner;
     ArrayAdapter<String> dataAdapter2;
-    String ENDPOINT = "http://192.168.1.4:3000/";
+    String ENDPOINT = "http://50.0.30.129:3000/";
     int brand_spinner_id = 2131296325;
     int device_spinner_id = 2131296323;
-
     EditText device_name;
-    Button addDeviceButton;
+    Button add_device_button;
     myAPI api;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -47,8 +46,8 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         setContentView(R.layout.activity_add_devices);
 
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID = (mSharedPreference.getInt("userID", 1));
-        roomID = (mSharedPreference.getInt("roomID", 1));
+        userID = (mSharedPreference.getInt("user_id", 1));
+        roomID = (mSharedPreference.getInt("room_id", 1));
         device_name = (EditText) findViewById(R.id.device_name);
 
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
@@ -102,8 +101,8 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         brand_spinner.setClickable(false);
         brand_spinner.setAdapter(dataAdapter2);
 
-        addDeviceButton = (Button) findViewById(R.id.addDeviceButton);
-        addDeviceButton.setOnClickListener(new Button.OnClickListener() {
+        add_device_button = (Button) findViewById(R.id.addDeviceButton);
+        add_device_button.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if ((device_spinner.getSelectedItem().toString().equals("None")) ||
@@ -116,9 +115,9 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
 
                         @Override
                         public void success(Device device, Response response) {
-                            new_device.setDevice_id(device.getDevice_id());
+                            new_device.setDeviceId(device.getDeviceId());
                             if (universal_clicker.contains(new_device.getName().toUpperCase()))
-                                api.addClicker(userID + "", roomID + "", device.getDevice_id(), device.getDevice_id() + "", new Callback<Clicker>() {
+                                api.addClicker(userID + "", roomID + "", device.getDeviceId(), device.getDeviceId() + "", new Callback<Clicker>() {
                                     @Override
                                     public void success(Clicker clicker, Response response) {
                                         startActivity(new Intent(getApplicationContext(), viewDevices.class));

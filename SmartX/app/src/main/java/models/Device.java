@@ -8,26 +8,27 @@ public class Device {
     String type;
     String name;
     String brand;
-    String device_id;
-
-    public Device(int userID, String type, String name, String brand, String device_id, String status, int roomID) {
+    String deviceId;
+    String status;
+    int roomId;
+    public Device(int userID, String type, String name, String brand, String deviceId, String status, int roomID) {
         this.userID = userID;
         this.type = type;
         this.name = name;
         this.brand = brand;
-        this.device_id = device_id;
+        this.deviceId = deviceId;
         this.status = status;
-        this.roomID = roomID;
+        this.roomId = roomID;
     }
 
-    public void setDevice_id(String device_id) {
+    public void setDeviceId(String deviceId) {
 
-        this.device_id = device_id;
+        this.deviceId = deviceId;
     }
 
-    public String getDevice_id() {
+    public String getDeviceId() {
 
-        return device_id;
+        return deviceId;
     }
 
     public void setStatus(String status) {
@@ -39,8 +40,7 @@ public class Device {
         return status;
     }
 
-    String status;
-    int roomID;
+
 
     public Device(){
 
@@ -80,11 +80,11 @@ public class Device {
     }
 
     public int getRoomID() {
-        return roomID;
+        return roomId;
     }
 
     public void setRoomID(int roomID) {
-        this.roomID = roomID;
+        this.roomId = roomID;
     }
 
 

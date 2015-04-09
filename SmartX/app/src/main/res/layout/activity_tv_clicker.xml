@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="On/Off"
         android:id="@+id/switch1"
-        android:onClick="Turn_on_off"
+        android:onClick="TurnOnOff"
         android:checked="false"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/textView2"
@@ -35,7 +35,7 @@
         android:layout_alignTop="@+id/imageView3"
         android:layout_alignRight="@+id/imageView3"
         android:layout_alignEnd="@+id/imageView3"
-        android:onClick="next_channel" />
+        android:onClick="nextChannel" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:text="-"
         android:id="@+id/button2"
-        android:onClick="previous_channel"
+        android:onClick="previousChannel"
         android:layout_alignTop="@+id/imageView3"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -58,7 +58,7 @@
         android:layout_alignLeft="@+id/button"
         android:layout_alignStart="@+id/button"
         android:layout_marginTop="108dp"
-        android:onClick="volume_uP" />
+        android:onClick="volumeUP" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -69,7 +69,7 @@
         android:layout_alignTop="@+id/button3"
         android:layout_alignLeft="@+id/button2"
         android:layout_alignStart="@+id/button2"
-        android:onClick="volume_down" />
+        android:onClick="volumeDown" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -80,57 +80,63 @@ ADDED from AndroidManifest.xml:37:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:41:13
 	android:label
-		ADDED from AndroidManifest.xml:39:13
-	android:configChanges
 		ADDED from AndroidManifest.xml:40:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:39:13
 	android:name
 		ADDED from AndroidManifest.xml:38:13
 activity#com.smartx.cookies.smartx.addRoomsActivity
-ADDED from AndroidManifest.xml:47:9
+ADDED from AndroidManifest.xml:45:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:51:13
-	android:label
-		ADDED from AndroidManifest.xml:50:13
-	android:configChanges
 		ADDED from AndroidManifest.xml:49:13
-	android:name
+	android:label
 		ADDED from AndroidManifest.xml:48:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:47:13
+	android:name
+		ADDED from AndroidManifest.xml:46:13
 activity#com.smartx.cookies.smartx.addDevices
-ADDED from AndroidManifest.xml:53:9
+ADDED from AndroidManifest.xml:51:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:57:13
-	android:label
-		ADDED from AndroidManifest.xml:56:13
-	android:configChanges
 		ADDED from AndroidManifest.xml:55:13
-	android:name
+	android:label
 		ADDED from AndroidManifest.xml:54:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:53:13
+	android:name
+		ADDED from AndroidManifest.xml:52:13
 activity#com.smartx.cookies.smartx.ViewRooms
-ADDED from AndroidManifest.xml:59:9
+ADDED from AndroidManifest.xml:57:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:63:13
-	android:label
-		ADDED from AndroidManifest.xml:62:13
-	android:configChanges
 		ADDED from AndroidManifest.xml:61:13
-	android:name
+	android:label
 		ADDED from AndroidManifest.xml:60:13
-activity#com.smartx.cookies.smartx.Settings
-ADDED from AndroidManifest.xml:65:9
-	android:label
-		ADDED from AndroidManifest.xml:67:13
-	android:name
-		ADDED from AndroidManifest.xml:66:13
-activity#com.smartx.cookies.smartx.TvClickerActivity
-ADDED from AndroidManifest.xml:69:9
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:73:13
-	android:label
-		ADDED from AndroidManifest.xml:71:13
 	android:configChanges
-		ADDED from AndroidManifest.xml:72:13
+		ADDED from AndroidManifest.xml:59:13
 	android:name
+		ADDED from AndroidManifest.xml:58:13
+activity#com.smartx.cookies.smartx.Settings
+ADDED from AndroidManifest.xml:63:9
+	android:label
+		ADDED from AndroidManifest.xml:65:13
+	android:name
+		ADDED from AndroidManifest.xml:64:13
+activity#com.smartx.cookies.smartx.TvClickerActivity
+ADDED from AndroidManifest.xml:67:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:71:13
+	android:label
 		ADDED from AndroidManifest.xml:70:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:69:13
+	android:name
+		ADDED from AndroidManifest.xml:68:13
+activity#com.smartx.cookies.smartx.Add_clicker_Activity
+ADDED from AndroidManifest.xml:72:9
+	android:label
+		ADDED from AndroidManifest.xml:74:13
+	android:name
+		ADDED from AndroidManifest.xml:73:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5

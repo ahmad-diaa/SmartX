@@ -29,48 +29,50 @@ public interface myAPI {
     public void getFeed(@Path("id") int id, Callback<User> callback);
 
     @FormUrlEncoded
-    @POST("/users/{userID}/rooms/")
-    void addRoom(@Path("userID") String id, @Field("room[name]") String name, @Field("room[photo]") String photo, Callback<Room> callback);
+    @POST("/users/{userId}/rooms/")
+    void addRoom(@Path("userId") String id, @Field("room[name]") String name, @Field("room[photo]") String photo, Callback<Room> callback);
 
 
-    @GET("/users/{userID}/rooms/{roomID}/devices")
-    void viewDevices(@Path("userID") String user_id, @Path("roomID") String room_id, Callback<List<Device>> callback);
+    @GET("/users/{userId}/rooms/{roomId}/devices")
+    void viewDevices(@Path("userId") String user_id, @Path("roomId") String room_id, Callback<List<Device>> callback);
 
-    @GET("/users/{user_id}/rooms/{room_id}/devices/{device_id}")
-    void viewDevice(@Path("user_id") String user_id, @Path("room_id") String room_id, @Path("device_id") String device_id, Callback<Device> callback);
+    @GET("/users/{userId}/rooms/{roomId}/devices/{deviceId}")
+    void viewDevice(@Path("userId") String user_id, @Path("roomId") String room_id, @Path("deviceId") String device_id, Callback<Device> callback);
 
     @FormUrlEncoded
-    @PUT("/users/{user_id}/rooms/{room_id}/devices/{device_id}/clickers/{clicker_id}")
-    void send_clicker_command(@Path("user_id") String user_id, @Path("room_id") String room_id, @Path("device_id") String device_id, @Path("clicker_id") String Clicker_id, @Field("clicker[command]") String command, Callback<Clicker> callback);
+    @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/clickers/{clickerId}")
+    void send_clicker_command(@Path("userId") String user_id, @Path("roomId") String room_id, @Path("deviceId") String device_id, @Path("clickerId") String Clicker_id, @Field("clicker[command]") String command, Callback<Clicker> callback);
 
     @GET("/types/{name}")
     void requestBrands(@Path("name") String device, Callback<List<Type>> types);
 
     @FormUrlEncoded
-    @POST("/users/{user_id}/rooms/{room_id}/devices/{device_id}/clickers")
-    void addClicker(@Path("user_id") String user_id, @Path("room_id") String room_id, @Path("device_id") String device_id, @Field("clicker[command]") String command, Callback<Clicker> callback);
+    @POST("/users/{userId}/rooms/{roomId}/devices/{deviceId}/clickers")
+    void addClicker(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("clicker[command]") String command, Callback<Clicker> callback);
 
-    @GET("/users/{user_id}/rooms/{room_id}/devices/{device_id}/clickers")
-    void get_clicker(@Path("user_id") String user_id, @Path("room_id") String room_id, @Path("device_id") String device_id, Callback<Clicker> callback);
+    @GET("/users/{userId}/rooms/{roomId}/devices/{deviceId}/clickers")
+    void getClicker(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String device_id, Callback<Clicker> callback);
 
 
     @FormUrlEncoded
-    @PUT("/users/{user_id}/rooms/{room_id}/devices/{device_id}")
-    void edit_device_status(@Path("user_id") String user_id, @Path("room_id") String room_id, @Path("device_id") String device_id, @Field("device[status]") String status, Callback<Clicker> callback);
+    @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}")
+    void editDeviceStatus(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String device_id, @Field("device[status]") String status, Callback<Clicker> callback);
 
     @FormUrlEncoded
-    @POST("/users/{user_id}/rooms/{room_id}/devices")
-    void addDevice(@Path("user_id") String userid, @Path("room_id") String roomid, @Field("device[name]") String name, @Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
+    @POST("/users/{userId}/rooms/{roomId}/devices")
+    void addDevice(@Path("userId") String userId, @Path("roomId") String roomId, @Field("device[name]") String name, @Field("device[typeName]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
 
 
-    @GET("/users/{userID}/rooms/")
-    void viewRooms(@Path("userID") String id, Callback<List<Room>> callback);
-
-    @FormUrlEncoded
-    @PUT("/users/{userID}/")
-    void changePassword(@Path("userID") String id, @Field("user[password]") String password, Callback<User> callback);
+    @GET("/users/{userId}/rooms/")
+    void viewRooms(@Path("userId") String id, Callback<List<Room>> callback);
 
     @FormUrlEncoded
-    @GET("/users/{userID}/")
-    void getUser(@Path("userID") String id, Callback<User> callback);
+    @PUT("/users/{userId}/")
+    void changePassword(@Path("userId") String id, @Field("user[password]") String password, Callback<User> callback);
+
+    @FormUrlEncoded
+    @GET("/users/{userId}/")
+    void getUser(@Path("userId") String id, Callback<User> callback);
+
+
 }
