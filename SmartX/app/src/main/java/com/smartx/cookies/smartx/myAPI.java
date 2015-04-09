@@ -55,7 +55,7 @@ public interface myAPI {
 
     @FormUrlEncoded
     @POST("/users/{userId}/rooms/{roomId}/devices")
-    void addDevice(@Path("userId") String userId, @Path("roomId") String roomId, @Field("device[name]") String name, @Field("device[typeName]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
+    void addDevice(@Path("userId") String userId, @Path("roomId") String roomId, @Field("device[name]") String name, @Field("device[status]") String status, Callback<Device> callback);
 
     @GET("/users/{userId}/rooms/")
     void viewRooms(@Path("userId") String id, Callback<List<Room>> callback);

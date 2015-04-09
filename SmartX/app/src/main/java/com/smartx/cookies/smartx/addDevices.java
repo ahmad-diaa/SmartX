@@ -111,7 +111,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
                     Toast.makeText(getApplicationContext(), "Please Fill in the Blank spaces", Toast.LENGTH_LONG).show();
                 } else {
                     final Device new_device = new Device(userID, device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), "0", "0", roomID);
-                    api.addDevice(new_device.getName() + " ", new_device.getRoomID() + "", new_device.getName(), new_device.getType(), new_device.getBrand(), new Callback<Device>() {
+                    api.addDevice(new_device.getName() + " ", new_device.getRoomID() + "", new_device.getName(), new_device.getType(), new Callback<Device>() {
 
                         @Override
                         public void success(Device device, Response response) {

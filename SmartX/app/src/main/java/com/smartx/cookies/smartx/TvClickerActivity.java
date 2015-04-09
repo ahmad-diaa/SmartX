@@ -89,7 +89,7 @@ endPoint getter
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
 
         myAPI api = adapter.create(myAPI.class);
-        api.getClicker("2", "2", "3", new Callback<Clicker>() {
+        api.getClicker("1", "1", "1", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 TvClicker.setClickerId(clicker.getClickerId());
@@ -122,7 +122,7 @@ endPoint getter
      @param View
      */
     public void volumeUP(View v) {
-        command = new String(TvClicker.getClickerId() + "/");
+        command = new String("TV"+ "/");
         command += "V/1";
         send_a_command();
     }
@@ -133,7 +133,7 @@ endPoint getter
        @param View
       */
     public void volumeDown(View v) {
-        command = new String(TvClicker.getClickerId() + "/" + "V/0");
+        command = new String("TV"+ "/" + "V/0");
         send_a_command();
     }
 
@@ -143,7 +143,7 @@ endPoint getter
       @param View
      */
     public void nextChannel(View v) {
-        command = new String(TvClicker.getClickerId() + "/" + "/C/1");
+        command = new String("TV"+ "/" + "/C/1");
         send_a_command();
 
     }
@@ -154,7 +154,7 @@ endPoint getter
       @param View
      */
     public void previousChannel(View v) {
-        command = new String(TvClicker.getClickerId() + "/" + "/C/0");
+        command = new String("TV" + "/" + "/C/0");
         send_a_command();
 
     }
@@ -167,7 +167,7 @@ endPoint getter
           @param View
        */
     public void TurnOnOff(View v) {
-        command = new String(TvClicker.getClickerId() + "/" + on_and_off % 2 + "");
+        command = new String("TV" + "/" + on_and_off % 2 + "");
         on_and_off++;
         changeDeviceStatus(on_and_off % 2);
         if (on_and_off % 2 != 0)
@@ -211,7 +211,7 @@ endPoint getter
     public void changeDeviceStatus(int status) {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus("2", "2", "3", status + "", new Callback<Clicker>() {
+        api.editDeviceStatus("1", "1", "1", status + "", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 TvClicker.setClickerId(clicker.getClickerId());
