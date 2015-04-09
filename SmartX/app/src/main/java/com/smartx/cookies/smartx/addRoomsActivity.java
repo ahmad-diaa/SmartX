@@ -40,7 +40,7 @@ public class addRoomsActivity extends Activity {
         Room room = new Room(roomName.getText().toString(), roomID.getText().toString());
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.addRoom((userID + ""), room.get_roomName(), new Callback<Room>() {
+        api.addRoom((userID + ""), room.get_roomName(), room.get_id().toString(), new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {
@@ -52,5 +52,6 @@ public class addRoomsActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Cannot add room!", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 }

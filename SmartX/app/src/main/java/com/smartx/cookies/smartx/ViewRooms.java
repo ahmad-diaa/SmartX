@@ -38,6 +38,8 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
+
+    Button renameRoom;
     private EditText editSearch;
     private int userID;
     Button addRoomB;
@@ -133,11 +135,13 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void success(List<Room> rooms, Response response) {
+
                 roomNames = new ArrayList<String>();
                 Iterator<Room> iterator = rooms.iterator();
                 iconRooms = new ArrayList<Integer>();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
+
                     roomNames.add(iterator.next().get_roomName());
                     iconRooms.add(photos[randomIcon()]);
                     i--;

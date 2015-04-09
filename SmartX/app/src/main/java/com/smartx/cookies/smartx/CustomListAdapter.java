@@ -54,6 +54,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.mylist, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.nameroom);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageroom);
+
         txtTitle.setText(itemName.get(position));
         imageView.setImageResource(imgId.get(position));
         return rowView;

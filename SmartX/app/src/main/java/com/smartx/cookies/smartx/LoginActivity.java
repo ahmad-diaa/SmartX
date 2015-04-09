@@ -27,6 +27,7 @@ import retrofit.client.Response;
 
 public class LoginActivity extends Activity {
     Button btnLogin;
+
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";

@@ -16,6 +16,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+
 public class Settings extends Activity {
     Button changePasswordB;
     int userID;
@@ -52,14 +53,15 @@ public class Settings extends Activity {
         if (newPassword.equals(confirmPassword)) {
             RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
             myAPI api = adapter.create(myAPI.class);
-            api.getUser(userID + "", new Callback<models.User>() {
-
+            api.getUser(userID + "", new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
+
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
+
                 }
             });
         }
