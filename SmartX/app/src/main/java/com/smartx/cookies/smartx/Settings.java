@@ -17,7 +17,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class Settings extends Activity {
-    String ENDPOINT = "http://192.168.2.35:3000/";
     Button changePasswordB;
     int userID;
     String oldPasswordS;
@@ -51,7 +50,7 @@ public class Settings extends Activity {
         newPasswordS = newPassword.getText().toString();
         confirmPasswordS = confirmPassword.getText().toString();
         if (newPassword.equals(confirmPassword)) {
-            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
             myAPI api = adapter.create(myAPI.class);
             api.getUser(userID + "", new Callback<models.User>() {
 

@@ -48,3 +48,4 @@ public interface myAPI {
     @GET("/users/{userID}/")
     void getUser(@Path("userID") String id, Callback<User> callback);
 }
+

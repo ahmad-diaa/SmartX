@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,13 +27,10 @@ import retrofit.client.Response;
 
 public class LoginActivity extends Activity {
     Button btnLogin;
-
-    String ENDPOINT = "http://192.168.2.35:3000/";
-
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
-
+    String ENDPOINT = "http://192.168.1.2:3000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +67,7 @@ public class LoginActivity extends Activity {
                 EditText password = (EditText) findViewById(R.id.txtPassword);
                 String Name = username.getText().toString();
                 String Pass = password.getText().toString();
-
-                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
 
                 myAPI api = adapter.create(myAPI.class);
                 api.login(Name, Pass, new Callback<Session>() {
@@ -80,7 +77,7 @@ public class LoginActivity extends Activity {
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putInt("userID", session.getId());
                         editor.commit();
-                        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+                        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
                         myAPI api = adapter.create(myAPI.class);
 
                         api.getFeed(session.getId(), new Callback<models.User>() {
@@ -119,6 +116,7 @@ public class LoginActivity extends Activity {
                         } else if (error.getMessage().contains("401 Unauthorized")) {
                             Toast.makeText(getApplicationContext(), "Wrong Username/Password", Toast.LENGTH_LONG).show();
                         } else {
+                            Log.i("Ya rab", error.getMessage());
                             Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -154,7 +152,7 @@ public class LoginActivity extends Activity {
     private void requestData(String uri) {
 
 
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
 
         myAPI api = adapter.create(myAPI.class);
 

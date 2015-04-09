@@ -20,7 +20,7 @@ public class addRoomsActivity extends Activity {
     Button addRoomButton;
     EditText roomID;
     EditText roomName;
-    String ENDPOINT = "http://192.168.2.35:3000/";
+    public static int count = -1;
     int userID;
 
 
@@ -38,7 +38,7 @@ public class addRoomsActivity extends Activity {
         roomID = (EditText) findViewById(R.id.RoomIDText);
         Button addRoomButton = (Button) v;
         Room room = new Room(roomName.getText().toString(), roomID.getText().toString());
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.addRoom((userID + ""), room.get_roomName(), new Callback<Room>() {
 

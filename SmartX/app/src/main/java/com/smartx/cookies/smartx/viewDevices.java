@@ -28,7 +28,6 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity{
 
-    String ENDPOINT = "http://192.168.2.35:3000/";
     int userID;
     int roomID;
     Button addDevice;
@@ -50,7 +49,7 @@ public class viewDevices extends ListActivity{
             }
         });
 
-        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.viewDevices(userID +"",roomID + "", new Callback<List<Device>>() {
 
