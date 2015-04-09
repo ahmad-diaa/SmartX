@@ -226,7 +226,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
             }
 
             @Override
-            public void failure (RetrofitError error) {
+            public void failure(RetrofitError error) {
 
             }
         });
