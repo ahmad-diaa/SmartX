@@ -60,11 +60,9 @@ class DevicesController < ApplicationController
     head :no_content
   end
 
+#Gets all devices that belong to a user. 
+#GET /devices/users/1/rooms/1/devices/1/devices
 def get_all_type
-  # @user=User.find(params[:user_id])
-  # @type=devices.find(params[:name])
-  # @device= devices.find(params[:device_id])
-  # render json: @device if stale?(@device)
     @devices = Device.all
     @user=User.find(params[:user_id])
     render json: @devices if stale?(etag: @devices.all, last_modified: @devices.maximum(:updated_at))
