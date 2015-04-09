@@ -56,7 +56,7 @@ public interface myAPI {
 
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}")
-    void editDeviceStatus(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String device_id, @Field("device[status]") String status, Callback<Clicker> callback);
+    void editDeviceStatus (@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String device_id, @Field("device[status]") String status, Callback<Clicker> callback);
 
     @FormUrlEncoded
     @POST("/users/{userId}/rooms/{roomId}/devices")
