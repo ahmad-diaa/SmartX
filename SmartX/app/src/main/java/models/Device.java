@@ -5,17 +5,15 @@ package models;
  */
 public class Device {
     int userID;
-    String type;
+
     String name;
-    String brand;
     String deviceId;
     String status;
     int roomId;
-    public Device(int userID, String type, String name, String brand, String deviceId, String status, int roomID) {
+
+    public Device(int userID ,String name, String deviceId, String status, int roomID) {
         this.userID = userID;
-        this.type = type;
         this.name = name;
-        this.brand = brand;
         this.deviceId = deviceId;
         this.status = status;
         this.roomId = roomID;
@@ -25,28 +23,20 @@ public class Device {
 
         this.deviceId = deviceId;
     }
-
     public String getDeviceId() {
 
         return deviceId;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
-
     public String getStatus() {
 
         return status;
     }
-
-
-
-    public Device(){
+    public Device() {
 
     }
-
-
     public int getUserID() {
         return userID;
     }
@@ -55,28 +45,12 @@ public class Device {
         this.userID = userID;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public int getRoomID() {

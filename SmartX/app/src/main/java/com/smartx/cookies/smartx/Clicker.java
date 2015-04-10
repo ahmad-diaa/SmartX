@@ -1,8 +1,8 @@
 package com.smartx.cookies.smartx;
 
 /**
- This class is the clickers' factory.
- *@author  youmna
+ *Purpose:This class is the clickers' factory.
+ *@author youmna
  */
 public class Clicker {
     int userId;//current userId
@@ -13,9 +13,13 @@ public class Clicker {
 
     public Clicker() {
     }
-/*
-clicker constructor creates a Clicker object
-@params userID ,RoomID ,deviceID, ClickerId and command
+/**
+*clicker constructor creates a Clicker object
+*@param userID, 
+*@param RoomID ,
+*@param deviceID,
+*@param  ClickerId ,
+*@param command
 */
 
     public Clicker(int userId, int roomId, int deviceId, int clickerId, String command) {
@@ -26,52 +30,52 @@ clicker constructor creates a Clicker object
         this.command = command;
     }
 
-    /*
-    ClickerId setter
-    @params new clickerID
+    /**
+    *ClickerId setter
+    *@param clickerID
      */
     public void setClickerId(int clickerId) {
 
         this.clickerId = clickerId;
     }
 
-    /*
-    ClickerId getter
-    @return clickerID
+    /**
+    *ClickerId getter
+    *@return clickerID
      */
     public int getClickerId() {
 
         return clickerId;
     }
 
-    /*
-userId setter
-@params new userID
+    /**
+*userId setter
+*@param userID
  */
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    /*
-    roomId setter
-    @params new roomID
+    /**
+    *roomId setter
+    *@param roomID
      */
     public void setRoomId(int roomId) {
         this.roomId = roomId;
     }
 
-    /*
-     userId getter
-     @return userID
+    /**
+     *userId getter
+     *@return userID
       */
     public int getUserId() {
 
         return userId;
     }
 
-    /*
-     roomId getter
-     @return roomID
+    /**
+     *roomId getter
+     *@return roomID
       */
     public int getRoomId() {
         return roomId;

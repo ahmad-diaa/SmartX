@@ -1,16 +1,10 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,13 +19,10 @@ import java.util.List;
 
 import models.Device;
 import models.Type;
-import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.http.POST;
-import retrofit.http.Path;
 
 
 public class AddDevices extends Activity implements AdapterView.OnItemSelectedListener {
@@ -113,12 +104,10 @@ public class AddDevices extends Activity implements AdapterView.OnItemSelectedLi
                         ) {
                     Toast.makeText(getApplicationContext(), "Please Fill in the Blank spaces", Toast.LENGTH_LONG).show();
                 } else {
-                    Device device = new Device(device_spinner.getSelectedItem().toString(), device_name.getText().toString(), brand_spinner.getSelectedItem().toString(), roomID, userID);
-
-                    api.addDevice(device.getName(), device.getUserID() + "", device.getRoomID() + "", device.getType(), device.getBrand(), new Callback<Device>() {
+                    Device device = new Device(userID, device_name.getText().toString(),device_spinner.getSelectedItem().toString(),"0",roomID);
+                    api.addDevice(device.getUserID() + "", device.getRoomID() + "",device.getName(),device.getStatus(),"0" ,new Callback<Device>() {
                         @Override
                         public void success(Device device, Response response) {
-                            startActivity(new Intent(getApplicationContext(), About_us.class));
 
 
                         }
