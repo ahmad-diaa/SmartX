@@ -5,7 +5,6 @@ package models;
  */
 public class Device {
     int userID;
-
     String name;
     String deviceId;
     String status;
