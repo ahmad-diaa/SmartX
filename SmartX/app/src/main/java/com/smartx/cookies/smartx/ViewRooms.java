@@ -138,6 +138,7 @@ public class ViewRooms extends ListActivity {
 
                 roomNames = new ArrayList<String>();
                 Iterator<Room> iterator = rooms.iterator();
+
                 iconRooms = new ArrayList<Integer>();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {

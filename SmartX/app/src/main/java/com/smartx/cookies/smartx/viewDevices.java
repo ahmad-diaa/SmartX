@@ -31,12 +31,13 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity{
 
+
     int userID;
     int roomID;
     String roomName;
     Button addDevice;
     ArrayList<String> deviceNames;
-    String [] deviceType;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,6 @@ public class viewDevices extends ListActivity{
             public void success(List<Device> devices, Response response) {
                 deviceNames = new ArrayList<String>();
                 Iterator<Device> iterator = devices.iterator();
-                Iterator<Device> iterator2 = devices.iterator();
                 int i = devices.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
                     deviceNames.add(iterator.next().getName());
@@ -89,7 +89,7 @@ public class viewDevices extends ListActivity{
 
             @Override
             public void failure(RetrofitError error) {
-                Log.i("ya mosahhel", "no idea");
+                throw error;
             }
         });
     }
