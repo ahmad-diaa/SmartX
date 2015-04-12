@@ -18,6 +18,13 @@ class RoomsController < ApplicationController
     @room=@user.rooms.find(params[:id])
     render json: @room if stale?(@room)
   end
+ 
+  def getName
+    @user=User.find(params[:user_id])
+    @room=@user.rooms.find(params[:id])
+    @name = @room.name
+    render json: @name if stale?(@name)
+  end
 
   #Creates room with room parameters for a specific user.
   # POST /rooms
@@ -42,6 +49,7 @@ class RoomsController < ApplicationController
       render json: @room.errors, status: :unprocessable_entity
     end
   end
+
   
   #Deletes room with given room id for a specific user.
   # DELETE /rooms/1

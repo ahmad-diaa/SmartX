@@ -89,8 +89,8 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         roomID = (SHARED_PREFERENCE .getInt("roomID", 1));
         deviceID = (EditText) findViewById(R.id.device_id);
 
-        RestAdapter adapter =
-                new RestAdapter.Builder().setEndpoint(endpoint).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+
         api = adapter.create(myAPI.class);
         deviceSpinner = (Spinner) findViewById(R.id.device_spinner);
         deviceSpinner.setOnItemSelectedListener(this);
@@ -113,10 +113,12 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         });
 
         devices.add("None");
+
         ArrayAdapter<String> dataAdapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, devices);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         deviceSpinner.setAdapter(dataAdapter);
+
         addDeviceButton = (Button) findViewById(R.id.addDeviceButton);
         addDeviceButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -127,7 +129,6 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
                 } else {
                     Device device = new Device(deviceSpinner.getSelectedItem().toString(), roomID, userID, deviceID.getText().toString(), "off");
                     api.addDevice(device.getUserID() + " ", device.getRoomID() + "", device.getName(), device.getDeviceID(), device.getStatus(), new Callback<Device>() {
-
                         @Override
                         public void success(Device device, Response response) {
                             SharedPreferences prefs =
@@ -136,14 +137,20 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
                             editor.putString("deviceID",deviceID.getText().toString());
                             editor.commit();
                             startActivity(new Intent(getApplicationContext(), viewDevices.class));
+
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
                             Toast.makeText(getApplicationContext(), "Cannot Add A Device!", Toast.LENGTH_LONG).show();
                             throw error;
+
                         }
+
+
                     });
+
+
                 }
             }
 
@@ -308,4 +315,6 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     public void setDeviceID(EditText deviceID) {
         this.deviceID = deviceID;
     }
+
+
 }
