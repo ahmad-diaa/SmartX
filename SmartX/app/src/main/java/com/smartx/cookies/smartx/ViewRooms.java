@@ -1,17 +1,19 @@
 package com.smartx.cookies.smartx;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.app.ListActivity;
+
 import java.util.Iterator;
 import java.util.List;
+
 import models.Room;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -20,7 +22,7 @@ import retrofit.client.Response;
 
 public class ViewRooms extends ListActivity {
 
-    String ENDPOINT = "http://172.20.10.3:3000/";
+    String ENDPOINT = "http://192.168.1.3:3000/";
     int userID;
     Button addRoomB;
     Button changePasswordB;
@@ -77,11 +79,11 @@ public class ViewRooms extends ListActivity {
         startActivity(new Intent(this, addRoomsActivity.class));
     }
 
-    public void changePassword (View v) {
+    public void changePassword(View v) {
         startActivity(new Intent(this, changePassword.class));
     }
 
-    public void changeInfo (View v) {
+    public void changeInfo(View v) {
         startActivity(new Intent(this, changeInfo.class));
     }
 

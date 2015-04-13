@@ -26,8 +26,8 @@ import retrofit.client.Response;
 public class changeInfo extends Activity {
     EditText emailTxt;
     EditText phoneTxt;
-    Button changeInfoB;
     String ENDPOINT = "http://192.168.1.6:3000/";
+    Button changeInfoB;
     private String email;
     private String phone;
     private String originalPass;
@@ -36,6 +36,7 @@ public class changeInfo extends Activity {
     public String getEmail() {
         return email;
     }
+// @param String for setting the email
 
     public void setEmail(String email) {
         this.email = email;
@@ -44,11 +45,13 @@ public class changeInfo extends Activity {
     public String getPhone() {
         return phone;
     }
+// @param String for setting the phone number
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    // @param String for setting the original password
     public String getOriginalPass() {
         return originalPass;
     }
@@ -60,6 +63,7 @@ public class changeInfo extends Activity {
     public int getUserID() {
         return userID;
     }
+    // @param String for setting the user id
 
     public void setUserID(int userID) {
         this.userID = userID;
@@ -68,6 +72,7 @@ public class changeInfo extends Activity {
     public String getENDPOINT() {
         return ENDPOINT;
     }
+    // @param String for setting the endpoint
 
     public void setENDPOINT(String ENDPOINT) {
         this.ENDPOINT = ENDPOINT;
@@ -84,10 +89,8 @@ public class changeInfo extends Activity {
         userID = (mSharedPreference.getInt("userID", 1));
         originalPass = (mSharedPreference.getString("password", "123456"));
     }
-
     /**
      * it takes the input from the user to change his information,it toast whether the information is updated or not,
-     *
      * @param v the view of the activity, it take the
      */
     public void changeInfo(View v) {
@@ -103,7 +106,6 @@ public class changeInfo extends Activity {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         api.changeInfo(userID + "", email, originalPass, phone, new Callback<User>() {
-
             @Override
             public void success(User user, Response response) {
                 SharedPreferences.Editor editor = mSharedPreference.edit();

@@ -15,23 +15,29 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
+/**
+ * changePasssword.java
+ * Purpose: user can change his password
+ *
+ * @author Ahmad Abdalraheem
+ */
 public class changePassword extends Activity {
     Button changePasswordB;
     EditText oldPassword;
     EditText newPassword;
     EditText confirmPassword;
+    String ENDPOINT = "http://192.168.1.3:3000/";
     private String oldPass;
     private String originalPass;
     private String newPass;
     private String confPass;
     private int userID;
-    String ENDPOINT = "http://192.168.1.6:3000/";
 
     public String getOldPass() {
         return oldPass;
     }
 
+    // @param String for setting the old password
     public void setOldPass(String oldPass) {
         this.oldPass = oldPass;
     }
@@ -40,6 +46,7 @@ public class changePassword extends Activity {
         return originalPass;
     }
 
+    // @param String for setting the original password
     public void setOriginalPass(String originalPass) {
         this.originalPass = originalPass;
     }
@@ -48,6 +55,7 @@ public class changePassword extends Activity {
         return newPass;
     }
 
+    // @param String for setting the new password
     public void setNewPass(String newPass) {
         this.newPass = newPass;
     }
@@ -56,6 +64,7 @@ public class changePassword extends Activity {
         return confPass;
     }
 
+    // @param String for setting the confirmation password
     public void setConfPass(String confPass) {
         this.confPass = confPass;
     }
@@ -64,6 +73,7 @@ public class changePassword extends Activity {
         return userID;
     }
 
+    // @param String for setting the user id
     public void setUserID(int userID) {
         this.userID = userID;
     }
@@ -71,6 +81,7 @@ public class changePassword extends Activity {
     public String getENDPOINT() {
         return ENDPOINT;
     }
+    // @param String for setting the endpoint
 
     public void setENDPOINT(String ENDPOINT) {
         this.ENDPOINT = ENDPOINT;
@@ -87,8 +98,11 @@ public class changePassword extends Activity {
         newPassword = (EditText) findViewById(R.id.newPassword);
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
     }
-
-
+    /**
+     * it takes the input from the user to change his password,in case the process of changing passsword succeed it renders a login view, otherwise it toasts an error message,
+     *
+     * @param v the view of the activity which consists of 3 textfields and a button
+     */
     public void changePassword(View v) {
         oldPass = oldPassword.getText().toString();
         newPass = newPassword.getText().toString();
@@ -99,28 +113,27 @@ public class changePassword extends Activity {
             Toast.makeText(getApplicationContext(), "Please make sure your password at least 6 characters", Toast.LENGTH_LONG).show();
         } else if (!originalPass.equals(oldPass)) {
             Toast.makeText(getApplicationContext(), "Please make sure you entered the correct password", Toast.LENGTH_LONG).show();
-        }
-        if (newPass.equals(confPass) && originalPass.equals(oldPass)) {
-            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-            myAPI api = adapter.create(myAPI.class);
-            api.changePassword(userID + "", newPass, new Callback<models.User>() {
+            if (newPass.equals(confPass) && originalPass.equals(oldPass)) {
+                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+                myAPI api = adapter.create(myAPI.class);
+                api.changePassword(userID + "", newPass, new Callback<models.User>() {
 
-                @Override
-                public void success(models.User user, Response response) {
-                    oldPass = newPass;
-                    Toast.makeText(getApplicationContext(), "Your password is successfully changed",
-                            Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                }
+                    @Override
+                    public void success(models.User user, Response response) {
+                        oldPass = newPass;
+                        Toast.makeText(getApplicationContext(), "Your password is successfully changed",
+                                Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    }
 
-                @Override
-                public void failure(RetrofitError error) {
-                    Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
-                }
-            });
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

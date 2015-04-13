@@ -1,51 +1,53 @@
 package com.smartx.cookies.smartx;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.app.ListActivity;
+
 import java.util.Iterator;
 import java.util.List;
+
 import models.Device;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class viewDevices extends ListActivity{
+public class viewDevices extends ListActivity {
 
-    String ENDPOINT = "http://172.20.10.3:3000/";
+    String ENDPOINT = "http://192.168.1.3:3000/";
     int userID;
     int roomID;
     Button addDevice;
-    String [] deviceNames;
-    String [] deviceType;
+    String[] deviceNames;
+    String[] deviceType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_devices);
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID",1));
-        roomID=(mSharedPreference.getInt("roomID", 1));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
+        roomID = (mSharedPreference.getInt("roomID", 1));
         addDevice = (Button) findViewById(R.id.addDevice);
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-        startActivity(new Intent(viewDevices.this, addDevices.class));
+                startActivity(new Intent(viewDevices.this, addDevices.class));
             }
         });
 
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.viewDevices(userID +"",roomID + "", new Callback<List<Device>>() {
+        api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
 
             @Override
             public void success(List<Device> devices, Response response) {
@@ -53,11 +55,11 @@ public class viewDevices extends ListActivity{
                 Iterator<Device> iterator = devices.iterator();
                 Iterator<Device> iterator2 = devices.iterator();
                 int i = devices.size() - 1;
-                while(i>= 0 & iterator.hasNext()){
+                while (i >= 0 & iterator.hasNext()) {
                     deviceNames[i] = iterator.next().getName();
                     i--;
                 }
-                ArrayAdapter <String> adapter=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
             }
 

@@ -25,7 +25,7 @@ import retrofit.client.Response;
 public class LoginActivity extends Activity {
     public static final String sharedPrefs = "MySharedPrefs";
     Button btnLogin;
-    String ENDPOINT = "http://192.168.1.6:3000/";
+    String ENDPOINT = "http://192.168.1.3:3000/";
     List<User> userList;
     SharedPreferences Data;
     //TextView aboutlogin;
@@ -47,6 +47,7 @@ public class LoginActivity extends Activity {
             }
 
         });
+
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -58,8 +59,6 @@ public class LoginActivity extends Activity {
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
                 myAPI api = adapter.create(myAPI.class);
                 api.login(Name, Pass, new Callback<Session>() {
-                    EditText username = (EditText) findViewById(R.id.txtUserName);
-                    EditText password = (EditText) findViewById(R.id.txtPassword);
 
                     @Override
                     public void success(Session session, Response response) {
@@ -89,6 +88,7 @@ public class LoginActivity extends Activity {
 
                             @Override
                             public void failure(RetrofitError error) {
+                                Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
                                 Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
                             }
                         });

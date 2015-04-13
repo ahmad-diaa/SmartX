@@ -1,16 +1,11 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,13 +20,10 @@ import java.util.List;
 
 import models.Device;
 import models.Type;
-import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.http.POST;
-import retrofit.http.Path;
 
 
 public class AddDevices extends Activity implements AdapterView.OnItemSelectedListener {
@@ -41,7 +33,7 @@ public class AddDevices extends Activity implements AdapterView.OnItemSelectedLi
     List<String> brands;
     Spinner brand_spinner;
     ArrayAdapter<String> dataAdapter2;
-    String ENDPOINT = "http://172.20.10.3:3000/";
+    String ENDPOINT = "http://192.168.1.3:3000/";
     int brand_spinner_id = 2131296325;
     int device_spinner_id = 2131296323;
 
@@ -147,7 +139,6 @@ public class AddDevices extends Activity implements AdapterView.OnItemSelectedLi
         if (parent.getId() == device_spinner_id) {
 
 
-
             if (position > 0) {
                 parent.setSelection(position);
                 String item = parent.getItemAtPosition(position).toString();
@@ -156,53 +147,50 @@ public class AddDevices extends Activity implements AdapterView.OnItemSelectedLi
                 Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
 
+                dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, brands);
+                api.requestBrands(item, new Callback<List<Type>>() {
+                    @Override
+                    public void success(List<Type> types, Response response) {
+                        Log.i("In succes part", " ");
+                        brands.add("None");
 
 
-                    dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, brands);
-                    api.requestBrands(item, new Callback<List<Type>>() {
-                        @Override
-                        public void success(List<Type> types, Response response) {
-Log.i("In succes part", " ");
-                            brands.add("None");
+                        Iterator<Type> iterator = types.iterator();
+
+                        while (iterator.hasNext()) {
 
 
-                            Iterator<Type> iterator = types.iterator();
-
-                            while (iterator.hasNext()) {
-
-
-                                String s = iterator.next().getBrand();
-                                brands.add(s);
-                                Log.i("Brand name", s);
-
-
-                            }
-
-
-
-                            dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            brand_spinner.setEnabled(true);
-                            brand_spinner.setClickable(true);
-                            brand_spinner.setAdapter(dataAdapter2);
-
-                        }
-
-
-                        @Override
-                        public void failure(RetrofitError error) {
-                            throw error;
+                            String s = iterator.next().getBrand();
+                            brands.add(s);
+                            Log.i("Brand name", s);
 
 
                         }
 
-                    });
-               if (parent.getSelectedItem().toString().equals("None")) {
+
+                        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        brand_spinner.setEnabled(true);
+                        brand_spinner.setClickable(true);
+                        brand_spinner.setAdapter(dataAdapter2);
+
+                    }
+
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        throw error;
+
+
+                    }
+
+                });
+                if (parent.getSelectedItem().toString().equals("None")) {
                     brands.clear();
-                   dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, brands);
-                   dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                   brand_spinner.setEnabled(false);
-                   brand_spinner.setClickable(false);
-                   brand_spinner.setAdapter(dataAdapter2);
+                    dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, brands);
+                    dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    brand_spinner.setEnabled(false);
+                    brand_spinner.setClickable(false);
+                    brand_spinner.setAdapter(dataAdapter2);
 
                 }
             } else {
@@ -213,7 +201,6 @@ Log.i("In succes part", " ");
         }
 
     }
-
 
 
 //            public void addDeviceButton(View v) {
@@ -246,9 +233,9 @@ Log.i("In succes part", " ");
 //                });
 //            }
 
-            public void onNothingSelected(AdapterView arg0) {
+    public void onNothingSelected(AdapterView arg0) {
 
-            }
+    }
 
 
-        }
+}
