@@ -42,9 +42,7 @@ public class SX2_test extends ActivityInstrumentationTestCase2<changePassword> {
         newPassword = (EditText) changePass.findViewById(R.id.newPassword);
         confirmPassword = (EditText) changePass.findViewById(R.id.confirmPassword);
         userID = changePass.getUserID();
-
         ENDPOINT = changePass.getENDPOINT();
-
     }
 
     public void testPreconditions() {
@@ -65,11 +63,8 @@ public class SX2_test extends ActivityInstrumentationTestCase2<changePassword> {
                 assertEquals(changePass.getOriginalPass(), oldPass);
                 assertEquals("asdfgh", newPass);
                 assertEquals(newPass, confPass);
-
-
             }
         });
-
         changePass.changePassword(changePass.getWindow().getDecorView());
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
@@ -83,16 +78,10 @@ public class SX2_test extends ActivityInstrumentationTestCase2<changePassword> {
             @Override
             public void failure(RetrofitError error) {
                 assertEquals("123456", changePass.getOriginalPass());
-
-
             }
         });
     }
 
     public void testFilter() throws Exception {
-
-
-    }
-
-
+                            }
 }
