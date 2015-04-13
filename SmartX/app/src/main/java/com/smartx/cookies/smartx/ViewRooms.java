@@ -6,11 +6,15 @@ import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+import android.app.ListActivity;
+import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +30,15 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
+/**
+ *SE Sprint1
+ *ViewRooms.java
+ * Purpose: View rooms and devices in each room.
+ *
+ * @author Amir
+ */
+
 
 
 /**
@@ -121,16 +134,25 @@ public class ViewRooms extends ListActivity {
     }
 
 
+
+    /**
+     *Called when the activity is starting.
+    It shows list of rooms belonging to the user signed in.
+     *
+     * @param savedInstanceState if the activity is being
+    re-initialized after previously being shut down then
+    this Bundle  contains the data it most recently supplied.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_rooms);
-        count = -1;
-        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID = (mSharedPreference.getInt("userID", 1));
-
-        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = adapter.create(myAPI.class);
+        final SharedPreferences SHARED_PREFERENCE =
+                PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (SHARED_PREFERENCE.getInt("userID", 1));
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
         api.viewRooms(userID + "", new Callback<List<Room>>() {
 
             @Override
@@ -143,7 +165,7 @@ public class ViewRooms extends ListActivity {
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
 
-                    roomNames.add(iterator.next().get_roomName());
+                    roomNames.add(iterator.next().getName());
                     iconRooms.add(photos[randomIcon()]);
                     i--;
                 }
@@ -175,36 +197,54 @@ public class ViewRooms extends ListActivity {
                     }
                 });
                 registerForContextMenu(getListView());
-
-
             }
 
 
             @Override
             public void failure(RetrofitError error) {
-                throw error;
+                Log.d("", error.getMessage());throw error;
             }
         });
     }
 
     /**
-     * opens the activity (ViewDevices) of the clicked room
+     *This method will be called when an item in the list is selected.
+    The name of the room clicked will be used as parameter to
+    findRoom method which retrieves from rails the room with given name.
+    The devices inside this room will show up.
      *
-     * @param list     List of all rooms
-     * @param view     The clicked listview
-     * @param position The position of the view in the list
-     * @param id       The row id of the item that was clicked
+     * @param l the ListView where the click happened.
+     * @param v the view that was clicked within the ListView.
+     * @param position the position of the view in the list.
+     * @param id the row id of the item that was clicked.
      */
-    protected void onListItemClick(ListView list, View view, int position, long id) {
-        super.onListItemClick(list, view, position, id);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("userID", userID);
-        editor.putInt("roomID", position);
-        editor.commit();
-        startActivity(new Intent(this, viewDevices.class));
-        this.setTitle("View Rooms");
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Object o = this.getListAdapter().getItem(position);
+        String room = o.toString();
+        Toast.makeText(getApplicationContext(), room, Toast.LENGTH_LONG).show();
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
+        api.findRoom(userID + "", room, new Callback<List<Room>>() {
+            @Override
+            public void success(List<Room> rooms, Response response) {
+                SharedPreferences prefs =
+                        PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("roomID", rooms.get(0).getId());
+                editor.commit();
+                startActivity(new Intent(ViewRooms.this, viewDevices.class));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d("YA RAB" , error.getMessage());
+                throw error;
+            }
+        });
     }
+
 
     /**
      * Starts the activity (addRoomsActivity) to create a new room
@@ -226,9 +266,24 @@ public class ViewRooms extends ListActivity {
         inflater.inflate(R.menu.menu_view_rooms, menu);
         return true;
     }
+    /**
+     *get id of the user.
+     *
+     * @return primary key of the user.
+     */
+    public int getUserID() {
+        return userID;
+    }
 
     /**
-     * Called when the context menu for this view is being built.
+     *set id of the user.
+     *
+     * @param userID the primary key of the user.
+     */
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+    /** Called when the context menu for this view is being built.
      *
      * @param menu     The context menu that is being built.
      * @param v        The view for which the context menu is being built.
@@ -265,3 +320,6 @@ public class ViewRooms extends ListActivity {
         return true;
     }
 }
+
+
+

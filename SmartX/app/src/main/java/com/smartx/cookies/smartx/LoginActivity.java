@@ -32,7 +32,6 @@ public class LoginActivity extends Activity {
     List<User> userList;
     SharedPreferences Data;
     public static final String sharedPrefs = "MySharedPrefs";
-    String ENDPOINT = "http://192.168.1.2:3000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +117,6 @@ public class LoginActivity extends Activity {
                         } else if (error.getMessage().contains("401 Unauthorized")) {
                             Toast.makeText(getApplicationContext(), "Wrong Username/Password", Toast.LENGTH_LONG).show();
                         } else {
-                            Log.i("Ya rab", error.getMessage());
                             Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -127,7 +125,6 @@ public class LoginActivity extends Activity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

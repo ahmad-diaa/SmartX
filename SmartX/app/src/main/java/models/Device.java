@@ -1,8 +1,8 @@
 package models;
 
 /**
- *SE Sprint1
- *Device.java
+ * SE Sprint1
+ * Device.java
  *
  * @author Amir
  */
@@ -11,7 +11,8 @@ public class Device {
     /**
      * The id of the user having the device.
      */
-    int userID;
+    int user_id;
+
 
     /**
      * The type of the device.
@@ -31,25 +32,25 @@ public class Device {
     /**
      * The primary key of device.
      */
-    String deviceID;
+    String device_id;
 
 
     /**
      * Constructor to create a device with given parameters.
      *
-     * @param name  the type of the device.
-     * @param roomID the id of the room to which the device belongs.
-     * @param userID the id of the user having the device.
+     * @param name     the type of the device.
+     * @param roomID   the id of the room to which the device belongs.
+     * @param userID   the id of the user having the device.
      * @param deviceID the primary key of device.
-     * @param status the status of the device: on or off.
+     * @param status   the status of the device: on or off.
      */
 
-    public Device( String name, int roomID, int userID, String deviceID, String status) {
+    public Device(String name, int roomID, int userID, String deviceID, String status) {
         this.name = name;
         this.roomID = roomID;
-        this.userID=userID;
-        this.deviceID=deviceID;
-        this.status=status;
+        this.user_id = userID;
+        this.status = status;
+        this.device_id = deviceID;
     }
 
     /**
@@ -58,7 +59,7 @@ public class Device {
      * @return the id of the user.
      */
     public int getUserID() {
-        return userID;
+        return user_id;
     }
 
     /**
@@ -67,8 +68,9 @@ public class Device {
      * @param userID the id of the user.
      */
     public void setUserID(int userID) {
-        this.userID = userID;
+        this.user_id = userID;
     }
+
 
     /**
      * get the primary key of device.
@@ -76,7 +78,7 @@ public class Device {
      * @return id of the device.
      */
     public String getDeviceID() {
-        return deviceID;
+        return device_id;
     }
 
     /**
@@ -85,7 +87,7 @@ public class Device {
      * @param deviceID the id of device.
      */
     public void setDeviceID(String deviceID) {
-        this.deviceID= deviceID;
+        this.device_id = deviceID;
     }
 
     /**
@@ -107,7 +109,7 @@ public class Device {
     }
 
     /**
-     * get the status of the device: on or off. 
+     * get the status of the device: on or off.
      *
      * @return status of the device.
      */
@@ -116,7 +118,7 @@ public class Device {
     }
 
     /**
-     * set the status of the device: on or off. 
+     * set the status of the device: on or off.
      *
      * @param status
      */
@@ -141,7 +143,6 @@ public class Device {
     public void setRoomID(int roomID) {
         this.roomID = roomID;
     }
-
 
 }
 

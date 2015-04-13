@@ -13,6 +13,7 @@ public class Type {
      * The available type for device.
      */
     private String name;
+    private String brand;
 
     /**
      * get available type for device.
@@ -31,5 +32,6 @@ public class Type {
     public void setName(String name) {
         this.name = name;
     }
+
 
 }

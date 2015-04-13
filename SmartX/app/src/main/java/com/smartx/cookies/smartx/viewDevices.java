@@ -66,7 +66,6 @@ public class viewDevices extends ListActivity{
 
             @Override
             public void failure(RetrofitError error) {
-                Log.i(roomID + " " , error.getMessage());
                 Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_LONG).show();
             }
         });
