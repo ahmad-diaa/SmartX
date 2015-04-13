@@ -1,5 +1,4 @@
 class TypesController < ApplicationController
-
   #Returns list of types. 
   # GET /types
   # GET /types.json
@@ -34,5 +33,4 @@ class TypesController < ApplicationController
   def type_params
     params.require(:type).permit(:name)	
   end
-
 end
