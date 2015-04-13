@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20150407115340) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phone"
-  
   end
 
 end

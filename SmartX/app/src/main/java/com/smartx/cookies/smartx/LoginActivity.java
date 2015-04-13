@@ -1,4 +1,3 @@
-
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
@@ -16,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
-
 import models.Session;
 import models.User;
 import retrofit.Callback;
@@ -25,57 +23,43 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class LoginActivity extends Activity {
+    public static final String sharedPrefs = "MySharedPrefs";
     Button btnLogin;
-    //TextView aboutlogin;
-    private String Pass;
-    String ENDPOINT = "http://172.20.10.3:3000/";
-
+    String ENDPOINT = "http://192.168.1.6:3000/";
     List<User> userList;
     SharedPreferences Data;
-    public static final String sharedPrefs = "MySharedPrefs";
+    //TextView aboutlogin;
+    private String Pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Data = getSharedPreferences(sharedPrefs, 0);
-
-
         setContentView(R.layout.activity_login);
-
-
         TextView aboutlogin = (TextView) findViewById(R.id.aboutlogin);
         SpannableString content = new SpannableString("About");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         aboutlogin.setText(content);
-
-
-        aboutlogin.setOnClickListener(new TextView.OnClickListener(){
+        aboutlogin.setOnClickListener(new TextView.OnClickListener() {
             @Override
-            public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this,About_us.class));
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, About_us.class));
             }
 
         });
-
-
-
         btnLogin = (Button) findViewById(R.id.btnLogin);
-
         btnLogin.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 EditText username = (EditText) findViewById(R.id.txtUserName);
                 EditText password = (EditText) findViewById(R.id.txtPassword);
                 String Name = username.getText().toString();
                 setPass(password.getText().toString());
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-
                 myAPI api = adapter.create(myAPI.class);
-
-
                 api.login(Name, Pass, new Callback<Session>() {
+                    EditText username = (EditText) findViewById(R.id.txtUserName);
+                    EditText password = (EditText) findViewById(R.id.txtPassword);
 
                     @Override
                     public void success(Session session, Response response) {
@@ -85,7 +69,6 @@ public class LoginActivity extends Activity {
                         editor.commit();
                         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
                         myAPI api = adapter.create(myAPI.class);
-
                         api.getFeed(session.getId(), new Callback<models.User>() {
 
                             @Override
@@ -100,44 +83,37 @@ public class LoginActivity extends Activity {
                                 editor.putString("password", getPass());
                                 editor.putString("email", email);
                                 editor.putString("phone", phone);
-
                                 editor.commit();
-                                startActivity(new Intent(getApplicationContext(),ViewRooms.class));
+                                startActivity(new Intent(getApplicationContext(), ViewRooms.class));
                             }
 
                             @Override
                             public void failure(RetrofitError error) {
-
-                                Toast.makeText(getApplicationContext(),"Make sure you are online",Toast.LENGTH_LONG).show();
-
-
+                                Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
                             }
                         });
 
                     }
-                    EditText username = (EditText) findViewById(R.id.txtUserName);
-                    EditText password = (EditText) findViewById(R.id.txtPassword);
 
                     @Override
                     public void failure(RetrofitError error) {
-                        if(username == null || username.getText().equals(""))
-                        {
-                            Toast.makeText(getApplicationContext(),"Username cannot be blank",Toast.LENGTH_LONG).show();
-                        }else {
-                            Toast.makeText(getApplicationContext(),"msh fahem ",Toast.LENGTH_LONG).show();
+                        if (username == null || username.getText().equals("")) {
+                            Toast.makeText(getApplicationContext(), "Username cannot be blank", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "msh fahem ", Toast.LENGTH_LONG).show();
                         }
-
                     }
                 });
-
             }
         });
     }
-    public void setPass(String Pass) {
-        this.Pass = Pass ;
+
+    public String getPass() {
+        return this.Pass;
     }
-    public String getPass (){
-         return this.Pass ;
+
+    public void setPass(String Pass) {
+        this.Pass = Pass;
     }
 
     @Override
@@ -153,24 +129,15 @@ public class LoginActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     private void requestData(String uri) {
-
-
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-
         myAPI api = adapter.create(myAPI.class);
-
-
     }
-
-
 }
