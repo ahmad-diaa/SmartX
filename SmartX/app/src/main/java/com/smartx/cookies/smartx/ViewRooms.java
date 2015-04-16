@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -20,11 +21,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.app.ListActivity;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
 import android.widget.Toast;
+
 import models.Room;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -38,7 +45,6 @@ import retrofit.client.Response;
  *
  * @author Amir
  */
-
 
 
 /**
@@ -63,9 +69,10 @@ public class ViewRooms extends ListActivity {
             R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
     private ArrayList<String> roomNames;
     private ArrayList<Integer> iconRooms;
+    private myAPI api;
+    private int itemPosition;
 
     /**
-     *
      * @param adapter2 CustomListAdapter to set
      */
     public void setAdapter2(CustomListAdapter adapter2) {
@@ -73,7 +80,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @param photos Array  of photos to set
      */
     public void setPhotos(int[] photos) {
@@ -81,7 +87,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @return the customListAdapter
      */
     public CustomListAdapter getAdapter2() {
@@ -89,7 +94,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @return ArrayList of all rooms
      */
     public ArrayList<String> getRoomNames() {
@@ -97,7 +101,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @return ArrayList of all devices
      */
     public ArrayList<Integer> getIconRooms() {
@@ -106,7 +109,6 @@ public class ViewRooms extends ListActivity {
 
 
     /**
-     *
      * @param iconRooms Arraylist of Rooms photos ids
      */
     public void setIconRooms(ArrayList<Integer> iconRooms) {
@@ -114,7 +116,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @param roomNames ArrayList of all rooms
      */
     public void setRoomNames(ArrayList<String> roomNames) {
@@ -134,14 +135,13 @@ public class ViewRooms extends ListActivity {
     }
 
 
-
     /**
-     *Called when the activity is starting.
-    It shows list of rooms belonging to the user signed in.
+     * Called when the activity is starting.
+     * It shows list of rooms belonging to the user signed in.
      *
      * @param savedInstanceState if the activity is being
-    re-initialized after previously being shut down then
-    this Bundle  contains the data it most recently supplied.
+     *                           re-initialized after previously being shut down then
+     *                           this Bundle  contains the data it most recently supplied.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -152,7 +152,7 @@ public class ViewRooms extends ListActivity {
         userID = (SHARED_PREFERENCE.getInt("userID", 1));
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = ADAPTER.create(myAPI.class);
+        api = ADAPTER.create(myAPI.class);
         api.viewRooms(userID + "", new Callback<List<Room>>() {
 
             @Override
@@ -165,7 +165,7 @@ public class ViewRooms extends ListActivity {
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
 
-                    roomNames.add(iterator.next().getName());
+                    roomNames.add(iterator.next().getName().replace("%20", " "));
                     iconRooms.add(photos[randomIcon()]);
                     i--;
                 }
@@ -202,29 +202,31 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Log.d("", error.getMessage());throw error;
+                Log.d("", error.getMessage());
+                throw error;
             }
         });
     }
 
     /**
-     *This method will be called when an item in the list is selected.
-    The name of the room clicked will be used as parameter to
-    findRoom method which retrieves from rails the room with given name.
-    The devices inside this room will show up.
+     * This method will be called when an item in the list is selected.
+     * The name of the room clicked will be used as parameter to
+     * findRoom method which retrieves from rails the room with given name.
+     * The devices inside this room will show up.
      *
-     * @param l the ListView where the click happened.
-     * @param v the view that was clicked within the ListView.
+     * @param l        the ListView where the click happened.
+     * @param v        the view that was clicked within the ListView.
      * @param position the position of the view in the list.
-     * @param id the row id of the item that was clicked.
+     * @param id       the row id of the item that was clicked.
      */
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Object o = this.getListAdapter().getItem(position);
         String room = o.toString();
-        Toast.makeText(getApplicationContext(), room, Toast.LENGTH_LONG).show();
+        room = room.replace(" ", "%20");
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+
         myAPI api = ADAPTER.create(myAPI.class);
         api.findRoom(userID + "", room, new Callback<List<Room>>() {
             @Override
@@ -239,7 +241,7 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Log.d("YA RAB" , error.getMessage());
+                Log.d("ERROR505", error.getMessage());
                 throw error;
             }
         });
@@ -266,8 +268,9 @@ public class ViewRooms extends ListActivity {
         inflater.inflate(R.menu.menu_view_rooms, menu);
         return true;
     }
+
     /**
-     *get id of the user.
+     * get id of the user.
      *
      * @return primary key of the user.
      */
@@ -276,14 +279,16 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *set id of the user.
+     * set id of the user.
      *
      * @param userID the primary key of the user.
      */
     public void setUserID(int userID) {
         this.userID = userID;
     }
-    /** Called when the context menu for this view is being built.
+
+    /**
+     * Called when the context menu for this view is being built.
      *
      * @param menu     The context menu that is being built.
      * @param v        The view for which the context menu is being built.
@@ -295,6 +300,7 @@ public class ViewRooms extends ListActivity {
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        itemPosition = info.position;
         menu.setHeaderTitle("Context menu");
         menu.add(0, v.getId(), 0, "Rename Room");
         menu.add(0, v.getId(), 0, "Delete Room");
@@ -310,9 +316,33 @@ public class ViewRooms extends ListActivity {
      */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if (item.getTitle() == "Rename") {
-            Toast.makeText(this, "Rename Action Should be invoked", Toast.LENGTH_SHORT).show();
-        } else if (item.getTitle() == "Delete") {
+        if (item.getTitle() == "Rename Room") {
+
+
+            String roomSelected = getListView().getItemAtPosition(itemPosition).toString();
+
+
+            api.findRoom(userID + "", roomSelected, new Callback<List<Room>>() {
+                @Override
+                public void success(List<Room> rooms, Response response) {
+                    SharedPreferences prefs =
+                            PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("roomID", rooms.get(0).getId());
+                    editor.commit();
+                    startActivity(new Intent(ViewRooms.this, renameRoomActivity.class));
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.d("ERROR505", error.getMessage());
+                    throw error;
+                }
+
+            });
+
+
+        } else if (item.getTitle() == "Delete Room") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else {
             return false;

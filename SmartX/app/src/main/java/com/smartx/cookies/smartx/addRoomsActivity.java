@@ -36,7 +36,8 @@ public class addRoomsActivity extends Activity {
         roomName = (EditText) findViewById(R.id.roomName);
         roomID = (EditText) findViewById(R.id.RoomIDText);
         Button addRoomButton = (Button) v;
-        Room room = new Room(roomName.getText().toString());
+        roomName.setText(roomName.getText());
+        Room room = new Room(roomName.getText().toString().replace(" ","%20"));
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.addRoom((userID + ""), room.getName(), room.getId()+"", new Callback<Room>() {

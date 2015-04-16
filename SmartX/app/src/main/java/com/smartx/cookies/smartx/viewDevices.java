@@ -15,21 +15,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.Iterator;
 import java.util.List;
+
 import android.app.ListActivity;
 import android.widget.EditText;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
 import models.Device;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class viewDevices extends ListActivity{
+public class viewDevices extends ListActivity {
 
 
     int userID;
@@ -43,29 +47,30 @@ public class viewDevices extends ListActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_devices);
-        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID=(mSharedPreference.getInt("userID",1));
-        roomID=(mSharedPreference.getInt("roomID", 1));
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (mSharedPreference.getInt("userID", 1));
+        roomID = (mSharedPreference.getInt("roomID", 1));
         addDevice = (Button) findViewById(R.id.addDevice);
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-        startActivity(new Intent(viewDevices.this, addDevices.class));
+                startActivity(new Intent(viewDevices.this, addDevices.class));
             }
         });
 
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.getRoom(userID+"",roomID+"",new Callback<String>() {
+        api.getRoom(userID + "", roomID + "", new Callback<String>() {
             @Override
             public void success(String s, Response response) {
-                roomName = s;
-                TextView roomText = (TextView)findViewById(R.id.textView6);
+                roomName = s.replace("%20", " ");
+                TextView roomText = (TextView) findViewById(R.id.textView6);
                 roomText.setText(roomName);
             }
 
             @Override
             public void failure(RetrofitError error) {
+                Log.d("ERROR ", error.getMessage());
                 Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_LONG).show();
             }
         });
@@ -84,7 +89,7 @@ public class viewDevices extends ListActivity{
                 setListAdapter(adapter);
 
 
-        }
+            }
 
             @Override
             public void failure(RetrofitError error) {
@@ -99,7 +104,5 @@ public class viewDevices extends ListActivity{
         inflater.inflate(R.menu.menu_view_devices, menu);
         return true;
     }
-    public void renameRoom(View v) {
-        startActivity(new Intent(this, renameRoomActivity.class));
-    }
+
 }
