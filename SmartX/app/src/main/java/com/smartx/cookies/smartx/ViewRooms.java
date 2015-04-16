@@ -1,9 +1,10 @@
 package com.smartx.cookies.smartx;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.JsonReader;
@@ -20,8 +21,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import java.util.Iterator;
+import java.util.List;
 import android.app.ListActivity;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URLEncoder;
@@ -255,6 +257,14 @@ public class ViewRooms extends ListActivity {
      */
     public void addRoom(View view) {
         startActivity(new Intent(this, addRoomsActivity.class));
+    }
+
+    public void changePassword(View v) {
+        startActivity(new Intent(this, changePassword.class));
+    }
+
+    public void changeInfo(View v) {
+        startActivity(new Intent(this, changeInfo.class));
     }
 
     /**

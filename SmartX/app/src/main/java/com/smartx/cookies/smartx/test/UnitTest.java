@@ -1,6 +1,7 @@
 package com.smartx.cookies.smartx.test;
 
 import android.test.ActivityInstrumentationTestCase2;
+
 import com.smartx.cookies.smartx.CustomListAdapter;
 import com.smartx.cookies.smartx.ViewRooms;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class UnitTest extends ActivityInstrumentationTestCase2<ViewRooms> {
 
     protected void setUp() throws Exception {
         super.setUp();
+
         myRooms = getActivity();
     }
 

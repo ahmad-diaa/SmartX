@@ -3,8 +3,9 @@ package com.smartx.cookies.smartx;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,9 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import models.Device;
 import models.Type;
 import retrofit.Callback;
@@ -31,7 +34,6 @@ import retrofit.client.Response;
  */
 
 public class addDevices extends Activity implements AdapterView.OnItemSelectedListener {
-
     /**
      * Holds user's id saved in shared preferences.
      */
@@ -46,12 +48,6 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
      * Shows different types of devices.
      */
     private Spinner deviceSpinner;
-
-    /**
-     * Endpoint composed of the ip address of network
-     plus port number of server.
-     */
-    private String endpoint = "http://192.168.1.2:3000/";
 
     /**
      * Holds controller id entered.
@@ -123,6 +119,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         addDeviceButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if ((deviceSpinner.getSelectedItem().toString().equals("None")) ||
                         deviceID.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "Please Fill in the Blank spaces", Toast.LENGTH_LONG).show();
@@ -177,6 +174,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
      */
 
     @Override
+
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         parent.setSelection(position);
         String item = parent.getItemAtPosition(position).toString();
@@ -231,18 +229,9 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
      * @return the endpoint
      */
     public String getEndpoint() {
-        return endpoint;
+        return getResources().getString(R.string.ENDPOINT);
     }
 
-    /**
-     *set the endpoint composed of the ip address of network
-     plus the port number of server.
-     *
-     * @param endpoint
-     */
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-    }
 
     /**
      *get id of the user.

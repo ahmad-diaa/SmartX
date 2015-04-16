@@ -2,6 +2,7 @@ package com.smartx.cookies.smartx;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,8 +35,8 @@ public class Settings extends Activity {
         changePasswordB = (Button) findViewById(R.id.changePasswordButton);
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
-        EditText oldPassword = (EditText) findViewById(R.id.passwordOld);
-        EditText newPassword = (EditText) findViewById(R.id.passwordNew);
+        EditText oldPassword = (EditText) findViewById(R.id.oldPassword);
+        EditText newPassword = (EditText) findViewById(R.id.newPassword);
         EditText confirmPassword = (EditText) findViewById(R.id.passwordConfirm);
     }
 
@@ -53,6 +54,7 @@ public class Settings extends Activity {
         if (newPassword.equals(confirmPassword)) {
             RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
             myAPI api = adapter.create(myAPI.class);
+
             api.getUser(userID + "", new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {

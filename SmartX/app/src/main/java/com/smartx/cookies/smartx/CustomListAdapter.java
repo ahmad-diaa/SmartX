@@ -57,9 +57,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         txtTitle.setText(itemName.get(position));
         imageView.setImageResource(imgId.get(position));
         return rowView;
-    }
-
-    ;
+    } ;
 
     /**
      * Filter the list of rooms (itemName) matching a certain word
@@ -82,6 +80,5 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         }
         notifyDataSetChanged();
     }
-
 }
 

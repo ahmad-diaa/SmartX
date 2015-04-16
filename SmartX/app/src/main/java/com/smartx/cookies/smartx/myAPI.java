@@ -7,8 +7,8 @@ import java.util.List;
 import models.Device;
 import models.Room;
 import models.Session;
-import models.User;
 import models.Type;
+import models.User;
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -32,9 +32,13 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/{id}")
     void getRoom(@Path("userID") String userID, @Path("id") String roomID, Callback<String> callback);
 
+
+    @FormUrlEncoded
+    @PUT("/users/{userID}/")
+    void changeInfo(@Path("userID") String id, @Field("user[email]") String email, @Field("user[password]") String password, @Field("user[phone]") String phone, Callback<User> callback);
+
     @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
-
     void addRoom(@Path("userID") String id, @Field("room[name]") String name , @Field("room[id]") String room_id ,Callback<Room> callback);
 
     @FormUrlEncoded

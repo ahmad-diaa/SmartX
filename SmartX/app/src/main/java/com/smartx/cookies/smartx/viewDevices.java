@@ -13,20 +13,18 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.Iterator;
 import java.util.List;
-
+import android.widget.TextView;
+import android.widget.Toast;
+import java.util.Iterator;
+import java.util.List;
 import android.app.ListActivity;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
 import models.Device;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -35,11 +33,11 @@ import retrofit.client.Response;
 
 public class viewDevices extends ListActivity {
 
-
     int userID;
     int roomID;
     String roomName;
     Button addDevice;
+
     ArrayList<String> deviceNames;
 
 
@@ -82,6 +80,7 @@ public class viewDevices extends ListActivity {
                 Iterator<Device> iterator = devices.iterator();
                 int i = devices.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
+
                     deviceNames.add(iterator.next().getName());
                     i--;
                 }

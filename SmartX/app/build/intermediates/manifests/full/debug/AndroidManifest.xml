@@ -70,8 +70,18 @@
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
+            android:name="com.smartx.cookies.smartx.changePassword"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Change Password"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.smartx.cookies.smartx.renameRoomActivity"
             android:label="@string/title_activity_rename_room" >
+        </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.changeInfo"
+            android:label="@string/title_activity_change_info" >
         </activity>
     </application>
 
