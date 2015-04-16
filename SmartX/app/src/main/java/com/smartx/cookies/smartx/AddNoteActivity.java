@@ -17,10 +17,10 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/*
- *This Class adds a note to the database
+/**
+ * Purpose: This class is used to add a note to a specific device
+ * @author maggiemoheb
  */
-
 
 public class AddNoteActivity extends Activity {
     String ENDPOINT = "http://192.168.43.249:3000/"; // ENDPOINT value for the server ip address
