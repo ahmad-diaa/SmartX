@@ -33,7 +33,7 @@ public class About_us extends Activity {
             }
 
         });
-        bird= (ImageView) findViewById(R.id.bird);
+        bird = (ImageView) findViewById(R.id.bird);
         bird.setOnClickListener(new View.OnClickListener() {
 
             @Override

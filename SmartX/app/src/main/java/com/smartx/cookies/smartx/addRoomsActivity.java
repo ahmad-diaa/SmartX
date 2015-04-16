@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import models.Room;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -36,12 +37,6 @@ public class addRoomsActivity extends Activity{
     private static int count = -1;
 
     /**
-     * Endpoint composed of the ip address of network
-     plus port number of server.
-     */
-    private String endpoint = "http://192.168.1.2:3000/";
-
-    /**
      * Holds user's id saved in shared preferences.
      */
     private int userID;
@@ -53,6 +48,7 @@ public class addRoomsActivity extends Activity{
      private int[] photos = new int[]{ R.drawable.one ,
             R.drawable.two ,R.drawable.three ,R.drawable.four ,R.drawable.five ,
             R.drawable.six ,R.drawable.seven ,R.drawable.eight ,R.drawable.nine};
+
 
     /**
      *Called when the activity is starting.
@@ -92,13 +88,11 @@ public class addRoomsActivity extends Activity{
      */
     public void addRoomButton(View v) {
         EditText roomName = (EditText) findViewById(R.id.roomName);
-        Room room = new Room(roomName.getText().toString());
-        RestAdapter adapter =
-                new RestAdapter.Builder().setEndpoint(endpoint).build();
+        Room room = new Room(roomName.getText().toString().replace(" ","%20"));
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         room.setPhoto(photos[randomIcon()] + "");
         api.addRoom((userID + ""), room.getName(), room.getPhoto(), new Callback<Room>() {
-
             @Override
             public void success(Room room, Response response) {
                 SharedPreferences prefs =
@@ -112,9 +106,10 @@ public class addRoomsActivity extends Activity{
             @Override
             public void failure(RetrofitError error) {
                 Toast.makeText(getApplicationContext(), "Cannot add room!", Toast.LENGTH_LONG).show();
-                throw error;
+
             }
         });
+
     }
 
 
@@ -162,18 +157,9 @@ public class addRoomsActivity extends Activity{
      * @return the endpoint
      */
     public String getEndpoint() {
-        return endpoint;
+        return getResources().getString(R.string.ENDPOINT);
     }
 
-    /**
-     *set the endpoint composed of the ip address of network
-     plus the port number of server.
-     *
-     * @param endpoint
-     */
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-    }
 
     /**
      *get id of the user.
