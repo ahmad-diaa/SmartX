@@ -17,15 +17,12 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class addRoomsActivity extends Activity {
-    public static int count = -1;
+
     Button addRoomButton;
     EditText roomID;
     EditText roomName;
-    String ENDPOINT = "http://192.168.1.3:3000/";
     int userID;
-    int[] photos = new int[]{R.drawable.one,
-            R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
-            R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +33,15 @@ public class addRoomsActivity extends Activity {
         addRoomButton = (Button) findViewById(R.id.addRoomButton);
     }
 
-    public int randomIcon() {
-        count = (count + 1) % 9;
-        return count;
-    }
-
     public void addRoomButton(View v) {
         roomName = (EditText) findViewById(R.id.roomName);
         roomID = (EditText) findViewById(R.id.RoomIDText);
         Button addRoomButton = (Button) v;
-        Room room = new Room(roomName.getText().toString(), roomID.getText().toString());
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        roomName.setText(roomName.getText());
+        Room room = new Room(roomName.getText().toString().replace(" ","%20"));
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        room.setPhoto(photos[randomIcon()] + "");
-        api.addRoom((userID + ""), room.get_roomName(), room.getPhoto(), room.get_id(), new Callback<Room>() {
+        api.addRoom((userID + ""), room.getName(), room.getId()+"", new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {
@@ -61,5 +53,6 @@ public class addRoomsActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Cannot add room!", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 }

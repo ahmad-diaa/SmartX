@@ -73,12 +73,6 @@
         android:id="@+id/changePasswordButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="changePassword" /><![CDATA[
+        android:onClick="changePassword" />
 
-
-
-    " />
-
-
-]]>
 </RelativeLayout>

@@ -1,79 +1,69 @@
 package com.smartx.cookies.smartx.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.smartx.cookies.smartx.R;
-import com.smartx.cookies.smartx.changeInfo;
-import com.smartx.cookies.smartx.myAPI;
+import com.smartx.cookies.smartx.CustomListAdapter;
+import com.smartx.cookies.smartx.ViewRooms;
+import java.util.ArrayList;
 
-import models.User;
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
- * Created by ahmad on 08/04/15.
+ * Created by ahmaddiaa on 4/6/15.
  */
-public class UnitTest extends ActivityInstrumentationTestCase2<changeInfo> {
-    EditText emailTxt;
-    EditText phoneTxt;
-    Button changeInfoB;
-    String email;
-    String phone;
-    String originalPass;
-    int userID;
-    String ENDPOINT;
-    private changeInfo myInfo;
+public class UnitTest extends ActivityInstrumentationTestCase2<ViewRooms> {
+
+    private ViewRooms myRooms;
 
     public UnitTest() {
-        super(changeInfo.class);
+        super(ViewRooms.class);
     }
 
     protected void setUp() throws Exception {
         super.setUp();
-        myInfo = getActivity();
 
-        changeInfoB = (Button) myInfo.findViewById(R.id.changeInfoB);
-        emailTxt = (EditText) myInfo.findViewById(R.id.email);
-        phoneTxt = (EditText) myInfo.findViewById(R.id.phone);
-        userID = myInfo.getUserID();
-        originalPass = myInfo.getOriginalPass();
-        ENDPOINT = myInfo.getENDPOINT();
-    }
-
-    public void testPreconditions() {
-        assertNotNull("myActivity is null", myInfo);
-    }
-
-    public void testchangeInfoSuccess() throws Exception {
-        myInfo.runOnUiThread(new Runnable() {
-            public void run() {
-                emailTxt.setText("email");
-                phoneTxt.setText("9565632323");
-                email = emailTxt.getText().toString();
-                phone = phoneTxt.getText().toString();
-            }
-        });
-        myInfo.changeInfo(myInfo.getWindow().getDecorView());
-        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-        myAPI api = adapter.create(myAPI.class);
-        api.changeInfo(userID + "", email, originalPass, phone, new Callback<User>() {
-
-            @Override
-            public void success(User s, Response response) {
-                assertEquals("", s.getEmail());
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                assertEquals("emailbbb", email);
-            }
-        });
+        myRooms = getActivity();
     }
 
     public void testFilter() throws Exception {
-                            }
+        ArrayList<String> rooms = new ArrayList<String>();
+        ArrayList<Integer> photos = new ArrayList<Integer>();
+        rooms.add("Kitchen");
+        rooms.add("Kitchen2");
+        rooms.add("Bathroom");
+        rooms.add("Bedroom");
+        rooms.add("ahmad's kitchen");
+        for (int i = -1; i < rooms.size() - 1; i++)
+            photos.add((i + 1) % 9);
+
+        myRooms.setRoomNames(rooms);
+        myRooms.setIconRooms(photos);
+
+        assertEquals(rooms, myRooms.getRoomNames());
+        assertEquals(photos, myRooms.getIconRooms());
+
+        CustomListAdapter adapter2 = new CustomListAdapter(myRooms, rooms, photos);
+        adapter2.filter("Kit");
+        ArrayList<String> searchedRooms = new ArrayList<String>();
+        searchedRooms.add("Kitchen");
+        searchedRooms.add("Kitchen2");
+        searchedRooms.add("ahmad's kitchen");
+        ArrayList<Integer> searchedRoomsPhotos = new ArrayList<Integer>();
+        searchedRoomsPhotos.add(0);
+        searchedRoomsPhotos.add(1);
+        searchedRoomsPhotos.add(4);
+
+        assertEquals(searchedRooms, adapter2.getItemName());
+        assertEquals(searchedRoomsPhotos, adapter2.getImgId());
+
+        adapter2.filter("");
+
+        assertEquals(myRooms.getRoomNames(), adapter2.getItemName());
+        assertEquals(myRooms.getIconRooms(), adapter2.getImgId());
+
+        adapter2.filter("ahmed");
+
+        assertEquals(adapter2.getItemName(), new ArrayList<String>());
+        assertEquals(adapter2.getImgId(), new ArrayList<Integer>());
+
+    }
 }

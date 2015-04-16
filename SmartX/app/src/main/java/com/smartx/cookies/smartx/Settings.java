@@ -1,9 +1,10 @@
 package com.smartx.cookies.smartx;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,8 +17,8 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class Settings extends ActionBarActivity {
-    String ENDPOINT = "http://192.168.1.3:3000/";
+
+public class Settings extends Activity {
     Button changePasswordB;
     int userID;
     String oldPasswordS;
@@ -51,18 +52,18 @@ public class Settings extends ActionBarActivity {
         newPasswordS = newPassword.getText().toString();
         confirmPasswordS = confirmPassword.getText().toString();
         if (newPassword.equals(confirmPassword)) {
-            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
             myAPI api = adapter.create(myAPI.class);
-            api.getUser(userID + "", new Callback<models.User>() {
 
+            api.getUser(userID + "", new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
-
 
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
+
                 }
             });
         }

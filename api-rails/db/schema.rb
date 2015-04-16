@@ -37,14 +37,34 @@ ActiveRecord::Schema.define(version: 20150407115340) do
   add_index "devices", ["room_id"], name: "index_devices_on_room_id"
   add_index "devices", ["user_id"], name: "index_devices_on_user_id"
 
-  create_table "rooms", force: true do |t|
+  create_table "notes", force: true do |t|
+    t.text     "body"
+    t.integer  "device_id"
+    t.integer  "room_id"
     t.integer  "user_id"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "notes", ["device_id"], name: "index_notes_on_device_id"
+  add_index "notes", ["room_id"], name: "index_notes_on_room_id"
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id"
+
+  create_table "rooms", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
+
+  add_index "rooms", ["name"], name: "index_rooms_on_name", unique: true
   add_index "rooms", ["user_id"], name: "index_rooms_on_user_id"
+
+  create_table "types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

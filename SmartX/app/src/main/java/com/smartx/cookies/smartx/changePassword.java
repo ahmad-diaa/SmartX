@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,7 @@ public class changePassword extends Activity {
     EditText oldPassword;
     EditText newPassword;
     EditText confirmPassword;
-    String ENDPOINT = "http://192.168.1.3:3000/";
+    String ENDPOINT = "http://192.168.43.181:3000/";
     private String oldPass;
     private String originalPass;
     private String newPass;
@@ -113,7 +114,9 @@ public class changePassword extends Activity {
             Toast.makeText(getApplicationContext(), "Please make sure your password at least 6 characters", Toast.LENGTH_LONG).show();
         } else if (!originalPass.equals(oldPass)) {
             Toast.makeText(getApplicationContext(), "Please make sure you entered the correct password", Toast.LENGTH_LONG).show();
-            if (newPass.equals(confPass) && originalPass.equals(oldPass)) {
+        }
+        if (newPass.equals(confPass) && originalPass.equals(oldPass)) {
+                Log.d("ana hena", newPass);
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
                 myAPI api = adapter.create(myAPI.class);
                 api.changePassword(userID + "", newPass, new Callback<models.User>() {
@@ -132,8 +135,7 @@ public class changePassword extends Activity {
                     }
                 });
             }
-        }
-    }
+         }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

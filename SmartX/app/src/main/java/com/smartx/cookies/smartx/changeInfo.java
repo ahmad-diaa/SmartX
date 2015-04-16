@@ -26,7 +26,7 @@ import retrofit.client.Response;
 public class changeInfo extends Activity {
     EditText emailTxt;
     EditText phoneTxt;
-    String ENDPOINT = "http://192.168.1.6:3000/";
+    String ENDPOINT = "http://192.168.43.181:3000/";
     Button changeInfoB;
     private String email;
     private String phone;
@@ -105,7 +105,8 @@ public class changeInfo extends Activity {
         }
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.changeInfo(userID + "", email, originalPass, phone, new Callback<User>() {
+
+               api.changeInfo(userID + "", email, originalPass, phone, new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 SharedPreferences.Editor editor = mSharedPreference.edit();
