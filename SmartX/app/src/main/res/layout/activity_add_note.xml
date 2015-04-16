@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Add Note"
         android:id="@+id/button3"
-        android:onClick="sendNoteToRails"
+        android:onClick="AddNote"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

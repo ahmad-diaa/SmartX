@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/addDevice">
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/addDevice"
+        android:layout_below="@+id/textView6">
 
     </ListView>
 
@@ -19,9 +21,15 @@
         android:layout_height="wrap_content"
         android:text="Add Device"
         android:id="@+id/addDevice"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
-
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView6"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        />
 
 </RelativeLayout>

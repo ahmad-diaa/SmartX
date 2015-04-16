@@ -5,8 +5,4 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
-<<<<<<< HEAD
 <!-- From: file:/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/src/main/res/menu/menu_device.xml -->
-=======
-<!-- From: file:/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/src/main/res/menu/menu_device.xml -->
->>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f

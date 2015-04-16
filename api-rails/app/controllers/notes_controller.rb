@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+
   # A controller for the notes model.
 
   #Index takes the user Id, room ID and device ID.
@@ -10,7 +11,6 @@ class NotesController < ApplicationController
     	@notes = @device.notes.all
     	render json: @notes if stale?(etag: @notes.all, last_modified: @notes.maximum(:updated_at))
   	end
-
 
   #Show takes the user Id, room ID, device ID and note ID.
   #Returns that specific note with its attributes.

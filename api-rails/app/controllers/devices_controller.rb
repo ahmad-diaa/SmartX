@@ -1,4 +1,10 @@
 class DevicesController < ApplicationController
+  def find 
+    @user = User.find(params[:user_id])
+    @room = @user.rooms.find(params[:room_id])
+    @device = @room.devices.where(:name => params[:name])
+    render json: @device if stale?(etag: @device.all, last_modified: @device.maximum(:updated_at))
+  end
   #Returns list of devices in a specific room knowing she belongs to which user. 
   # GET /devices
   # GET /devices.json

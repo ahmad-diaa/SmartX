@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,10 +24,10 @@ import retrofit.client.Response;
  */
 
 public class AddNoteActivity extends Activity {
-    String ENDPOINT = "http://192.168.43.249:3000/"; // ENDPOINT value for the server ip address
+    String ENDPOINT = "http://192.168.26.15:3000/"; // ENDPOINT value for the server ip address
     int userID; // ID of the user of this session
     int roomID; //ID of the room of the device
-    String deviceID = "1"; //ID of the device to which the note is added
+    String deviceID ; //ID of the device to which the note is added
     String Body = "";//The body of the note
     String errorMessage = "initial"; //error message which indicates if the adding ended up in success or failure
 
@@ -92,7 +93,10 @@ public class AddNoteActivity extends Activity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
-//        deviceID = (mSharedPreference.getString("deviceID","1"));
+        deviceID = (mSharedPreference.getString("deviceID", "1"));
+        Log.d("ID1", userID + "");
+        Log.d("ID2", roomID + "");
+        Log.d("ID3", deviceID);
         setContentView(R.layout.activity_add_note);
     }
 

@@ -20,8 +20,4 @@
     <item android:state_enabled="true" android:drawable="@drawable/abc_textfield_search_default_mtrl_alpha"/>
     <item android:drawable="@drawable/abc_textfield_search_default_mtrl_alpha"/>
 </selector>
-<<<<<<< HEAD
 <!-- From: file:/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/drawable/abc_textfield_search_material.xml -->
-=======
-<!-- From: file:/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/drawable/abc_textfield_search_material.xml -->
->>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f

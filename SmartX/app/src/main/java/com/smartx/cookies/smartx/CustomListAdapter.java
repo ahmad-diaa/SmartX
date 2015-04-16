@@ -16,6 +16,10 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
     private Activity context;
     private ArrayList<String> itemName;
+    private ArrayList<Integer> imgId;
+    private ArrayList<String> tempItemname;
+    private ArrayList<Integer> tempImgid;
+    Button addRoom;
 
     public ArrayList<String> getItemName() {
         return itemName;
@@ -32,12 +36,6 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     public void setImgId(ArrayList<Integer> imgId) {
         this.imgId = imgId;
     }
-
-    private ArrayList<Integer> imgId;
-
-    private ArrayList<String> tempItemname;
-    private ArrayList<Integer> tempImgid;
-    Button addRoom;
 
     public CustomListAdapter(Activity context, ArrayList<String> itemName, ArrayList<Integer> imgId) {
         super(context, R.layout.mylist, itemName);
@@ -59,9 +57,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         txtTitle.setText(itemName.get(position));
         imageView.setImageResource(imgId.get(position));
         return rowView;
-    }
-
-    ;
+    } ;
 
     /**
      * Filter the list of rooms (itemName) matching a certain word
@@ -84,6 +80,5 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         }
         notifyDataSetChanged();
     }
-
 }
 

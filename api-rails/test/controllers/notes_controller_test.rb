@@ -2,7 +2,11 @@ require 'test_helper'
 class NotesControllerTest < ActionController::TestCase
   #This class is a test for the note controller
 
+<<<<<<< HEAD
   #Tests that the controller creates successfully a note when is called with right parameters.
+=======
+  #tests that the controller creates successfully a note when is called with right parameters
+>>>>>>> origin/Sprint_One
 	test "#create Note" do
   	  post 'create', {user_id: '1', room_id: '1', device_device_id: '1',
       		note: {
@@ -16,7 +20,11 @@ class NotesControllerTest < ActionController::TestCase
     	assert results['id'] > 0
   	end
 
+<<<<<<< HEAD
     #Tests that the controller fails to create successfully a note when is called with empty body.
+=======
+    #tests that the controller fails to create successfully a note when is called with empty body
+>>>>>>> origin/Sprint_One
   	test "#create Note with invalid data" do
   	  post 'create', {user_id: '1', room_id: '1', device_device_id: '1',
       		note: {
@@ -30,7 +38,11 @@ class NotesControllerTest < ActionController::TestCase
    		 assert results.size > 0
   	end
 
+<<<<<<< HEAD
   #Tests that the controller shows the note successfully when is called with right parameters/
+=======
+  #tests that the controller shows the note successfully when is called with right parameters
+>>>>>>> origin/Sprint_One
 	test "#show Note" do
     	newnote = notes(:note_one)
    		post 'show', { user_id: newnote.user_id ,room_id: newnote.room_id,device_device_id: newnote.device_id,id: newnote.id }
@@ -42,7 +54,11 @@ class NotesControllerTest < ActionController::TestCase
     	assert results['device_id'] == newnote.device_id
   	end
 
+<<<<<<< HEAD
      #Tests that the controller shows all the noted of a device successfully when is called with right parameters.
+=======
+     #tests that the controller shows all the noted of a device successfully when is called with right parameters
+>>>>>>> origin/Sprint_One
   	test "#index notes" do
   		get 'index' ,{user_id: '1', room_id: '1', device_device_id: '1'}
   		results = JSON.parse(response.body)

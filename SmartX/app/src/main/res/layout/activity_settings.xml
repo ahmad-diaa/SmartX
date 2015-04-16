@@ -9,7 +9,7 @@
 
     <TextView android:text="Old Password" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
+        android:id="@+id/oldPasswordLbl"
         android:textSize="23dp"
         android:layout_marginTop="117dp"
         android:layout_alignParentTop="true"
@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/passwordOld"
-        android:layout_below="@+id/textView3"
+        android:id="@+id/oldPassword"
+        android:layout_below="@+id/oldPasswordLbl"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -33,18 +33,18 @@
         android:textSize="23dp"
         android:textColor="#ffff4608"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_alignRight="@+id/oldPasswordLbl"
+        android:layout_alignEnd="@+id/oldPasswordLbl" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/passwordNew"
+        android:id="@+id/newPassword"
         android:layout_below="@+id/textView4"
-        android:layout_alignLeft="@+id/passwordOld"
-        android:layout_alignStart="@+id/passwordOld" />
+        android:layout_alignLeft="@+id/oldPassword"
+        android:layout_alignStart="@+id/oldPassword" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
         android:id="@+id/textView5"
         android:textSize="23dp"
         android:layout_marginTop="50dp"
-        android:layout_below="@+id/passwordNew"
+        android:layout_below="@+id/newPassword"
         android:layout_centerHorizontal="true"
         android:textColor="#ffff4608" />
 
@@ -64,7 +64,7 @@
         android:ems="10"
         android:id="@+id/passwordConfirm"
         android:layout_below="@+id/textView5"
-        android:layout_alignRight="@+id/passwordNew" />
+        android:layout_alignRight="@+id/newPassword" />
 
     <Button
         android:layout_width="wrap_content"
@@ -73,12 +73,6 @@
         android:id="@+id/changePasswordButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="changePassword" /><![CDATA[
+        android:onClick="changePassword" />
 
-
-
-    " />
-
-
-]]>
 </RelativeLayout>
