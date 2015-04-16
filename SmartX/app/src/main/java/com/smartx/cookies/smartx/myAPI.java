@@ -39,14 +39,10 @@ public interface myAPI {
 
     @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
-    void addRoom(@Path("userID") String id, @Field("room[name]") String name , @Field("room[id]") String room_id ,Callback<Room> callback);
-
+    void addRoom(@Path("userID") String id, @Field("room[name]") String name ,@Field("room[photo]") String photo ,Callback<Room> callback);
     @FormUrlEncoded
     @PUT("/users/{userID}/rooms/{id}")
     void renameRoom(@Path("userID") String id,@Path("id") String roomID, @Field("room[name]") String name , Callback<Room> callback);
-
-    @GET("/types/{name}")
-    void requestBrands(@Path("name") String device, Callback<List<Type>> types);
 
     @GET("/users/{userID}/rooms/{roomID}/devices")
     void viewDevices(@Path("userID") String id, @Path("roomID") String rid, Callback<List<Device>> callback);

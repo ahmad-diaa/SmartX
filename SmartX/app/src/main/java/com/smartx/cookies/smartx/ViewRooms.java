@@ -166,7 +166,6 @@ public class ViewRooms extends ListActivity {
                 iconRooms = new ArrayList<Integer>();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-
                     roomNames.add(iterator.next().getName().replace("%20", " "));
                     iconRooms.add(photos[randomIcon()]);
                     i--;

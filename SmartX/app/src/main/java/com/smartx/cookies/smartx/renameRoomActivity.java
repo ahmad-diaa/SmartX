@@ -24,7 +24,6 @@ import retrofit.client.Response;
  */
 public class renameRoomActivity extends Activity {
 
-    String ENDPOINT = "http://192.168.43.181:3000/";// The ENDPOINT to the server IP address
     EditText roomName;// EditText field to put the new name room in
     int userID;// the user ID of the session
     int roomID;// room ID to be renamed
@@ -42,7 +41,7 @@ public class renameRoomActivity extends Activity {
      */
     public String getENDPOINT() {
 
-        return this.ENDPOINT;
+        return getResources().getString(R.string.ENDPOINT);
     }
 
     /**
@@ -106,7 +105,7 @@ public class renameRoomActivity extends Activity {
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
 
-        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         if (name.equals("")) {
             errorMessage = "Room name cannot be blank";

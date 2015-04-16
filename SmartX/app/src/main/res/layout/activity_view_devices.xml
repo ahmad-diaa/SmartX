@@ -29,7 +29,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="xvdfdfg"
         android:id="@+id/textView6"
         android:layout_centerHorizontal="true"
         android:gravity="center"

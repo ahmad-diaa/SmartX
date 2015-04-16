@@ -27,7 +27,7 @@ public class changePassword extends Activity {
     EditText oldPassword;
     EditText newPassword;
     EditText confirmPassword;
-    String ENDPOINT = "http://192.168.43.181:3000/";
+    String ENDPOINT = "http://192.168.43.182:3000/";
     private String oldPass;
     private String originalPass;
     private String newPass;
