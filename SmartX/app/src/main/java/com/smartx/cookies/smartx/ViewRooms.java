@@ -7,32 +7,22 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
-import android.app.ListActivity;
-import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import java.util.Iterator;
-import java.util.List;
-import android.app.ListActivity;
-import java.io.IOException;
-import java.io.StringReader;
-import java.net.URLEncoder;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
-import android.widget.Toast;
 
 import models.Room;
 import retrofit.Callback;
@@ -58,7 +48,6 @@ import retrofit.client.Response;
 
 
 public class ViewRooms extends ListActivity {
-
 
     Button renameRoom;
     private EditText editSearch;

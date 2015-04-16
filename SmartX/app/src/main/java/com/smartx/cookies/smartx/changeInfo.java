@@ -26,7 +26,7 @@ import retrofit.client.Response;
 public class changeInfo extends Activity {
     EditText emailTxt;
     EditText phoneTxt;
-    String ENDPOINT = "http://192.168.43.182:3000/";
+    String ENDPOINT = "http://192.168.26.15:3000/";
     Button changeInfoB;
     private String email;
     private String phone;

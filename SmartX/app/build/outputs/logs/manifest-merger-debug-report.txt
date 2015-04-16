@@ -13,8 +13,6 @@ ADDED from AndroidManifest.xml:2:1
 	android:versionCode
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
-	android:installLocation
-		ADDED from AndroidManifest.xml:3:41
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from AndroidManifest.xml:6:5
 	android:name
@@ -84,63 +82,81 @@ ADDED from AndroidManifest.xml:38:9
 	android:name
 		ADDED from AndroidManifest.xml:39:13
 activity#com.smartx.cookies.smartx.addRoomsActivity
-ADDED from AndroidManifest.xml:44:9
+ADDED from AndroidManifest.xml:41:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:48:13
-	android:label
-		ADDED from AndroidManifest.xml:47:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:46:13
-	android:name
 		ADDED from AndroidManifest.xml:45:13
+	android:label
+		ADDED from AndroidManifest.xml:44:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:43:13
+	android:name
+		ADDED from AndroidManifest.xml:42:13
 activity#com.smartx.cookies.smartx.addDevices
-ADDED from AndroidManifest.xml:50:9
+ADDED from AndroidManifest.xml:47:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:54:13
-	android:label
-		ADDED from AndroidManifest.xml:53:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:52:13
-	android:name
 		ADDED from AndroidManifest.xml:51:13
-activity#com.smartx.cookies.smartx.ViewRooms
-ADDED from AndroidManifest.xml:56:9
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:60:13
 	android:label
-		ADDED from AndroidManifest.xml:59:13
+		ADDED from AndroidManifest.xml:50:13
 	android:configChanges
-		ADDED from AndroidManifest.xml:58:13
+		ADDED from AndroidManifest.xml:49:13
 	android:name
-		ADDED from AndroidManifest.xml:57:13
-activity#com.smartx.cookies.smartx.Settings
-ADDED from AndroidManifest.xml:62:9
-	android:label
-		ADDED from AndroidManifest.xml:64:13
-	android:name
-		ADDED from AndroidManifest.xml:63:13
-activity#com.smartx.cookies.smartx.changePassword
-ADDED from AndroidManifest.xml:66:9
+		ADDED from AndroidManifest.xml:48:13
+activity#com.smartx.cookies.smartx.ViewRooms
+ADDED from AndroidManifest.xml:53:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:70:13
+		ADDED from AndroidManifest.xml:57:13
+	android:label
+		ADDED from AndroidManifest.xml:56:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:55:13
+	android:name
+		ADDED from AndroidManifest.xml:54:13
+activity#com.smartx.cookies.smartx.Settings
+ADDED from AndroidManifest.xml:59:9
+	android:label
+		ADDED from AndroidManifest.xml:61:13
+	android:name
+		ADDED from AndroidManifest.xml:60:13
+activity#com.smartx.cookies.smartx.ViewDeviceActivity
+ADDED from AndroidManifest.xml:63:9
+	android:label
+		ADDED from AndroidManifest.xml:65:13
+	android:name
+		ADDED from AndroidManifest.xml:64:13
+activity#com.smartx.cookies.smartx.ViewNotesActivity
+ADDED from AndroidManifest.xml:67:9
 	android:label
 		ADDED from AndroidManifest.xml:69:13
-	android:configChanges
+	android:name
 		ADDED from AndroidManifest.xml:68:13
-	android:name
-		ADDED from AndroidManifest.xml:67:13
-activity#com.smartx.cookies.smartx.renameRoomActivity
-ADDED from AndroidManifest.xml:72:9
+activity#com.smartx.cookies.smartx.AddNoteActivity
+ADDED from AndroidManifest.xml:71:9
 	android:label
-		ADDED from AndroidManifest.xml:74:13
-	android:name
 		ADDED from AndroidManifest.xml:73:13
-activity#com.smartx.cookies.smartx.changeInfo
-ADDED from AndroidManifest.xml:76:9
+	android:name
+		ADDED from AndroidManifest.xml:72:13
+activity#com.smartx.cookies.smartx.changePassword
+ADDED from AndroidManifest.xml:75:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:79:13
 	android:label
 		ADDED from AndroidManifest.xml:78:13
-	android:name
+	android:configChanges
 		ADDED from AndroidManifest.xml:77:13
+	android:name
+		ADDED from AndroidManifest.xml:76:13
+activity#com.smartx.cookies.smartx.renameRoomActivity
+ADDED from AndroidManifest.xml:81:9
+	android:label
+		ADDED from AndroidManifest.xml:83:13
+	android:name
+		ADDED from AndroidManifest.xml:82:13
+activity#com.smartx.cookies.smartx.changeInfo
+ADDED from AndroidManifest.xml:85:9
+	android:label
+		ADDED from AndroidManifest.xml:87:13
+	android:name
+		ADDED from AndroidManifest.xml:86:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:multidex:1.0.0:18:5

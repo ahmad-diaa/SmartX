@@ -4,9 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   test "#create" do
     post 'create', {
       user: {
-        
         name: 'Billy Blowers',
-        
         password: 'secret',
         password_confirmation: 'secret'
       }

@@ -1,8 +1,9 @@
 class NotesController < ApplicationController
-  # A controller for the notes model
 
-  #index takes the user Id, room ID and device ID
-  #returns all the notes for this specific device
+  # A controller for the notes model.
+
+  #Index takes the user Id, room ID and device ID.
+  #Returns all the notes for this specific device.
 	def index
 		@user=User.find(params[:user_id])
     	@room=@user.rooms.find(params[:room_id])
@@ -11,9 +12,8 @@ class NotesController < ApplicationController
     	render json: @notes if stale?(etag: @notes.all, last_modified: @notes.maximum(:updated_at))
   	end
 
-
-  #show takes the user Id, room ID, device ID and note ID
-  #returns that specific note with its attributes
+  #Show takes the user Id, room ID, device ID and note ID.
+  #Returns that specific note with its attributes.
 	def show
 		@user=User.find(params[:user_id])
     	@room=@user.rooms.find(params[:room_id])
@@ -22,8 +22,8 @@ class NotesController < ApplicationController
     	render json: @note if stale?(@note)
 	end
 
-  #create takes the user ID, room ID, devide ID and the note body
-  #creates a note with this body for this specific device
+  #Create takes the user ID, room ID, devide ID and the note body.
+  #Creates a note with this body for this specific device.
 	def create
 		@user=User.find(params[:user_id])
 		@room = @user.rooms.find(params[:room_id])
@@ -38,8 +38,8 @@ class NotesController < ApplicationController
     	end
 	end
 
-  #destroy takes the user Id, room ID, device ID and note ID
-  #deletes that specific note with its attributes
+  #Destroy takes the user Id, room ID, device ID and note ID.
+  #Deletes that specific note with its attributes.
 	def destroy
 		@user=User.find(params[:user_id])
     	@room=@user.rooms.find(params[:room_id])

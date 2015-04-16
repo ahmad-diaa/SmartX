@@ -3,6 +3,8 @@
 
     <item
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
         jar="/home/ahmad/Desktop/sprint_1/SmartX/SmartX/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -108,6 +110,7 @@
         <dex dex="/home/ahmad/Desktop/test/SmartX/SmartX/app/build/intermediates/pre-dexed/debug/classes-bbd9510fb2640bf2c1175596cc52fa5bfd991740.jar" />
 =======
 <<<<<<< HEAD
+>>>>>>> origin/Sprint_One
         jar="/Users/maggiemoheb/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -171,6 +174,9 @@
         <dex dex="/Users/maggiemoheb/Desktop/finalizing/SmartX/SmartX/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-2.0.0-1f70046425ba6ee1517fd82fc077f53235e06943.jar" />
 =======
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/Sprint_One
         jar="/Users/ahmaddiaa/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -232,6 +238,9 @@
         revision="21.1.2"
         sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
         <dex dex="/Users/ahmaddiaa/Desktop/SE/SmartX/SmartX/app/build/intermediates/pre-dexed/debug/classes-b0135e59696db791571e5227e94a07df8f9b0f93.jar" />
+<<<<<<< HEAD
+>>>>>>> a3c95bde2241fa8ef579ff0a3187655bdb39d30f
+=======
 =======
         jar="/Users/zamzamy/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.3.1/ecb6e1f8e4b0e84c4b886c2f14a1500caf309757/gson-2.3.1.jar"
         jumboMode="false"
@@ -296,6 +305,7 @@
         <dex dex="/Users/zamzamy/Documents/new/SmartX/app/build/intermediates/pre-dexed/debug/retrofit-1.9.0-02a00f8f3f6c963d48a162942eed0565b77155c5.jar" />
 >>>>>>> SX30_context_menu
 >>>>>>> Sprint_One
+>>>>>>> origin/Sprint_One
 >>>>>>> origin/Sprint_One
     </item>
 

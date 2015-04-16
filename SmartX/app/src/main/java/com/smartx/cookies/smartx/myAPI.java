@@ -1,10 +1,9 @@
 package com.smartx.cookies.smartx;
 
-import android.widget.EditText;
-
 import java.util.List;
 
 import models.Device;
+import models.Note;
 import models.Room;
 import models.Session;
 import models.Type;
@@ -52,7 +51,16 @@ public interface myAPI {
 
     @FormUrlEncoded
     @POST("/users/{user_id}/rooms/{room_id}/devices")
-    void addDevice(@Field("device[name]") String name, @Field("device[user_id]") String userID, @Field("device[room_id]") String roomID,@Field("device[type_name]") String type, @Field("device[type_brand]") String brand, Callback<Device> callback);
+    void addDevice(@Path("user_id") String userid, @Path("room_id") String roomid, @Field("device[name]") String name,@Field("device[device_id]") String device_id, @Field("device[status]") String status, Callback<Device> callback);
+
+    @FormUrlEncoded
+    @POST("/users/{user_id}/rooms/{room_id}/devices/{device_device_id}/notes")
+    void addNote(@Path("user_id") String userid, @Path("room_id") String roomid,
+                 @Path("device_device_id") String deviceID,@Field("note[body]") String noteText, Callback<Note> callback);
+
+    @GET("/users/{user_id}/rooms/{room_id}/devices/{device_device_id}/notes")
+    void getNotes(@Path("user_id") String userid, @Path("room_id") String roomid, @Path("device_device_id") String deviceID,
+                  Callback<List<Note>> callback);
 
     @GET("/users/{userID}/rooms/")
     void viewRooms(@Path("userID") String id, Callback<List<Room>> callback);
@@ -63,6 +71,8 @@ public interface myAPI {
     @FormUrlEncoded
     @PUT("/users/{userID}/")
     void changePassword(@Path("userID") String id, @Field("user[password]") String password, Callback<User> callback);
+    @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
+    void findDevice(@Path("userID") String userID,@Path("roomID") String roomID,@Path("deviceName") String name, Callback<List<Device>> callback);
 
 }
 

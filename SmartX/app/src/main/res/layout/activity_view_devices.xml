@@ -14,7 +14,6 @@
         android:layout_above="@+id/addDevice"
         android:layout_below="@+id/textView6">
 
-        >
     </ListView>
 
     <Button
@@ -24,7 +23,6 @@
         android:id="@+id/addDevice"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

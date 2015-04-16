@@ -5,26 +5,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import java.util.Iterator;
-import java.util.List;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Iterator;
-import java.util.List;
-import android.app.ListActivity;
-import android.widget.EditText;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
+
 import models.Device;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -58,6 +52,7 @@ public class viewDevices extends ListActivity {
 
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
+        Log.d(userID + "", roomID + "");
         api.getRoom(userID + "", roomID + "", new Callback<String>() {
             @Override
             public void success(String s, Response response) {
@@ -78,6 +73,7 @@ public class viewDevices extends ListActivity {
             public void success(List<Device> devices, Response response) {
                 deviceNames = new ArrayList<String>();
                 Iterator<Device> iterator = devices.iterator();
+                Log.d("devices size", devices.size() + "");
                 int i = devices.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
 
@@ -86,8 +82,6 @@ public class viewDevices extends ListActivity {
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
-
-
             }
 
             @Override
@@ -104,4 +98,29 @@ public class viewDevices extends ListActivity {
         return true;
     }
 
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Object o = this.getListAdapter().getItem(position);
+        String device = o.toString();
+        Toast.makeText(getApplicationContext(), device, Toast.LENGTH_LONG).show();
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
+        api.findDevice(userID + "", roomID + "", device, new Callback<List<Device>>() {
+            @Override
+            public void success(List<Device> devices, Response response) {
+                SharedPreferences prefs =
+                        PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("deviceID", devices.get(0).getDeviceID() + "");
+                editor.commit();
+                startActivity(new Intent(viewDevices.this, ViewDeviceActivity.class));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                throw error;
+            }
+        });
+    }
 }
