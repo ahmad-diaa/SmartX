@@ -1,9 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-room_one:
+one:
   id: 1
   user_id: 1
+  name: kitchen
+
+
+room_one:
+  id: 3
+  user_id: 2
   name: bedroom
+
 
 room_two:
   id: 2

@@ -6,4 +6,4 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
-<!-- From: file:/media/dalia/C6464E16464E081F/SIX/SE/smartx/SmartX/app/src/main/res/menu/menu_main.xml -->
+<!-- From: file:/Users/youmna/smartx1/SmartX/app/src/main/res/menu/menu_main.xml -->

@@ -4,6 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.smartx.cookies.smartx.CustomListAdapter;
 import com.smartx.cookies.smartx.ViewRooms;
+
 import java.util.ArrayList;
 
 

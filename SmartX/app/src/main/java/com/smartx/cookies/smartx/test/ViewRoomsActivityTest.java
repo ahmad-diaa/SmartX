@@ -20,15 +20,15 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class ViewRoomsActivityTest  extends ActivityInstrumentationTestCase2<ViewRooms> {
+public class ViewRoomsActivityTest extends ActivityInstrumentationTestCase2<ViewRooms> {
 
     private ViewRooms myActivity;
 
     private int userID;
     private int roomID;
-    private List<String> names=new ArrayList<String>();
+    private List<String> names = new ArrayList<String>();
     private String ENDPOINT;
-    private List<String> types=new ArrayList<String>();
+    private List<String> types = new ArrayList<String>();
 
     public ViewRoomsActivityTest() {
         super(ViewRooms.class);
@@ -38,7 +38,7 @@ public class ViewRoomsActivityTest  extends ActivityInstrumentationTestCase2<Vie
         super.setUp();
         myActivity = getActivity();
         userID = 1;
-        ENDPOINT ="http://50.0.32.231:3000/";
+        ENDPOINT = "http://50.0.32.231:3000/";
     }
 
     public void testPreconditions() {
@@ -56,48 +56,49 @@ public class ViewRoomsActivityTest  extends ActivityInstrumentationTestCase2<Vie
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
 
-                api.findRoom(userID + "", "sleeping", new Callback<List<Room>>() {
+        api.findRoom(userID + "", "sleeping", new Callback<List<Room>>() {
+            @Override
+            public void success(List<Room> rooms, Response response) {
+                roomID = (rooms.get(0).getId());
+                final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+                myAPI api = adapter.create(myAPI.class);
+                api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
+
                     @Override
-                    public void success(List<Room> rooms, Response response) {
-                        roomID = (rooms.get(0).getId());
-                        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-                        myAPI api = adapter.create(myAPI.class);
-                        api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>(){
-
-                            @Override
-                            public void success (List <Device> devices, Response response){
-                                List<String> deviceNames = new ArrayList<String>();
-                                Iterator<Device> iterator = devices.iterator();
-                                int i = devices.size() - 1;
-                                while (i >= 0 & iterator.hasNext()) {
-                                    deviceNames.add(iterator.next().getName());
-                                    i--;
-                                }
-                                assertTrue(types.containsAll(deviceNames) && deviceNames.containsAll(types));
-                            }
-
-                            @Override
-                           public void failure(RetrofitError error) {
-
-                            }
-
-                        });
-
-
+                    public void success(List<Device> devices, Response response) {
+                        List<String> deviceNames = new ArrayList<String>();
+                        Iterator<Device> iterator = devices.iterator();
+                        int i = devices.size() - 1;
+                        while (i >= 0 & iterator.hasNext()) {
+                            deviceNames.add(iterator.next().getName());
+                            i--;
+                        }
+                        assertTrue(types.containsAll(deviceNames) && deviceNames.containsAll(types));
                     }
-
 
                     @Override
                     public void failure(RetrofitError error) {
 
                     }
+
                 });
 
+
+            }
+
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+
     }
+
     public void testViewDevicesFailure() throws Exception {
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
-          types.add("tv");
+                types.add("tv");
             }
         });
 
@@ -159,12 +160,12 @@ public class ViewRoomsActivityTest  extends ActivityInstrumentationTestCase2<Vie
         myAPI api = adapter.create(myAPI.class);
         api.viewRooms(userID + "", new Callback<List<Room>>() {
             @Override
-            public void success( List<Room> rooms, Response response) {
-                List< String> roomNames= new ArrayList<String>();
+            public void success(List<Room> rooms, Response response) {
+                List<String> roomNames = new ArrayList<String>();
                 Iterator<Room> iterator = rooms.iterator();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-                    roomNames.add( iterator.next().getName());
+                    roomNames.add(iterator.next().getName());
                     i--;
                 }
                 assertTrue(names.containsAll(roomNames) && roomNames.containsAll(names));
@@ -177,6 +178,7 @@ public class ViewRoomsActivityTest  extends ActivityInstrumentationTestCase2<Vie
             }
         });
     }
+
     public void testViewRoomsFailure() throws Exception {
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
@@ -188,12 +190,12 @@ public class ViewRoomsActivityTest  extends ActivityInstrumentationTestCase2<Vie
         myAPI api = adapter.create(myAPI.class);
         api.viewRooms(userID + "", new Callback<List<Room>>() {
             @Override
-            public void success( List<Room> rooms, Response response) {
-                List< String> roomNames= new ArrayList<String>();
+            public void success(List<Room> rooms, Response response) {
+                List<String> roomNames = new ArrayList<String>();
                 Iterator<Room> iterator = rooms.iterator();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-                    roomNames.add( iterator.next().getName());
+                    roomNames.add(iterator.next().getName());
                     i--;
                 }
                 assertTrue(names.containsAll(roomNames) && roomNames.containsAll(names));

@@ -83,5 +83,5 @@ public class SX2_test extends ActivityInstrumentationTestCase2<changePassword> {
     }
 
     public void testFilter() throws Exception {
-                            }
+    }
 }

@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/media/dalia/C6464E16464E081F/SIX/SE/smartx/SmartX/app/src/androidTest/res"/><source path="/media/dalia/C6464E16464E081F/SIX/SE/smartx/SmartX/app/build/generated/res/rs/androidTest/debug"/><source path="/media/dalia/C6464E16464E081F/SIX/SE/smartx/SmartX/app/build/generated/res/generated/androidTest/debug"/></dataSet><mergedItems/></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/youmna/smartx1/SmartX/app/src/androidTest/res"/><source path="/Users/youmna/smartx1/SmartX/app/build/generated/res/rs/androidTest/debug"/><source path="/Users/youmna/smartx1/SmartX/app/build/generated/res/generated/androidTest/debug"/></dataSet><mergedItems/></merger>

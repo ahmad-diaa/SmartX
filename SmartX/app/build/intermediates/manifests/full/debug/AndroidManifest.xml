@@ -95,6 +95,15 @@
             android:name="com.smartx.cookies.smartx.changeInfo"
             android:label="@string/title_activity_change_info" >
         </activity>
+        <activity
+            android:name="com.smartx.cookies.smartx.TvClickerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_tv_clicker"
+            android:screenOrientation="portrait" />
+        <!-- <activity -->
+        <!-- android:name=".Add_clicker_Activity" -->
+        <!-- android:label="@string/title_activity_add_clicker_" > -->
+        <!-- </activity> -->
     </application>
 
 </manifest>

@@ -27,4 +27,3 @@ class RoomsControllerTest < ActionController::TestCase
     	assert results.size > 0 
   	end
 end
->>>>>>> origin/Sprint_One

@@ -23,5 +23,7 @@
     <string name="rename_room">New Room Name</string>
     <string name="rename_button">Rename</string>
     <string name="title_activity_device_list">DeviceList</string>
-    <string name="ENDPOINT">http://192.168.43.100:3000/</string>
+    <string name="title_activity_tv_clicker">TvClickerActivity</string>
+    <string name="title_activity_add_clicker_">Add_clicker_Activity</string>
+    <string name="ENDPOINT">http://192.168.1.5:3000/</string>
 </resources>

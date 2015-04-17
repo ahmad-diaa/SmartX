@@ -23,6 +23,19 @@ ActiveRecord::Schema.define(version: 20150407115340) do
 
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id"
 
+  create_table "clickers", force: true do |t|
+    t.string   "command"
+    t.integer  "user_id"
+    t.integer  "room_id"
+    t.integer  "device_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "clickers", ["device_id"], name: "index_clickers_on_device_id"
+  add_index "clickers", ["room_id"], name: "index_clickers_on_room_id"
+  add_index "clickers", ["user_id"], name: "index_clickers_on_user_id"
+
   create_table "devices", id: false, force: true do |t|
     t.integer  "user_id"
     t.integer  "room_id"

@@ -124,22 +124,34 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
                     Toast.makeText(getApplicationContext(), "Please Fill in the Blank spaces", Toast.LENGTH_LONG).show();
                 } else {
                     Device device = new Device(deviceSpinner.getSelectedItem().toString(), roomID, userID, deviceID.getText().toString(), "off");
-                    api.addDevice(device.getUserID() + " ", device.getRoomID() + "", device.getName(), device.getDeviceID(), device.getStatus(), new Callback<Device>() {
+                    api.addDevice(device.getUserID() + " ", device.getRoomID() + "",device.getDeviceID() ,device.getName(), device.getStatus(), new Callback<Device>() {
                         @Override
                         public void success(Device device, Response response) {
                             SharedPreferences prefs =
                                     PreferenceManager.getDefaultSharedPreferences(addDevices.this);
                             SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString("deviceID",deviceID.getText().toString());
+                            editor.putString("deviceID", deviceID.getText().toString());
                             editor.commit();
-                            startActivity(new Intent(getApplicationContext(), viewDevices.class));
+                            api.addClicker(device.getUserID() + " ", device.getRoomID() + "",device.getDeviceID(),device.getDeviceID()+"/false",new Callback<Clicker>() {
+                                @Override
+                                public void success(Clicker clicker, Response response) {
+                                    startActivity(new Intent(getApplicationContext(), viewDevices.class));
+
+                                }
+
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+
+
+                                }
+                            });
 
                         }
 
                         @Override
                         public void failure(RetrofitError error) {
                             Toast.makeText(getApplicationContext(), "Cannot Add A Device!", Toast.LENGTH_LONG).show();
-                            throw error;
 
                         }
 

@@ -4,11 +4,14 @@ device_one:
   device_id: 1
   user_id: 1
   room_id: 1
-  name: myTelevision
+  name: Tv
+  status: 'false'
+
 
 device_two:
   device_id: 2
   user_id: 1
-  room_id: MyString
+  room_id: 1
   name: myLamp
+  status: 'false'
 

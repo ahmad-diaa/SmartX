@@ -33,9 +33,8 @@ public class viewDevices extends ListActivity {
     Button addDevice;
 
     ArrayList<String> deviceNames;
-
-
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_devices);
@@ -73,7 +72,6 @@ public class viewDevices extends ListActivity {
             public void success(List<Device> devices, Response response) {
                 deviceNames = new ArrayList<String>();
                 Iterator<Device> iterator = devices.iterator();
-                Log.d("devices size", devices.size() + "");
                 int i = devices.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
 
@@ -86,10 +84,11 @@ public class viewDevices extends ListActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                throw error;
+                startActivity(new Intent(getApplicationContext(), viewDevices.class));
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -114,8 +113,10 @@ public class viewDevices extends ListActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("deviceID", devices.get(0).getDeviceID() + "");
                 editor.commit();
-                startActivity(new Intent(viewDevices.this, ViewDeviceActivity.class));
+                startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
+
             }
+
 
             @Override
             public void failure(RetrofitError error) {

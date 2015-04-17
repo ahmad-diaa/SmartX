@@ -47,7 +47,7 @@ public class addRoomsActivityTest extends ActivityInstrumentationTestCase2<addRo
         roomName="LivingRoom";
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
-        api.addRoom(userID + "", roomName, "", new Callback<Room>() {
+        api.addRoom(userID + "", roomName, new Callback<Room>() {
             @Override
             public void success( Room room, Response response) {
 
@@ -84,7 +84,7 @@ public class addRoomsActivityTest extends ActivityInstrumentationTestCase2<addRo
         roomName="LivingRoom";
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
-        api.addRoom(userID + "", roomName, "", new Callback<Room>() {
+        api.addRoom(userID + "", roomName, new Callback<Room>() {
             @Override
             public void success( Room room, Response response) {
 

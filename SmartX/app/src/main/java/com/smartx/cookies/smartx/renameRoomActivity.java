@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +19,7 @@ import retrofit.client.Response;
 
 /**
  * Purpose: renames a room
+ *
  * @author maggiemoheb
  */
 public class renameRoomActivity extends Activity {
@@ -37,6 +37,7 @@ public class renameRoomActivity extends Activity {
 
     /**
      * A getter to the ENDPOINT
+     *
      * @return the ENDPOINT of the activity
      */
     public String getENDPOINT() {
@@ -46,6 +47,7 @@ public class renameRoomActivity extends Activity {
 
     /**
      * A getter to the user ID
+     *
      * @return the user ID of the session
      */
     public int getUserID() {
@@ -55,6 +57,7 @@ public class renameRoomActivity extends Activity {
 
     /**
      * A getter to the room ID
+     *
      * @return the room ID of the activity
      */
     public int getRoomID() {
@@ -63,6 +66,7 @@ public class renameRoomActivity extends Activity {
 
     /**
      * A getter to the errorMessage
+     *
      * @return the errorMessage of the activity
      */
     public String getErrorMessage() {
@@ -95,12 +99,13 @@ public class renameRoomActivity extends Activity {
      * RenameRoom method takes the new room name from the EditText field
      * checks that the room name is not "" to update error message
      * calls API.renameRoom to update the name in rails server
+     *
      * @param view takes the current view as a parameter
      */
     public void renameRoom(View view) {
         roomName = (EditText) findViewById(R.id.rename_room);
         String name = String.valueOf(roomName.getText());
-        name = name.replace(" " , "%20");
+        name = name.replace(" ", "%20");
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
