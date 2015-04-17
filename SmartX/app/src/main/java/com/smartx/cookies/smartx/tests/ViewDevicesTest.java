@@ -1,7 +1,7 @@
 package com.smartx.cookies.smartx.tests;
 
 /**
- * Created by youmna 
+ * Created by youmna
  */
 
 import android.test.ActivityInstrumentationTestCase2;
