@@ -390,11 +390,10 @@ public class ViewRooms extends ListActivity {
             String roomSelected = getListView().getItemAtPosition(itemPosition).toString();
 
 
-            api.findRoom(userID + "", roomSelected, new Callback<List<Room>>() {
+            api.findRoom(userID + "", roomSelected.replace(" ","%20"), new Callback<List<Room>>() {
                 @Override
                 public void success(List<Room> rooms, Response response) {
-                    SharedPreferences prefs =
-                            PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putInt("roomID", rooms.get(0).getId());
                     editor.commit();
@@ -403,8 +402,6 @@ public class ViewRooms extends ListActivity {
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Log.d("ERROR505", error.getMessage());
-                    throw error;
                 }
 
             });
