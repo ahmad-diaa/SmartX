@@ -1,64 +1,148 @@
 package models;
 
+/**
+ * SE Sprint1
+ * Device.java
+ *
+ * @author Amir
+ */
+
 public class Device {
+    /**
+     * The id of the user having the device.
+     */
     int user_id;
-    String type;
+
+
+    /**
+     * The type of the device.
+     */
     String name;
-    String brand;
-    String room_id;
+
+    /**
+     * The status of the device: on or off.
+     */
     String status;
+
+    /**
+     * The id of the room to which the device belongs.
+     */
+    int room_id;
+
+    /**
+     * The primary key of device.
+     */
     String device_id;
 
-    public Device(){
 
-    }
+    /**
+     * Constructor to create a device with given parameters.
+     *
+     * @param name     the type of the device.
+     * @param roomID   the id of the room to which the device belongs.
+     * @param userID   the id of the user having the device.
+     * @param deviceID the primary key of device.
+     * @param status   the status of the device: on or off.
+     */
 
-    public Device(String device_id, String name, String roomID, int userID) {
+    public Device(String name, int roomID, int userID, String deviceID, String status) {
         this.name = name;
         this.room_id = roomID;
-        this.user_id=userID;
-        this.device_id = device_id;
+        this.user_id = userID;
+        this.status = status;
+        this.device_id = deviceID;
     }
 
+    /**
+     * get the id of the user having the device.
+     *
+     * @return the id of the user.
+     */
     public int getUserID() {
         return user_id;
     }
 
+    /**
+     * set the id of the user having the device.
+     *
+     * @param userID the id of the user.
+     */
     public void setUserID(int userID) {
         this.user_id = userID;
     }
 
-    public String getType() {
-        return type;
+
+    /**
+     * get the primary key of device.
+     *
+     * @return id of the device.
+     */
+    public String getDeviceID() {
+        return device_id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    /**
+     * set get the primary key of device.
+     *
+     * @param deviceID the id of device.
+     */
+    public void setDeviceID(String deviceID) {
+        this.device_id = deviceID;
     }
 
+    /**
+     * get type of the device.
+     *
+     * @return type of the device.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * set type of the device.
+     *
+     * @param name the type of the device.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getBrand() {
-        return brand;
+    /**
+     * get the status of the device: on or off.
+     *
+     * @return status of the device.
+     */
+    public String getStatus() {
+        return status;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    /**
+     * set the status of the device: on or off.
+     *
+     * @param status
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getRoomID() {
+    /**
+     * get the id of the room to which the device belongs.
+     *
+     * @return id of the room.
+     */
+    public int getRoomID() {
         return room_id;
     }
 
-    public void setRoomID(String roomID) {
+    /**
+     * set the id of the room to which the device belongs.
+     *
+     * @param roomID the id of the room.
+     */
+    public void setRoomID(int roomID) {
         this.room_id = roomID;
     }
 
-
 }
+

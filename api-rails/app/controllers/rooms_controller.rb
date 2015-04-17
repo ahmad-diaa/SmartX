@@ -1,6 +1,15 @@
+
 class RoomsController < ApplicationController
 	
 	before_action :set_room, only: [:show, :update, :destroy]
+
+  #Returns room for a specific user with given name. 
+  def find 
+    @user = User.find(params[:user_id])
+    @room = @user.rooms.where(:name => params[:name])
+    render json: @room if stale?(etag: @room.all, last_modified: @room.maximum(:updated_at))
+  end
+
   #Returns list of rooms for a specific user. 
   # GET /rooms
   # GET /rooms.json
@@ -17,6 +26,13 @@ class RoomsController < ApplicationController
     @user=User.find(params[:user_id])
     @room=@user.rooms.find(params[:id])
     render json: @room if stale?(@room)
+  end
+ 
+  def getName
+    @user=User.find(params[:user_id])
+    @room=@user.rooms.find(params[:id])
+    @name = @room.name
+    render json: @name if stale?(@name)
   end
 
   #Creates room with room parameters for a specific user.
@@ -42,6 +58,7 @@ class RoomsController < ApplicationController
       render json: @room.errors, status: :unprocessable_entity
     end
   end
+
   
   #Deletes room with given room id for a specific user.
   # DELETE /rooms/1

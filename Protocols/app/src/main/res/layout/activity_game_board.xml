@@ -1,0 +1,580 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.protocols_androidclient.checkerboard">
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:showDividers="middle|beginning|end"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/block1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block8"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/block9"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block12"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block13"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block14"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block15"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block16"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:showDividers="middle|beginning|end"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/block17"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block18"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block19"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block20"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block21"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block22"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block23"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block24"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/block25"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block26"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block27"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block28"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block29"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block30"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block31"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block32"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:showDividers="middle|beginning|end"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/block33"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block34"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block35"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block36"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block37"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block38"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block39"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block40"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/block41"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block42"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block43"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block44"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block45"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block46"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block47"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block48"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:showDividers="middle|beginning|end"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/block49"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block50"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block51"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block52"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block53"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block54"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block55"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block56"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/block57"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block58"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block59"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block60"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block61"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block62"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+
+        <ImageView
+            android:id="@+id/block63"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/block64"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription"
+            android:background="#000000" />
+    </TableRow>
+</TableLayout>

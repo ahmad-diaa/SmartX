@@ -1,3 +1,4 @@
+
 class CreateDevices < ActiveRecord::Migration
   def change
     create_table :devices, id:false do |t|
@@ -6,8 +7,8 @@ class CreateDevices < ActiveRecord::Migration
       t.string :device_id, null: false
       t.string :status
       t.string :name
-t.references :room, index: true
-t.references :user, index: true
+      t.references :room, index: true
+      t.references :user, index: true
       t.timestamps
     end
     add_index :devices, :device_id, unique: true

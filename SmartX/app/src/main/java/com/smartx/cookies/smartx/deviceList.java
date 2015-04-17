@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,7 +28,6 @@ import retrofit.client.Response;
      @author Dalia Maarek
  */
 public class deviceList extends ListActivity {
-    private String ENDPOINT = "http://192.168.1.106:3000/";
     private static int userID;
     private String type;
     private ArrayList<String> roomNameList;
@@ -94,15 +95,9 @@ public class deviceList extends ListActivity {
     @return ENDPOINT IP address to connect to
      */
     public String getENDPOINT() {
-        return ENDPOINT;
+        return getResources().getString(R.string.ENDPOINT);
     }
 
-    /*
-    @params ENDPOINT IP address to connect to
-     */
-    public void setENDPOINT(String ENDPOINT) {
-        this.ENDPOINT = ENDPOINT;
-    }
 
     /*
     @params roomNameList sets array of room names with a selected type of device
@@ -133,7 +128,7 @@ public class deviceList extends ListActivity {
         type = mSharedPreference.getString("deviceType", "TV");
         userID = (mSharedPreference.getInt("userID", 1));
 
-        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         api = adapter.create(myAPI.class);
         roomNameList = new ArrayList<String>();
         adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomNameList);
@@ -156,10 +151,12 @@ public class deviceList extends ListActivity {
                         Iterator<Device> iterator2 = devices.iterator();
                         while (iterator.hasNext()) {
                             if (type.equalsIgnoreCase(iterator2.next().getName())) {
-                                api.getRoom(userID + "", iterator.next().getRoomID() + "", new Callback<Room>() {
+                                int roomid = iterator.next().getRoomID();
+                                api.getRoom(userID + "",  roomid + "", new Callback<String>() {
                                     @Override
-                                    public void success(Room room, Response response) {
-                                        roomNameList.add(room.get_roomName());
+                                    public void success(String room, Response response) {
+                                        room = room.replace("%20", " ");
+                                        roomNameList.add(room);
                                         setListAdapter(adapter2);
 
                                     }
@@ -167,6 +164,8 @@ public class deviceList extends ListActivity {
                                     @Override
                                     public void failure(RetrofitError error) {
                                         //add toast
+                                        Toast.makeText(getApplicationContext(), error.getMessage()  , Toast.LENGTH_LONG).show();
+
                                     }
                                 });
                             } else {

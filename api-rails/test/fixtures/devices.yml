@@ -1,13 +1,14 @@
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+device_one:
+  device_id: 1
+  user_id: 1
+  room_id: 1
+  name: myTelevision
 
-one:
+device_two:
+  device_id: 2
   user_id: 1
   room_id: MyString
-  type_id: 1
-  name: MyString
+  name: myLamp
 
-two:
-  user_id: 1
-  room_id: MyString
-  type_id: 1
-  name: MyString

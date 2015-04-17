@@ -1,4 +1,11 @@
+
 class DevicesController < ApplicationController
+  def find 
+    @user = User.find(params[:user_id])
+    @room = @user.rooms.find(params[:room_id])
+    @device = @room.devices.where(:name => params[:name])
+    render json: @device if stale?(etag: @device.all, last_modified: @device.maximum(:updated_at))
+  end
   #Returns list of devices in a specific room knowing she belongs to which user. 
   # GET /devices
   # GET /devices.json
@@ -7,7 +14,6 @@ class DevicesController < ApplicationController
     @room = @user.rooms.find(params[:room_id])
     @devices = @room.devices.all
     render json: @devices if stale?(etag: @devices.all, last_modified: @devices.maximum(:updated_at))
-  get_all_type
   end
 
   #Returns device with given id knowing he belongs to which user and room.
@@ -49,18 +55,7 @@ class DevicesController < ApplicationController
     end
   end
   
-  #Deletes device with given id knowing he belongs to which user and room.
-  # DELETE /devices/1
-  # DELETE /devices/1.json
-  def destroy
-    @user=User.find(params[:user_id])
-    @room=@user.rooms.find(params[:room_id])
-    @device= @room.devices.find(params[:device_id]) 
-    @device.destroy
-    head :no_content
-  end
-
-#Gets all devices that belong to a user. 
+  #Gets all devices that belong to a user. 
 #GET /devices/users/1/rooms/1/devices/1/devices
 def get_all_type
     @devices = Device.all
@@ -68,10 +63,20 @@ def get_all_type
     render json: @devices if stale?(etag: @devices.all, last_modified: @devices.maximum(:updated_at))
 end  
 
+  #Deletes device with given id knowing he belongs to which user and room.
+  # DELETE /devices/1
+  # DELETE /devices/1.json
+  def destroy
+    @user=User.find(params[:user_id])
+    @room=@user.rooms.find(params[:room_id])
+    @device= @room.devices.find(params[:device_id])
+    @device.destroy
+    head :no_content
+  end
+
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def device_params
     params.require(:device).permit(:name,:device_id,:user_id,:room_id, :status)
-  end 
+  end
 end
-

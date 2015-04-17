@@ -58,22 +58,6 @@ public class DeviceTypesTest extends ActivityInstrumentationTestCase2<deviceList
         final ArrayList<String> typeRooms = new ArrayList<String>();
         final ArrayList<String> roomIDs = new ArrayList<String>();
 
-//        devices.add(new Device("1", "TV", "1", 1));
-//        devices.add(new Device("2", "TV", "3", 1));
-//        devices.add(new Device("3", "AC", "2", 1));
-//        devices.add(new Device("4", "TV", "1", 1));
-//
-//        rooms.add(new Room("Bedroom", "1", "1"));
-//        rooms.add(new Room("Kitchen", "2", "1"));
-//        rooms.add(new Room("Music Hall", "3", "2"));
-//        rooms.add(new Room("Chill Room", "4", "1"));
-//
-//        ArrayList<String> types = new ArrayList<String>();
-//
-//        types.add("TV");
-//        types.add("AC");
-//        types.add("Lights");
-
 
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
@@ -85,8 +69,8 @@ public class DeviceTypesTest extends ActivityInstrumentationTestCase2<deviceList
             @Override
             public void success(List<Device> devices, Response response) {
                 for(int i=0;i<devices.size();i++)
-                if (devices.get(i).getType().equalsIgnoreCase(deviceActivity.getType())){
-                       roomIDs.add(devices.get(i).getRoomID());
+                if (devices.get(i).getName().equalsIgnoreCase(deviceActivity.getType())){
+                       roomIDs.add(devices.get(i).getRoomID() +"");
                 }
             }
 
@@ -100,8 +84,8 @@ public class DeviceTypesTest extends ActivityInstrumentationTestCase2<deviceList
             @Override
             public void success(List<Room> rooms, Response response) {
                 for (int i = 0; i < rooms.size(); i++) {
-                    if (roomIDs.contains(rooms.get(i).get_id())){
-                        typeRooms.add(rooms.get(i).get_roomName());
+                    if (roomIDs.contains(rooms.get(i).getId())){
+                        typeRooms.add(rooms.get(i).getName());
                     }
                 }
             }

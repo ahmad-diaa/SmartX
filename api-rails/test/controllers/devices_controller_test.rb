@@ -5,3 +5,4 @@ class DevicesControllerTest < ActionController::TestCase
   #   assert true
   # end
 end
+
