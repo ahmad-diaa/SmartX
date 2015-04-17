@@ -31,5 +31,4 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         />
-
 </RelativeLayout>

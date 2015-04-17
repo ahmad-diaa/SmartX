@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     tools:context="{relativePackage}.${activityClass}" >
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="View By.."
+        android:id="@+id/viewBy"
+        android:layout_above="@+id/changeInfoB"
+        android:layout_centerHorizontal="true"
+        android:onClick="viewByType" />
     <EditText
         android:id="@+id/search"
         android:singleLine="true"
@@ -17,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/changeInfoB"
-        android:layout_below="@+id/search"/>
+        android:layout_below="@+id/search"
+        android:layout_above="@+id/viewBy" />
 
     <Button
         android:layout_width="fill_parent"
@@ -52,4 +60,5 @@
     android:layout_alignParentStart="true"
     android:layout_centerHorizontal="true"
     />
+>>>>>>> origin/Sprint_One
 </RelativeLayout>

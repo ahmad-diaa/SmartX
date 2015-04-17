@@ -1,3 +1,4 @@
+
 class DevicesController < ApplicationController
   def find 
     @user = User.find(params[:user_id])
@@ -54,6 +55,14 @@ class DevicesController < ApplicationController
     end
   end
   
+  #Gets all devices that belong to a user. 
+#GET /devices/users/1/rooms/1/devices/1/devices
+def get_all_type
+    @devices = Device.all
+    @user=User.find(params[:user_id])
+    render json: @devices if stale?(etag: @devices.all, last_modified: @devices.maximum(:updated_at))
+end  
+
   #Deletes device with given id knowing he belongs to which user and room.
   # DELETE /devices/1
   # DELETE /devices/1.json
@@ -71,4 +80,3 @@ class DevicesController < ApplicationController
     params.require(:device).permit(:name,:device_id,:user_id,:room_id, :status)
   end
 end
-

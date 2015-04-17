@@ -27,7 +27,7 @@ public class Device {
     /**
      * The id of the room to which the device belongs.
      */
-    int roomID;
+    int room_id;
 
     /**
      * The primary key of device.
@@ -47,7 +47,7 @@ public class Device {
 
     public Device(String name, int roomID, int userID, String deviceID, String status) {
         this.name = name;
-        this.roomID = roomID;
+        this.room_id = roomID;
         this.user_id = userID;
         this.status = status;
         this.device_id = deviceID;
@@ -132,7 +132,7 @@ public class Device {
      * @return id of the room.
      */
     public int getRoomID() {
-        return roomID;
+        return room_id;
     }
 
     /**
@@ -141,7 +141,7 @@ public class Device {
      * @param roomID the id of the room.
      */
     public void setRoomID(int roomID) {
-        this.roomID = roomID;
+        this.room_id = roomID;
     }
 
 }

@@ -98,7 +98,7 @@ public class LoginActivity extends Activity {
 
                     @Override
                     public void failure(RetrofitError error) {
-                       if (error.getMessage().contains("401 Unauthorized")) {
+                        if (error.getMessage().contains("401 Unauthorized")) {
                             Toast.makeText(getApplicationContext(), "Wrong Username/Password", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();

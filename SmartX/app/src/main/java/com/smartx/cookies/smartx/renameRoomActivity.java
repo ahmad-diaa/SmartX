@@ -100,7 +100,7 @@ public class renameRoomActivity extends Activity {
     public void renameRoom(View view) {
         roomName = (EditText) findViewById(R.id.rename_room);
         String name = String.valueOf(roomName.getText());
-        name.replace(" " , "%20");
+        name = name.replace(" " , "%20");
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));

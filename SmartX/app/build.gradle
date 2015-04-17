@@ -20,13 +20,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_6
     }
-    defaultConfig {
-        multiDexEnabled true
-    }
 }
 
 dependencies {
-
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp:2.2.0'
@@ -34,4 +30,5 @@ dependencies {
     compile files('libs/gson-2.3.1.jar')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.9.5"
 }

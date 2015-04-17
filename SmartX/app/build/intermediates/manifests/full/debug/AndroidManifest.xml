@@ -24,6 +24,10 @@
             android:label="@string/title_activity_view_devices" >
         </activity>
         <activity
+            android:name="com.smartx.cookies.smartx.deviceList"
+            android:label="@string/title_activity_device_list" >
+        </activity>
+        <activity
             android:name="com.smartx.cookies.smartx.LoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"

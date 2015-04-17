@@ -27,7 +27,6 @@ public class changePassword extends Activity {
     EditText oldPassword;
     EditText newPassword;
     EditText confirmPassword;
-    String ENDPOINT = "http://192.168.26.15:3000/";
     private String oldPass;
     private String originalPass;
     private String newPass;
@@ -80,13 +79,10 @@ public class changePassword extends Activity {
     }
 
     public String getENDPOINT() {
-        return ENDPOINT;
+        return getResources().getString(R.string.ENDPOINT);
     }
     // @param String for setting the endpoint
 
-    public void setENDPOINT(String ENDPOINT) {
-        this.ENDPOINT = ENDPOINT;
-    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +113,7 @@ public class changePassword extends Activity {
         }
         if (newPass.equals(confPass) && originalPass.equals(oldPass)) {
                 Log.d("ana hena", newPass);
-                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
                 myAPI api = adapter.create(myAPI.class);
                 api.changePassword(userID + "", newPass, new Callback<models.User>() {
 

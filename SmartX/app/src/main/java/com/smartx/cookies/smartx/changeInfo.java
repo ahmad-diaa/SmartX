@@ -26,7 +26,6 @@ import retrofit.client.Response;
 public class changeInfo extends Activity {
     EditText emailTxt;
     EditText phoneTxt;
-    String ENDPOINT = "http://192.168.26.15:3000/";
     Button changeInfoB;
     private String email;
     private String phone;
@@ -70,13 +69,10 @@ public class changeInfo extends Activity {
     }
 
     public String getENDPOINT() {
-        return ENDPOINT;
+        return getResources().getString(R.string.ENDPOINT);
     }
     // @param String for setting the endpoint
 
-    public void setENDPOINT(String ENDPOINT) {
-        this.ENDPOINT = ENDPOINT;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +99,7 @@ public class changeInfo extends Activity {
         if (phone.equals(null)) {
             phone = (mSharedPreference.getString("phone", ""));
         }
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
 
                api.changeInfo(userID + "", email, originalPass, phone, new Callback<User>() {
@@ -119,7 +115,7 @@ public class changeInfo extends Activity {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Please make sure you are connected to the internet", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.smartx.cookies.smartx;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -25,18 +28,11 @@ import java.util.List;
 import java.util.Locale;
 
 import models.Room;
+import models.Type;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
-/**
- *SE Sprint1
- *ViewRooms.java
- * Purpose: View rooms and devices in each room.
- *
- * @author Amir
- */
 
 
 /**
@@ -125,6 +121,69 @@ public class ViewRooms extends ListActivity {
         return count;
     }
 
+    public void viewByType(View v) {
+        showPopUp();
+    }
+
+    private void showPopUp() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                this);
+
+        builderSingle.setTitle("Select a device type");
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.select_dialog_singlechoice);
+//        arrayAdapter.add("TV");
+//        arrayAdapter.add("Air Conditioner");
+//        arrayAdapter.add("Curtain");
+//        arrayAdapter.add("Plug");
+
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = adapter.create(myAPI.class);
+
+
+        api.requestTypes(new Callback<List<Type>>() {
+            @Override
+            public void success(List<Type> types, Response response) {
+
+                Iterator<Type> iterator = types.iterator();
+                while (iterator.hasNext()) {
+                    String s = iterator.next().getName();
+                    arrayAdapter.add(s);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+
+        builderSingle.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(arrayAdapter,
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final String strName = arrayAdapter.getItem(which);
+                        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                        SharedPreferences.Editor editor = mSharedPreference.edit();
+                        editor.putString("deviceType", strName);
+                        editor.commit();
+                        startActivity(new Intent(getBaseContext(), deviceList.class));
+
+                    }
+
+                });
+        builderSingle.show();
+    }
 
     /**
      * Called when the activity is starting.

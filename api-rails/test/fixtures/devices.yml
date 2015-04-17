@@ -1,5 +1,5 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 device_one:
   device_id: 1
   user_id: 1
@@ -8,11 +8,7 @@ device_one:
 
 device_two:
   device_id: 2
-<<<<<<< HEAD
-  user_id: 2
-  room_id: 2
-=======
   user_id: 1
   room_id: MyString
->>>>>>> origin/Sprint_One
   name: myLamp
+
