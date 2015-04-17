@@ -2,12 +2,9 @@
 
 one:
   user_id: 1
-  room_id: MyString
-  type_id: 1
-  name: MyString
+  room_id: 1
+  device_id: 1
+  name: Tv
+  status: '0'
 
-two:
-  user_id: 1
-  room_id: MyString
-  type_id: 1
-  name: MyString
+
