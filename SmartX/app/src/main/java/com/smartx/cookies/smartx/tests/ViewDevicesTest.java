@@ -6,8 +6,8 @@ package com.smartx.cookies.smartx.tests;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.smartx.cookies.smartx.ViewDeviceActivity;
 import com.smartx.cookies.smartx.myAPI;
-import com.smartx.cookies.smartx.viewDevices;
 
 import java.util.Iterator;
 import java.util.List;
@@ -21,15 +21,15 @@ import retrofit.client.Response;
 /**
  * Created by youmna on 4/16/15.
  */
-public class ViewDevicesTest extends ActivityInstrumentationTestCase2<viewDevices> {
-    private viewDevices myActivity;
+public class ViewDevicesTest extends ActivityInstrumentationTestCase2<ViewDeviceActivity> {
+    private ViewDeviceActivity myActivity;
 
     private String ENDPOINT;
     RestAdapter adapter;
     myAPI api;
 
     public ViewDevicesTest() {
-        super(viewDevices.class);
+        super(ViewDeviceActivity.class);
     }
 
     protected void setUp() throws Exception {
@@ -51,7 +51,7 @@ public class ViewDevicesTest extends ActivityInstrumentationTestCase2<viewDevice
                         @Override
                         public void success(List<Device> devices, Response response) {
                             if (devices != null)
-                                assertEquals(current.getDeviceId(), devices.get(0).getDeviceId());
+                                assertEquals(current.getDeviceID(), devices.get(0).getDeviceID());
                         }
 
                         @Override

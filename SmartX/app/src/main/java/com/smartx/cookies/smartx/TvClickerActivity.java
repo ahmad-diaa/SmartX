@@ -24,7 +24,7 @@ public class TvClickerActivity extends Activity {
     String ENDPOINT = "http://192.168.1.5:3000/";    // store the ip address and the port number to which the Tv_clicker is connected
     int userID; //store the current userID
     int roomID;//store the current roomID
-    int deviceID;//store the current deviceID
+    String deviceID;//store the current deviceID
     int clickerID;//store the current clickerID
     String command;//store the current command
     boolean on;//initial current state of device
@@ -63,7 +63,7 @@ public class TvClickerActivity extends Activity {
     *deviceId getter
     *@return deviceID
           */
-    public int getDeviceID() {
+    public String getDeviceID() {
         return deviceID;
     }
     /**
@@ -89,14 +89,16 @@ public class TvClickerActivity extends Activity {
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
-        deviceID = (mSharedPreference.getInt("deviceID", 1));
+        deviceID = (mSharedPreference.getString("deviceID", "1"));
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.getClicker("1","1","1",new Callback<Clicker>() {
+        api.getClicker(userID+"",roomID+"",deviceID+"",new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 TvClicker = new Clicker(clicker.getUserId(),clicker.getRoomId(),clicker.getDeviceId(),clicker.getClickerId(),clicker.getCommand());
+                clickerID = clicker.getClickerId();
                 checkPreviousState();
+
 
             }
             @Override
@@ -193,20 +195,21 @@ public class TvClickerActivity extends Activity {
     public void checkPreviousState() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.getDevice("1", "1", "1", new Callback<Device>() {
+        api.getDevice(userID+"",roomID+"",deviceID+"", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
                 Switch on_off = (Switch) findViewById(R.id.switch1);
 
-                if (device.getStatus().contains("false")) {
-                    on_off.setChecked(false);
-                    on = false;
+                if (device.getStatus().contains("true")) {
+                    on_off.setChecked(true);
+                    on = true;
+
 
                 }
                 else {
-                    on_off.setChecked(true);
-                    on = true;
+                    on_off.setChecked(false);
+                    on = false;
 //                TvClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
                 }
             }
@@ -224,7 +227,7 @@ public class TvClickerActivity extends Activity {
     public void changeDeviceStatus(boolean on) {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus("1", "1", "1", on+"", new Callback<Device>() {
+        api.editDeviceStatus(userID+"",roomID+"",deviceID, on+"", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -244,7 +247,7 @@ public class TvClickerActivity extends Activity {
     public void sendCommand() {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.sendClickerCommand("1", "1", "1", "1", "1"+command, new Callback<Clicker>() {
+        api.sendClickerCommand(userID+"", roomID+"", deviceID, clickerID+"", clickerID+command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("V/0")) {

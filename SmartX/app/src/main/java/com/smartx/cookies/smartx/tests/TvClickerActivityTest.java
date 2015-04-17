@@ -1,14 +1,17 @@
 package com.smartx.cookies.smartx.tests;
+
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.Switch;
+
 import com.smartx.cookies.smartx.Clicker;
 import com.smartx.cookies.smartx.R;
-import com.smartx.cookies.smartx.Session;
 import com.smartx.cookies.smartx.TvClickerActivity;
 import com.smartx.cookies.smartx.myAPI;
+
 import models.Device;
 import models.Room;
+import models.Session;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -63,7 +66,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
             }
         });
-        api.addRoom("1", "Kitchen", "photo", new Callback<Room>() {
+        api.addRoom("1", "Kitchen", new Callback<Room>() {
             @Override
             public void success(Room room, Response response) {
 

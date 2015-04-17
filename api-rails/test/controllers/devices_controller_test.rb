@@ -44,3 +44,4 @@ test "#create device" do
   		assert results.size > 0
   	end
 end
+

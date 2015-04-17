@@ -1,9 +1,9 @@
 package com.smartx.cookies.smartx;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,8 +17,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class Settings extends ActionBarActivity {
-    String ENDPOINT = "http://50.0.30.129:3000/";
+public class Settings extends Activity {
     Button changePasswordB;
     int userID;
     String oldPasswordS;
@@ -28,7 +27,6 @@ public class Settings extends ActionBarActivity {
     EditText newPassword;
     EditText confirmPassword;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,33 +34,27 @@ public class Settings extends ActionBarActivity {
         changePasswordB = (Button) findViewById(R.id.changePasswordButton);
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
-        EditText oldPassword = (EditText) findViewById(R.id.passwordOld);
-        EditText newPassword = (EditText) findViewById(R.id.passwordNew);
+        EditText oldPassword = (EditText) findViewById(R.id.oldPassword);
+        EditText newPassword = (EditText) findViewById(R.id.newPassword);
         EditText confirmPassword = (EditText) findViewById(R.id.passwordConfirm);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_settings, menu);
         return true;
-
-
     }
 
     public void changePassword(View v) {
         oldPasswordS = oldPassword.getText().toString();
         newPasswordS = newPassword.getText().toString();
         confirmPasswordS = confirmPassword.getText().toString();
-
         if (newPassword.equals(confirmPassword)) {
-
-
-            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-
+            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
             myAPI api = adapter.create(myAPI.class);
-            api.getUser(userID + "", new Callback<models.User>() {
+
+            api.getUser(userID + "", new Callback<User>() {
                 @Override
                 public void success(User user, Response response) {
 
@@ -82,12 +74,10 @@ public class Settings extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

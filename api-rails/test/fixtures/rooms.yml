@@ -1,8 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+<<<<<<< HEAD
 one:
   id: 1
   user_id: 1
   name: kitchen
 
 
+=======
+room_one:
+  id: 1
+  user_id: 1
+  name: bedroom
+
+room_two:
+  id: 2
+  user_id: 2
+  name: kitchen
+>>>>>>> origin/Sprint_One
