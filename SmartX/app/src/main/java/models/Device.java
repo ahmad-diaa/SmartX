@@ -8,7 +8,6 @@ package models;
  */
 
 public class Device {
-
     /**
      * The id of the user having the device.
      */
@@ -53,13 +52,7 @@ public class Device {
         this.status = status;
         this.device_id = deviceID;
     }
-    public String getStatus() {
 
-        return status;
-    }
-    public Device() {
-
-    }
     /**
      * get the id of the user having the device.
      *
@@ -116,6 +109,15 @@ public class Device {
     }
 
     /**
+     * get the status of the device: on or off.
+     *
+     * @return status of the device.
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
      * set the status of the device: on or off.
      *
      * @param status
@@ -139,7 +141,6 @@ public class Device {
      * @param roomID the id of the room.
      */
     public void setRoomID(int roomID) {
-
         this.room_id = roomID;
     }
 

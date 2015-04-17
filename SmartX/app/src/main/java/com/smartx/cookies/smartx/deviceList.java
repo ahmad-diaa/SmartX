@@ -3,9 +3,8 @@ package com.smartx.cookies.smartx;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import models.Device;
-import models.Room;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -152,7 +150,7 @@ public class deviceList extends ListActivity {
                         while (iterator.hasNext()) {
                             if (type.equalsIgnoreCase(iterator2.next().getName())) {
                                 int roomid = iterator.next().getRoomID();
-                                api.getRoom(userID + "",  roomid + "", new Callback<String>() {
+                                api.getRoom(userID + "", roomid + "", new Callback<String>() {
                                     @Override
                                     public void success(String room, Response response) {
                                         room = room.replace("%20", " ");
@@ -164,7 +162,7 @@ public class deviceList extends ListActivity {
                                     @Override
                                     public void failure(RetrofitError error) {
                                         //add toast
-                                        Toast.makeText(getApplicationContext(), error.getMessage()  , Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
 
                                     }
                                 });

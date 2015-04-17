@@ -3,12 +3,16 @@ package com.smartx.cookies.smartx.test;
 /**
  * Created by Amir on 4/9/2015.
  */
+
 import android.test.ActivityInstrumentationTestCase2;
+
 import com.smartx.cookies.smartx.addDevices;
 import com.smartx.cookies.smartx.myAPI;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import models.Device;
 import models.Type;
 import retrofit.Callback;
@@ -16,7 +20,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<addDevices> {
+public class addDevicesActivityTest extends ActivityInstrumentationTestCase2<addDevices> {
 
     private addDevices myActivity;
 
@@ -25,7 +29,7 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
     private String deviceID;
     private String deviceName;
     private String ENDPOINT;
-    private List<String> types=new ArrayList<String>();
+    private List<String> types = new ArrayList<String>();
 
     public addDevicesActivityTest() {
         super(addDevices.class);
@@ -36,7 +40,7 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
         myActivity = getActivity();
         userID = 3;
         roomID = 13;
-        ENDPOINT ="http://50.0.32.231:3000/";
+        ENDPOINT = "http://50.0.32.231:3000/";
     }
 
     public void testPreconditions() {
@@ -44,7 +48,7 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
     }
 
 
-    public void testGetTypesSuccess()throws Exception{
+    public void testGetTypesSuccess() throws Exception {
         types.add("Tv");
         types.add("Plug");
         types.add("Lamp");
@@ -53,14 +57,14 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
         types.add("Curtain");
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.requestTypes( new Callback<List<Type>>() {
+        api.requestTypes(new Callback<List<Type>>() {
             @Override
-            public void success( List<Type> types, Response response) {
-                List< String> typeNames= new ArrayList<String>();
+            public void success(List<Type> types, Response response) {
+                List<String> typeNames = new ArrayList<String>();
                 Iterator<Type> iterator = types.iterator();
                 int i = types.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-                    typeNames.add( iterator.next().getName());
+                    typeNames.add(iterator.next().getName());
                     i--;
                 }
                 assertTrue(types.containsAll(typeNames) && typeNames.containsAll(types));
@@ -75,22 +79,20 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
     }
 
 
-
-
-    public void testGetTypesFailure()throws Exception{
+    public void testGetTypesFailure() throws Exception {
         types.add("Tv");
         types.add("Plug");
         types.add("Lamp");
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.requestTypes( new Callback<List<Type>>() {
+        api.requestTypes(new Callback<List<Type>>() {
             @Override
-            public void success( List<Type> types, Response response) {
-                List< String> typeNames= new ArrayList<String>();
+            public void success(List<Type> types, Response response) {
+                List<String> typeNames = new ArrayList<String>();
                 Iterator<Type> iterator = types.iterator();
                 int i = types.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-                    typeNames.add( iterator.next().getName());
+                    typeNames.add(iterator.next().getName());
                     i--;
                 }
                 assertTrue(types.containsAll(typeNames) && typeNames.containsAll(types));
@@ -108,16 +110,15 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
     public void testAddDevicesSuccess() throws Exception {
 
 
-
-        deviceID="abc123";
-        deviceName="Tv";
+        deviceID = "abc123";
+        deviceName = "Tv";
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
-        api.addDevice(userID + " ", roomID + "", deviceName,deviceID,"off", new Callback<Device>() {
+        api.addDevice(userID + " ", roomID + "", deviceName, deviceID, "off", new Callback<Device>() {
             @Override
-            public void success( Device device, Response response) {
+            public void success(Device device, Response response) {
 
-                api.viewDevices(userID + "",roomID+ "", new Callback<List<Device>>() {
+                api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
                     @Override
                     public void success(List<Device> devices, Response response) {
                         List<String> deviceIDs = new ArrayList<String>();
@@ -127,7 +128,7 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
                             deviceIDs.add(iterator.next().getDeviceID());
                             i--;
                         }
-                        assertTrue( deviceIDs.contains(deviceID));
+                        assertTrue(deviceIDs.contains(deviceID));
 
                     }
 
@@ -145,16 +146,17 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
             }
         });
     }
+
     public void testAddDevicesFailure() throws Exception {
-        deviceID="abc123";
-        deviceName="Tv";
+        deviceID = "abc123";
+        deviceName = "Tv";
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
-        api.addDevice(userID + " ", roomID + "", deviceName,deviceID,"off", new Callback<Device>() {
+        api.addDevice(userID + " ", roomID + "", deviceName, deviceID, "off", new Callback<Device>() {
             @Override
-            public void success( Device device, Response response) {
+            public void success(Device device, Response response) {
 
-                api.viewDevices(userID + "",roomID+ "", new Callback<List<Device>>() {
+                api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
                     @Override
                     public void success(List<Device> devices, Response response) {
                         List<String> deviceIDs = new ArrayList<String>();
@@ -164,7 +166,7 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
                             deviceIDs.add(iterator.next().getDeviceID());
                             i--;
                         }
-                        assertTrue( deviceIDs.contains("ab"));
+                        assertTrue(deviceIDs.contains("ab"));
 
                     }
 
@@ -181,5 +183,5 @@ public class addDevicesActivityTest  extends ActivityInstrumentationTestCase2<ad
 
             }
         });
-   }
+    }
 }

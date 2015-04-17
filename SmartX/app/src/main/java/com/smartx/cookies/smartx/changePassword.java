@@ -5,17 +5,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
 /**
  * changePasssword.java
  * Purpose: user can change his password
@@ -95,6 +96,7 @@ public class changePassword extends Activity {
         newPassword = (EditText) findViewById(R.id.newPassword);
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
     }
+
     /**
      * it takes the input from the user to change his password,in case the process of changing passsword succeed it renders a login view, otherwise it toasts an error message,
      *
@@ -112,26 +114,26 @@ public class changePassword extends Activity {
             Toast.makeText(getApplicationContext(), "Please make sure you entered the correct password", Toast.LENGTH_LONG).show();
         }
         if (newPass.equals(confPass) && originalPass.equals(oldPass)) {
-                Log.d("ana hena", newPass);
-                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-                myAPI api = adapter.create(myAPI.class);
-                api.changePassword(userID + "", newPass, new Callback<models.User>() {
+            RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+            myAPI api = adapter.create(myAPI.class);
+            api.changePassword(userID + "", newPass, new Callback<models.User>() {
 
-                    @Override
-                    public void success(models.User user, Response response) {
-                        oldPass = newPass;
-                        Toast.makeText(getApplicationContext(), "Your password is successfully changed",
-                                Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    }
+                @Override
+                public void success(models.User user, Response response) {
+                    oldPass = newPass;
+                    Toast.makeText(getApplicationContext(), "Your password is successfully changed",
+                            Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                }
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-         }
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

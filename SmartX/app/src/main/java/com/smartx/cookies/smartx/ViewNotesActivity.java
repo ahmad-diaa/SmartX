@@ -41,6 +41,7 @@ public class ViewNotesActivity extends Activity {
 
     /**
      * This method is called whenever the Add Note button is clicked in the ViewNotesActivity
+     *
      * @param view it takes the view
      */
     public void addNote(View view) {

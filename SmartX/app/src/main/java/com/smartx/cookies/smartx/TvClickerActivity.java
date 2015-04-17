@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.Toast;
+
 import models.Device;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -17,11 +18,11 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- *purpose:This class creates an instance of a clicker that will allow the user to control a device.
- *@author youmna 
+ * purpose:This class creates an instance of a clicker that will allow the user to control a device.
+ *
+ * @author youmna
  */
 public class TvClickerActivity extends Activity {
-    String ENDPOINT = "http://192.168.1.5:3000/";    // store the ip address and the port number to which the Tv_clicker is connected
     int userID; //store the current userID
     int roomID;//store the current roomID
     String deviceID;//store the current deviceID
@@ -30,53 +31,57 @@ public class TvClickerActivity extends Activity {
     boolean on;//initial current state of device
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
     Clicker TvClicker;
-/**
-*clickerId getter
-*@return clickerId
- */
+
+    /**
+     * clickerId getter
+     *
+     * @return clickerId
+     */
     public int getClickerID() {
         return clickerID;
     }
 
-/**
-*endPoint getter
-*@return endpoint
- */
-    public String getENDPOINT() {
-        return ENDPOINT;
-    }
     /**
-    *userId getter
-    *@return userID
+     * userId getter
+     *
+     * @return userID
      */
     public int getUserID() {
         return userID;
     }
+
     /**
-    *roomId getter
-    *@return RoomID
-         */
+     * roomId getter
+     *
+     * @return RoomID
+     */
     public int getRoomID() {
         return roomID;
     }
+
     /**
-    *deviceId getter
-    *@return deviceID
-          */
+     * deviceId getter
+     *
+     * @return deviceID
+     */
     public String getDeviceID() {
         return deviceID;
     }
+
     /**
-    *command getter
-    *@return command
-          */
+     * command getter
+     *
+     * @return command
+     */
     public String getCommand() {
         return command;
     }
+
     /**
-    *current status getter
-    *@return status
-          */
+     * current status getter
+     *
+     * @return status
+     */
     public boolean getOn() {
         return on;
     }
@@ -90,17 +95,18 @@ public class TvClickerActivity extends Activity {
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
         deviceID = (mSharedPreference.getString("deviceID", "1"));
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.getClicker(userID+"",roomID+"",deviceID+"",new Callback<Clicker>() {
+        api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
-                TvClicker = new Clicker(clicker.getUserId(),clicker.getRoomId(),clicker.getDeviceId(),clicker.getClickerId(),clicker.getCommand());
+                TvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
                 clickerID = clicker.getClickerId();
                 checkPreviousState();
 
 
             }
+
             @Override
             public void failure(RetrofitError error) {
 
@@ -108,6 +114,7 @@ public class TvClickerActivity extends Activity {
         });
         checkPreviousState();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -116,9 +123,10 @@ public class TvClickerActivity extends Activity {
     }
 
     /**
-    *called  if the Volume "+" button in tv_clicker layout is clicked.
-    *It updates the current clicker command to the recently entered one by calling sendCommand method
-    *@param View
+     * called  if the Volume "+" button in tv_clicker layout is clicked.
+     * It updates the current clicker command to the recently entered one by calling sendCommand method
+     *
+     * @param View
      */
     public void volumeUP(View v) {
         command = new String("/V/1");
@@ -130,23 +138,25 @@ public class TvClickerActivity extends Activity {
     }
 
     /**
-    *called  if the Volume "-" button in tv_clicker layout is clicked.
-    *It updates the current clicker command to the recently entered one by calling sendCommand method
-    *@param View
-      */
+     * called  if the Volume "-" button in tv_clicker layout is clicked.
+     * It updates the current clicker command to the recently entered one by calling sendCommand method
+     *
+     * @param View
+     */
     public void volumeDown(View v) {
         command = new String("/V/0");
         if (on)
             sendCommand();
         else
-        Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
 
     }
 
     /**
-    *called  if the channel "+" button in tv_clicker layout is clicked.
-    *It updates the current clicker command to the recently entered one by calling sendCommand method
-    *@param View
+     * called  if the channel "+" button in tv_clicker layout is clicked.
+     * It updates the current clicker command to the recently entered one by calling sendCommand method
+     *
+     * @param View
      */
     public void nextChannel(View v) {
         command = new String("/C/1");
@@ -159,13 +169,14 @@ public class TvClickerActivity extends Activity {
     }
 
     /**
-    *called  if the channel "+" button in tv_clicker layout is clicked.
-    *It updates the current clicker command to the recently entered one by calling sendCommand method
-    *@param View
+     * called  if the channel "+" button in tv_clicker layout is clicked.
+     * It updates the current clicker command to the recently entered one by calling sendCommand method
+     *
+     * @param View
      */
     public void previousChannel(View v) {
         command = new String("/C/0");
-        if (on )
+        if (on)
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
@@ -174,28 +185,29 @@ public class TvClickerActivity extends Activity {
     }
 
     /**
-    *called  if the Switch "on/off" button in tv_clicker layout is clicked.
-    *It updates the current device status to either on or off by calling changeDeviceStatus method
-    *if the device was turned off then the command wont be sent otherwise sendCommand method
-    *will send the current command to the Clicker
-    *@param View
-       */
+     * called  if the Switch "on/off" button in tv_clicker layout is clicked.
+     * It updates the current device status to either on or off by calling changeDeviceStatus method
+     * if the device was turned off then the command wont be sent otherwise sendCommand method
+     * will send the current command to the Clicker
+     *
+     * @param View
+     */
     public void TurnOnOff(View v) {
-            on =!on;
-        command = new String("/"+on+ "");
-            sendCommand();
+        on = !on;
+        command = new String("/" + on + "");
+        sendCommand();
         changeDeviceStatus(on);
 
     }
 
     /**
-    *called  each time the tv_clicker layout is loaded to update the switch state to on or off according
-    *to the device state before the Clicker was closed last time.
+     * called  each time the tv_clicker layout is loaded to update the switch state to on or off according
+     * to the device state before the Clicker was closed last time.
      */
     public void checkPreviousState() {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.getDevice(userID+"",roomID+"",deviceID+"", new Callback<Device>() {
+        api.getDevice(userID + "", roomID + "", deviceID + "", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -206,8 +218,7 @@ public class TvClickerActivity extends Activity {
                     on = true;
 
 
-                }
-                else {
+                } else {
                     on_off.setChecked(false);
                     on = false;
 //                TvClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
@@ -221,13 +232,14 @@ public class TvClickerActivity extends Activity {
     }
 
     /**
-   *changes the status of the device when switch is turned on/off
-   *@param on
-    */
+     * changes the status of the device when switch is turned on/off
+     *
+     * @param on
+     */
     public void changeDeviceStatus(boolean on) {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus(userID+"",roomID+"",deviceID, on+"", new Callback<Device>() {
+        api.editDeviceStatus(userID + "", roomID + "", deviceID, on + "", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -242,12 +254,12 @@ public class TvClickerActivity extends Activity {
     }
 
     /**
-    *called if the device was switched on ,it updates the current clicker command to the recently entered one
+     * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
     public void sendCommand() {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();;
         myAPI api = adapter.create(myAPI.class);
-        api.sendClickerCommand(userID+"", roomID+"", deviceID, clickerID+"", clickerID+command, new Callback<Clicker>() {
+        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", clickerID + command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("V/0")) {

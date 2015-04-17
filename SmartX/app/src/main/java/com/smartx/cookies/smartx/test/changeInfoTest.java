@@ -1,15 +1,19 @@
 package com.smartx.cookies.smartx.test;
+
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.smartx.cookies.smartx.R;
 import com.smartx.cookies.smartx.changeInfo;
 import com.smartx.cookies.smartx.myAPI;
+
 import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
 /**
  * Created by ahmad on 08/04/15.
  */
@@ -23,9 +27,11 @@ public class changeInfoTest extends ActivityInstrumentationTestCase2<changeInfo>
     int userID;
     String ENDPOINT;
     private changeInfo myInfo;
+
     public changeInfoTest() {
         super(changeInfo.class);
     }
+
     protected void setUp() throws Exception {
         super.setUp();
         myInfo = getActivity();
@@ -36,9 +42,11 @@ public class changeInfoTest extends ActivityInstrumentationTestCase2<changeInfo>
         originalPass = myInfo.getOriginalPass();
         ENDPOINT = myInfo.getENDPOINT();
     }
+
     public void testPreconditions() {
         assertNotNull("myActivity is null", myInfo);
     }
+
     public void testchangeInfoSuccess() throws Exception {
         myInfo.runOnUiThread(new Runnable() {
             public void run() {
@@ -56,12 +64,14 @@ public class changeInfoTest extends ActivityInstrumentationTestCase2<changeInfo>
             public void success(User s, Response response) {
                 assertEquals("", s.getEmail());
             }
+
             @Override
             public void failure(RetrofitError error) {
                 assertEquals("email", email);
             }
         });
     }
+
     public void testFilter() throws Exception {
     }
 }

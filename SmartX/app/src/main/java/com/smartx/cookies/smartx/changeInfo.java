@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -85,8 +86,10 @@ public class changeInfo extends Activity {
         userID = (mSharedPreference.getInt("userID", 1));
         originalPass = (mSharedPreference.getString("password", "123456"));
     }
+
     /**
      * it takes the input from the user to change his information,it toast whether the information is updated or not,
+     *
      * @param v the view of the activity, it take the
      */
     public void changeInfo(View v) {
@@ -102,7 +105,7 @@ public class changeInfo extends Activity {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
 
-               api.changeInfo(userID + "", email, originalPass, phone, new Callback<User>() {
+        api.changeInfo(userID + "", email, originalPass, phone, new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 SharedPreferences.Editor editor = mSharedPreference.edit();

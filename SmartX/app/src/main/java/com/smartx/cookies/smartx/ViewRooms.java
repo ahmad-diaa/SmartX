@@ -1,6 +1,5 @@
 package com.smartx.cookies.smartx;
 
-import android.app.ListActivity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -110,16 +108,18 @@ public class ViewRooms extends ListActivity {
         this.roomNames = roomNames;
     }
 
-    /**
-     * Gets the id of the photo to be assigned to the next room
-     *
-     * @return An integer number between 0 and 8
-     */
-    public int randomIcon() {
 
-        count = (count + 1) % 9;
-        return count;
-    }
+
+        /**
+         * Gets the id of the photo to be assigned to the next room
+         *
+         * @return An integer number between 0 and 8
+         */
+        public int randomIcon () {
+
+            count = (count + 1) % 9;
+            return count;
+        }
 
     public void viewByType(View v) {
         showPopUp();
@@ -222,52 +222,63 @@ public class ViewRooms extends ListActivity {
                 setListAdapter(adapter2);
                 editSearch = (EditText) findViewById(R.id.search);
 
-                // Capture Text in EditText
 
-                editSearch.addTextChangedListener(new TextWatcher() {
+                            // Capture Text in EditText
 
-                    @Override
-                    public void afterTextChanged(Editable arg0) {
-                        // TODO Auto-generated method stub
-                        String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
-                        adapter2.filter(text);
+                            editSearch.addTextChangedListener(new
+
+                    TextWatcher() {
+
+                        @Override
+                        public void afterTextChanged (Editable arg0){
+                            // TODO Auto-generated method stub
+                            String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
+                            adapter2.filter(text);
+                        }
+
+                        @Override
+                        public void beforeTextChanged (CharSequence arg0,int arg1,
+                        int arg2, int arg3){
+                            // TODO Auto-generated method stub
+                        }
+
+                        @Override
+                        public void onTextChanged (CharSequence arg0,int arg1, int arg2,
+                        int arg3){
+                            // TODO Auto-generated method stub
+                        }
                     }
 
-                    @Override
-                    public void beforeTextChanged(CharSequence arg0, int arg1,
-                                                  int arg2, int arg3) {
-                        // TODO Auto-generated method stub
-                    }
+                    );
 
-                    @Override
-                    public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-                                              int arg3) {
-                        // TODO Auto-generated method stub
-                    }
-                });
-                registerForContextMenu(getListView());
+                    registerForContextMenu(getListView()
+
+                    );
+                }
+
+
+                @Override
+                public void failure (RetrofitError error){
+                    Log.d("", error.getMessage());
+                    throw error;
+                }
             }
 
+            );
+        }
 
-            @Override
-            public void failure(RetrofitError error) {
-                Log.d("", error.getMessage());
-                throw error;
-            }
-        });
-    }
+                /**
+                 * This method will be called when an item in the list is selected.
+                 * The name of the room clicked will be used as parameter to
+                 * findRoom method which retrieves from rails the room with given name.
+                 * The devices inside this room will show up.
+                 *
+                 * @param l        the ListView where the click happened.
+                 * @param v        the view that was clicked within the ListView.
+                 * @param position the position of the view in the list.
+                 * @param id       the row id of the item that was clicked.
+                 */
 
-    /**
-     * This method will be called when an item in the list is selected.
-     * The name of the room clicked will be used as parameter to
-     * findRoom method which retrieves from rails the room with given name.
-     * The devices inside this room will show up.
-     *
-     * @param l        the ListView where the click happened.
-     * @param v        the view that was clicked within the ListView.
-     * @param position the position of the view in the list.
-     * @param id       the row id of the item that was clicked.
-     */
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 

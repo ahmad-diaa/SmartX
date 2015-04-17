@@ -9,6 +9,7 @@ import com.smartx.cookies.smartx.R;
 
 /**
  * Purpose: This class is a test for AddNoteActivity.
+ *
  * @author maggiemoheb.
  */
 
@@ -39,7 +40,6 @@ public class AddNoteActivityTest extends ActivityInstrumentationTestCase2<AddNot
         myActivity = getActivity();
         noteBody = (EditText) myActivity.findViewById(R.id.noteText);
         addNote = (Button) myActivity.findViewById(R.id.button3);
-        this.ENDPOINT = myActivity.getENDPOINT();
         this.userID = myActivity.getUserID();
         this.roomID = myActivity.getRoomID();
         this.deviceID = myActivity.getDeviceID();

@@ -57,7 +57,7 @@ class RoomsController < ApplicationController
       render json: @room.errors, status: :unprocessable_entity
     end
   end
-
+  
   #Deletes room with given room id for a specific user.
   # DELETE /rooms/1
   # DELETE /rooms/1.json

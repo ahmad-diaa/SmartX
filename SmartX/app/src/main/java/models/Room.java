@@ -78,6 +78,7 @@ public class Room {
     public void setId(int id) {
         this.id = id;
     }
+
     /**
      * Constructor to create a room with given name
      *

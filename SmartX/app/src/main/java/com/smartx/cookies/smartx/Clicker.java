@@ -1,8 +1,9 @@
 package com.smartx.cookies.smartx;
 
 /**
- *Purpose:This class is the clickers' factory.
- *@author youmna
+ * Purpose:This class is the clickers' factory.
+ *
+ * @author youmna
  */
 public class Clicker {
     int userId;//current userId
@@ -13,14 +14,16 @@ public class Clicker {
 
     public Clicker() {
     }
-/**
-*clicker constructor creates a Clicker object
-*@param userID, 
-*@param RoomID ,
-*@param deviceID,
-*@param  ClickerId ,
-*@param command
-*/
+
+    /**
+     * clicker constructor creates a Clicker object
+     *
+     * @param userID,
+     * @param RoomID    ,
+     * @param deviceID,
+     * @param ClickerId ,
+     * @param command
+     */
 
     public Clicker(int userId, int roomId, int deviceId, int clickerId, String command) {
         this.userId = userId;
@@ -31,8 +34,9 @@ public class Clicker {
     }
 
     /**
-    *ClickerId setter
-    *@param clickerID
+     * ClickerId setter
+     *
+     * @param clickerID
      */
     public void setClickerId(int clickerId) {
 
@@ -40,8 +44,9 @@ public class Clicker {
     }
 
     /**
-    *ClickerId getter
-    *@return clickerID
+     * ClickerId getter
+     *
+     * @return clickerID
      */
     public int getClickerId() {
 
@@ -49,66 +54,70 @@ public class Clicker {
     }
 
     /**
-*userId setter
-*@param userID
- */
+     * userId setter
+     *
+     * @param userID
+     */
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
     /**
-    *roomId setter
-    *@param roomID
+     * roomId setter
+     *
+     * @param roomID
      */
     public void setRoomId(int roomId) {
         this.roomId = roomId;
     }
 
     /**
-     *userId getter
-     *@return userID
-      */
+     * userId getter
+     *
+     * @return userID
+     */
     public int getUserId() {
 
         return userId;
     }
 
     /**
-     *roomId getter
-     *@return roomID
-      */
+     * roomId getter
+     *
+     * @return roomID
+     */
     public int getRoomId() {
         return roomId;
     }
 
-       /*
-       deviceId setter
-       @params deviceID
-        */
+    /*
+    deviceId setter
+    @params deviceID
+     */
     public void setDeviceId(int device_id) {
         this.deviceId = device_id;
     }
 
-       /*
-       command setter
-       @params command
-        */
+    /*
+    command setter
+    @params command
+     */
     public void setCommand(String command) {
         this.command = command;
     }
 
-       /*
-       deviceId getter
-       @return deviceID
-        */
+    /*
+    deviceId getter
+    @return deviceID
+     */
     public int getDeviceId() {
         return deviceId;
     }
 
-      /*
-       command getter
-       @return command
-        */
+    /*
+     command getter
+     @return command
+      */
     public String getCommand() {
         return command;
     }

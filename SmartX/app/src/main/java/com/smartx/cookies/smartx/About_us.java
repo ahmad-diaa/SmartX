@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
 public class About_us extends Activity {
 
     public static final String sharedPrefs = "MySharedPrefs";
@@ -45,6 +46,7 @@ public class About_us extends Activity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

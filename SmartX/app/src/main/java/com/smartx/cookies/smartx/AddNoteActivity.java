@@ -20,19 +20,20 @@ import retrofit.client.Response;
 
 /**
  * Purpose: This class is used to add a note to a specific device
+ *
  * @author maggiemoheb
  */
 
 public class AddNoteActivity extends Activity {
-    String ENDPOINT = "http://192.168.26.15:3000/"; // ENDPOINT value for the server ip address
     int userID; // ID of the user of this session
     int roomID; //ID of the room of the device
-    String deviceID ; //ID of the device to which the note is added
+    String deviceID; //ID of the device to which the note is added
     String Body = "";//The body of the note
     String errorMessage = "initial"; //error message which indicates if the adding ended up in success or failure
 
     /**
      * Getter for the user ID
+     *
      * @return userID
      */
     public int getUserID() {
@@ -41,6 +42,7 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Getter for the room ID
+     *
      * @return roomID
      */
     public int getRoomID() {
@@ -49,6 +51,7 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Getter for the device ID
+     *
      * @return deviceID
      */
     public String getDeviceID() {
@@ -56,15 +59,8 @@ public class AddNoteActivity extends Activity {
     }
 
     /**
-     * Getter for the ENDPOINT
-     * @return ENDPOINT
-     */
-    public String getENDPOINT() {
-        return this.ENDPOINT;
-    }
-
-    /**
      * Getter for the error message
+     *
      * @return errorMessage
      */
     public String getErrorMessage() {
@@ -73,6 +69,7 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Getter for the body
+     *
      * @return Body
      */
     public String getBody() {
@@ -81,6 +78,7 @@ public class AddNoteActivity extends Activity {
 
     /**
      * Setter for the body of the note
+     *
      * @param s: The body is changed to the value of this String
      */
     public void setBody(String s) {
@@ -126,6 +124,7 @@ public class AddNoteActivity extends Activity {
     /**
      * This method us called whenever Add Note button is clicked.
      * It puts what is written in EditText in the Body instance variable.
+     *
      * @param view: It takes the view as a parameter.
      */
     public void AddNote(View view) {
@@ -135,11 +134,12 @@ public class AddNoteActivity extends Activity {
 
     }
 
-    /**This method is called whenever adding a note to the database is needed (in the test and AddNote() method).
-      * It calls API.AddNote() method passing Body instance method in the method to be sent to rails to create a note.
-      */
+    /**
+     * This method is called whenever adding a note to the database is needed (in the test and AddNote() method).
+     * It calls API.AddNote() method passing Body instance method in the method to be sent to rails to create a note.
+     */
     public void sendNoteToRails() {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         if (Body.equals("")) {
             errorMessage = "Cannot add note!";

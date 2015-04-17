@@ -5,8 +5,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.smartx.cookies.smartx.R;
-import com.smartx.cookies.smartx.renameRoomActivity;
 import com.smartx.cookies.smartx.myAPI;
+import com.smartx.cookies.smartx.renameRoomActivity;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -18,7 +18,7 @@ import retrofit.client.Response;
  * Created by maggiemoheb on 4/7/15.
  */
 
-class renameRoomActivityTest  extends ActivityInstrumentationTestCase2<renameRoomActivity> {
+class renameRoomActivityTest extends ActivityInstrumentationTestCase2<renameRoomActivity> {
 
     private renameRoomActivity myActivity;//An instance of the RenameRoomActivity
     private EditText roomName;//An instance of EditText field in the RenameRoomActivity
@@ -37,6 +37,7 @@ class renameRoomActivityTest  extends ActivityInstrumentationTestCase2<renameRoo
 
     /**
      * setUp() sets the instance variables to match those of the RenameRoomActivity it is testing
+     *
      * @throws Exception
      */
     protected void setUp() throws Exception {
@@ -47,7 +48,7 @@ class renameRoomActivityTest  extends ActivityInstrumentationTestCase2<renameRoo
         userID = myActivity.getUserID();
         roomID = myActivity.getRoomID();
         ENDPOINT = myActivity.getENDPOINT();
-        errorMessage =myActivity.getErrorMessage();
+        errorMessage = myActivity.getErrorMessage();
     }
 
     /**
@@ -60,6 +61,7 @@ class renameRoomActivityTest  extends ActivityInstrumentationTestCase2<renameRoo
 
     /**
      * testRenameRoomSuccess() tests that the name is updated correctly when given the correct parameters
+     *
      * @throws Exception
      */
     public void testRenameRoomSuccess() throws Exception {
@@ -77,7 +79,7 @@ class renameRoomActivityTest  extends ActivityInstrumentationTestCase2<renameRoo
             public void success(String s, Response response) {
                 assertEquals("some new name", s);
                 String check = myActivity.getErrorMessage();
-                assertEquals("",check);
+                assertEquals("", check);
             }
 
             @Override
@@ -89,6 +91,7 @@ class renameRoomActivityTest  extends ActivityInstrumentationTestCase2<renameRoo
 
     /**
      * testRenameRoomFailure() tests that the room name will not be updated when passed wrong parameters (empty room name)
+     *
      * @throws Exception
      */
     public void testRenameRoomFailure() throws Exception {
@@ -105,7 +108,7 @@ class renameRoomActivityTest  extends ActivityInstrumentationTestCase2<renameRoo
             public void success(String s, Response response) {
                 myActivity.renameRoom(myActivity.getWindow().getDecorView());
                 String check = myActivity.getErrorMessage();
-                assertEquals("Room name cannot be blank",check);
+                assertEquals("Room name cannot be blank", check);
             }
 
             @Override

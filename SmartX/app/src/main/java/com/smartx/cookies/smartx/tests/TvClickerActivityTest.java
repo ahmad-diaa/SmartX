@@ -18,8 +18,9 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- *Pupose:The purpose of this class is to test TVClickerActivity
- *@author youmna
+ * Pupose:The purpose of this class is to test TVClickerActivity
+ *
+ * @author youmna
  */
 public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvClickerActivity> {
 
@@ -41,9 +42,10 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     }
 
     /**
-    *initiate parameters and get activities
-    *@throws exception
-      */
+     * initiate parameters and get activities
+     *
+     * @throws exception
+     */
     protected void setUp() throws Exception {
         super.setUp();
         myActivity = getActivity();
@@ -52,7 +54,6 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         nextChannel = (Button) myActivity.findViewById(R.id.button2);
         volumeUp = (Button) myActivity.findViewById(R.id.button3);
         volumeDown = (Button) myActivity.findViewById(R.id.button4);
-        ENDPOINT = myActivity.getENDPOINT();
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
         api.login("ahdiaa", "123456", new Callback<Session>() {
@@ -77,7 +78,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
             }
         });
-        api.addDevice("1","1","1","TV","0", new Callback<Device>() {
+        api.addDevice("1", "1", "1", "TV", "0", new Callback<Device>() {
 
             @Override
             public void success(Device device, Response response) {
@@ -89,7 +90,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
             }
         });
-        api.addClicker("1","1","1","1",new Callback<Clicker>() {
+        api.addClicker("1", "1", "1", "1", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
 
@@ -103,25 +104,25 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     }
 
 
-
-
     /**
-    *verify that the test fixture has been set up correctly,
-    *and the objects that you want to test have been correctly instantiated or initialized
-    */
+     * verify that the test fixture has been set up correctly,
+     * and the objects that you want to test have been correctly instantiated or initialized
+     */
     public void testPreconditions() {
         assertNotNull("myActivity is null", myActivity);
     }
-   /**
-    *used to test if the clicker's current command changes when the channel "+" button is clicked
-    *and the device is turned on
-    *@throws exception
-    */
+
+    /**
+     * used to test if the clicker's current command changes when the channel "+" button is clicked
+     * and the device is turned on
+     *
+     * @throws exception
+     */
 
     public void testNextChannelSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus("1", "1" , "1", "1", new Callback<Device>() {
+        api.editDeviceStatus("1", "1", "1", "1", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -131,7 +132,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
             public void failure(RetrofitError error) {
 
             }
-        } );
+        });
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
                 onOff.setChecked(true);
@@ -140,7 +141,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
         myActivity.nextChannel(myActivity.getWindow().getDecorView());
 
-        api.getClicker("1","1","1", new Callback<com.smartx.cookies.smartx.Clicker>() {
+        api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
                 assertEquals("Tv/C/1", clicker.getCommand());
@@ -154,15 +155,16 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         });
     }
 
-     /**
-    *test if the clicker's current command changes when the channel "-" button is clicked
-    *and the device is turned on
-    *@throws exception
-      */
+    /**
+     * test if the clicker's current command changes when the channel "-" button is clicked
+     * and the device is turned on
+     *
+     * @throws exception
+     */
     public void testPreviousChannelSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus("1","1","1", "1", new Callback<Device>() {
+        api.editDeviceStatus("1", "1", "1", "1", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -181,7 +183,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
         myActivity.previousChannel(myActivity.getWindow().getDecorView());
 
-        api.getClicker("1","1","1", new Callback<com.smartx.cookies.smartx.Clicker>() {
+        api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
                 assertEquals("Tv/C/0", clicker.getCommand());
@@ -196,14 +198,15 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     }
 
     /**
-    *test if the clicker's current command changes when the Volume "+" button is clicked
-    *and  the device is turned off
-    *@throws exception
+     * test if the clicker's current command changes when the Volume "+" button is clicked
+     * and  the device is turned off
+     *
+     * @throws exception
      */
     public void testVolumeUpFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus("1","1","1", "0", new Callback<Device>() {
+        api.editDeviceStatus("1", "1", "1", "0", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -223,7 +226,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
         myActivity.volumeUP(myActivity.getWindow().getDecorView());
 
-        api.getClicker("1","1", "1",new Callback<com.smartx.cookies.smartx.Clicker>() {
+        api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
                 assertEquals("Tv/V/1", clicker.getCommand());
@@ -238,14 +241,15 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     }
 
     /**
-    *used to test if the clicker's current command changes if the volume "-" button is clicked
-    *and  the device is turned off
-    *@throws exception
-    */
+     * used to test if the clicker's current command changes if the volume "-" button is clicked
+     * and  the device is turned off
+     *
+     * @throws exception
+     */
     public void testVolumeDownFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus("1", "1","1", "0", new Callback<Device>() {
+        api.editDeviceStatus("1", "1", "1", "0", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -263,7 +267,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         });
 
         myActivity.volumeDown(myActivity.getWindow().getDecorView());
-        api.getClicker("1","1","1", new Callback<com.smartx.cookies.smartx.Clicker>() {
+        api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
                 api.getDevice("1", "1", "1", new Callback<Device>() {
@@ -288,55 +292,57 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     }
 
     /**
-    *test if the clicker's current command changes when the channel "+" button is clicked
-    *and the status = "0"
-    *@throws exception
-    */
-   public void testNextChannelFailure() throws Exception {
-       final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-       final myAPI api = adapter.create(myAPI.class);
-       api.editDeviceStatus("1","1","1", "0", new Callback<Device>() {
-           @Override
-           public void success(Device device, Response response) {
+     * test if the clicker's current command changes when the channel "+" button is clicked
+     * and the status = "0"
+     *
+     * @throws exception
+     */
+    public void testNextChannelFailure() throws Exception {
+        final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        final myAPI api = adapter.create(myAPI.class);
+        api.editDeviceStatus("1", "1", "1", "0", new Callback<Device>() {
+            @Override
+            public void success(Device device, Response response) {
 
-           }
+            }
 
-           @Override
-           public void failure(RetrofitError error) {
+            @Override
+            public void failure(RetrofitError error) {
 
-           }
-       });
-       myActivity.runOnUiThread(new Runnable() {
-           public void run() {
-               onOff.setChecked(false);
-           }
-       });
+            }
+        });
+        myActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                onOff.setChecked(false);
+            }
+        });
 
-       myActivity.nextChannel(myActivity.getWindow().getDecorView());
+        myActivity.nextChannel(myActivity.getWindow().getDecorView());
 
-       api.getClicker("1","1", "1",new Callback<com.smartx.cookies.smartx.Clicker>() {
-           @Override
-           public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-               assertEquals("Tv/C/1", clicker.getCommand());
+        api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
+            @Override
+            public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
+                assertEquals("Tv/C/1", clicker.getCommand());
 
-           }
+            }
 
-           @Override
-           public void failure(RetrofitError error) {
+            @Override
+            public void failure(RetrofitError error) {
 
-           }
-       });
-   }
+            }
+        });
+    }
 
     /**
-   *test the clicker's current command changes when the channel "+" button is clicked
-   *and the device is turned on
-   *@throws exception
-   */
+     * test the clicker's current command changes when the channel "+" button is clicked
+     * and the device is turned on
+     *
+     * @throws exception
+     */
     public void testPreviousChannelFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus("1", "1","1", "0", new Callback<Device>() {
+        api.editDeviceStatus("1", "1", "1", "0", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -355,7 +361,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
         myActivity.previousChannel(myActivity.getWindow().getDecorView());
 
-        api.getClicker("1","1","1", new Callback<com.smartx.cookies.smartx.Clicker>() {
+        api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
                 assertNotSame("Tv/C/0", clicker.getCommand());
@@ -370,10 +376,11 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     }
 
     /**
-     *test the clicker's current command changes when the volume "+" button is clicked
-     *and the device is turned on
-     *@throws exception
-    */
+     * test the clicker's current command changes when the volume "+" button is clicked
+     * and the device is turned on
+     *
+     * @throws exception
+     */
     public void testVolumeUpSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
@@ -396,7 +403,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
         myActivity.volumeUP(myActivity.getWindow().getDecorView());
 
-        api.getClicker("1", "1","1", new Callback<com.smartx.cookies.smartx.Clicker>() {
+        api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
                 assertEquals("Tv/V/1", clicker.getCommand());
@@ -412,14 +419,15 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     }
 
     /**
-    *test the clicker's current command changes when the volume "-" button is clicked
-    *and the device is turned on
-    *@throws exception
-    */
+     * test the clicker's current command changes when the volume "-" button is clicked
+     * and the device is turned on
+     *
+     * @throws exception
+     */
     public void testVolumeDownSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus("1", "1","1", "1", new Callback<Device>() {
+        api.editDeviceStatus("1", "1", "1", "1", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
 
@@ -438,7 +446,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
         myActivity.volumeDown(myActivity.getWindow().getDecorView());
 
-        api.getClicker("1","1","1", new Callback<com.smartx.cookies.smartx.Clicker>() {
+        api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
                 assertEquals("Tv/V/0", clicker.getCommand());

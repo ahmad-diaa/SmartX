@@ -39,7 +39,8 @@ public class ViewDevicesTest extends ActivityInstrumentationTestCase2<ViewDevice
         adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         api = adapter.create(myAPI.class);
     }
-    public void testViewDevices() throws Exception{
+
+    public void testViewDevices() throws Exception {
         api.viewDevices("1", "1", new Callback<List<Device>>() {
             @Override
             public void success(List<Device> devices, Response response) {

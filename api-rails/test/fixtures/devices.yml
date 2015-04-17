@@ -4,19 +4,14 @@ device_one:
   device_id: 1
   user_id: 1
   room_id: 1
-<<<<<<< HEAD
-  device_id: 2
   name: Tv
-  status: '0'
+  status: 'false'
 
-
-=======
-  name: myTelevision
 
 device_two:
   device_id: 2
   user_id: 1
-  room_id: MyString
+  room_id: 1
   name: myLamp
+  status: 'false'
 
->>>>>>> origin/Sprint_One
