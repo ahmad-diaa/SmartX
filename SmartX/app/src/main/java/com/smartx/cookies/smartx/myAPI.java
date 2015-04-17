@@ -16,6 +16,9 @@ import retrofit.http.*;
  */
 public interface myAPI {
 
+    @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
+    void findDevice(@Path("userID") String userID,@Path("roomID") String roomID,@Path("deviceName") String name, Callback<List<Device>> callback);
+
     @FormUrlEncoded
     @POST("/session")
     void login(@Field("session[name]") String username, @Field("session[password]") String password,

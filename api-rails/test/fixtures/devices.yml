@@ -3,7 +3,7 @@
 one:
   user_id: 1
   room_id: 1
-  device_id: 1
+  device_id: 2
   name: Tv
   status: '0'
 
