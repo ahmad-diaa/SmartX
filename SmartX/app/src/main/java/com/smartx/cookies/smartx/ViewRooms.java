@@ -1,5 +1,7 @@
 package com.smartx.cookies.smartx;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -63,6 +65,28 @@ public class ViewRooms extends ListActivity {
             R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
     private ArrayList<String> roomNames;
     private ArrayList<Integer> iconRooms;
+    private myAPI api;
+    private int itemPosition;
+    private int selectedRoomID;
+    private String roomSelected;
+    private String end;
+
+    /**
+     *
+     * @return value of the ENDPOINT in strings.xml
+     */
+    public String getEnd() {
+        return end;
+    }
+
+    /**
+     *
+     * @param End the value of the endpoint from the strings.xml
+     */
+    public void setEnd(String End){
+        this.end = End;
+    }
+
 
     /**
      *
@@ -133,6 +157,23 @@ public class ViewRooms extends ListActivity {
         return count;
     }
 
+    public int getSelectedRoomID() {
+        return selectedRoomID;
+    }
+
+    public void setSelectedRoomID(int selectedRoomID) {
+        this.selectedRoomID = selectedRoomID;
+    }
+
+    public String getRoomSelected() {
+        return roomSelected;
+    }
+
+    public void setRoomSelected(String roomSelected) {
+        this.roomSelected = roomSelected;
+    }
+
+
 
 
     /**
@@ -150,9 +191,10 @@ public class ViewRooms extends ListActivity {
         final SharedPreferences SHARED_PREFERENCE =
                 PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (SHARED_PREFERENCE.getInt("userID", 1));
+        setEnd(getResources().getString(R.string.ENDPOINT));
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = ADAPTER.create(myAPI.class);
+        api = ADAPTER.create(myAPI.class);
         api.viewRooms(userID + "", new Callback<List<Room>>() {
 
             @Override
@@ -310,15 +352,89 @@ public class ViewRooms extends ListActivity {
      */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if (item.getTitle() == "Rename") {
-            Toast.makeText(this, "Rename Action Should be invoked", Toast.LENGTH_SHORT).show();
-        } else if (item.getTitle() == "Delete") {
-            Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
+        setRoomSelected(getListView().getItemAtPosition(itemPosition).toString());
+        setRoomSelected(getRoomSelected().replace(" ", "%20"));
+        if (item.getTitle() == "Rename Room") {
+            api.findRoom(userID + "", getRoomSelected(), new Callback<List<Room>>() {
+
+                @Override
+                public void success(List<Room> rooms, Response response) {
+                    SharedPreferences prefs =
+                            PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("roomID", rooms.get(0).getId());
+                    editor.commit();
+                    startActivity(new Intent(ViewRooms.this, renameRoomActivity.class));
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.d("ERROR505", error.getMessage());
+                    throw error;
+                }
+
+            });
+
+        } else if (item.getTitle() == "Delete Room") {
+            showPopUp();
         } else {
             return false;
         }
         return true;
     }
+
+    /**
+     * shows a popup window when user clicks on "Delete Room" in the context menu
+     */
+    private void showPopUp() {
+
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                this);
+        builderSingle.setTitle("Room Selected will be deleted with all its devices\n");
+        builderSingle.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builderSingle.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                api.findRoom(userID + "", getRoomSelected(), new Callback<List<Room>>() {
+
+                    @Override
+                    public void success(List<Room> rooms, Response response) {
+                        setSelectedRoomID((rooms.get(0).getId()));
+                        api.deleteRoom(userID + "", (rooms.get(0).getId()) + "", new Callback<Room>() {
+
+                            @Override
+                            public void success(Room room, Response response) {
+                                Toast.makeText(getApplicationContext(), "Room Successfully deleted", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(getApplicationContext(), ViewRooms.class));
+
+                            }
+                            @Override
+                            public void failure(RetrofitError error) {
+                                throw error;
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        throw error;
+                    }
+                });
+            }
+        });
+
+
+        builderSingle.show();
+    }
+
 }
 
 

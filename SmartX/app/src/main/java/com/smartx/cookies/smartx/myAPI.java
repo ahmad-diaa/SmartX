@@ -10,6 +10,7 @@ import models.Session;
 import models.User;
 import models.Type;
 import retrofit.Callback;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -64,5 +65,7 @@ public interface myAPI {
     @PUT("/users/{userID}/")
     void changePassword(@Path("userID") String id, @Field("user[password]") String password, Callback<User> callback);
 
+    @DELETE("/users/{userID}/rooms/{roomID}")
+    void deleteRoom(@Path("userID") String userid, @Path("roomID") String roomid, Callback<Room> callback);
 }
 

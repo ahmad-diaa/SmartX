@@ -64,7 +64,7 @@ class RoomsController < ApplicationController
   # DELETE /rooms/1.json
   def destroy
     @user = User.find(params[:user_id])
-    @room = @user.room.find(params[:id])
+    @room = @user.rooms.find(params[:id])
     @room.destroy
     head :no_content
   end
