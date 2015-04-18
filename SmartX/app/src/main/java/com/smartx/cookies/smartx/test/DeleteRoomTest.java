@@ -62,19 +62,6 @@ public class DeleteRoomTest extends ActivityInstrumentationTestCase2<ViewRooms> 
         ENDPOINT = "http://172.20.10.4:3000";
         adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         api = adapter.create(myAPI.class);
-        api.addRoom(1 + "", "AwesomeRoom", "JustAnotherRoomID", new Callback<Room>() {
-            @Override
-            public void success(Room room, Response response) {
-                setRoomID(room.getId());
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                throw error;
-            }
-        });
-
 
 
     }
@@ -92,38 +79,56 @@ public class DeleteRoomTest extends ActivityInstrumentationTestCase2<ViewRooms> 
             }
         });
 
-        api.deleteRoom(userID+"", roomID+"", new Callback<Room>(){
 
+        api.addRoom(1 + "", "NewRoom23", new Callback<Room>() {
             @Override
             public void success(Room room, Response response) {
 
+
+
+
+                api.deleteRoom(1+"", room.getId()+"", new Callback<Room>(){
+
+                    @Override
+                    public void success(Room room, Response response) {
+                        api.viewRooms(userID+"", new Callback<List<Room>>(){
+
+
+                            @Override
+                            public void success(List<Room> rooms, Response response) {
+                                ArrayList<String> roomNames = new ArrayList<String>();
+                                Iterator<Room> iterator = rooms.iterator();
+                                int i = rooms.size() - 1;
+                                while (i >= 0 & iterator.hasNext()) {
+                                    if((iterator.next().getName()).equals("NewRoom23")) assertEquals(1, 0);
+                                    i--;
+                                }
+
+
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+
+                });
+
+
+
             }
 
             @Override
             public void failure(RetrofitError error) {
-
-            }
-
-        });
-        api.viewRooms(userID+"", new Callback<List<Room>>(){
-
-
-            @Override
-            public void success(List<Room> rooms, Response response) {
-                ArrayList<String> roomNames = new ArrayList<String>();
-                Iterator<Room> iterator = rooms.iterator();
-                int i = rooms.size() - 1;
-                while (i >= 0 & iterator.hasNext()) {
-                    roomNames.add(iterator.next().getName());
-                    i--;
-                }
-
-                assertTrue(!(roomNames.contains("AwesomeRoom")));
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
+                throw error;
             }
         });
 

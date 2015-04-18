@@ -24,7 +24,7 @@ import retrofit.client.Response;
  */
 public class renameRoomActivity extends Activity {
 
-    String ENDPOINT = "http://192.168.43.63:3000/";// The ENDPOINT to the server IP address
+    String ENDPOINT = "http://172.20.10.4:3000/";// The ENDPOINT to the server IP address
     EditText roomName;// EditText field to put the new name room in
     int userID;// the user ID of the session
     int roomID;// room ID to be renamed

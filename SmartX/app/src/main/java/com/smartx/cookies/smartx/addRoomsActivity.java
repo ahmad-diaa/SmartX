@@ -39,7 +39,7 @@ public class addRoomsActivity extends Activity {
         Room room = new Room(roomName.getText().toString());
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.addRoom((userID + ""), room.getName(), room.getId()+"", new Callback<Room>() {
+        api.addRoom((userID + ""), room.getName(), new Callback<Room>() {
 
             @Override
             public void success(Room room, Response response) {

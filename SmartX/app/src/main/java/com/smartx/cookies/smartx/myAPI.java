@@ -36,7 +36,7 @@ public interface myAPI {
     @FormUrlEncoded
     @POST("/users/{userID}/rooms/")
 
-    void addRoom(@Path("userID") String id, @Field("room[name]") String name , @Field("room[id]") String room_id ,Callback<Room> callback);
+    void addRoom(@Path("userID") String id, @Field("room[name]") String name , Callback<Room> callback);
 
     @FormUrlEncoded
     @PUT("/users/{userID}/rooms/{id}")
@@ -64,6 +64,7 @@ public interface myAPI {
     @FormUrlEncoded
     @PUT("/users/{userID}/")
     void changePassword(@Path("userID") String id, @Field("user[password]") String password, Callback<User> callback);
+
 
     @DELETE("/users/{userID}/rooms/{roomID}")
     void deleteRoom(@Path("userID") String userid, @Path("roomID") String roomid, Callback<Room> callback);
