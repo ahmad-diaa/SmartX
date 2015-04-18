@@ -22,11 +22,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.app.ListActivity;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
 import android.widget.Toast;
+
 import models.Room;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -40,7 +43,6 @@ import retrofit.client.Response;
  *
  * @author Amir
  */
-
 
 
 /**
@@ -72,7 +74,6 @@ public class ViewRooms extends ListActivity {
     private String end;
 
     /**
-     *
      * @return value of the ENDPOINT in strings.xml
      */
     public String getEnd() {
@@ -80,16 +81,14 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @param End the value of the endpoint from the strings.xml
      */
-    public void setEnd(String End){
+    public void setEnd(String End) {
         this.end = End;
     }
 
 
     /**
-     *
      * @param adapter2 CustomListAdapter to set
      */
     public void setAdapter2(CustomListAdapter adapter2) {
@@ -97,7 +96,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @param photos Array  of photos to set
      */
     public void setPhotos(int[] photos) {
@@ -105,7 +103,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @return the customListAdapter
      */
     public CustomListAdapter getAdapter2() {
@@ -113,7 +110,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @return ArrayList of all rooms
      */
     public ArrayList<String> getRoomNames() {
@@ -121,7 +117,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @return ArrayList of all devices
      */
     public ArrayList<Integer> getIconRooms() {
@@ -130,7 +125,6 @@ public class ViewRooms extends ListActivity {
 
 
     /**
-     *
      * @param iconRooms Arraylist of Rooms photos ids
      */
     public void setIconRooms(ArrayList<Integer> iconRooms) {
@@ -138,7 +132,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *
      * @param roomNames ArrayList of all rooms
      */
     public void setRoomNames(ArrayList<String> roomNames) {
@@ -174,15 +167,13 @@ public class ViewRooms extends ListActivity {
     }
 
 
-
-
     /**
-     *Called when the activity is starting.
-    It shows list of rooms belonging to the user signed in.
+     * Called when the activity is starting.
+     * It shows list of rooms belonging to the user signed in.
      *
      * @param savedInstanceState if the activity is being
-    re-initialized after previously being shut down then
-    this Bundle  contains the data it most recently supplied.
+     *                           re-initialized after previously being shut down then
+     *                           this Bundle  contains the data it most recently supplied.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -244,21 +235,22 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Log.d("", error.getMessage());throw error;
+                Log.d("", error.getMessage());
+                throw error;
             }
         });
     }
 
     /**
-     *This method will be called when an item in the list is selected.
-    The name of the room clicked will be used as parameter to
-    findRoom method which retrieves from rails the room with given name.
-    The devices inside this room will show up.
+     * This method will be called when an item in the list is selected.
+     * The name of the room clicked will be used as parameter to
+     * findRoom method which retrieves from rails the room with given name.
+     * The devices inside this room will show up.
      *
-     * @param l the ListView where the click happened.
-     * @param v the view that was clicked within the ListView.
+     * @param l        the ListView where the click happened.
+     * @param v        the view that was clicked within the ListView.
      * @param position the position of the view in the list.
-     * @param id the row id of the item that was clicked.
+     * @param id       the row id of the item that was clicked.
      */
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
@@ -281,7 +273,7 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Log.d("YA RAB" , error.getMessage());
+                Log.d("YA RAB", error.getMessage());
                 throw error;
             }
         });
@@ -308,8 +300,9 @@ public class ViewRooms extends ListActivity {
         inflater.inflate(R.menu.menu_view_rooms, menu);
         return true;
     }
+
     /**
-     *get id of the user.
+     * get id of the user.
      *
      * @return primary key of the user.
      */
@@ -318,14 +311,16 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     *set id of the user.
+     * set id of the user.
      *
      * @param userID the primary key of the user.
      */
     public void setUserID(int userID) {
         this.userID = userID;
     }
-    /** Called when the context menu for this view is being built.
+
+    /**
+     * Called when the context menu for this view is being built.
      *
      * @param menu     The context menu that is being built.
      * @param v        The view for which the context menu is being built.
@@ -416,6 +411,7 @@ public class ViewRooms extends ListActivity {
                                 startActivity(new Intent(getApplicationContext(), ViewRooms.class));
 
                             }
+
                             @Override
                             public void failure(RetrofitError error) {
                                 throw error;

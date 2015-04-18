@@ -27,17 +27,8 @@ public class DeleteRoomTest extends ActivityInstrumentationTestCase2<ViewRooms> 
 
     private ViewRooms myActivity;
     private int userID;
-
-    public int getRoomID() {
-        return roomID;
-    }
-
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
-    }
-
     private int roomID;
-    private List<String> names=new ArrayList<String>();
+    private List<String> names = new ArrayList<String>();
     private String ENDPOINT;
     RestAdapter adapter;
     myAPI api;
@@ -52,23 +43,22 @@ public class DeleteRoomTest extends ActivityInstrumentationTestCase2<ViewRooms> 
 
     /**
      * setUp() sets the instance variables to match those of the ViewRoomsActivity it is testing
+     *
      * @throws Exception
      */
     protected void setUp() throws Exception {
         super.setUp();
         myActivity = getActivity();
         userID = 1;
-        roomName= "AwesomeRoom";
+        roomName = "AwesomeRoom";
         ENDPOINT = "http://172.20.10.4:3000";
         adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         api = adapter.create(myAPI.class);
-
-
     }
-
 
     /**
      * tests that the name is updated correctly when given the correct parameters
+     *
      * @throws Exception
      */
 
@@ -79,32 +69,23 @@ public class DeleteRoomTest extends ActivityInstrumentationTestCase2<ViewRooms> 
             }
         });
 
-
         api.addRoom(1 + "", "NewRoom23", new Callback<Room>() {
             @Override
             public void success(Room room, Response response) {
-
-
-
-
-                api.deleteRoom(1+"", room.getId()+"", new Callback<Room>(){
-
+                api.deleteRoom(1 + "", room.getId() + "", new Callback<Room>() {
                     @Override
                     public void success(Room room, Response response) {
-                        api.viewRooms(userID+"", new Callback<List<Room>>(){
-
-
+                        api.viewRooms(userID + "", new Callback<List<Room>>() {
                             @Override
                             public void success(List<Room> rooms, Response response) {
                                 ArrayList<String> roomNames = new ArrayList<String>();
                                 Iterator<Room> iterator = rooms.iterator();
                                 int i = rooms.size() - 1;
                                 while (i >= 0 & iterator.hasNext()) {
-                                    if((iterator.next().getName()).equals("NewRoom23")) assertEquals(1, 0);
+                                    if ((iterator.next().getName()).equals("NewRoom23"))
+                                        assertEquals(1, 0);
                                     i--;
                                 }
-
-
                             }
 
                             @Override
@@ -122,8 +103,6 @@ public class DeleteRoomTest extends ActivityInstrumentationTestCase2<ViewRooms> 
 
                 });
 
-
-
             }
 
             @Override
@@ -131,10 +110,5 @@ public class DeleteRoomTest extends ActivityInstrumentationTestCase2<ViewRooms> 
                 throw error;
             }
         });
-
-
-
     }
-
-
 }
