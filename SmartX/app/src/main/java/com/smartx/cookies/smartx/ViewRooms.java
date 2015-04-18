@@ -1,0 +1,437 @@
+package com.smartx.cookies.smartx;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.app.ListActivity;
+import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.app.ListActivity;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+
+import android.widget.Toast;
+
+import models.Room;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+/**
+ *SE Sprint1
+ *ViewRooms.java
+ * Purpose: View rooms and devices in each room.
+ *
+ * @author Amir
+ */
+
+
+/**
+ * ViewRooms.java
+ * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
+ *
+ * @author Dalia Maarek
+ */
+
+
+public class ViewRooms extends ListActivity {
+
+
+    Button renameRoom;
+    private EditText editSearch;
+    private int userID;
+    Button addRoomB;
+    static int count = -1;
+    private CustomListAdapter adapter2;
+    private int[] photos = new int[]{R.drawable.one,
+            R.drawable.two, R.drawable.three, R.drawable.four, R.drawable.five,
+            R.drawable.six, R.drawable.seven, R.drawable.eight, R.drawable.nine};
+    private ArrayList<String> roomNames;
+    private ArrayList<Integer> iconRooms;
+    private myAPI api;
+    private int itemPosition;
+    private int selectedRoomID;
+    private String roomSelected;
+    private String end;
+
+    /**
+     * @return value of the ENDPOINT in strings.xml
+     */
+    public String getEnd() {
+        return end;
+    }
+
+    /**
+     * @param End the value of the endpoint from the strings.xml
+     */
+    public void setEnd(String End) {
+        this.end = End;
+    }
+
+
+    /**
+     * @param adapter2 CustomListAdapter to set
+     */
+    public void setAdapter2(CustomListAdapter adapter2) {
+        this.adapter2 = adapter2;
+    }
+
+    /**
+     * @param photos Array  of photos to set
+     */
+    public void setPhotos(int[] photos) {
+        this.photos = photos;
+    }
+
+    /**
+     * @return the customListAdapter
+     */
+    public CustomListAdapter getAdapter2() {
+        return adapter2;
+    }
+
+    /**
+     * @return ArrayList of all rooms
+     */
+    public ArrayList<String> getRoomNames() {
+        return roomNames;
+    }
+
+    /**
+     * @return ArrayList of all devices
+     */
+    public ArrayList<Integer> getIconRooms() {
+        return iconRooms;
+    }
+
+
+    /**
+     * @param iconRooms Arraylist of Rooms photos ids
+     */
+    public void setIconRooms(ArrayList<Integer> iconRooms) {
+        this.iconRooms = iconRooms;
+    }
+
+    /**
+     * @param roomNames ArrayList of all rooms
+     */
+    public void setRoomNames(ArrayList<String> roomNames) {
+
+        this.roomNames = roomNames;
+    }
+
+    /**
+     * Gets the id of the photo to be assigned to the next room
+     *
+     * @return An integer number between 0 and 8
+     */
+    public int randomIcon() {
+
+        count = (count + 1) % 9;
+        return count;
+    }
+
+    public int getSelectedRoomID() {
+        return selectedRoomID;
+    }
+
+    public void setSelectedRoomID(int selectedRoomID) {
+        this.selectedRoomID = selectedRoomID;
+    }
+
+    public String getRoomSelected() {
+        return roomSelected;
+    }
+
+    public void setRoomSelected(String roomSelected) {
+        this.roomSelected = roomSelected;
+    }
+
+
+    /**
+     * Called when the activity is starting.
+     * It shows list of rooms belonging to the user signed in.
+     *
+     * @param savedInstanceState if the activity is being
+     *                           re-initialized after previously being shut down then
+     *                           this Bundle  contains the data it most recently supplied.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_rooms);
+        final SharedPreferences SHARED_PREFERENCE =
+                PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (SHARED_PREFERENCE.getInt("userID", 1));
+        setEnd(getResources().getString(R.string.ENDPOINT));
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        api = ADAPTER.create(myAPI.class);
+        api.viewRooms(userID + "", new Callback<List<Room>>() {
+
+            @Override
+            public void success(List<Room> rooms, Response response) {
+
+                roomNames = new ArrayList<String>();
+                Iterator<Room> iterator = rooms.iterator();
+
+                iconRooms = new ArrayList<Integer>();
+                int i = rooms.size() - 1;
+                while (i >= 0 & iterator.hasNext()) {
+
+                    roomNames.add(iterator.next().getName());
+                    iconRooms.add(photos[randomIcon()]);
+                    i--;
+                }
+                adapter2 = new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
+                setListAdapter(adapter2);
+                editSearch = (EditText) findViewById(R.id.search);
+
+                // Capture Text in EditText
+
+                editSearch.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void afterTextChanged(Editable arg0) {
+                        // TODO Auto-generated method stub
+                        String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
+                        adapter2.filter(text);
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence arg0, int arg1,
+                                                  int arg2, int arg3) {
+                        // TODO Auto-generated method stub
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                              int arg3) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+                registerForContextMenu(getListView());
+            }
+
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d("", error.getMessage());
+                throw error;
+            }
+        });
+    }
+
+    /**
+     * This method will be called when an item in the list is selected.
+     * The name of the room clicked will be used as parameter to
+     * findRoom method which retrieves from rails the room with given name.
+     * The devices inside this room will show up.
+     *
+     * @param l        the ListView where the click happened.
+     * @param v        the view that was clicked within the ListView.
+     * @param position the position of the view in the list.
+     * @param id       the row id of the item that was clicked.
+     */
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Object o = this.getListAdapter().getItem(position);
+        String room = o.toString();
+        Toast.makeText(getApplicationContext(), room, Toast.LENGTH_LONG).show();
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
+        api.findRoom(userID + "", room, new Callback<List<Room>>() {
+            @Override
+            public void success(List<Room> rooms, Response response) {
+                SharedPreferences prefs =
+                        PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt("roomID", rooms.get(0).getId());
+                editor.commit();
+                startActivity(new Intent(ViewRooms.this, viewDevices.class));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d("YA RAB", error.getMessage());
+                throw error;
+            }
+        });
+    }
+
+
+    /**
+     * Starts the activity (addRoomsActivity) to create a new room
+     *
+     * @param view add room button
+     */
+    public void addRoom(View view) {
+        startActivity(new Intent(this, addRoomsActivity.class));
+    }
+
+    /**
+     * Creates the initial menu state
+     *
+     * @param menu Menu to be populated
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_view_rooms, menu);
+        return true;
+    }
+
+    /**
+     * get id of the user.
+     *
+     * @return primary key of the user.
+     */
+    public int getUserID() {
+        return userID;
+    }
+
+    /**
+     * set id of the user.
+     *
+     * @param userID the primary key of the user.
+     */
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    /**
+     * Called when the context menu for this view is being built.
+     *
+     * @param menu     The context menu that is being built.
+     * @param v        The view for which the context menu is being built.
+     * @param menuInfo Extra information about the item for which the context menu should be shown. This
+     *                 information will vary depending on the class of v.
+     */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        menu.setHeaderTitle("Context menu");
+        menu.add(0, v.getId(), 0, "Rename Room");
+        menu.add(0, v.getId(), 0, "Delete Room");
+    }
+
+
+    /**
+     * Executes commands found in the context menu
+     *
+     * @param item The item clicked in the context menu
+     * @return boolean true in case item clicked corresponds to an action and executed
+     * else returns false in case
+     */
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        setRoomSelected(getListView().getItemAtPosition(itemPosition).toString());
+        setRoomSelected(getRoomSelected().replace(" ", "%20"));
+        if (item.getTitle() == "Rename Room") {
+            api.findRoom(userID + "", getRoomSelected(), new Callback<List<Room>>() {
+
+                @Override
+                public void success(List<Room> rooms, Response response) {
+                    SharedPreferences prefs =
+                            PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("roomID", rooms.get(0).getId());
+                    editor.commit();
+                    startActivity(new Intent(ViewRooms.this, renameRoomActivity.class));
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.d("ERROR505", error.getMessage());
+                    throw error;
+                }
+
+            });
+
+        } else if (item.getTitle() == "Delete Room") {
+            showPopUp();
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * shows a popup window when user clicks on "Delete Room" in the context menu
+     */
+    private void showPopUp() {
+
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                this);
+        builderSingle.setTitle("Room Selected will be deleted with all its devices\n");
+        builderSingle.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builderSingle.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                api.findRoom(userID + "", getRoomSelected(), new Callback<List<Room>>() {
+
+                    @Override
+                    public void success(List<Room> rooms, Response response) {
+                        setSelectedRoomID((rooms.get(0).getId()));
+                        api.deleteRoom(userID + "", (rooms.get(0).getId()) + "", new Callback<Room>() {
+
+                            @Override
+                            public void success(Room room, Response response) {
+                                Toast.makeText(getApplicationContext(), "Room Successfully deleted", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(getApplicationContext(), ViewRooms.class));
+
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                throw error;
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        throw error;
+                    }
+                });
+            }
+        });
+
+
+        builderSingle.show();
+    }
+
+}
+
+
+
