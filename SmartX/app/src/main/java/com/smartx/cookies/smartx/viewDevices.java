@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -31,10 +34,11 @@ public class viewDevices extends ListActivity {
     int roomID;
     String roomName;
     Button addDevice;
-
+    private int itemPosition;
+    private myAPI api;
     ArrayList<String> deviceNames;
-    @Override
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_devices);
@@ -80,6 +84,8 @@ public class viewDevices extends ListActivity {
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
+                registerForContextMenu(getListView());
+
             }
 
             @Override
@@ -123,5 +129,58 @@ public class viewDevices extends ListActivity {
                 throw error;
             }
         });
+    }
+
+    /**
+     * Called when the context menu for this view is being built.
+     *
+     * @param menu     The context menu that is being built.
+     * @param v        The view for which the context menu is being built.
+     * @param menuInfo Extra information about the item for which the context menu should be shown. This
+     *                 information will vary depending on the class of v.
+     */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        itemPosition = info.position;
+        menu.setHeaderTitle("Context menu");
+        menu.add(0, v.getId(), 0, "Add To Favorites");
+        menu.add(0, v.getId(), 0, "Delete Device");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle() == "Add To Favorites") {
+            Toast.makeText(this, "Add To Favorites Action should be invoked", Toast.LENGTH_SHORT).show();
+
+//            String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
+//            final RestAdapter ADAPTER =
+//                    new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+//            myAPI api = ADAPTER.create(myAPI.class);
+//            api.findDevice(userID+"", roomID+"", deviceSelected.replace(" ","%20"), new Callback<List<Device>>() {
+//                @Override
+//                public void success(List<Device> devices, Response response) {
+//                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
+//                    SharedPreferences.Editor editor = prefs.edit();
+//                    editor.putString("deviceID", devices.get(0).getId());
+//                    editor.commit();
+//                    startActivity(new Intent(viewDevices.this, renameRoomActivity.class));
+//                }
+//
+//                @Override
+//                public void failure(RetrofitError error) {
+//                    Toast.makeText(getApplicationContext(), "Errorrrrrr!!!!", Toast.LENGTH_LONG).show();
+//                }
+//            });
+
+
+        } else if (item.getTitle() == "Delete Device") {
+            Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
+        } else {
+            return false;
+        }
+        return true;
     }
 }
