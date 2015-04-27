@@ -35,7 +35,6 @@ public class viewDevices extends ListActivity {
     String roomName;
     Button addDevice;
     private int itemPosition;
-    private myAPI api;
     ArrayList<String> deviceNames;
 
     @Override
@@ -148,6 +147,7 @@ public class viewDevices extends ListActivity {
         menu.setHeaderTitle("Context menu");
         menu.add(0, v.getId(), 0, "Add To Favorites");
         menu.add(0, v.getId(), 0, "Delete Device");
+        menu.add(0, v.getId(), 0, "View Notes");
     }
 
     /**
@@ -163,7 +163,31 @@ public class viewDevices extends ListActivity {
             Toast.makeText(this, "Add To Favorites Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "Delete Device") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if (item.getTitle() == "View Notes") {
+            String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
+            final RestAdapter ADAPTER =
+                    new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+            myAPI api = ADAPTER.create(myAPI.class);
+            api.findDevice(userID + "", roomID + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+                @Override
+                public void success(List<Device> devices, Response response) {
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("deviceID", devices.get(0).getId());
+                    editor.commit();
+                    startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
+
+        } else if (item.getTitle() == "View Notes") {
+
+        }else
+        {
             return false;
         }
         return true;
