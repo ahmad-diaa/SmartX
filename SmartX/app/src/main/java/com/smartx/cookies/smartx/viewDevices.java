@@ -150,32 +150,17 @@ public class viewDevices extends ListActivity {
         menu.add(0, v.getId(), 0, "Delete Device");
     }
 
+    /**
+     * Executes commands found in the context menu
+     *
+     * @param item The item clicked in the context menu
+     * @return boolean true in case item clicked corresponds to an action and executed
+     * else returns false in case
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Add To Favorites") {
             Toast.makeText(this, "Add To Favorites Action should be invoked", Toast.LENGTH_SHORT).show();
-
-//            String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
-//            final RestAdapter ADAPTER =
-//                    new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-//            myAPI api = ADAPTER.create(myAPI.class);
-//            api.findDevice(userID+"", roomID+"", deviceSelected.replace(" ","%20"), new Callback<List<Device>>() {
-//                @Override
-//                public void success(List<Device> devices, Response response) {
-//                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
-//                    SharedPreferences.Editor editor = prefs.edit();
-//                    editor.putString("deviceID", devices.get(0).getId());
-//                    editor.commit();
-//                    startActivity(new Intent(viewDevices.this, renameRoomActivity.class));
-//                }
-//
-//                @Override
-//                public void failure(RetrofitError error) {
-//                    Toast.makeText(getApplicationContext(), "Errorrrrrr!!!!", Toast.LENGTH_LONG).show();
-//                }
-//            });
-
-
         } else if (item.getTitle() == "Delete Device") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else {
