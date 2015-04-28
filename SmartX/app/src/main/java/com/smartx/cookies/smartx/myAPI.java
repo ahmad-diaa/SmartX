@@ -106,5 +106,11 @@ public interface myAPI {
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
 
+    @GET("/f/users/{userID}/rooms/{roomID}/devices/{deviceID}")
+    void findFavorite(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<String> callback);
+
+    @FormUrlEncoded
+    @PUT("/users/{userID}/rooms/{roomID}/devices/{deviceID}")
+    void addToFavorites(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, @Field("device[favorite]") String favorite, Callback<Device> callback);
 }
 

@@ -34,6 +34,7 @@ public class Device {
      */
     String device_id;
 
+    String favorite;
 
     /**
      * Constructor to create a device with given parameters.
@@ -51,6 +52,7 @@ public class Device {
         this.user_id = userID;
         this.status = status;
         this.device_id = deviceID;
+        this.favorite="false";
     }
 
     /**
@@ -142,6 +144,14 @@ public class Device {
      */
     public void setRoomID(int roomID) {
         this.room_id = roomID;
+    }
+
+    public String getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(String favorite) {
+        this.favorite=favorite;
     }
 
 }
