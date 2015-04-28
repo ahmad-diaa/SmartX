@@ -31,6 +31,7 @@ public class TvClickerActivity extends Activity {
     boolean on;//initial current state of device
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
     Clicker TvClicker;
+    Switch mySwitch;
 
     /**
      * clickerId getter
@@ -95,6 +96,7 @@ public class TvClickerActivity extends Activity {
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
         deviceID = (mSharedPreference.getString("deviceID", "1"));
+        mySwitch = (Switch) findViewById(R.id.switch1);
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
@@ -126,7 +128,7 @@ public class TvClickerActivity extends Activity {
      * called  if the Volume "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void volumeUP(View v) {
         command = new String("/V/1");
@@ -141,7 +143,7 @@ public class TvClickerActivity extends Activity {
      * called  if the Volume "-" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void volumeDown(View v) {
         command = new String("/V/0");
@@ -156,15 +158,16 @@ public class TvClickerActivity extends Activity {
      * called  if the channel "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void nextChannel(View v) {
         command = new String("/C/1");
+
+
         if (on)
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
-
 
     }
 
@@ -172,7 +175,7 @@ public class TvClickerActivity extends Activity {
      * called  if the channel "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void previousChannel(View v) {
         command = new String("/C/0");
@@ -190,13 +193,22 @@ public class TvClickerActivity extends Activity {
      * if the device was turned off then the command wont be sent otherwise sendCommand method
      * will send the current command to the Clicker
      *
-     * @param View
+     * @param v
      */
     public void TurnOnOff(View v) {
+
         on = !on;
         command = new String("/" + on + "");
         sendCommand();
         changeDeviceStatus(on);
+        mySwitch.setEnabled(false);
+        for(int i = 0; i<1000000000; i++);
+        for(int i = 0; i<1000000000; i++);
+        for(int i = 0; i<1000000000; i++);
+        for(int i = 0; i<1000000000; i++);
+        for(int i = 0; i<1000000000; i++);
+        for(int i = 0; i<1000000000; i++);
+        mySwitch.setEnabled(true);
 
     }
 
