@@ -129,6 +129,14 @@ public class viewDevices extends ListActivity {
         });
     }
 
+    /**
+     * Called when the context menu for this view is being built.
+     *
+     * @param menu     The context menu that is being built.
+     * @param v        The view for which the context menu is being built.
+     * @param menuInfo Extra information about the item for which the context menu should be shown. This
+     *                 information will vary depending on the class of v.
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
@@ -139,6 +147,14 @@ public class viewDevices extends ListActivity {
         menu.add(0, v.getId(), 0, "Add To Favorites");
     }
 
+
+    /**
+     * Executes commands found in the context menu
+     *
+     * @param item The item clicked in the context menu
+     * @return boolean true in case item clicked corresponds to an action and executed
+     * else returns false in case
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Add To Favorites") {
