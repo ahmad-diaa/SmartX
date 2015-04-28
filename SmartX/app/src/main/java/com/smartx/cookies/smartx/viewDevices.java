@@ -200,6 +200,13 @@ public class viewDevices extends ListActivity {
         }
         return true;
     }
+
+    /**
+     * Renders view notes view for the device of the context menu
+     * @param itemPosition
+     * @param user
+     * @param room
+     */
     public void renderViewNotes (int itemPosition, int user, int room) {
         String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
         final RestAdapter ADAPTER =
