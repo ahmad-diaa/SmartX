@@ -68,7 +68,7 @@ public class TvClickerActivity extends Activity {
     public String getDeviceID() {
         return deviceID;
     }
-
+    public String getENDPOINT() {return getResources().getString(R.string.ENDPOINT);}
     /**
      * command getter
      *

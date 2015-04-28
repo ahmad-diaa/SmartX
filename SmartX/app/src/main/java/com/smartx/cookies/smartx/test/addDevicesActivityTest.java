@@ -5,6 +5,7 @@ package com.smartx.cookies.smartx.test;
  */
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.Switch;
 
 import com.smartx.cookies.smartx.addDevices;
 import com.smartx.cookies.smartx.myAPI;
@@ -30,6 +31,7 @@ public class addDevicesActivityTest extends ActivityInstrumentationTestCase2<add
     private String deviceName;
     private String ENDPOINT;
     private List<String> types = new ArrayList<String>();
+
 
     public addDevicesActivityTest() {
         super(addDevices.class);
