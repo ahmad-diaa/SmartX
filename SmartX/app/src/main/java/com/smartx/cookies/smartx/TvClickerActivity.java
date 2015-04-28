@@ -192,7 +192,7 @@ public class TvClickerActivity extends Activity {
      * It updates the current device status to either on or off by calling changeDeviceStatus method
      * if the device was turned off then the command wont be sent otherwise sendCommand method
      * will send the current command to the Clicker
-     *
+     *It disables clicking while turning on/off devices for protection
      * @param v
      */
     public void TurnOnOff(View v) {
@@ -201,6 +201,7 @@ public class TvClickerActivity extends Activity {
         command = new String("/" + on + "");
         sendCommand();
         changeDeviceStatus(on);
+
         mySwitch.setEnabled(false);
         for(int i = 0; i<1000000000; i++);
         for(int i = 0; i<1000000000; i++);
