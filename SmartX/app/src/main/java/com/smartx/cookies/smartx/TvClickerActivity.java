@@ -30,8 +30,8 @@ public class TvClickerActivity extends Activity {
     String command;//store the current command
     boolean on;//initial current state of device
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
-    Clicker TvClicker;
-    Switch mySwitch;
+    Clicker TvClicker;// store the clicker
+    Switch mySwitch;// the Switch instance of this activity
 
     /**
      * clickerId getter
@@ -68,6 +68,11 @@ public class TvClickerActivity extends Activity {
     public String getDeviceID() {
         return deviceID;
     }
+
+    /**
+     * ENDPOINT getter
+     * @return ENDPOINT
+     */
     public String getENDPOINT() {return getResources().getString(R.string.ENDPOINT);}
     /**
      * command getter

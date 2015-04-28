@@ -115,6 +115,10 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         assertNotNull("myActivity is null", myActivity);
     }
 
+    /**
+     * verifies that the protection is set correctly
+     * @throws Exception
+     */
     public void testTurnOnOff() throws Exception {
 
         myActivity.runOnUiThread(new Runnable() {
