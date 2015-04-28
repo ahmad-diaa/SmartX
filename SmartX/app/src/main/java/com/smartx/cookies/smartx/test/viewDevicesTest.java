@@ -8,7 +8,7 @@ import com.smartx.cookies.smartx.R;
 import com.smartx.cookies.smartx.viewDevices;
 
 /**
- * Created by maggiemoheb on 4/28/15.
+ * @author maggiemoheb 
  */
 public class viewDevicesTest extends ActivityInstrumentationTestCase2<viewDevices> {
     private viewDevices myActivity;//An instance of the viewDevices
