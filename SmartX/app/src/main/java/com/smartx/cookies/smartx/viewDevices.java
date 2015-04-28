@@ -36,6 +36,35 @@ public class viewDevices extends ListActivity {
     Button addDevice;
     private int itemPosition;
     ArrayList<String> deviceNames;
+    String message = "";
+    /**
+     * A getter to the user ID
+     *
+     * @return the user ID of the session
+     */
+    public int getUserID() {
+
+        return this.userID;
+    }
+
+    /**
+     * A getter to the room ID
+     *
+     * @return the room ID of the activity
+     */
+    public int getRoomID() {
+        return this.roomID;
+    }
+
+    /**
+     * A getter to the errorMessage
+     *
+     * @return the errorMessage of the activity
+     */
+    public String getErrorMessage() {
+        return this.message;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,32 +193,34 @@ public class viewDevices extends ListActivity {
         } else if (item.getTitle() == "Delete Device") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "View Notes") {
-            String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
-            final RestAdapter ADAPTER =
-                    new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-            myAPI api = ADAPTER.create(myAPI.class);
-            api.findDevice(userID + "", roomID + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
-                @Override
-                public void success(List<Device> devices, Response response) {
-                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString("deviceID", devices.get(0).getId());
-                    editor.commit();
-                    startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-
-                }
-            });
-
-        } else if (item.getTitle() == "View Notes") {
-
+              renderViewNotes(itemPosition, userID, roomID);
         }else
         {
             return false;
         }
         return true;
+    }
+    public void renderViewNotes (int itemPosition, int user, int room) {
+        String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
+        api.findDevice(user + "", room + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+            @Override
+            public void success(List<Device> devices, Response response) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("deviceID", devices.get(0).getId());
+                editor.commit();
+                startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+        message = "Selected Successfully";
     }
 }
