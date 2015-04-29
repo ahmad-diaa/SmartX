@@ -6,7 +6,20 @@ class TypesController < ApplicationController
     @types = Type.all
     render json: @types if stale?(etag: @types.all, last_modified: @types.maximum(:updated_at))
   end
-  
+
+  #Returns device with given id knowing he belongs to which user and room.
+  # GET /devices/1
+  # GET /devices/1.json
+  def show
+    @type= Type.find(params[:id])
+    render json: @type if stale?(@type)
+  end
+
+   def find 
+    @type = Type.where(:name => params[:name])
+    render json: @type if stale?(etag: @type.all, last_modified: @type.maximum(:updated_at))
+  end
+
   #Creates type with given parameters.
   # POST /types
   # POST /types.json

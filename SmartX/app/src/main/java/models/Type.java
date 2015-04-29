@@ -13,7 +13,10 @@ public class Type {
      * The available type for device.
      */
     private String name;
-    private String brand;
+    /**
+     * The type of device's clicker.
+     */
+    private int clickerType;
 
     /**
      * get available type for device.
@@ -33,5 +36,12 @@ public class Type {
         this.name = name;
     }
 
-
+    /**
+     * get the type for device's clicker.
+     *
+     * @return the type of device's clicker.
+     */
+    public int getClickerType() {
+        return clickerType;
+    }
 }
