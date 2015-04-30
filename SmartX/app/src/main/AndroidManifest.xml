@@ -84,6 +84,12 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".answerSecurityQuestion"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_answer_security_question"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".renameRoomActivity"
             android:label="@string/title_activity_rename_room" >
         </activity>
