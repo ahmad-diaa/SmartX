@@ -28,6 +28,10 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+/**
+ * Purpose: view devices in a certain room
+ * @author maggiemoheb
+ */
 public class viewDevices extends ListActivity {
 
     int userID;
@@ -43,7 +47,6 @@ public class viewDevices extends ListActivity {
      * @return the user ID of the session
      */
     public int getUserID() {
-
         return this.userID;
     }
 
@@ -103,7 +106,6 @@ public class viewDevices extends ListActivity {
                 Iterator<Device> iterator = devices.iterator();
                 int i = devices.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-
                     deviceNames.add(iterator.next().getName());
                     i--;
                 }
