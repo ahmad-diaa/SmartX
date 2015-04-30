@@ -21,6 +21,7 @@ import retrofit.client.Response;
  * purpose:This class creates an instance of a clicker that will allow the user to control a device.
  *
  * @author youmna
+ * @author maggiemoheb
  */
 public class TvClickerActivity extends Activity {
     int userID; //store the current userID

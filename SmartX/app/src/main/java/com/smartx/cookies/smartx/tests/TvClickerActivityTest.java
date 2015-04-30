@@ -21,6 +21,7 @@ import retrofit.client.Response;
  * Pupose:The purpose of this class is to test TVClickerActivity
  *
  * @author youmna
+ * @author maggiemoheb 
  */
 public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvClickerActivity> {
     private TvClickerActivity myActivity;//TvClickerACtivity
@@ -118,7 +119,6 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      *
      * @throws Exception
      */
-
     public void testNextChannelSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
