@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import models.Session;
 import models.User;
+import models.securityQuestion;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -27,6 +29,7 @@ import retrofit.client.Response;
 public class LoginActivity extends Activity {
     public static final String sharedPrefs = "MySharedPrefs";
     Button btnLogin;
+    TextView resetPasswordB;
     List<User> userList;
     SharedPreferences Data;
     //TextView aboutlogin;
@@ -48,6 +51,8 @@ public class LoginActivity extends Activity {
             }
 
         });
+        resetPasswordB = (TextView) findViewById(R.id.resetPasswordB);
+
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -118,6 +123,31 @@ public class LoginActivity extends Activity {
             public void setPass(String Pass) {
                 this.Pass = Pass;
             }
+
+
+    public void getSecurityQuestion(View v) {
+        EditText username = (EditText) findViewById(R.id.txtUserName);
+        String  name = username.getText().toString();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = adapter.create(myAPI.class);
+
+        api.getSecurityQuestion(name, new Callback<securityQuestion>() {
+            @Override
+            public void success(securityQuestion securityQuestion, Response response) {
+                int id = securityQuestion.getId();
+                String sq = securityQuestion.getSecurityQ();
+                Intent resP = new Intent(getApplicationContext(), answerSecurityQuestion.class);
+                resP.putExtra("id", id);
+                resP.putExtra("securityQuestion", sq);
+                startActivity(resP);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
 
             @Override
             public boolean onCreateOptionsMenu(Menu menu) {

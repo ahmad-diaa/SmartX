@@ -25,5 +25,11 @@
     <string name="title_activity_device_list">DeviceList</string>
     <string name="title_activity_tv_clicker">TvClickerActivity</string>
     <string name="title_activity_add_clicker_">Add_clicker_Activity</string>
-    <string name="ENDPOINT">http://192.168.1.5:3000/</string>
+    <string name="ENDPOINT">http://192.168.1.4:3000/</string>
+    <string name="title_activity_reset_password">resetPassword</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_res_pass">resPass</string>
+    <string name="reset_password">reset password</string>
+    <string name="title_activity_answer_security_question">answerSecurityQuestion</string>
 </resources>

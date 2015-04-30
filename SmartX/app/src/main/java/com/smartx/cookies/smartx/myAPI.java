@@ -8,6 +8,7 @@ import models.Room;
 import models.Session;
 import models.Type;
 import models.User;
+import models.securityQuestion;
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -21,6 +22,12 @@ public interface myAPI {
 
     @GET("/v/users/{userID}/rooms/{roomName}")
     void findRoom(@Path("userID") String id, @Path("roomName") String name, Callback<List<Room>> callback);
+
+    @GET("/v/users/{name}")
+    void getSecurityQuestion(@Path("name") String name, Callback<securityQuestion> callback);
+
+    @GET("/v/users/{id}/{securityA}")
+    void checkUser(@Path("id") String id,@Path("securityA") String securityA, Callback<List<User>> cb);
 
     @GET("/users/{userID}/rooms/1/devices/1/devices")
     void allDevices(@Path("userID") String id, Callback<List<Device>> callback);

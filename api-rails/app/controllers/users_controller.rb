@@ -8,16 +8,32 @@ class UsersController < ApplicationController
     render json: @users if stale?(etag: @users.all, last_modified: @users.maximum(:updated_at))
   end
 
-  # GET /user
-# GET /user.json
+  # GET /v1/user/name
+# GET /v1/user/name.json
 def security
     
-@securityQ = User.where( :name => params[:name] )
+@user = User.where( :name => params[:name] )
+array = []
+array = Array.new
+# array << @securityQ.last.securityQ
+# array << @securityQ.last.id
+
+array = {'securityQ' => @user.last.securityQ, 'id' => @user.last.id}
 
 # @securityQ = @user
-    render json: @securityQ.last.securityQ if stale?(@securityQ )
+    render json:  array if stale?(@user )
 end
   
+  # GET /v1/user/id/answer
+# GET /v1/user/id/answer.json
+def answer
+    
+@user = User.where( :id => params[:id], :securityA =>params[:securityA])
+# @securityQ = @user
+    render json:  @user 
+end
+
+
   #Returns user with a given id. 
   # GET /users/1
   # GET /users/1.json

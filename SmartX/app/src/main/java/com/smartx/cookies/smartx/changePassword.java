@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import retrofit.Callback;
@@ -28,11 +30,13 @@ public class changePassword extends Activity {
     EditText oldPassword;
     EditText newPassword;
     EditText confirmPassword;
+    TextView oldPassLbl;
     private String oldPass;
     private String originalPass;
     private String newPass;
     private String confPass;
     private int userID;
+    private int flag;
 
     public String getOldPass() {
         return oldPass;
@@ -95,6 +99,15 @@ public class changePassword extends Activity {
         oldPassword = (EditText) findViewById(R.id.oldPassword);
         newPassword = (EditText) findViewById(R.id.newPassword);
         confirmPassword = (EditText) findViewById(R.id.confirmPassword);
+        userID = getIntent().getExtras().getInt("id");
+        flag = getIntent().getExtras().getInt("flag");
+        oldPassLbl = (TextView) findViewById(R.id.oldPasswordLbl);
+        if (flag == 1 ){
+            oldPassword.setVisibility(View.GONE);
+            oldPassLbl.setVisibility(View.GONE);
+
+        }
+
     }
 
     /**
@@ -103,17 +116,44 @@ public class changePassword extends Activity {
      * @param v the view of the activity which consists of 3 textfields and a button
      */
     public void changePassword(View v) {
-        oldPass = oldPassword.getText().toString();
-        newPass = newPassword.getText().toString();
-        confPass = confirmPassword.getText().toString();
-        if (!newPass.equals(confPass)) {
-            Toast.makeText(getApplicationContext(), "Password and confirm password are not the same", Toast.LENGTH_LONG).show();
-        } else if (newPass.length() < 6) {
-            Toast.makeText(getApplicationContext(), "Please make sure your password at least 6 characters", Toast.LENGTH_LONG).show();
-        } else if (!originalPass.equals(oldPass)) {
-            Toast.makeText(getApplicationContext(), "Please make sure you entered the correct password", Toast.LENGTH_LONG).show();
-        }
-        if (newPass.equals(confPass) && originalPass.equals(oldPass)) {
+        if (flag == 0) {
+            oldPass = oldPassword.getText().toString();
+            newPass = newPassword.getText().toString();
+            confPass = confirmPassword.getText().toString();
+            if (!newPass.equals(confPass)) {
+                Toast.makeText(getApplicationContext(), "Password and confirm password are not the same", Toast.LENGTH_LONG).show();
+            } else if (newPass.length() < 6) {
+                Toast.makeText(getApplicationContext(), "Please make sure your password at least 6 characters", Toast.LENGTH_LONG).show();
+            } else if (!originalPass.equals(oldPass)) {
+                Toast.makeText(getApplicationContext(), "Please make sure you entered the correct password", Toast.LENGTH_LONG).show();
+            }
+            if (newPass.equals(confPass) && originalPass.equals(oldPass)) {
+                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+                myAPI api = adapter.create(myAPI.class);
+                api.changePassword(userID + "", newPass, new Callback<models.User>() {
+
+                    @Override
+                    public void success(models.User user, Response response) {
+                        oldPass = newPass;
+                        Toast.makeText(getApplicationContext(), "Your password is successfully changed",
+                                Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        } else {
+            newPass = newPassword.getText().toString();
+            confPass = confirmPassword.getText().toString();
+            if (!newPass.equals(confPass)) {
+                Toast.makeText(getApplicationContext(), "Password and confirm password are not the same", Toast.LENGTH_LONG).show();
+            } else if (newPass.length() < 6) {
+                Toast.makeText(getApplicationContext(), "Please make sure your password at least 6 characters", Toast.LENGTH_LONG).show();
+            }
             RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
             myAPI api = adapter.create(myAPI.class);
             api.changePassword(userID + "", newPass, new Callback<models.User>() {
@@ -132,6 +172,8 @@ public class changePassword extends Activity {
                 }
             });
         }
+
+
     }
 
     @Override

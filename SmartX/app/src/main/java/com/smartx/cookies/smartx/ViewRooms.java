@@ -318,7 +318,10 @@ public class ViewRooms extends ListActivity {
     }
 
     public void changePassword(View v) {
-        startActivity(new Intent(this, changePassword.class));
+        Intent rs = new Intent(getApplicationContext(), changePassword.class);
+        rs.putExtra("id", userID);
+        rs.putExtra("flag",0);
+        startActivity(rs);
     }
 
     public void changeInfo(View v) {
