@@ -6,13 +6,24 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.smartx.cookies.smartx.ViewNotesActivity">
 
+    <ListView
+        android:id="@+id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:divider="#FFFF4608"
+        android:dividerHeight="4px"
+        android:layout_above="@+id/button2">
+    </ListView>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Add Note"
         android:id="@+id/button2"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
         android:onClick="addNote"/>
 </RelativeLayout>
