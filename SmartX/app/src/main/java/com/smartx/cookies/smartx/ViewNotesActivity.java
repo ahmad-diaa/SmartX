@@ -60,6 +60,7 @@ public class ViewNotesActivity extends ListActivity {
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.getNotes(userID + "", roomID + "", deviceID, new Callback<List<Note>>() {
+
             /**
              * Shows a list of the notes left on this device.
              */
@@ -71,8 +72,7 @@ public class ViewNotesActivity extends ListActivity {
                 while (iterator.hasNext()) {
                     deviceNotes.add(iterator.next().getBody().replace("%20", " "));
                 }
-                final RestAdapter adapter2 =
-                        new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNotes) {
 
                     /**
@@ -97,24 +97,20 @@ public class ViewNotesActivity extends ListActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-    /**
-     * Inflate the menu; this adds items to the action bar if it is present.
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_view_notes, menu);
         return true;
     }
 
-    /**
-     *  The action bar will automatically handle clicks on the Home/Up button,
-     *  as long as you specify a parent activity in AndroidManifest.xml.
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

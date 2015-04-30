@@ -15,8 +15,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +28,10 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+/**
+ * Purpose: view devices in a certain room
+ * @author maggiemoheb
+ */
 public class viewDevices extends ListActivity {
 
     int userID;
@@ -45,7 +47,6 @@ public class viewDevices extends ListActivity {
      * @return the user ID of the session
      */
     public int getUserID() {
-
         return this.userID;
     }
 
@@ -67,7 +68,6 @@ public class viewDevices extends ListActivity {
         return this.message;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +82,6 @@ public class viewDevices extends ListActivity {
                 startActivity(new Intent(viewDevices.this, addDevices.class));
             }
         });
-
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         Log.d(userID + "", roomID + "");
@@ -101,21 +100,18 @@ public class viewDevices extends ListActivity {
             }
         });
         api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
-
             @Override
             public void success(List<Device> devices, Response response) {
                 deviceNames = new ArrayList<String>();
                 Iterator<Device> iterator = devices.iterator();
                 int i = devices.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-
                     deviceNames.add(iterator.next().getName());
                     i--;
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
                 registerForContextMenu(getListView());
-
             }
 
             @Override
@@ -124,7 +120,6 @@ public class viewDevices extends ListActivity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,10 +145,7 @@ public class viewDevices extends ListActivity {
                 editor.putString("deviceID", devices.get(0).getDeviceID() + "");
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
-
             }
-
-
             @Override
             public void failure(RetrofitError error) {
                 throw error;
@@ -195,7 +187,6 @@ public class viewDevices extends ListActivity {
         } else if (item.getTitle() == "Delete Device") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "View Notes") {
-            String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
             renderViewNotes(itemPosition, userID, roomID);
         }else
         {
@@ -223,12 +214,9 @@ public class viewDevices extends ListActivity {
                 editor.putString("deviceID", devices.get(0).getId());
                 editor.commit();
                 startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
-
             }
-
             @Override
             public void failure(RetrofitError error) {
-
             }
         });
         message = "Selected Successfully";
