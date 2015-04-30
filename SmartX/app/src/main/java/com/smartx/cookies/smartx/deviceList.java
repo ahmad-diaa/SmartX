@@ -158,14 +158,12 @@ public class deviceList extends ListActivity {
                                         room = room.replace("%20", " ");
                                         roomNameList.add(room + " - " + dName);
                                         setListAdapter(adapter2);
-
                                     }
 
                                     @Override
                                     public void failure(RetrofitError error) {
                                         //add toast
                                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-
                                     }
                                 });
                             } else {
@@ -174,7 +172,6 @@ public class deviceList extends ListActivity {
                             }
                             ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomNameList);
                             setListAdapter(adapter2);
-
                         }
                     }
 
@@ -204,5 +201,4 @@ public class deviceList extends ListActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
