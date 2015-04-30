@@ -28,18 +28,19 @@
         android:layout_height="wrap_content"
         android:text="Done"
         android:id="@+id/donebutton"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Choose Icon"
-        android:id="@+id/plugtext"
+        android:id="@+id/icontext"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="#ffff4608"
-        android:textSize="25dp" />
+        android:textSize="15dp" />
 
 </RelativeLayout>
