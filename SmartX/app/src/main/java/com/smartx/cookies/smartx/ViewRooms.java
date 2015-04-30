@@ -43,7 +43,7 @@ import retrofit.client.Response;
 
 
 public class ViewRooms extends ListActivity {
-    
+
     private EditText editSearch;
     private int userID;
     Button addRoomB;
@@ -131,13 +131,7 @@ public class ViewRooms extends ListActivity {
 
         builderSingle.setTitle("Select a device type");
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.select_dialog_singlechoice);
-//        arrayAdapter.add("TV");
-//        arrayAdapter.add("Air Conditioner");
-//        arrayAdapter.add("Curtain");
-//        arrayAdapter.add("Plug");
-
+                this,android.R.layout.select_dialog_singlechoice);
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
 
@@ -248,14 +242,10 @@ public class ViewRooms extends ListActivity {
                             // TODO Auto-generated method stub
                         }
                     }
-
                     );
-
                     registerForContextMenu(getListView()
-
                     );
                 }
-
 
                 @Override
                 public void failure (RetrofitError error){
@@ -263,7 +253,6 @@ public class ViewRooms extends ListActivity {
                     throw error;
                 }
             }
-
             );
         }
 
@@ -316,14 +305,24 @@ public class ViewRooms extends ListActivity {
     public void addRoom(View view) {
         startActivity(new Intent(this, addRoomsActivity.class));
     }
-
+    /**
+     * Starts the Activity (changePassword) to change user's  password,
+     * @param v the view of the activity
+     */
     public void changePassword(View v) {
         startActivity(new Intent(this, changePassword.class));
     }
-
+    /**
+     * Starts the Activity (changeInfo) to change user's information,
+     * @param v the view of the activity
+     */
     public void changeInfo(View v) {
         startActivity(new Intent(this, changeInfo.class));
     }
+    /**
+     *It allows the user to email his problem,
+     * @param v the view of the activity
+     */
     public void reportProblemE(View v){
 
         Intent i = new Intent(Intent.ACTION_SEND);
@@ -337,6 +336,12 @@ public class ViewRooms extends ListActivity {
             Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    /**
+     *It allows the user to call the company in order to report his problem,
+     * @param v the view of the activity
+     */
+
     public void reportProblemP(View v){
 
         String number = "01117976333";
