@@ -68,11 +68,9 @@ public class ViewNotesActivity extends ListActivity {
             public void success(List<Note> notes, Response response) {
                 ArrayList<String> deviceNotes = new ArrayList<String>();
                 Iterator<Note> iterator = notes.iterator();
-
                 while (iterator.hasNext()) {
                     deviceNotes.add(iterator.next().getBody().replace("%20", " "));
                 }
-
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNotes) {
 
                     /**
