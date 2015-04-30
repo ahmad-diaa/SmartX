@@ -17,14 +17,38 @@ import android.widget.TextView;
  */
 
 public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHolder> {
+    /**
+     *Declaring Variable to Understand which View is being worked on,
+     if the view under inflation is header or item.
+     */
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
+
+    /**
+     *String Array to store the passed titles of available activities to visit.
+     */
     private String titles[];
+
+    /**
+     *Int Array to store the passed images corresponding to each title.
+     */
     private int icons[];
+
+    /**
+     *String Resource for header View Name.
+     */
     private String name;
+
+    /**
+     *int Resource for header View Logo Of Company.
+     */
     private int profile;
     Context context;
 
+    /**
+     * Creating a ViewHolder which extends the RecyclerView View Holder.
+     ViewHolder is used to store the inflated views in order to recycle them.
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         int holderId;
         TextView textView;
@@ -32,6 +56,12 @@ public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHold
         ImageView profile;
         TextView name;
 
+        /**
+         * Constructor to create ViewHolder with given parameters.
+         the appropriate view is set in accordance with the the view type as passed when the holder object is created
+         * @param itemView
+         * @param ViewType
+         */
         public ViewHolder(View itemView,int ViewType) {
             super(itemView);
             if(ViewType == TYPE_ITEM) {
@@ -47,6 +77,16 @@ public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHold
         }
     }
 
+    /**
+     * Constructor to create side bar with given parameters.
+     *
+     * @param titles options of activities within the side bar to visit.
+     * @param icons images corresponding to each title.
+     * @param name name of user.
+     * @param profile logo of company.
+     * @param context
+     */
+
     SideBarAdapter(String titles[],int icons[],String name, int profile,Context context){
         this.titles = titles;
         this.icons = icons;
@@ -54,6 +94,16 @@ public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHold
         this.profile = profile;
         this.context=context;
     }
+
+    /**
+     *This method is called when the ViewHolder is Created,
+     In this method we inflate the item.xml layout if the viewType is Type_ITEM or else we inflate header.xml
+     if the viewType is TYPE_HEADER and pass it to the view holder.
+     *
+     * @param parent
+     * @param viewType
+     * @return
+     */
 
     @Override
     public SideBarAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -69,6 +119,12 @@ public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHold
         return null;
     }
 
+    /**
+     * This method is called when an item in a row is needed to be displayed.
+     *
+     * @param holder shows which view type is being created for item row.
+     * @param position shows position of item that is being constructed to be displayed.
+     */
     @Override
     public void onBindViewHolder( SideBarAdapter.ViewHolder holder, int position) {
         if(holder.holderId ==1) {
@@ -81,16 +137,28 @@ public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHold
         }
     }
 
+    /**
+     * This method returns the number of items present in the list.
+     *
+     * @return
+     */
+
     @Override
     public int getItemCount() {
         return titles.length+1;
     }
 
+    /**
+     * With the following method we check what type of view is being passed.
+     *
+     * @param position
+     * @return
+     */
+
     @Override
     public int getItemViewType(int position) {
         if (position==0)
             return TYPE_HEADER;
-
         return TYPE_ITEM;
     }
 }

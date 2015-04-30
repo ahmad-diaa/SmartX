@@ -183,6 +183,9 @@ public class ViewRooms extends ListActivity {
     /**
      * Called when the activity is starting.
      * It shows list of rooms belonging to the user signed in.
+     *It creates an instance of side bar and handling the selection of options
+     available within the side bar, each title if clicked renders a specific Activity
+     to visit it.
      *
      * @param savedInstanceState if the activity is being
      *                           re-initialized after previously being shut down then
