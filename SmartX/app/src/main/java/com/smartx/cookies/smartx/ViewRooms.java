@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -42,8 +43,7 @@ import retrofit.client.Response;
 
 
 public class ViewRooms extends ListActivity {
-
-    Button renameRoom;
+    
     private EditText editSearch;
     private int userID;
     Button addRoomB;
@@ -324,7 +324,26 @@ public class ViewRooms extends ListActivity {
     public void changeInfo(View v) {
         startActivity(new Intent(this, changeInfo.class));
     }
+    public void reportProblemE(View v){
 
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"ahmaddiaa93@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "My problem is regarding");
+        i.putExtra(Intent.EXTRA_TEXT   , "Explain Your problem here");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void reportProblemP(View v){
+
+        String number = "01117976333";
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + number));
+        startActivity(intent);
+    }
     /**
      * Creates the initial menu state
      *
