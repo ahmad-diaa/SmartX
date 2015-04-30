@@ -34,7 +34,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     private int roomID;//current room id
     private int deviceID;//current device id
     private int clickerID;//current Clicker id
-    private String ENDPOINT;
+    private String ENDPOINT = "192.168.1.5";
 
     public TvClickerActivityTest() {
 
@@ -44,7 +44,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     /**
      * initiate parameters and get activities
      *
-     * @throws exception
+     * @throws Exception
      */
     protected void setUp() throws Exception {
         super.setUp();
@@ -78,7 +78,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
             }
         });
-        api.addDevice("1", "1", "1", "TV", "0", new Callback<Device>() {
+        api.addDevice("1", "1", "1", "1", "0", new Callback<Device>() {
 
             @Override
             public void success(Device device, Response response) {
@@ -116,7 +116,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      * used to test if the clicker's current command changes when the channel "+" button is clicked
      * and the device is turned on
      *
-     * @throws exception
+     * @throws Exception
      */
 
     public void testNextChannelSuccess() throws Exception {
@@ -144,7 +144,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/C/1", clicker.getCommand());
+                assertEquals("1/C/1", clicker.getCommand());
 
             }
 
@@ -159,7 +159,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      * test if the clicker's current command changes when the channel "-" button is clicked
      * and the device is turned on
      *
-     * @throws exception
+     * @throws Exception
      */
     public void testPreviousChannelSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
@@ -186,7 +186,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/C/0", clicker.getCommand());
+                assertEquals("1/C/0", clicker.getCommand());
 
             }
 
@@ -201,7 +201,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      * test if the clicker's current command changes when the Volume "+" button is clicked
      * and  the device is turned off
      *
-     * @throws exception
+     * @throws Exception
      */
     public void testVolumeUpFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
@@ -229,7 +229,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/V/1", clicker.getCommand());
+                assertEquals("1/V/1", clicker.getCommand());
 
             }
 
@@ -244,7 +244,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      * used to test if the clicker's current command changes if the volume "-" button is clicked
      * and  the device is turned off
      *
-     * @throws exception
+     * @throws Exception
      */
     public void testVolumeDownFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
@@ -280,7 +280,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
                     }
                 });
-                assertNotSame(clicker.getCommand(), "TV/V/0");
+                assertNotSame(clicker.getCommand(), "1/V/0");
 
             }
 
@@ -295,7 +295,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      * test if the clicker's current command changes when the channel "+" button is clicked
      * and the status = "0"
      *
-     * @throws exception
+     * @throws Exception
      */
     public void testNextChannelFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
@@ -322,7 +322,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/C/1", clicker.getCommand());
+                assertEquals("1/C/1", clicker.getCommand());
 
             }
 
@@ -337,7 +337,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      * test the clicker's current command changes when the channel "+" button is clicked
      * and the device is turned on
      *
-     * @throws exception
+     * @throws Exception
      */
     public void testPreviousChannelFailure() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
@@ -364,7 +364,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertNotSame("Tv/C/0", clicker.getCommand());
+                assertNotSame("1/C/0", clicker.getCommand());
 
             }
 
@@ -379,7 +379,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      * test the clicker's current command changes when the volume "+" button is clicked
      * and the device is turned on
      *
-     * @throws exception
+     * @throws Exception
      */
     public void testVolumeUpSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
@@ -406,7 +406,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/V/1", clicker.getCommand());
+                assertEquals("1/V/1", clicker.getCommand());
 
             }
 
@@ -422,7 +422,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      * test the clicker's current command changes when the volume "-" button is clicked
      * and the device is turned on
      *
-     * @throws exception
+     * @throws Exception
      */
     public void testVolumeDownSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
@@ -449,7 +449,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/V/0", clicker.getCommand());
+                assertEquals("1/V/0", clicker.getCommand());
 
             }
 

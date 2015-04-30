@@ -126,10 +126,10 @@ public class TvClickerActivity extends Activity {
      * called  if the Volume "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void volumeUP(View v) {
-        command = new String("/V/1");
+        command = new String(deviceID+"/V/1");
         if (on)
             sendCommand();
         else
@@ -141,10 +141,10 @@ public class TvClickerActivity extends Activity {
      * called  if the Volume "-" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void volumeDown(View v) {
-        command = new String("/V/0");
+        command = new String(deviceID+"/V/0");
         if (on)
             sendCommand();
         else
@@ -156,10 +156,10 @@ public class TvClickerActivity extends Activity {
      * called  if the channel "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void nextChannel(View v) {
-        command = new String("/C/1");
+        command = new String(deviceID+"/C/1");
         if (on)
             sendCommand();
         else
@@ -172,10 +172,10 @@ public class TvClickerActivity extends Activity {
      * called  if the channel "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void previousChannel(View v) {
-        command = new String("/C/0");
+        command = new String(deviceID+"/C/0");
         if (on)
             sendCommand();
         else
@@ -190,11 +190,11 @@ public class TvClickerActivity extends Activity {
      * if the device was turned off then the command wont be sent otherwise sendCommand method
      * will send the current command to the Clicker
      *
-     * @param View
+     * @param v
      */
     public void TurnOnOff(View v) {
         on = !on;
-        command = new String("/" + on + "");
+        command = new String(deviceID+"/" + on + "");
         sendCommand();
         changeDeviceStatus(on);
 
@@ -221,7 +221,7 @@ public class TvClickerActivity extends Activity {
                 } else {
                     on_off.setChecked(false);
                     on = false;
-//                TvClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
+//                plugClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
                 }
             }
 
@@ -259,7 +259,7 @@ public class TvClickerActivity extends Activity {
     public void sendCommand() {
         RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();;
         myAPI api = adapter.create(myAPI.class);
-        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", clickerID + command, new Callback<Clicker>() {
+        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "",command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("V/0")) {
@@ -274,7 +274,7 @@ public class TvClickerActivity extends Activity {
                 if (command.contains("C/1")) {
                     Toast.makeText(getApplicationContext(), "Next Channel", Toast.LENGTH_LONG).show();
                 }
-//                TvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
+//                plugClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
             }
 
 
