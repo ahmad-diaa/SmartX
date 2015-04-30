@@ -144,5 +144,8 @@ public class Device {
         this.room_id = roomID;
     }
 
+    public String getId() {
+        return device_id;
+    }
 }
 
