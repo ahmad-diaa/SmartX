@@ -39,6 +39,7 @@ public class DeviceTypesTest extends ActivityInstrumentationTestCase2<deviceList
     private int roomID;
     private String ENDPOINT;
 
+
     protected void setUp() throws Exception {
         super.setUp();
         deviceActivity = getActivity();
@@ -64,12 +65,12 @@ public class DeviceTypesTest extends ActivityInstrumentationTestCase2<deviceList
 
         deviceActivity.setList(userID);
 
-        String type = deviceActivity.getmSharedPreference().getString("deviceType", "TV");
+        type = deviceActivity.getmSharedPreference().getString("deviceType", "TV");
         deviceActivity.getApi().allDevices(userID+"", new Callback<List<Device>>() {
             @Override
             public void success(List<Device> devices, Response response) {
                 for(int i=0;i<devices.size();i++)
-                if (devices.get(i).getName().equalsIgnoreCase(deviceActivity.getType())){
+                if (devices.get(i).getName().equalsIgnoreCase(type)){
                        roomIDs.add(devices.get(i).getRoomID() +"");
                 }
             }
@@ -97,6 +98,7 @@ public class DeviceTypesTest extends ActivityInstrumentationTestCase2<deviceList
         });
 
         assertEquals(typeRooms, deviceActivity.getRoomNameList());
+        assertEquals(type, deviceActivity.getType());
     }
 
 }
