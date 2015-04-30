@@ -29,15 +29,20 @@ public class LoginActivity extends Activity {
     Button btnLogin;
     List<User> userList;
     SharedPreferences Data;
-    //TextView aboutlogin;
     private String Pass;
-
+    EditText username;
+    EditText password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Data = getSharedPreferences(sharedPrefs, 0);
         setContentView(R.layout.activity_login);
         TextView aboutlogin = (TextView) findViewById(R.id.aboutlogin);
+        username = (EditText) findViewById(R.id.txtUserName);
+        password = (EditText) findViewById(R.id.txtPassword);
+        password.setHint("Password");
+        username.setHint("Username");
+
         SpannableString content = new SpannableString("About");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         aboutlogin.setText(content);
@@ -52,8 +57,6 @@ public class LoginActivity extends Activity {
         btnLogin.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText username = (EditText) findViewById(R.id.txtUserName);
-                EditText password = (EditText) findViewById(R.id.txtPassword);
                 String Name = username.getText().toString();
                 setPass(password.getText().toString());
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
