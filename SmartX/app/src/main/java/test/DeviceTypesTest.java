@@ -86,18 +86,18 @@ public class DeviceTypesTest extends ActivityInstrumentationTestCase2<deviceList
             public void success(List<Room> rooms, Response response) {
                 for (int i = 0; i < rooms.size(); i++) {
                     if (roomIDs.contains(rooms.get(i).getId())){
-                        typeRooms.add(rooms.get(i).getName());
+                        typeRooms.add(rooms.get(i).getName() + " - " + type);
                     }
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                System.out.print("failed");
             }
         });
 
-        assertEquals(typeRooms, deviceActivity.getRoomNameList());
+        assertEquals(deviceActivity.getRoomNameList(), typeRooms);
         assertEquals(type, deviceActivity.getType());
     }
 
