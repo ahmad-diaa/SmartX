@@ -65,7 +65,6 @@ public class viewDevices extends ListActivity {
         return this.message;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +79,6 @@ public class viewDevices extends ListActivity {
                 startActivity(new Intent(viewDevices.this, addDevices.class));
             }
         });
-
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         Log.d(userID + "", roomID + "");
@@ -99,7 +97,6 @@ public class viewDevices extends ListActivity {
             }
         });
         api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
-
             @Override
             public void success(List<Device> devices, Response response) {
                 deviceNames = new ArrayList<String>();
@@ -113,7 +110,6 @@ public class viewDevices extends ListActivity {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
                 registerForContextMenu(getListView());
-
             }
 
             @Override
@@ -122,7 +118,6 @@ public class viewDevices extends ListActivity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -148,10 +143,7 @@ public class viewDevices extends ListActivity {
                 editor.putString("deviceID", devices.get(0).getDeviceID() + "");
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
-
             }
-
-
             @Override
             public void failure(RetrofitError error) {
                 throw error;
@@ -220,12 +212,9 @@ public class viewDevices extends ListActivity {
                 editor.putString("deviceID", devices.get(0).getId());
                 editor.commit();
                 startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
-
             }
-
             @Override
             public void failure(RetrofitError error) {
-
             }
         });
         message = "Selected Successfully";
