@@ -16,6 +16,13 @@ import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
 
+/**
+ *SE Sprint2
+ *myAPI.java
+ *Purpose: api interface to interact with rails.
+ *
+ *@author Amir
+ */
 
 public interface myAPI {
 
