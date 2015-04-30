@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import models.Device;
 import retrofit.Callback;
@@ -31,7 +35,8 @@ public class viewDevices extends ListActivity {
     int roomID;
     String roomName;
     Button addDevice;
-
+    CustomListDevice adapter2;
+    EditText editSearch;
     ArrayList<String> deviceNames;
     @Override
 
@@ -80,6 +85,39 @@ public class viewDevices extends ListActivity {
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
+                adapter2 = new CustomListDevice(viewDevices.this, deviceNames);
+                setListAdapter(adapter2);
+                editSearch = (EditText) findViewById(R.id.search);
+
+
+                // Capture Text in EditText
+
+                editSearch.addTextChangedListener(new
+
+                                                          TextWatcher() {
+
+                                                              @Override
+                                                              public void afterTextChanged (Editable arg0){
+                                                                  // TODO Auto-generated method stub
+                                                                  String text = editSearch.getText().toString().toLowerCase(Locale.getDefault());
+                                                                  adapter2.filter2(text);
+                                                              }
+
+                                                              @Override
+                                                              public void beforeTextChanged (CharSequence arg0,int arg1,
+                                                                                             int arg2, int arg3){
+                                                                  // TODO Auto-generated method stub
+                                                              }
+
+                                                              @Override
+                                                              public void onTextChanged (CharSequence arg0,int arg1, int arg2,
+                                                                                         int arg3){
+                                                                  // TODO Auto-generated method stub
+                                                              }
+                                                          }
+
+                );
+
             }
 
             @Override
