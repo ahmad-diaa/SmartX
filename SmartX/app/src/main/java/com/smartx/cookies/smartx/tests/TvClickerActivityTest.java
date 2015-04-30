@@ -23,19 +23,17 @@ import retrofit.client.Response;
  * @author youmna
  */
 public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvClickerActivity> {
-
     private TvClickerActivity myActivity;//TvClickerACtivity
     private Switch onOff;//On and off switch
     private Button volumeUp;//Volume"+" control
     private Button volumeDown;//Volume "-" control
     private Button nextChannel;//Channel "+"control
     private Button previousChannel;//channel "-" control
-    private Switch mySwitch;
     private int userID;//current user id
     private int roomID;//current room id
     private int deviceID;//current device id
     private int clickerID;//current Clicker id
-    private String ENDPOINT;
+    private String ENDPOINT = "192.168.1.3";
 
     public TvClickerActivityTest() {
         super(TvClickerActivity.class);
@@ -49,13 +47,11 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     protected void setUp() throws Exception {
         super.setUp();
         myActivity = getActivity();
-        onOff = (Switch) myActivity.findViewById(R.id.switch1);
         previousChannel = (Button) myActivity.findViewById(R.id.button);
-        ENDPOINT = myActivity.getENDPOINT();
         nextChannel = (Button) myActivity.findViewById(R.id.button2);
         volumeUp = (Button) myActivity.findViewById(R.id.button3);
         volumeDown = (Button) myActivity.findViewById(R.id.button4);
-        mySwitch = (Switch) myActivity.findViewById(R.id.switch1);
+        onOff = (Switch) myActivity.findViewById(R.id.switch1);
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
         api.login("ahdiaa", "123456", new Callback<Session>() {
@@ -76,7 +72,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
             public void failure(RetrofitError error) {
             }
         });
-        api.addDevice("1", "1", "1", "TV", "0", new Callback<Device>() {
+        api.addDevice("1", "1", "1", "1", "0", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
             }
@@ -96,6 +92,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         });
     }
 
+
     /**
      * verify that the test fixture has been set up correctly,
      * and the objects that you want to test have been correctly instantiated or initialized
@@ -110,12 +107,9 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      * @throws Exception
      */
     public void testTurnOnOff() throws Exception {
-        myActivity.runOnUiThread(new Runnable() {
-            public void run() {
                 myActivity.TurnOnOff(myActivity.getWindow().getDecorView());
-                assertEquals(false, mySwitch.isEnabled());
-            }
-        });
+                onOff = (Switch) myActivity.findViewById(R.id.switch1);
+                assertEquals(false, onOff.isEnabled());
     }
 
     /**
@@ -124,6 +118,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
      *
      * @throws Exception
      */
+
     public void testNextChannelSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
@@ -142,11 +137,10 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
             }
         });
         myActivity.nextChannel(myActivity.getWindow().getDecorView());
-
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/C/1", clicker.getCommand());
+                assertEquals("1/C/1", clicker.getCommand());
             }
 
             @Override
@@ -182,7 +176,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/C/0", clicker.getCommand());
+                assertEquals("1/C/0", clicker.getCommand());
             }
 
             @Override
@@ -219,7 +213,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/V/1", clicker.getCommand());
+                assertEquals("1/V/1", clicker.getCommand());
             }
 
             @Override
@@ -248,9 +242,11 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         });
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
+                onOff = (Switch) myActivity.findViewById(R.id.switch1);
                 onOff.setChecked(false);
             }
         });
+
         myActivity.volumeDown(myActivity.getWindow().getDecorView());
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
@@ -262,9 +258,10 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
                     @Override
                     public void failure(RetrofitError error) {
+
                     }
                 });
-                assertNotSame(clicker.getCommand(), "TV/V/0");
+                assertNotSame(clicker.getCommand(), "1/V/0");
             }
 
             @Override
@@ -301,7 +298,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/C/1", clicker.getCommand());
+                assertEquals("1/C/1", clicker.getCommand());
             }
 
             @Override
@@ -337,7 +334,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertNotSame("Tv/C/0", clicker.getCommand());
+                assertNotSame("1/C/0", clicker.getCommand());
             }
 
             @Override
@@ -374,7 +371,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/V/1", clicker.getCommand());
+                assertEquals("1/V/1", clicker.getCommand());
             }
 
             @Override
@@ -411,7 +408,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("Tv/V/0", clicker.getCommand());
+                assertEquals("1/V/0", clicker.getCommand());
             }
 
             @Override
