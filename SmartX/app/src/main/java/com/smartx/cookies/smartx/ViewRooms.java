@@ -39,6 +39,7 @@ import retrofit.client.Response;
  * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
  *
  * @author Dalia Maarek
+ * @author Ahmad Abdalraheem
  */
 
 
@@ -56,17 +57,17 @@ public class ViewRooms extends ListActivity {
     private ArrayList<Integer> iconRooms;
     private myAPI api;
     private int itemPosition;
-
     /**
      * @param adapter2 CustomListAdapter to set
      */
+
     public void setAdapter2(CustomListAdapter adapter2) {
         this.adapter2 = adapter2;
     }
-
     /**
      * @param photos Array  of photos to set
      */
+
     public void setPhotos(int[] photos) {
         this.photos = photos;
     }
@@ -74,6 +75,7 @@ public class ViewRooms extends ListActivity {
     /**
      * @return the customListAdapter
      */
+
     public CustomListAdapter getAdapter2() {
         return adapter2;
     }
@@ -81,6 +83,7 @@ public class ViewRooms extends ListActivity {
     /**
      * @return ArrayList of all rooms
      */
+
     public ArrayList<String> getRoomNames() {
         return roomNames;
     }
@@ -88,6 +91,7 @@ public class ViewRooms extends ListActivity {
     /**
      * @return ArrayList of all devices
      */
+
     public ArrayList<Integer> getIconRooms() {
         return iconRooms;
     }
@@ -96,6 +100,7 @@ public class ViewRooms extends ListActivity {
     /**
      * @param iconRooms Arraylist of Rooms photos ids
      */
+    
     public void setIconRooms(ArrayList<Integer> iconRooms) {
         this.iconRooms = iconRooms;
     }
@@ -103,13 +108,10 @@ public class ViewRooms extends ListActivity {
     /**
      * @param roomNames ArrayList of all rooms
      */
-    public void setRoomNames(ArrayList<String> roomNames) {
 
+    public void setRoomNames(ArrayList<String> roomNames) {
         this.roomNames = roomNames;
     }
-
-
-
         /**
          * Gets the id of the photo to be assigned to the next room
          *
@@ -215,12 +217,7 @@ public class ViewRooms extends ListActivity {
                 adapter2 = new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
                 setListAdapter(adapter2);
                 editSearch = (EditText) findViewById(R.id.search);
-
-
-                            // Capture Text in EditText
-
                             editSearch.addTextChangedListener(new
-
                     TextWatcher() {
 
                         @Override
@@ -296,7 +293,6 @@ public class ViewRooms extends ListActivity {
         });
     }
 
-
     /**
      * Starts the activity (addRoomsActivity) to create a new room
      *
@@ -305,10 +301,12 @@ public class ViewRooms extends ListActivity {
     public void addRoom(View view) {
         startActivity(new Intent(this, addRoomsActivity.class));
     }
+
     /**
      * Starts the Activity (changePassword) to change user's  password,
      * @param v the view of the activity
      */
+
     public void changePassword(View v) {
         startActivity(new Intent(this, changePassword.class));
     }
@@ -316,6 +314,7 @@ public class ViewRooms extends ListActivity {
      * Starts the Activity (changeInfo) to change user's information,
      * @param v the view of the activity
      */
+
     public void changeInfo(View v) {
         startActivity(new Intent(this, changeInfo.class));
     }
@@ -323,8 +322,8 @@ public class ViewRooms extends ListActivity {
      *It allows the user to email his problem,
      * @param v the view of the activity
      */
-    public void reportProblemE(View v){
 
+    public void reportProblemE(View v){
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
         i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"ahmaddiaa93@gmail.com"});
@@ -398,7 +397,6 @@ public class ViewRooms extends ListActivity {
         menu.add(0, v.getId(), 0, "Delete Room");
     }
 
-
     /**
      * Executes commands found in the context menu
      *
@@ -427,9 +425,7 @@ public class ViewRooms extends ListActivity {
                 @Override
                 public void failure(RetrofitError error) {
                 }
-
             });
-
 
         } else if (item.getTitle() == "Delete Room") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
