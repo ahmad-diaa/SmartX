@@ -1,5 +1,5 @@
 class Plug < ActiveRecord::Base
-  self.primary_key = 'device_id'
+  self.primary_key = 'plug_id'
   belongs_to :room
   belongs_to :user
 def to_param

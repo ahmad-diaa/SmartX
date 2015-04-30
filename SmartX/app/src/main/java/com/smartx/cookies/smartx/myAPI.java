@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Device;
 import models.Note;
+import models.Plug;
 import models.Room;
 import models.Session;
 import models.Type;
@@ -106,5 +107,8 @@ public interface myAPI {
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
 
+    @FormUrlEncoded
+    @POST("/users/{userId}/rooms/{roomId}/plugs/")
+    void addPlug(@Path("userId") String userId, @Path("roomId") String roomId, @Field("plug[plug_id]") String plugId, @Field("plug[name]") String name, @Field("plug[status]") String status, @Field("plug[photo]") String photo, Callback<Plug> callback);
 }
 

@@ -1,17 +1,146 @@
 package com.smartx.cookies.smartx;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.Toast;
+
+import models.Plug;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
-public class PlugIcon extends ActionBarActivity {
+public class PlugIcon extends Activity {
+
+    GridView grid;
+    RestAdapter adapter;
+    myAPI api;
+    SharedPreferences.Editor editor;
+    int userID;
+    int roomID;
+    Button done;
+    String plugName;
+    String plugID;
+    String plugPhoto = "";
+    SharedPreferences prefs;
+
+    public SharedPreferences getPrefs() {
+        return prefs;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plug_icon);
+        grid = (GridView) findViewById(R.id.icongrid);
+        adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        api = adapter.create(myAPI.class);
+        initGrid();
+        prefs =
+                PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        userID = (prefs.getInt("userID", 1));
+        roomID = (prefs.getInt("roomID", 1));
+        editor = prefs.edit();
+        plugName = prefs.getString("plugName", "null");
+        plugID = prefs.getString("plugID", "null");
+        done = (Button) findViewById(R.id.donebutton);
+        done.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (plugPhoto.equals("")) {
+                    Toast.makeText(PlugIcon.this, "Please choose an icon first", Toast.LENGTH_SHORT).show();
+                } else {
+
+                  if(plugName.equals("null") || plugID.equals("null") )
+                     Toast.makeText(PlugIcon.this, "An Error Occurred :(\n Please Try again later", Toast.LENGTH_SHORT);
+                      else
+                  {
+                      Plug plug = new Plug(plugName, roomID, userID, plugID+"", "off", plugPhoto+"");
+                      api.addPlug(plug.getUserID() + "", plug.getRoomID() + "", plug.getPlugID() + "", plug.getName(), plug.getStatus(), plug.getPhoto() + "", new Callback<Plug>() {
+
+                          @Override
+                          public void success(Plug plug, Response response) {
+                              Toast.makeText(PlugIcon.this, "Yeah babyyyy", Toast.LENGTH_SHORT).show();
+                              //startActivity(new Intent(PlugIcon.this , ViewDeviceActivity.class));
+                          }
+
+                          @Override
+                          public void failure(RetrofitError error) {
+throw error;
+                          }
+                      });
+
+
+                  }
+                }
+           }
+        });
+    }
+
+    public void initGrid() {
+        final ImageAdapter imageAdapter = new ImageAdapter(this);
+        grid.setAdapter(imageAdapter);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                switch(position)
+                {
+                    case 0: plugPhoto = "plug";
+                        break;
+
+                    case 1: plugPhoto = "switcher";
+                        break;
+
+                    case 2: plugPhoto = "fridge";
+                        break;
+
+                    case 3:  plugPhoto = "lamp";
+                        break;
+
+                    case 4:  plugPhoto = "fan";
+                        break;
+
+                    case 5:  plugPhoto = "phone";
+                        break;
+
+                    case 6:  plugPhoto = "washmachine";
+                        break;
+
+                    case 7:  plugPhoto = "stereo";
+                        break;
+
+                    case 8:  plugPhoto = "food";
+                        break;
+
+                    case 9:  plugPhoto = "computer";
+                        break;
+
+                    case 10:  plugPhoto = "router";
+                        break;
+
+                    case 11:  plugPhoto = "microwave";
+                        break;
+
+                    case 12:  plugPhoto = "playstation";
+                        break;
+
+
+                }
+            }
+        });
     }
 
 
@@ -36,4 +165,5 @@ public class PlugIcon extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
