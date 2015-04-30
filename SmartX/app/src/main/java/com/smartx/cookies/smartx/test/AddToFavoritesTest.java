@@ -10,7 +10,11 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by Amir on 4/28/2015.
+ *SE Sprint2
+ *AddToFavoritesTest.java
+ *Purpose: Testing AddToFavorites Activity.
+ *
+ * @author Amir
  */
 public class AddToFavoritesTest extends ActivityInstrumentationTestCase2<AddToFavorites> {
     private AddToFavorites activity;

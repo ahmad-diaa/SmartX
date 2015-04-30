@@ -28,6 +28,13 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+/**
+ *SE Sprint2
+ *viewDevices.java
+ *Purpose: Display list of devices.
+ *
+ * @author Amir
+ */
 public class viewDevices extends ListActivity {
 
     int userID;
