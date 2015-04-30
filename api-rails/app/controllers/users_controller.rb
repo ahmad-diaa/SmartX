@@ -7,6 +7,16 @@ class UsersController < ApplicationController
     @users = User.all
     render json: @users if stale?(etag: @users.all, last_modified: @users.maximum(:updated_at))
   end
+
+  # GET /user
+# GET /user.json
+def security
+    
+@securityQ = User.where( :name => params[:name] )
+
+# @securityQ = @user
+    render json: @securityQ.last.securityQ if stale?(@securityQ )
+end
   
   #Returns user with a given id. 
   # GET /users/1
@@ -47,6 +57,7 @@ class UsersController < ApplicationController
     head :no_content
   end
 
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
@@ -55,6 +66,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:name, :password, :email, :phone)
+    params.require(:user).permit(:name, :password, :email, :phone, :securityQ , :securityA)
   end
 end
