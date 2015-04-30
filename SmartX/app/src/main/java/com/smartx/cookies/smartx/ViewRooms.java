@@ -7,13 +7,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,15 +44,13 @@ import retrofit.client.Response;
  * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
  *
  * @author Dalia Maarek
+ * @author Amir
  */
-
 
 public class ViewRooms extends ListActivity {
 
-    Button renameRoom;
     private EditText editSearch;
     private int userID;
-    Button addRoomB;
     static int count = -1;
     private CustomListAdapter adapter2;
     private int[] photos = new int[]{R.drawable.one,
@@ -56,6 +60,15 @@ public class ViewRooms extends ListActivity {
     private ArrayList<Integer> iconRooms;
     private myAPI api;
     private int itemPosition;
+    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","About us","Logout"};
+    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
+    String name ;
+    int profile = R.mipmap.smartorange2;
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+    DrawerLayout Drawer;
+    ActionBarDrawerToggle mDrawerToggle;
 
     /**
      * @param adapter2 CustomListAdapter to set
@@ -92,7 +105,6 @@ public class ViewRooms extends ListActivity {
         return iconRooms;
     }
 
-
     /**
      * @param iconRooms Arraylist of Rooms photos ids
      */
@@ -104,11 +116,8 @@ public class ViewRooms extends ListActivity {
      * @param roomNames ArrayList of all rooms
      */
     public void setRoomNames(ArrayList<String> roomNames) {
-
         this.roomNames = roomNames;
     }
-
-
 
         /**
          * Gets the id of the photo to be assigned to the next room
@@ -116,7 +125,6 @@ public class ViewRooms extends ListActivity {
          * @return An integer number between 0 and 8
          */
         public int randomIcon () {
-
             count = (count + 1) % 9;
             return count;
         }
@@ -126,26 +134,15 @@ public class ViewRooms extends ListActivity {
     }
 
     private void showPopUp() {
-        AlertDialog.Builder builderSingle = new AlertDialog.Builder(
-                this);
-
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
         builderSingle.setTitle("Select a device type");
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.select_dialog_singlechoice);
-//        arrayAdapter.add("TV");
-//        arrayAdapter.add("Air Conditioner");
-//        arrayAdapter.add("Curtain");
-//        arrayAdapter.add("Plug");
-
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice);
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-
-
         api.requestTypes(new Callback<List<Type>>() {
+
             @Override
             public void success(List<Type> types, Response response) {
-
                 Iterator<Type> iterator = types.iterator();
                 while (iterator.hasNext()) {
                     String s = iterator.next().getName();
@@ -157,7 +154,6 @@ public class ViewRooms extends ListActivity {
             public void failure(RetrofitError error) {
             }
         });
-
         builderSingle.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
 
@@ -166,7 +162,6 @@ public class ViewRooms extends ListActivity {
                         dialog.dismiss();
                     }
                 });
-
         builderSingle.setAdapter(arrayAdapter,
                 new DialogInterface.OnClickListener() {
 
@@ -207,10 +202,8 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public void success(List<Room> rooms, Response response) {
-
                 roomNames = new ArrayList<String>();
                 Iterator<Room> iterator = rooms.iterator();
-
                 iconRooms = new ArrayList<Integer>();
                 int i = rooms.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
@@ -221,12 +214,7 @@ public class ViewRooms extends ListActivity {
                 adapter2 = new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
                 setListAdapter(adapter2);
                 editSearch = (EditText) findViewById(R.id.search);
-
-
-                            // Capture Text in EditText
-
-                            editSearch.addTextChangedListener(new
-
+                editSearch.addTextChangedListener(new
                     TextWatcher() {
 
                         @Override
@@ -248,14 +236,10 @@ public class ViewRooms extends ListActivity {
                             // TODO Auto-generated method stub
                         }
                     }
-
                     );
-
                     registerForContextMenu(getListView()
-
                     );
                 }
-
 
                 @Override
                 public void failure (RetrofitError error){
@@ -263,8 +247,62 @@ public class ViewRooms extends ListActivity {
                     throw error;
                 }
             }
-
             );
+        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        name = (mSharedPreference.getString("Name", ""));
+        mAdapter = new SideBarAdapter(titles,icons,name,profile,this);
+        mRecyclerView.setAdapter(mAdapter);
+        final GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+
+            @Override public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+
+        });
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
+                if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
+                    Drawer.closeDrawers();
+                    switch (recyclerView.getChildPosition(child)){
+                        case 1: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 2: startActivity(new Intent(getApplicationContext(), ViewRooms.class));break;
+                        case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
+                        case 4: startActivity(new Intent(getApplicationContext(), changePassword.class));break;
+                        case 5: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 6: startActivity(new Intent(getApplicationContext(), About_us.class));break;
+                        case 7: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                    }
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+            }
+        });
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
+        mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,R.string.openDrawer,R.string.closeDrawer){
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        Drawer.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
         }
 
                 /**
@@ -281,7 +319,6 @@ public class ViewRooms extends ListActivity {
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-
         Object o = this.getListAdapter().getItem(position);
         String room = o.toString();
         room = room.replace(" ", "%20");
@@ -289,6 +326,7 @@ public class ViewRooms extends ListActivity {
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = ADAPTER.create(myAPI.class);
         api.findRoom(userID + "", room, new Callback<List<Room>>() {
+
             @Override
             public void success(List<Room> rooms, Response response) {
                 SharedPreferences prefs =
@@ -385,12 +423,9 @@ public class ViewRooms extends ListActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Rename Room") {
-
-
             String roomSelected = getListView().getItemAtPosition(itemPosition).toString();
-
-
             api.findRoom(userID + "", roomSelected.replace(" ","%20"), new Callback<List<Room>>() {
+
                 @Override
                 public void success(List<Room> rooms, Response response) {
                     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ViewRooms.this);
@@ -403,10 +438,7 @@ public class ViewRooms extends ListActivity {
                 @Override
                 public void failure(RetrofitError error) {
                 }
-
             });
-
-
         } else if (item.getTitle() == "Delete Room") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else {
