@@ -31,4 +31,15 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose Icon"
+        android:id="@+id/plugtext"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffff4608"
+        android:textSize="25dp" />
+
 </RelativeLayout>

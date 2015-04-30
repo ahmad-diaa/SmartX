@@ -72,8 +72,8 @@ public class PlugIcon extends Activity {
 
                           @Override
                           public void success(Plug plug, Response response) {
-                              Toast.makeText(PlugIcon.this, "Yeah babyyyy", Toast.LENGTH_SHORT).show();
-                              //startActivity(new Intent(PlugIcon.this , ViewDeviceActivity.class));
+                              //Toast.makeText(PlugIcon.this, "Yeah babyyyy", Toast.LENGTH_SHORT).show();
+                              startActivity(new Intent(PlugIcon.this , ViewDeviceActivity.class));
                           }
 
                           @Override
