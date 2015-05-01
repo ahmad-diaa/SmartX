@@ -26,7 +26,10 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-
+/**
+ * Purpose: it vies the plugs of a certain room 
+ * @author maggiemoheb
+ */
 public class ViewPlugs extends  ListActivity {
     int userID;
     int roomID;
@@ -66,7 +69,6 @@ public class ViewPlugs extends  ListActivity {
                 Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_LONG).show();
             }
         });
-
         api.viewPlugs(userID + "", roomID + "", new Callback<List<Plug>>() {
             @Override
             public void success(List<Plug> plugs, Response response) {
@@ -82,14 +84,8 @@ public class ViewPlugs extends  ListActivity {
                 adapter2 = new CustomListDevice(ViewPlugs.this, plugNames);
                 setListAdapter(adapter2);
                 editSearch = (EditText) findViewById(R.id.editText);
-
-
                 // Capture Text in EditText
-
-                editSearch.addTextChangedListener(new
-
-                                                          TextWatcher() {
-
+                editSearch.addTextChangedListener(new TextWatcher() {
                                                               @Override
                                                               public void afterTextChanged(Editable arg0) {
                                                                   // TODO Auto-generated method stub
@@ -109,9 +105,7 @@ public class ViewPlugs extends  ListActivity {
                                                                   // TODO Auto-generated method stub
                                                               }
                                                           }
-
                 );
-
             }
 
             @Override
@@ -120,11 +114,6 @@ public class ViewPlugs extends  ListActivity {
             }
         });
     }
-
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -139,12 +128,10 @@ public class ViewPlugs extends  ListActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
