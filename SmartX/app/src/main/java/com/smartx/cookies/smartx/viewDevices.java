@@ -45,7 +45,7 @@ public class viewDevices extends ListActivity {
     ArrayList<String> deviceNames;
     String message = "";
     String deviceIDTest =""; //for test
-    
+
     public String getDeviceIDTest() {
         return deviceIDTest;
     }
