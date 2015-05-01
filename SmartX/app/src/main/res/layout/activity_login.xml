@@ -15,7 +15,6 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/txtPassword"
-        android:text="Password"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -33,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtUserName"
-        android:text="Name"
         android:layout_above="@+id/txtPassword"
         android:layout_alignLeft="@+id/txtPassword"
         android:layout_alignStart="@+id/txtPassword"
