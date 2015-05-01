@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -37,8 +38,8 @@ public class AddNoteActivity extends Activity {
     String deviceID; //ID of the device to which the note is added
     String Body = "";//The body of the note
     String errorMessage = "initial"; //error message which indicates if the adding ended up in success or failure
-    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","About us","Logout"};
-    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
+    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","Report a problem","About us","Logout"};
+    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.call,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
     String name ;
     int profile = R.mipmap.smartorange2;
     RecyclerView mRecyclerView;
@@ -111,6 +112,7 @@ public class AddNoteActivity extends Activity {
         Log.d("ID2", roomID + "");
         Log.d("ID3", deviceID);
         setContentView(R.layout.activity_add_note);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
         name = (mSharedPreference.getString("Name", ""));
@@ -136,8 +138,9 @@ public class AddNoteActivity extends Activity {
                         case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
                         case 4: startActivity(new Intent(getApplicationContext(), changePassword.class));break;
                         case 5: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 6: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 7: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 6: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
+                        case 8: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
                     }
                     return true;
                 }

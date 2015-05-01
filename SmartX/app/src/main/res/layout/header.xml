@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="178dp"
-    android:background="@drawable/header"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -20,16 +19,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:textColor="#ffffff"
-            android:textSize="14sp"
+            android:textSize="25sp"
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <ImageView
+        android:layout_width="175dp"
+        android:layout_height="175dp"
         android:src="@mipmap/smartorange2"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/circleView"
        />
 </RelativeLayout>

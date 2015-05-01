@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -40,8 +41,8 @@ public class deviceList extends ListActivity {
     private myAPI api;
     private SharedPreferences mSharedPreference;
     private String dName;
-    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","About us","Logout"};
-    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
+    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","Report a problem","About us","Logout"};
+    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.call,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
     String name ;
     int profile = R.mipmap.smartorange2;
     RecyclerView mRecyclerView;
@@ -140,6 +141,7 @@ public class deviceList extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         type = mSharedPreference.getString("deviceType", "TV");
         userID = (mSharedPreference.getInt("userID", 1));
@@ -175,8 +177,9 @@ public class deviceList extends ListActivity {
                         case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
                         case 4: startActivity(new Intent(getApplicationContext(), changePassword.class));break;
                         case 5: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 6: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 7: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 6: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
+                        case 8: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
                     }
                     return true;
                 }

@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -63,8 +64,8 @@ public class ViewRooms extends ListActivity {
     private ArrayList<Integer> iconRooms;
     private myAPI api;
     private int itemPosition;
-    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","About us","Logout"};
-    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
+    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","Report a problem","About us","Logout"};
+    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.call,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
     String name ;
     int profile = R.mipmap.smartorange2;
     RecyclerView mRecyclerView;
@@ -198,6 +199,7 @@ public class ViewRooms extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_rooms);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         final SharedPreferences SHARED_PREFERENCE =
                 PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (SHARED_PREFERENCE.getInt("userID", 1));
@@ -280,8 +282,9 @@ public class ViewRooms extends ListActivity {
                         case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
                         case 4: startActivity(new Intent(getApplicationContext(), changePassword.class));break;
                         case 5: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 6: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 7: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 6: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
+                        case 8: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
                     }
                     return true;
                 }
