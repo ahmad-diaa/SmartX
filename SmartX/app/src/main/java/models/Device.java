@@ -148,4 +148,3 @@ public class Device {
         return device_id;
     }
 }
-
