@@ -11,11 +11,7 @@ class SessionControllerTest < ActionController::TestCase
   end
 
   	test "#session's index" do
-
-    	newSession = session(:joe)
-   		post 'show', { name: newSession.name ,access_token: newSession.access_token}
-    	assert results['name'] == newSession.name
-    	assert results['access_token'] == newSession.access_token
-    	
-  	end
+    get :index
+  	assert_response :success
+     end
 end
