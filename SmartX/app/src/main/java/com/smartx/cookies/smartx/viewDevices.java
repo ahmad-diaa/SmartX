@@ -217,7 +217,9 @@ public class viewDevices extends ListActivity {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "View Notes") {
             renderViewNotes(itemPosition, userID, roomID);
-        } else {
+        }else
+        {
+
             return false;
         }
         return true;
