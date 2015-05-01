@@ -15,20 +15,15 @@ def security
 @user = User.where( :name => params[:name] )
 array = []
 array = Array.new
-# array << @securityQ.last.securityQ
-# array << @securityQ.last.id
-
-array = {'securityQ' => @user.last.securityQ, 'id' => @user.last.id}
-
-# @securityQ = @user
-    render json:  array if stale?(@user )
+array = {'securityQ' => @user.last.securityQ, 'id' => @user.last.id}  
+render json:  array
 end
   
   # GET /v1/user/id/answer
 # GET /v1/user/id/answer.json
-def answer
+def answer 
     
-@user = User.where( :id => params[:id], :securityA =>params[:securityA])
+    @user = User.where( :id => params[:id], :securityA =>params[:securityA])
 # @securityQ = @user
     render json:  @user 
 end

@@ -40,19 +40,17 @@ public class answerSecurityQuestion extends Activity {
         answerTxt = (EditText) findViewById(R.id.answerTxt);
         question = (TextView) findViewById(R.id.question);
         question.setText(getIntent().getExtras().getString("securityQuestion"));
-        userID = getIntent().getExtras().getInt("id");
     }
 
 
     public void submitAnswer(View v) {
+        userID = getIntent().getExtras().getInt("id");
         securityA = answerTxt.getText().toString();
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-
         api.checkUser(userID + "", securityA, new Callback<List<User>>()  {
             @Override
             public void success(List<User> user, Response response) {
-
                 if (!user.isEmpty()) {
                     Intent rs = new Intent(getApplicationContext(), changePassword.class);
                     rs.putExtra("id", userID);
@@ -82,12 +80,46 @@ public class answerSecurityQuestion extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * get id of the user.
+     *
+     * @return primary key of the user.
+     */
+    public int getUserID() {
+        return userID;
+    }
+
+    /**
+     * set id of the user.
+     *
+     * @param userID the primary key of the user.
+     */
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+    /**
+     * get id of the user.
+     *
+     * @return the answer of the security question of the user.
+     */
+
+    public String getAnswer() {
+        return securityA;
+    }
+
+    /**
+     * set id of the user.
+     *
+     * @param a the new answer for the security question.
+     */
+    public void setAnswer(String a) {
+        this.securityA = a;
     }
 }
