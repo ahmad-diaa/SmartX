@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/search"
-        android:layout_above="@+id/logoutB" />
+        android:layout_below="@+id/reportProblemBp"
+        android:layout_above="@+id/viewBy" />
 
     <Button
         android:layout_width="fill_parent"
@@ -67,6 +67,14 @@
         android:id="@+id/logoutB"
         android:onClick="logout"
         android:layout_above="@+id/viewBy"
+    />
+        <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Call us to report a problem "
+        android:id="@+id/reportProblemBp"
+        android:onClick="reportProblemP"
+        android:layout_above="@+id/reportProblemBp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"

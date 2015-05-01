@@ -2,6 +2,7 @@
 Rails.application.routes.draw do
 	get 'v/users/:user_id/rooms/:name'=>'rooms#find'
   get 'v/users/:user_id/rooms/:room_id/devices/:name'=>'devices#find'
+  get 'f/users/:user_id/rooms/:room_id/devices/:device_id'=>'devices#findFavorite'
     resources :types
     get 'session' => 'session#index'
     post 'session' => 'session#create'
