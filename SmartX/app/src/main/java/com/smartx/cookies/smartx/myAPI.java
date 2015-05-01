@@ -9,13 +9,17 @@ import models.Session;
 import models.Type;
 import models.User;
 import retrofit.Callback;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
-
+/*
+    Purpose: This class is responsible for sending commands to rails and receiving Callbacks.
+    @author Dalia Maarek
+ */
 
 public interface myAPI {
 
@@ -105,6 +109,10 @@ public interface myAPI {
 
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
+
+    //deletes a room
+    @DELETE("/v/users/{userID}/rooms/{roomID}/devices/{deviceID}/")
+    void deleteDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<Device> callback);
 
 }
 
