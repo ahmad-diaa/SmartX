@@ -1,6 +1,8 @@
 package com.smartx.cookies.smartx;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +43,8 @@ public class viewDevices extends ListActivity {
     private int itemPosition;
     ArrayList<String> deviceNames;
     String message = "";
+
+
     /**
      * A getter to the user ID
      *
@@ -185,7 +189,25 @@ public class viewDevices extends ListActivity {
         if (item.getTitle() == "Add To Favorites") {
             Toast.makeText(this, "Add To Favorites Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "Delete Device") {
-            Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder confirmationDialog = new AlertDialog.Builder(
+                    this);
+            confirmationDialog.setMessage("Are you sure you want to delete this device?");
+            confirmationDialog.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            confirmationDialog.setPositiveButton("Confirm",   new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    deleteDevice(userID, roomID, itemPosition);
+                }
+            });
+            confirmationDialog.show();
         } else if (item.getTitle() == "View Notes") {
               renderViewNotes(itemPosition, userID, roomID);
         }else
@@ -194,7 +216,38 @@ public class viewDevices extends ListActivity {
         }
         return true;
     }
+    public void deleteDevice(final int userID, final int roomID, int itemPosition ){
+        final String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        final myAPI api = ADAPTER.create(myAPI.class);
+        api.findDevice(userID + "", roomID + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+            @Override
+            public void success(List<Device> devices, Response response) {
+                String id = devices.get(0).getId();
+                api.deleteDevice(userID + "", roomID + "", id, new Callback<Device>() {
+                    @Override
+                    public void success(Device device, Response response) {
+                        Toast.makeText(getApplicationContext(), deviceSelected + " has been successfully deleted!", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(getIntent());
+                    }
 
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
     /**
      * Renders view notes view for the device of the context menu
      * @param itemPosition
