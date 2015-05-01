@@ -21,4 +21,9 @@ Rails.application.routes.draw do
         end
       end
       end
+        resources :users do
+       resources :rooms do 
+        resources :plugs
+      end
+    end
 end

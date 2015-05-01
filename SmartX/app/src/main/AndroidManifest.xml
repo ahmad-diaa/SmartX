@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smartx.cookies.smartx">
-
+    package="com.smartx.cookies.smartx" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
 
     <application
         android:allowBackup="true"
@@ -96,11 +94,22 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_tv_clicker"
             android:screenOrientation="portrait" />
-        <!--<activity-->
-            <!--android:name=".Add_clicker_Activity"-->
-            <!--android:label="@string/title_activity_add_clicker_" >-->
-        <!--</activity>-->
+        <!-- <activity -->
+        <!-- android:name=".Add_clicker_Activity" -->
+        <!-- android:label="@string/title_activity_add_clicker_" > -->
+        <!-- </activity> -->
+        <activity
+            android:name=".AddPlug"
+            android:label="@string/title_activity_add_plug" >
+        </activity>
+        <activity
+            android:name=".PlugIcon"
+            android:label="@string/title_activity_plug_icon" >
+        </activity>
+        <activity
+            android:name=".ViewPlugs"
+            android:label="@string/title_activity_view_plugs" >
+        </activity>
     </application>
 
 </manifest>
-
