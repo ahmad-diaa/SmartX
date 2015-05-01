@@ -44,6 +44,7 @@
             />
 
 
+
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerView"
@@ -53,5 +54,5 @@
         android:background="#545454"
         android:scrollbars="vertical">
     </android.support.v7.widget.RecyclerView>
-
 </android.support.v4.widget.DrawerLayout>
+

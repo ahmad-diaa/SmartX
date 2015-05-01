@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
@@ -48,7 +49,11 @@ import retrofit.client.Response;
  * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
  *
  * @author Dalia Maarek
+<<<<<<< HEAD
  * @author Amir
+=======
+ * @author Ahmad Abdalraheem
+>>>>>>> origin/Sprint_Two
  */
 
 public class ViewRooms extends ListActivity {
@@ -74,16 +79,18 @@ public class ViewRooms extends ListActivity {
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
     View child;
+
     /**
      * @param adapter2 CustomListAdapter to set
      */
+
     public void setAdapter2(CustomListAdapter adapter2) {
         this.adapter2 = adapter2;
     }
-
     /**
      * @param photos Array  of photos to set
      */
+
     public void setPhotos(int[] photos) {
         this.photos = photos;
     }
@@ -91,6 +98,7 @@ public class ViewRooms extends ListActivity {
     /**
      * @return the customListAdapter
      */
+
     public CustomListAdapter getAdapter2() {
         return adapter2;
     }
@@ -98,6 +106,7 @@ public class ViewRooms extends ListActivity {
     /**
      * @return ArrayList of all rooms
      */
+
     public ArrayList<String> getRoomNames() {
         return roomNames;
     }
@@ -105,6 +114,7 @@ public class ViewRooms extends ListActivity {
     /**
      * @return ArrayList of all devices
      */
+
     public ArrayList<Integer> getIconRooms() {
         return iconRooms;
     }
@@ -112,6 +122,7 @@ public class ViewRooms extends ListActivity {
     /**
      * @param iconRooms Arraylist of Rooms photos ids
      */
+    
     public void setIconRooms(ArrayList<Integer> iconRooms) {
         this.iconRooms = iconRooms;
     }
@@ -119,10 +130,10 @@ public class ViewRooms extends ListActivity {
     /**
      * @param roomNames ArrayList of all rooms
      */
+
     public void setRoomNames(ArrayList<String> roomNames) {
         this.roomNames = roomNames;
     }
-
         /**
          * Gets the id of the photo to be assigned to the next room
          *
@@ -281,8 +292,8 @@ public class ViewRooms extends ListActivity {
                         case 2: startActivity(new Intent(getApplicationContext(), ViewRooms.class));break;
                         case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
                         case 4: startActivity(new Intent(getApplicationContext(), changePassword.class));break;
-                        case 5: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 6: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 5: reportProblemP(child);break;
+                        case 6: reportProblemE(child);break;
                         case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
                         case 8: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
                     }
@@ -354,7 +365,6 @@ public class ViewRooms extends ListActivity {
         });
     }
 
-
     /**
      * Starts the activity (addRoomsActivity) to create a new room
      *
@@ -364,8 +374,52 @@ public class ViewRooms extends ListActivity {
         startActivity(new Intent(this, addRoomsActivity.class));
     }
 
+    /**
+     * Starts the Activity (changePassword) to change user's  password,
+     * @param v the view of the activity
+     */
 
+    public void changePassword(View v) {
+        startActivity(new Intent(this, changePassword.class));
+    }
+    /**
+     * Starts the Activity (changeInfo) to change user's information,
+     * @param v the view of the activity
+     */
 
+    public void changeInfo(View v) {
+        startActivity(new Intent(this, changeInfo.class));
+    }
+    /**
+     *It allows the user to email his problem,
+     * @param v the view of the activity
+     */
+
+    public void reportProblemE(View v){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"ahmaddiaa93@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "My problem is regarding");
+        i.putExtra(Intent.EXTRA_TEXT   , "Explain Your problem here");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     *It allows the user to call the company in order to report his problem,
+     * @param v the view of the activity
+     */
+
+    public void reportProblemP(View v){
+
+        String number = "01117976333";
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + number));
+        startActivity(intent);
+    }
     /**
      * Creates the initial menu state
      *
@@ -414,7 +468,6 @@ public class ViewRooms extends ListActivity {
         menu.add(0, v.getId(), 0, "Rename Room");
         menu.add(0, v.getId(), 0, "Delete Room");
     }
-
 
     /**
      * Executes commands found in the context menu

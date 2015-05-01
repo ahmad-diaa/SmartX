@@ -3,6 +3,7 @@ package com.smartx.cookies.smartx;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
@@ -108,8 +109,8 @@ public class addRoomsActivity extends Activity {
                         case 2: startActivity(new Intent(getApplicationContext(), ViewRooms.class));break;
                         case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
                         case 4: startActivity(new Intent(getApplicationContext(), changePassword.class));break;
-                        case 5: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 6: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 5: reportProblemP(child);break;
+                        case 6: reportProblemE(child);break;
                         case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
                         case 8: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
                     }
@@ -251,5 +252,34 @@ public void setUserID(int userID){
         this.userID=userID;
         }
 
+    /**
+     *It allows the user to email his problem,
+     * @param v the view of the activity
+     */
 
+    public void reportProblemE(View v){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"ahmaddiaa93@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "My problem is regarding");
+        i.putExtra(Intent.EXTRA_TEXT   , "Explain Your problem here");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     *It allows the user to call the company in order to report his problem,
+     * @param v the view of the activity
+     */
+
+    public void reportProblemP(View v){
+
+        String number = "01117976333";
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + number));
+        startActivity(intent);
+    }
         }
