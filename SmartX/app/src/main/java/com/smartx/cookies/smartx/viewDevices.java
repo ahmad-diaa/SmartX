@@ -44,8 +44,11 @@ public class viewDevices extends ListActivity {
     private int itemPosition;
     ArrayList<String> deviceNames;
     String message = "";
-
-
+    String deviceIDTest =""; //for test
+    
+    public String getDeviceIDTest() {
+        return deviceIDTest;
+    }
     /**
      * A getter to the user ID
      *
@@ -63,7 +66,6 @@ public class viewDevices extends ListActivity {
     public int getRoomID() {
         return this.roomID;
     }
-
     /**
      * A getter to the errorMessage
      *
@@ -72,7 +74,6 @@ public class viewDevices extends ListActivity {
     public String getErrorMessage() {
         return this.message;
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,21 +119,18 @@ public class viewDevices extends ListActivity {
                 setListAdapter(adapter);
                 registerForContextMenu(getListView());
             }
-
             @Override
             public void failure(RetrofitError error) {
                 startActivity(new Intent(getApplicationContext(), viewDevices.class));
             }
         });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_view_devices, menu);
         return true;
     }
-
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Object o = this.getListAdapter().getItem(position);
@@ -157,7 +155,6 @@ public class viewDevices extends ListActivity {
             }
         });
     }
-
     /**
      * Called when the context menu for this view is being built.
      *
@@ -177,7 +174,6 @@ public class viewDevices extends ListActivity {
         menu.add(0, v.getId(), 0, "Delete Device");
         menu.add(0, v.getId(), 0, "View Notes");
     }
-
     /**
      * Executes commands found in the context menu
      *
@@ -210,21 +206,20 @@ public class viewDevices extends ListActivity {
             });
             confirmationDialog.show();
         } else if (item.getTitle() == "View Notes") {
-              renderViewNotes(itemPosition, userID, roomID);
+            renderViewNotes(itemPosition, userID, roomID);
         }else
         {
             return false;
         }
         return true;
     }
-
     /*
-    @param userID user's ID
-    @param roomID room's ID
-    @param itemPosition position of item in list
+ @param userID user's ID
+ @param roomID room's ID
+ @param itemPosition position of item in list
 
-    This method deletes the device that is selected, after the user has confirmed deletion
-     */
+ This method deletes the device that is selected, after the user has confirmed deletion
+  */
     public void deleteDevice(final int userID, final int roomID, int itemPosition ){
         final String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
         final RestAdapter ADAPTER =
@@ -234,6 +229,7 @@ public class viewDevices extends ListActivity {
             @Override
             public void success(List<Device> devices, Response response) {
                 String id = devices.get(0).getId();
+                deviceIDTest = id;
                 api.deleteDevice(userID + "", roomID + "", id, new Callback<Device>() {
                     @Override
                     public void success(Device device, Response response) {
@@ -241,19 +237,15 @@ public class viewDevices extends ListActivity {
                         finish();
                         startActivity(getIntent());
                     }
-
                     @Override
                     public void failure(RetrofitError error) {
                         Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
-
                     }
                 });
             }
-
             @Override
             public void failure(RetrofitError error) {
                 Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
-
             }
         });
     }
