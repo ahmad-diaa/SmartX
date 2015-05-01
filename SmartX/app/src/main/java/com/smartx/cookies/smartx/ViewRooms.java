@@ -33,17 +33,15 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-
 /**
  * ViewRooms.java
  * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
  *
  * @author Dalia Maarek
+ * @author Ahmad Abdalraheem
  */
 
-
 public class ViewRooms extends ListActivity {
-
     Button renameRoom;
     private EditText editSearch;
     private int userID;
@@ -93,7 +91,6 @@ public class ViewRooms extends ListActivity {
         return iconRooms;
     }
 
-
     /**
      * @param iconRooms Arraylist of Rooms photos ids
      */
@@ -105,11 +102,8 @@ public class ViewRooms extends ListActivity {
      * @param roomNames ArrayList of all rooms
      */
     public void setRoomNames(ArrayList<String> roomNames) {
-
         this.roomNames = roomNames;
     }
-
-
 
         /**
          * Gets the id of the photo to be assigned to the next room
@@ -129,19 +123,12 @@ public class ViewRooms extends ListActivity {
     private void showPopUp() {
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(
                 this);
-
         builderSingle.setTitle("Select a device type");
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.select_dialog_singlechoice);
-//        arrayAdapter.add("TV");
-//        arrayAdapter.add("Air Conditioner");
-//        arrayAdapter.add("Curtain");
-//        arrayAdapter.add("Plug");
-
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-
 
         api.requestTypes(new Callback<List<Type>>() {
             @Override
@@ -307,6 +294,12 @@ public class ViewRooms extends ListActivity {
             }
         });
     }
+
+    /**
+     * When the user click on logout, this method is called, it sends a request to delete the user's session after it succeed it renders login View after it sends
+     *
+     * @param v it takes the view
+     */
     public void logout(View v){
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String token = (mSharedPreference.getString("token", "222245asa"));

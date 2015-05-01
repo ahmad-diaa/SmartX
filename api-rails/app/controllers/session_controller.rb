@@ -11,13 +11,14 @@ class SessionController < ApplicationController
   end
 
 
+  #Index, it returns all sessions keys of all users.
 def index
 @keys = ApiKey.all
     render json: @keys 
   end
 
+#Destroy, it takes user's ID and delete the session key belongs to him 
   def destroy
-
     @api_key = ApiKey.find_by(params[:user_id])
     unless @api_key.nil?
     @api_key.destroy
