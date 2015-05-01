@@ -2,7 +2,7 @@ class PlugsController < ApplicationController
 def index
     @user=  User.find(params[:user_id])
     @room = @user.rooms.find(params[:room_id])
-    @plugs = @room.plugs.where(:name => params[:name])
+    @plugs = @room.plugs.all
     render json: @plugs if stale?(etag: @plugs.all, last_modified: @plugs.maximum(:updated_at))
   end
 
@@ -21,7 +21,7 @@ def index
 	  def show
     @user=User.find(params[:user_id])
     @room=@user.rooms.find(params[:room_id])
-    @plug= @room.plugs.find(params[:plug_id])
+    @plug= @room.plugs.find(params[:id])
     render json: @plug if stale?(@plug)
   end
 
