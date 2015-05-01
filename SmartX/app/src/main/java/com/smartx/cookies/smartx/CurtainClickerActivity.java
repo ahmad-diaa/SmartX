@@ -30,6 +30,7 @@ public class CurtainClickerActivity extends ActionBarActivity {
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
     ImageButton image; //Curtains on/off button
     int count = 0; //counter for the max and min
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,16 +47,14 @@ public class CurtainClickerActivity extends ActionBarActivity {
             @Override
             public void success(Clicker clicker, Response response) {
                 clickerID = clicker.getClickerId();
-
-
             }
 
             @Override
             public void failure(RetrofitError error) {
-
             }
         });
     }
+
     /**
      * It turns device on/off and updates the current clicker command to the recently entered one by calling sendCommand method
      *
@@ -73,6 +72,7 @@ public class CurtainClickerActivity extends ActionBarActivity {
         }
         sendCommand();
     }
+
     /**
      * It close the curtains gradually and updates the current clicker command to the recently entered one by calling sendCommand method
      *
@@ -87,8 +87,8 @@ public class CurtainClickerActivity extends ActionBarActivity {
            }
         command = new String(deviceID+"/shade/1");
         sendCommand();
-
     }
+
     /**
      * It opens the curtains gradually and updates the current clicker command to the recently entered one by calling sendCommand method
      *
@@ -104,6 +104,7 @@ public class CurtainClickerActivity extends ActionBarActivity {
         command = new String(deviceID+"/sun/0");
         sendCommand();
     }
+
     /**
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
@@ -121,31 +122,30 @@ public class CurtainClickerActivity extends ActionBarActivity {
                 }
                          }
 
-
             @Override
             public void failure(RetrofitError error) {
                 Toast.makeText(getApplicationContext(), "Something went wrong with the clicker!", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_curtain_clicker, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
 }

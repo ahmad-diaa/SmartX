@@ -46,6 +46,7 @@ public class TvClickerActivity extends Activity {
      * @return ENDPOINT
      */
     public String getENDPOINT() {return getResources().getString(R.string.ENDPOINT);}
+
     /**
      * userId getter
      *
@@ -213,6 +214,7 @@ public class TvClickerActivity extends Activity {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.getDevice(userID + "", roomID + "", deviceID + "", new Callback<Device>() {
+
             @Override
             public void success(Device device, Response response) {
                 Switch on_off = (Switch) findViewById(R.id.switch1);
@@ -222,9 +224,9 @@ public class TvClickerActivity extends Activity {
                 } else {
                     on_off.setChecked(false);
                     on = false;
-//                plugClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
                 }
             }
+
             @Override
             public void failure(RetrofitError error) {
             }
@@ -235,9 +237,10 @@ public class TvClickerActivity extends Activity {
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
     public void sendCommand() {
-        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();;
+        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "",command, new Callback<Clicker>() {
+
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("V/0")) {
@@ -252,9 +255,7 @@ public class TvClickerActivity extends Activity {
                 if (command.contains("C/1")) {
                     Toast.makeText(getApplicationContext(), "Next Channel", Toast.LENGTH_LONG).show();
                 }
-//                plugClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
             }
-
 
             @Override
             public void failure(RetrofitError error) {
@@ -275,4 +276,5 @@ public class TvClickerActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

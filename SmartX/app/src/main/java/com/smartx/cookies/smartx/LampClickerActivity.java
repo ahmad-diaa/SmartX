@@ -29,7 +29,6 @@ public class LampClickerActivity extends ActionBarActivity {
     int brightness;//controls the brightness level
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
 
-
     /**
      * userId getter
      *
@@ -65,10 +64,10 @@ public class LampClickerActivity extends ActionBarActivity {
     public boolean getOn() {
         return on;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-    super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lamp_clicker);
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
@@ -77,6 +76,7 @@ public class LampClickerActivity extends ActionBarActivity {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
+
             @Override
             public void success(Clicker clicker, Response response) {
                 clickerID = clicker.getClickerId();
@@ -95,7 +95,6 @@ public class LampClickerActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_lamp_clicker, menu);
         return true;
-
     }
 
     @Override
@@ -108,9 +107,9 @@ public class LampClickerActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
     /**
      * called  if the Switch "on/off" in lamp_clicker layout is clicked.
      * will send the current command to the Clicker
@@ -119,25 +118,25 @@ public class LampClickerActivity extends ActionBarActivity {
      */
     public void TurnOnOff(View v) {
         on = !on;
-        if(on)
-        command = new String(deviceID+"/1");
+        if (on)
+            command = new String(deviceID + "/1");
         else
-        command = new String(deviceID+"/0");
+            command = new String(deviceID + "/0");
         sendCommand();
     }
 
     /**
      * called  if the button '+' in lamp_clicker layout is clicked.
      * will send the current command to the Clicker
+     *
      * @param v
      */
-    public void dim(View v){
-        if(brightness>0 ){
+    public void dim(View v) {
+        if (brightness > 0) {
             brightness--;
-            command = new String(deviceID+"d/1");
+            command = new String(deviceID + "d/1");
             Toast.makeText(getApplicationContext(), "dimming", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             Toast.makeText(getApplicationContext(), "lights are off", Toast.LENGTH_SHORT).show();
         }
         sendCommand();
@@ -146,16 +145,16 @@ public class LampClickerActivity extends ActionBarActivity {
     /**
      * called  if the button '-' in lamp_clicker layout is clicked.
      * will send the current command to the Clicker
+     *
      * @param v
      */
-    public void bright(View v){
-        if(brightness<10 ){
+    public void bright(View v) {
+        if (brightness < 10) {
             brightness++;
-            command = new String(deviceID+"b/1");
+            command = new String(deviceID + "b/1");
             Toast.makeText(getApplicationContext(), "increase brightness", Toast.LENGTH_SHORT).show();
-        }
-        else{
-           Toast.makeText(getApplicationContext(), " max brightness", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), " max brightness", Toast.LENGTH_SHORT).show();
         }
         sendCommand();
     }
@@ -164,14 +163,12 @@ public class LampClickerActivity extends ActionBarActivity {
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
     public void sendCommand() {
-        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "",command, new Callback<Clicker>() {
+        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
-
             }
-
 
             @Override
             public void failure(RetrofitError error) {
@@ -179,4 +176,5 @@ public class LampClickerActivity extends ActionBarActivity {
             }
         });
     }
+
 }

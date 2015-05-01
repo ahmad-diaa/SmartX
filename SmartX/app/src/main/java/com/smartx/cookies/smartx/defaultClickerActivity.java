@@ -18,7 +18,6 @@ import retrofit.client.Response;
  * @author youmna
  */
 public class defaultClickerActivity extends ActionBarActivity {
-
     int userID; //store the current userID
     int roomID;//store the current roomID
     String deviceID;//store the current deviceID
@@ -98,14 +97,13 @@ public class defaultClickerActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
     /**
      * called  if the Switch "on/off" button in clicker layout is clicked.
      * It updates the current device status to either on or off
@@ -116,8 +114,8 @@ public class defaultClickerActivity extends ActionBarActivity {
         on = !on;
         command = new String(deviceID+"/" + on + "");
         sendCommand();
-
     }
+
     /**
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
@@ -128,9 +126,7 @@ public class defaultClickerActivity extends ActionBarActivity {
         api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "",command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
-
             }
-
 
             @Override
             public void failure(RetrofitError error) {
@@ -138,4 +134,5 @@ public class defaultClickerActivity extends ActionBarActivity {
             }
         });
     }
+
 }
