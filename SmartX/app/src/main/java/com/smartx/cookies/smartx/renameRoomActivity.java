@@ -27,6 +27,7 @@ import retrofit.client.Response;
  * Purpose: renames a room
  *
  * @author maggiemoheb
+ * @author Amir
  */
 public class renameRoomActivity extends Activity {
 

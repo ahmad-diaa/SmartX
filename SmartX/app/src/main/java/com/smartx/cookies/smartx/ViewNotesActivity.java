@@ -33,6 +33,7 @@ import retrofit.client.Response;
  *
  * @author maggiemoheb
  * @author ahmaddiaa
+ * @author Amir
  */
 public class ViewNotesActivity extends ListActivity {
 

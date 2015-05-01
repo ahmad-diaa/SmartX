@@ -28,6 +28,7 @@ import retrofit.client.Response;
  * Purpose: This class is used to add a note to a specific device
  *
  * @author maggiemoheb
+ * @author Amir
  */
 
 public class AddNoteActivity extends Activity {

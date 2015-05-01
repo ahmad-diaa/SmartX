@@ -29,6 +29,7 @@ import retrofit.client.Response;
  * Purpose: user can edit his contact information (email and phone number)
  *
  * @author Ahmad Abdalraheem
+ * @author Amir
  */
 public class changeInfo extends Activity {
     EditText emailTxt;

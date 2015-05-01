@@ -28,6 +28,7 @@ import retrofit.client.Response;
  * Purpose: user can change his password
  *
  * @author Ahmad Abdalraheem
+ * @author Amir
  */
 public class changePassword extends Activity {
     Button changePasswordB;

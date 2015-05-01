@@ -102,7 +102,7 @@ public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHold
      *
      * @param parent
      * @param viewType
-     * @return
+     * @return the view holder of SideBarAdapter, item or header according to the type of view passed.
      */
 
     @Override
@@ -140,7 +140,7 @@ public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHold
     /**
      * This method returns the number of items present in the list.
      *
-     * @return
+     * @return int value:the number of items present in the list.
      */
 
     @Override
@@ -152,7 +152,7 @@ public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHold
      * With the following method we check what type of view is being passed.
      *
      * @param position
-     * @return
+     * @return int value: the type of view passed item or header.
      */
 
     @Override

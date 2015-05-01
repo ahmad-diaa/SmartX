@@ -27,9 +27,10 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/*
-    Purpose: Displays a list of rooms that have a selected type of device
-     @author Dalia Maarek
+/**
+ *Purpose: Displays a list of rooms that have a selected type of device
+ *@author Dalia Maarek
+ *@author Amir
  */
 public class deviceList extends ListActivity {
     private static int userID;
@@ -38,6 +39,7 @@ public class deviceList extends ListActivity {
     private ArrayAdapter<String> adapter2;
     private myAPI api;
     private SharedPreferences mSharedPreference;
+    private String dName;
     String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","About us","Logout"};
     int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
     String name ;
@@ -47,6 +49,7 @@ public class deviceList extends ListActivity {
     RecyclerView.LayoutManager mLayoutManager;
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
+
 
     /*
     @return mSharedPreferences Shared Preference used in app
@@ -215,33 +218,33 @@ public class deviceList extends ListActivity {
 
                     @Override
                     public void success(List<Device> devices, Response response) {
-                        Iterator<Device> iterator = devices.iterator();
-                        Iterator<Device> iterator2 = devices.iterator();
-                        while (iterator.hasNext()) {
-                            if (type.equalsIgnoreCase(iterator2.next().getName())) {
-                                int roomid = iterator.next().getRoomID();
+                        Iterator<Device> deviceRooms = devices.iterator();
+                        Iterator<Device> deviceLoop = devices.iterator();
+                        Iterator<Device> deviceNames = devices.iterator();
+                        while (deviceRooms.hasNext()) {
+                            if (type.equalsIgnoreCase(deviceLoop.next().getName())) {
+                                int roomid = deviceRooms.next().getRoomID();
+                                dName = deviceNames.next().getName();
                                 api.getRoom(userID + "", roomid + "", new Callback<String>() {
                                     @Override
                                     public void success(String room, Response response) {
                                         room = room.replace("%20", " ");
-                                        roomNameList.add(room);
+                                        roomNameList.add(room + " - " + dName);
                                         setListAdapter(adapter2);
-
                                     }
 
                                     @Override
                                     public void failure(RetrofitError error) {
                                         //add toast
                                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-
                                     }
                                 });
                             } else {
-                                iterator.next();
+                                deviceRooms.next();
+                                deviceNames.next();
                             }
                             ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomNameList);
                             setListAdapter(adapter2);
-
                         }
                     }
 
@@ -268,5 +271,4 @@ public class deviceList extends ListActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

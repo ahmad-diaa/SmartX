@@ -27,6 +27,7 @@ import retrofit.client.Response;
  *
  * @author youmna
  * @author maggiemoheb
+ * @author Amir
  */
 public class TvClickerActivity extends Activity {
     int userID; //store the current userID
