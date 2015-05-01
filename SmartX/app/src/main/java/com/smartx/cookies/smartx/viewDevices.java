@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,11 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Purpose: view devices in a certain room
+ *SE Sprint2
+ *viewDevices.java
+ *Purpose: Display list of device in a certain room
+ *
+ * @author Amir
  * @author maggiemoheb
  * @author Dalia Maarek
  */
@@ -41,7 +46,8 @@ public class viewDevices extends ListActivity {
     int roomID;
     String roomName;
     Button addDevice;
-    private int itemPosition;
+    Button addPlug;
+    int itemPosition;
     ArrayList<String> deviceNames;
     String message = "";
     String deviceIDTest =""; //for test
@@ -81,6 +87,14 @@ public class viewDevices extends ListActivity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
+        addPlug = (Button) findViewById(R.id.addplug);
+        addPlug.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(viewDevices.this, AddPlug.class));
+            }
+        });
+
         addDevice = (Button) findViewById(R.id.addDevice);
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -149,6 +163,7 @@ public class viewDevices extends ListActivity {
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
             }
+
             @Override
             public void failure(RetrofitError error) {
                 throw error;
@@ -184,7 +199,26 @@ public class viewDevices extends ListActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Add To Favorites") {
-            Toast.makeText(this, "Add To Favorites Action should be invoked", Toast.LENGTH_SHORT).show();
+            String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
+            final RestAdapter ADAPTER =
+                    new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+            myAPI api = ADAPTER.create(myAPI.class);
+            api.findDevice(userID + "", roomID + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+                @Override
+                public void success(List<Device> devices, Response response) {
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("deviceID", devices.get(0).getDeviceID());
+                    editor.commit();
+                    startActivity(new Intent(getApplicationContext(), AddToFavorites.class));
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
         } else if (item.getTitle() == "Delete Device") {
             AlertDialog.Builder confirmationDialog = new AlertDialog.Builder(
                     this);
@@ -209,6 +243,7 @@ public class viewDevices extends ListActivity {
             renderViewNotes(itemPosition, userID, roomID);
         }else
         {
+
             return false;
         }
         return true;
@@ -251,11 +286,12 @@ public class viewDevices extends ListActivity {
     }
     /**
      * Renders view notes view for the device of the context menu
+     *
      * @param itemPosition
      * @param user
      * @param room
      */
-    public void renderViewNotes (int itemPosition, int user, int room) {
+    public void renderViewNotes(int itemPosition, int user, int room) {
         String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
@@ -267,12 +303,14 @@ public class viewDevices extends ListActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("deviceID", devices.get(0).getId());
                 editor.commit();
-                startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
+                startActivity(new Intent(viewDevices.this, ViewNotesActivity.class));
             }
+
             @Override
             public void failure(RetrofitError error) {
             }
         });
         message = "Selected Successfully";
     }
+
 }
