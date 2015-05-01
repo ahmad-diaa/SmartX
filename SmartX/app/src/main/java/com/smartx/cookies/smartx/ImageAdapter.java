@@ -17,6 +17,7 @@ public class ImageAdapter extends BaseAdapter {
 
     /**
      * Constructor thhat initializes the Context of the adapter the given context
+     *
      * @param c
      */
     public ImageAdapter(Context c) {
@@ -24,7 +25,6 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     /**
-     *
      * @returns the number of photos found in the grid
      */
     public int getCount() {
@@ -32,7 +32,6 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     /**
-     *
      * @param position the position in which the item found there should be returned.
      * @returns the the item found at the given position.
      */
@@ -41,7 +40,6 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     /**
-     *
      * @param position the position in which the item found there should have its ID returned.
      * @returns the id of the item found at the given position.
      */
@@ -55,10 +53,10 @@ public class ImageAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
 
-                imageView = new ImageView(mContext);
-                imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setPadding(23, 23, 23, 23);
+            imageView = new ImageView(mContext);
+            imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(23, 23, 23, 23);
 
         } else {
             imageView = (ImageView) convertView;
@@ -69,16 +67,13 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     /**
-     *
      * @returns the photo array
      */
     public Integer[] getPhotos() {
         return mThumbIds;
     }
 
-
     /**
-     *
      * references to our images
      */
     private Integer[] mThumbIds = {
@@ -95,4 +90,5 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.router,
             R.drawable.microwave,
             R.drawable.playstation,
-    };}
+    };
+}

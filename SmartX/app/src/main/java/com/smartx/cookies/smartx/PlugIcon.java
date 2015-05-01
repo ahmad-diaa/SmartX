@@ -36,9 +36,6 @@ public class PlugIcon extends Activity {
     String plugPhoto = "";
     private SharedPreferences prefs;
 
-    public SharedPreferences getMyPrefs() {
-        return prefs;
-    }
 
     /**
      * Called when the activity starts. it gets the plug name and id from the previous activity

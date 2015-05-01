@@ -30,31 +30,8 @@ public class AddPlug extends Activity {
     private Button next;
 
     /**
-     *
-     * @return shared preferences of the session
-     */
-    public SharedPreferences getPrefs() {
-        return prefs;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public int getRoomID() {
-        return roomID;
-    }
-
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
-    }
-
-    /**
      * gets the pug name and the plug ID, checks that they are not null, and passes them to the next page
+     *
      * @param savedInstanceState the bundle passed to the Activity from the previous one
      */
     @Override
@@ -69,20 +46,17 @@ public class AddPlug extends Activity {
             public void onClick(View v) {
                 prefs = PreferenceManager.getDefaultSharedPreferences(AddPlug.this);
                 SharedPreferences.Editor editor = prefs.edit();
-                String plugNameField= plugName.getText().toString();
+                String plugNameField = plugName.getText().toString();
                 String plugIDField = plugID.getText().toString();
                 roomID = prefs.getInt("roomID", 1);
                 userID = prefs.getInt("userID", 1);
 
 
-                if(plugNameField.trim().equals("") && plugNameField.trim().equals(""))
-                {
+                if (plugNameField.trim().equals("") && plugNameField.trim().equals("")) {
                     Toast.makeText(AddPlug.this, "Plug ID and name required", Toast.LENGTH_SHORT).show();
-                }
-                else if(plugNameField.trim().equals("")){
+                } else if (plugNameField.trim().equals("")) {
                     Toast.makeText(AddPlug.this, "Plug name required", Toast.LENGTH_SHORT).show();
-                }
-                else if(plugNameField.trim().equals("")){
+                } else if (plugNameField.trim().equals("")) {
                     Toast.makeText(AddPlug.this, "Plug ID required", Toast.LENGTH_SHORT).show();
                 }
                 editor.putString("plugName", plugName.getText().toString());
@@ -90,7 +64,7 @@ public class AddPlug extends Activity {
                 editor.commit();
                 startActivity(new Intent(AddPlug.this, PlugIcon.class));
             }
-                        });
+        });
 
 
     }
