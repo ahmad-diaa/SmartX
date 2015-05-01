@@ -74,6 +74,9 @@
             android:label="@string/title_activity_view_notes" >
         </activity>
         <activity
+            android:name=".AddToFavorites">
+        </activity>
+        <activity
             android:name=".AddNoteActivity"
             android:label="@string/title_activity_add_note" >
         </activity>
