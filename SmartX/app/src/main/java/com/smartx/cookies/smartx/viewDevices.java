@@ -101,7 +101,7 @@ public class viewDevices extends ListActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.d("ERROR ", error.getMessage());
-                Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_SHORT).show();
             }
         });
         api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
@@ -137,7 +137,7 @@ public class viewDevices extends ListActivity {
         super.onListItemClick(l, v, position, id);
         Object o = this.getListAdapter().getItem(position);
         final String device = o.toString();
-        Toast.makeText(getApplicationContext(), device, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), device, Toast.LENGTH_SHORT).show();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
        final myAPI api = ADAPTER.create(myAPI.class);
@@ -149,16 +149,13 @@ public class viewDevices extends ListActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("deviceID", devices.get(0).getDeviceID() + "");
                 editor.commit();
-                Toast.makeText(getApplicationContext(), devices.get(0).getName() , Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), devices.get(0).getName() , Toast.LENGTH_SHORT).show();
 
                 api.findClickerType(devices.get(0).getName() , new Callback<List<Type>>() {
                     @Override
                     public void success(List<Type> types, Response response) {
-                        Toast.makeText(getApplicationContext(), types.get(0).getId() + "" + types.get(0).getName(), Toast.LENGTH_LONG).show();
                        int  type = types.get(0).getId();
                         if (type == 1 || type == 4 || type == 5) {
-                            Toast.makeText(getApplicationContext(), "IN 1", Toast.LENGTH_LONG).show();
-
                             startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
 
                         }
@@ -171,7 +168,7 @@ public class viewDevices extends ListActivity {
 
                                 } else {
 
-                                    startActivity(new Intent(getApplicationContext(), About_us.class));
+                                    startActivity(new Intent(getApplicationContext(), defaultClickerActivity.class));
 
                                 }
                             }
@@ -186,11 +183,12 @@ public class viewDevices extends ListActivity {
                 });
 
 
+        }
+
             @Override
             public void failure(RetrofitError error) {
                 throw error;
-            }
-        });
+            }});
     }
 
     /**

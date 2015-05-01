@@ -1,7 +1,6 @@
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -31,7 +30,6 @@ public class TvClickerActivity extends Activity {
     String command;//store the current command
     boolean on;//initial current state of device
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
-    Clicker TvClicker;
     Switch mySwitch;// the Switch instance of this activity
 
     /**
@@ -107,7 +105,6 @@ public class TvClickerActivity extends Activity {
         api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
-                TvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
                 clickerID = clicker.getClickerId();
                 checkPreviousState();
             }
@@ -194,7 +191,6 @@ public class TvClickerActivity extends Activity {
         on = !on;
         command = new String(deviceID+"/" + on + "");
         sendCommand();
-        changeDeviceStatus(on);
         mySwitch.setEnabled(false);
         runOnUiThread(new Runnable() {
             public void run() {
@@ -231,27 +227,6 @@ public class TvClickerActivity extends Activity {
             }
             @Override
             public void failure(RetrofitError error) {
-            }
-        });
-    }
-
-    /**
-     * changes the status of the device when switch is turned on/off
-     *
-     * @param on
-     */
-    public void changeDeviceStatus(boolean on) {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus(userID + "", roomID + "", deviceID, on + "", new Callback<Device>() {
-            @Override
-            public void success(Device device, Response response) {
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                startActivity(new Intent(getApplicationContext(), About_us.class));
-
             }
         });
     }

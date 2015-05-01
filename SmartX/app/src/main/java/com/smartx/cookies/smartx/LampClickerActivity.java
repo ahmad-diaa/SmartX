@@ -135,10 +135,10 @@ public class LampClickerActivity extends ActionBarActivity {
         if(brightness>0 ){
             brightness--;
             command = new String(deviceID+"d/1");
-            Toast.makeText(getApplicationContext(), "dimming", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "dimming", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(getApplicationContext(), "lights are off", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "lights are off", Toast.LENGTH_SHORT).show();
         }
         sendCommand();
     }
@@ -152,10 +152,10 @@ public class LampClickerActivity extends ActionBarActivity {
         if(brightness<10 ){
             brightness++;
             command = new String(deviceID+"b/1");
-            Toast.makeText(getApplicationContext(), "increase brightness", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "increase brightness", Toast.LENGTH_SHORT).show();
         }
         else{
-           Toast.makeText(getApplicationContext(), " max brightness", Toast.LENGTH_LONG).show();
+           Toast.makeText(getApplicationContext(), " max brightness", Toast.LENGTH_SHORT).show();
         }
         sendCommand();
     }
@@ -175,7 +175,7 @@ public class LampClickerActivity extends ActionBarActivity {
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Something went wrong with the clicker!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Something went wrong with the clicker!", Toast.LENGTH_SHORT).show();
             }
         });
     }

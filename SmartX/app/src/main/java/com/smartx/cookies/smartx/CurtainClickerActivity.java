@@ -114,17 +114,17 @@ public class CurtainClickerActivity extends ActionBarActivity {
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("cur/1")) {
-                    Toast.makeText(getApplicationContext(), "Have a cloudy day", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Have a cloudy day", Toast.LENGTH_SHORT).show();
                 }
                 if (command.contains("cur/0")) {
-                    Toast.makeText(getApplicationContext(), "Have a sunny day", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Have a sunny day", Toast.LENGTH_SHORT).show();
                 }
                          }
 
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Something went wrong with the clicker!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Something went wrong with the clicker!", Toast.LENGTH_SHORT).show();
             }
         });
     }
