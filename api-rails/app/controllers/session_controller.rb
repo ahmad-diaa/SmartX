@@ -17,9 +17,11 @@ def index
   end
 
   def destroy
-    api_key = ApiKey.find_by(params[:user_id])
-    api_key.destroy
+
+    @api_key = ApiKey.find_by(params[:user_id])
+    unless @api_key.nil?
+    @api_key.destroy
   	head :no_content
   end
-
+end
 end
