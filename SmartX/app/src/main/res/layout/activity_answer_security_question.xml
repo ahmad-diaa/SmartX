@@ -15,9 +15,7 @@
         android:id="@+id/answerTxt"
         android:layout_row="0"
         android:layout_column="2"
-        android:layout_marginTop="134dp"
-
-        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"></EditText>
 
     <Button
@@ -29,27 +27,20 @@
         android:onClick="submitAnswer"
         android:layout_row="6"
         android:layout_column="2"
-        android:layout_marginBottom="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/answerTxt"
-        android:layout_alignEnd="@+id/answerTxt" />
-
-
-
+        android:textColor="#ffff4608"
+        android:layout_marginTop="144dp"
+        android:layout_below="@+id/answerTxt"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/question"
-        android:layout_row="0"
-        android:layout_column="0"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
         android:textColor="#ffff4608"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/answerB"
-        android:layout_toStartOf="@+id/answerB"
-        android:layout_marginTop="67dp" />
-
+        android:id="@+id/question"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/answerTxt" />
 
 
 </RelativeLayout>

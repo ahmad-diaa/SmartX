@@ -20,6 +20,15 @@ import retrofit.http.Path;
 
 public interface myAPI {
 
+
+    @GET("/v/users/{name}")
+     void getSecurityQuestion(@Path("name") String name, Callback<securityQuestion> callback);
+
+             @GET("/v/users/{id}/{securityA}")
+     void checkUser(@Path("id") String id,@Path("securityA") String securityA, Callback<List<User>> cb);
+
+
+
     @GET("/v/users/{userID}/rooms/{roomName}")
     void findRoom(@Path("userID") String id, @Path("roomName") String name, Callback<List<Room>> callback);
 
@@ -106,12 +115,6 @@ public interface myAPI {
 
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
-
-    @GET("v/users/{name}")
-    void getSecurityQuestion(@Path("name") String name, Callback<securityQuestion> callback);
-
-    @GET("/users/{id}/{securityA}")
-    void checkUser(@Path("id") String id,@Path("securityA") String securityA, Callback<List<User>> cb);
 
 }
 
