@@ -26,7 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/search"
-        android:layout_above="@+id/viewBy" />
+        android:layout_above="@+id/logoutB" />
 
     <Button
         android:layout_width="fill_parent"
@@ -60,4 +60,15 @@
     android:layout_alignParentStart="true"
     android:layout_centerHorizontal="true"
     />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        android:id="@+id/logoutB"
+        android:onClick="logout"
+        android:layout_above="@+id/viewBy"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        />
 </RelativeLayout>

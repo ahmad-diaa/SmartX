@@ -26,6 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import models.Room;
+import models.Session;
 import models.Type;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -200,7 +201,7 @@ public class ViewRooms extends ListActivity {
         final SharedPreferences SHARED_PREFERENCE =
                 PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (SHARED_PREFERENCE.getInt("userID", 1));
-        final RestAdapter ADAPTER =
+                final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         api = ADAPTER.create(myAPI.class);
         api.viewRooms(userID + "", new Callback<List<Room>>() {
@@ -306,7 +307,24 @@ public class ViewRooms extends ListActivity {
             }
         });
     }
+    public void logout(View v){
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String token = (mSharedPreference.getString("token", "222245asa"));
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
+        api.logout(userID+"", new Callback<Session>() {
+            @Override
+            public void success(Session session, Response response) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
 
+            @Override
+            public void failure(RetrofitError error) {
+                   }
+        }  );
+
+    }
 
     /**
      * Starts the activity (addRoomsActivity) to create a new room
@@ -414,6 +432,7 @@ public class ViewRooms extends ListActivity {
         }
         return true;
     }
+
 }
 
 

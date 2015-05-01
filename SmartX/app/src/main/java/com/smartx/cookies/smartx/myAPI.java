@@ -1,6 +1,7 @@
 package com.smartx.cookies.smartx;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import models.Device;
 import models.Note;
@@ -9,6 +10,7 @@ import models.Session;
 import models.Type;
 import models.User;
 import retrofit.Callback;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -24,6 +26,9 @@ public interface myAPI {
 
     @GET("/users/{userID}/rooms/1/devices/1/devices")
     void allDevices(@Path("userID") String id, Callback<List<Device>> callback);
+
+    @DELETE ("/session/{token}")
+    void logout(@Path("token") String access_token,Callback<Session> callback);
 
     @FormUrlEncoded
     @POST("/session")

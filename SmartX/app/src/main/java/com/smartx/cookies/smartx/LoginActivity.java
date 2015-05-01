@@ -29,7 +29,7 @@ public class LoginActivity extends Activity {
     Button btnLogin;
     List<User> userList;
     SharedPreferences Data;
-    //TextView aboutlogin;
+        String token;
     private String Pass;
 
     @Override
@@ -65,6 +65,8 @@ public class LoginActivity extends Activity {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putInt("userID", session.getId());
+                        token = session.getToken();
+                        editor.putString("accessToken",session.getToken());
                         editor.commit();
                         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
                         myAPI api = adapter.create(myAPI.class);
@@ -82,6 +84,7 @@ public class LoginActivity extends Activity {
                                 editor.putString("password", getPass());
                                 editor.putString("email", email);
                                 editor.putString("phone", phone);
+                                editor.putString("token",token);
                                 editor.commit();
                                 startActivity(new Intent(getApplicationContext(), ViewRooms.class));
                             }

@@ -10,4 +10,16 @@ class SessionController < ApplicationController
     end
   end
 
+
+def index
+@keys = ApiKey.all
+    render json: @keys 
+  end
+
+  def destroy
+    api_key = ApiKey.find_by(params[:user_id])
+    api_key.destroy
+  	head :no_content
+  end
+
 end
