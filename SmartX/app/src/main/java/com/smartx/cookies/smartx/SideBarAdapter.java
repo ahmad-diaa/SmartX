@@ -161,4 +161,12 @@ public class SideBarAdapter extends RecyclerView.Adapter<SideBarAdapter.ViewHold
             return TYPE_HEADER;
         return TYPE_ITEM;
     }
+
+    public String[] getTitles(){
+        return titles;
+    }
+
+    public int[] getIcons(){
+        return icons;
+    }
 }

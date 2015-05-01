@@ -27,6 +27,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.smartx.cookies.smartx.test.SideBarTest;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -69,7 +72,7 @@ public class ViewRooms extends ListActivity {
     RecyclerView.LayoutManager mLayoutManager;
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
-
+    View child;
     /**
      * @param adapter2 CustomListAdapter to set
      */
@@ -268,7 +271,7 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-                View child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
+                child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
                 if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
                     Drawer.closeDrawers();
                     switch (recyclerView.getChildPosition(child)){
@@ -448,6 +451,16 @@ public class ViewRooms extends ListActivity {
             return false;
         }
         return true;
+    }
+    public View getChild(){
+        return child;
+    }
+
+    public RecyclerView getRecyclerView(){
+        return mRecyclerView;
+    }
+    public SideBarAdapter getMAdapter(){
+        return (SideBarAdapter)mAdapter;
     }
 }
 
