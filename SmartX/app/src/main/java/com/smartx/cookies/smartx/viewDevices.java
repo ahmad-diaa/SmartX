@@ -33,6 +33,7 @@ import retrofit.client.Response;
 /**
  * Purpose: view devices in a certain room
  * @author maggiemoheb
+ * @author Dalia Maarek
  */
 public class viewDevices extends ListActivity {
 
@@ -216,6 +217,14 @@ public class viewDevices extends ListActivity {
         }
         return true;
     }
+
+    /*
+    @param userID user's ID
+    @param roomID room's ID
+    @param itemPosition position of item in list
+
+    This method deletes the device that is selected, after the user has confirmed deletion
+     */
     public void deleteDevice(final int userID, final int roomID, int itemPosition ){
         final String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
         final RestAdapter ADAPTER =
