@@ -25,5 +25,5 @@
     <string name="title_activity_device_list">DeviceList</string>
     <string name="title_activity_tv_clicker">TvClickerActivity</string>
     <string name="title_activity_add_clicker_">Add_clicker_Activity</string>
-    <string name="ENDPOINT">http://217.53.102.185:3000/</string>
+    <string name="ENDPOINT">http://217.53.100.80:3000/</string>
 </resources>

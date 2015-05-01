@@ -9,6 +9,7 @@ import models.Session;
 import models.Type;
 import models.User;
 import retrofit.Callback;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -95,6 +96,13 @@ public interface myAPI {
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
     void editDeviceStatus(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[status]") String status, Callback<Device> callback);
+
+    @FormUrlEncoded
+    @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
+    void editDeviceRoom(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[room_id]") String newID, Callback<Device> callback);
+
+    @DELETE("/users/{userID}/rooms/{roomID}/devices/{deviceID}/")
+    void deleteDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<Device> callback);
 
     @GET("/users/{userId}/")
     void getUser(@Path("userId") String id, Callback<User> callback);
