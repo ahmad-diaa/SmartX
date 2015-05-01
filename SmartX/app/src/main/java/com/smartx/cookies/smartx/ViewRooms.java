@@ -251,9 +251,7 @@ public class ViewRooms extends ListActivity {
 
                     );
 
-                    registerForContextMenu(getListView()
-
-                    );
+                    registerForContextMenu(getListView());
                 }
 
 

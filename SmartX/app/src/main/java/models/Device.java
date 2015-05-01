@@ -167,5 +167,10 @@ public class Device {
         this.favorite=favorite;
     }
 
+
+    public String getId() {
+        return device_id;
+    }
+
 }
 
