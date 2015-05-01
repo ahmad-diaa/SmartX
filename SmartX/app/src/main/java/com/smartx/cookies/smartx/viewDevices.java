@@ -29,8 +29,16 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
+<<<<<<< HEAD
+ *SE Sprint2
+ *viewDevices.java
+ *Purpose: Display list of devices.
+ *
+ * @author Amir
+=======
  * Purpose: view devices in a certain room
  * @author maggiemoheb
+>>>>>>> origin/Sprint_Two
  */
 public class viewDevices extends ListActivity {
 
@@ -38,9 +46,10 @@ public class viewDevices extends ListActivity {
     int roomID;
     String roomName;
     Button addDevice;
-    private int itemPosition;
+    int itemPosition;
     ArrayList<String> deviceNames;
     String message = "";
+
     /**
      * A getter to the user ID
      *
@@ -146,6 +155,7 @@ public class viewDevices extends ListActivity {
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
             }
+
             @Override
             public void failure(RetrofitError error) {
                 throw error;
@@ -183,13 +193,33 @@ public class viewDevices extends ListActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Add To Favorites") {
-            Toast.makeText(this, "Add To Favorites Action should be invoked", Toast.LENGTH_SHORT).show();
+            String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
+            final RestAdapter ADAPTER =
+                    new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+            myAPI api = ADAPTER.create(myAPI.class);
+            api.findDevice(userID + "", roomID + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+                @Override
+                public void success(List<Device> devices, Response response) {
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("deviceID", devices.get(0).getDeviceID());
+                    editor.commit();
+                    startActivity(new Intent(getApplicationContext(), AddToFavorites.class));
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                }
+            });
         } else if (item.getTitle() == "Delete Device") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "View Notes") {
             renderViewNotes(itemPosition, userID, roomID);
         }else
         {
+
             return false;
         }
         return true;
@@ -197,11 +227,12 @@ public class viewDevices extends ListActivity {
 
     /**
      * Renders view notes view for the device of the context menu
+     *
      * @param itemPosition
      * @param user
      * @param room
      */
-    public void renderViewNotes (int itemPosition, int user, int room) {
+    public void renderViewNotes(int itemPosition, int user, int room) {
         String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
@@ -213,12 +244,14 @@ public class viewDevices extends ListActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("deviceID", devices.get(0).getId());
                 editor.commit();
-                startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
+                startActivity(new Intent(viewDevices.this, ViewNotesActivity.class));
             }
+
             @Override
             public void failure(RetrofitError error) {
             }
         });
         message = "Selected Successfully";
     }
+
 }
