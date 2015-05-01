@@ -2,7 +2,9 @@
 Rails.application.routes.draw do
 	get 'v/users/:user_id/rooms/:name'=>'rooms#find'
   get 'v/users/:user_id/rooms/:room_id/devices/:name'=>'devices#find'
-    resources :types
+    resources :types do
+     resources :clickertype
+   end
     post 'session' => 'session#create'
     get 'users/:user_id/rooms/:id' =>'rooms#getName'
     get 'v/types/:name' =>'types#find'

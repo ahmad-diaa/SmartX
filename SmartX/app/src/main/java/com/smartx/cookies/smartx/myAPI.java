@@ -25,9 +25,8 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/1/devices/1/devices")
     void allDevices(@Path("userID") String id, Callback<List<Device>> callback);
 
-
-    @GET("/v/types/{deviceName}")
-    void findClickerType(@Path("deviceName") String name, Callback<List<Type>> callback);
+    @GET("/v/types/{name}")
+    void findClickerType(@Path("name") String deviceName, Callback<List<Type>> callback);
 
     @FormUrlEncoded
     @POST("/session")
