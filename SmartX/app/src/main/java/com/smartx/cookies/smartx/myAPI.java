@@ -111,6 +111,13 @@ public interface myAPI {
     @POST("/users/{userId}/rooms/{roomId}/plugs/")
     void addPlug(@Path("userId") String userId, @Path("roomId") String roomId, @Field("plug[plug_id]") String plugId, @Field("plug[name]") String name, @Field("plug[status]") String status, @Field("plug[photo]") String photo, Callback<Plug> callback);
 
+    /**
+     * Gets the plug with the 
+     * @param userID the given userID
+     * @param roomID the given roomID
+     * @param plugID the given plugID
+     * @param callback the callback from the rails
+     */
     @GET("/users/{userId}/rooms/{roomId}/plugs/{plugId}")
     void getPlug(@Path("userId") String userID, @Path("roomId") String roomID, @Field("plugId") String plugID, Callback <Plug> callback);
 }
