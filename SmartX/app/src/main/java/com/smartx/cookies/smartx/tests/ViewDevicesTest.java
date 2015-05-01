@@ -1,8 +1,6 @@
 package com.smartx.cookies.smartx.tests;
 
-/**
- * Created by youmna
- */
+
 
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -19,11 +17,13 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by youmna on 4/16/15.
+ * Purpose: tests view devices activity
+ *
+ * @author youmna
+ * @author maggiemoheb
  */
 public class ViewDevicesTest extends ActivityInstrumentationTestCase2<ViewDeviceActivity> {
     private ViewDeviceActivity myActivity;
-
     private String ENDPOINT;
     RestAdapter adapter;
     myAPI api;
@@ -61,10 +61,8 @@ public class ViewDevicesTest extends ActivityInstrumentationTestCase2<ViewDevice
                         }
 
                     });
-
                     i--;
                 }
-
             }
 
             @Override
@@ -76,9 +74,6 @@ public class ViewDevicesTest extends ActivityInstrumentationTestCase2<ViewDevice
 
     public void testPreconditions() {
         assertNotNull("myActivity is null", myActivity);
-
     }
-
-
 }
 
