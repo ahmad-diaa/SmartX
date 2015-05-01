@@ -110,5 +110,8 @@ public interface myAPI {
     @FormUrlEncoded
     @POST("/users/{userId}/rooms/{roomId}/plugs/")
     void addPlug(@Path("userId") String userId, @Path("roomId") String roomId, @Field("plug[plug_id]") String plugId, @Field("plug[name]") String name, @Field("plug[status]") String status, @Field("plug[photo]") String photo, Callback<Plug> callback);
+
+    @GET("/users/{userId}/rooms/{roomId}/plugs/{plugId}")
+    void getPlug(@Path("userId") String userID, @Path("roomId") String roomID, @Field("plugId") String plugID, Callback <Plug> callback);
 }
 

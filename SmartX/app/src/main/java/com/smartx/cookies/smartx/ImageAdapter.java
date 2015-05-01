@@ -15,18 +15,36 @@ public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
 
+    /**
+     * Constructor thhat initializes the Context of the adapter the given context
+     * @param c
+     */
     public ImageAdapter(Context c) {
         mContext = c;
     }
 
+    /**
+     *
+     * @returns the number of photos found in the grid
+     */
     public int getCount() {
         return mThumbIds.length;
     }
 
+    /**
+     *
+     * @param position the position in which the item found there should be returned.
+     * @returns the the item found at the given position.
+     */
     public Object getItem(int position) {
         return null;
     }
 
+    /**
+     *
+     * @param position the position in which the item found there should have its ID returned.
+     * @returns the id of the item found at the given position.
+     */
     public long getItemId(int position) {
         return 0;
     }
@@ -42,7 +60,6 @@ public class ImageAdapter extends BaseAdapter {
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setPadding(23, 23, 23, 23);
 
-
         } else {
             imageView = (ImageView) convertView;
         }
@@ -51,12 +68,19 @@ public class ImageAdapter extends BaseAdapter {
         return imageView;
     }
 
+    /**
+     *
+     * @returns the photo array
+     */
     public Integer[] getPhotos() {
         return mThumbIds;
     }
 
 
-    // references to our images
+    /**
+     *
+     * references to our images
+     */
     private Integer[] mThumbIds = {
             R.drawable.plugin,
             R.drawable.switcher,
@@ -71,8 +95,4 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.router,
             R.drawable.microwave,
             R.drawable.playstation,
-
-
-
-
     };}

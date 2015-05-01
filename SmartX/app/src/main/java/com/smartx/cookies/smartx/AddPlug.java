@@ -22,11 +22,41 @@ import retrofit.client.Response;
 
 public class AddPlug extends Activity {
 
-    Button next;
-    EditText plugName;
-    EditText plugID;
+    private EditText plugName;
+    private EditText plugID;
+    private int userID;
+    private int roomID;
+    private SharedPreferences prefs;
+    private Button next;
 
+    /**
+     *
+     * @return shared preferences of the session
+     */
+    public SharedPreferences getPrefs() {
+        return prefs;
+    }
 
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
+    /**
+     * gets the pug name and the plug ID, checks that they are not null, and passes them to the next page
+     * @param savedInstanceState the bundle passed to the Activity from the previous one
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +67,12 @@ public class AddPlug extends Activity {
         next.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(AddPlug.this);
+                prefs = PreferenceManager.getDefaultSharedPreferences(AddPlug.this);
                 SharedPreferences.Editor editor = prefs.edit();
                 String plugNameField= plugName.getText().toString();
                 String plugIDField = plugID.getText().toString();
+                roomID = prefs.getInt("roomID", 1);
+                userID = prefs.getInt("userID", 1);
 
 
                 if(plugNameField.trim().equals("") && plugNameField.trim().equals(""))
