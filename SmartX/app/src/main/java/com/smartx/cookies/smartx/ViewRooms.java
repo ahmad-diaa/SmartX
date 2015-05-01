@@ -361,13 +361,7 @@ public class ViewRooms extends ListActivity {
         startActivity(new Intent(this, addRoomsActivity.class));
     }
 
-    public void changePassword(View v) {
-        startActivity(new Intent(this, changePassword.class));
-    }
 
-    public void changeInfo(View v) {
-        startActivity(new Intent(this, changeInfo.class));
-    }
 
     /**
      * Creates the initial menu state

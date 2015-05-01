@@ -259,9 +259,6 @@ public class deviceList extends ListActivity {
         return true;
     }
 
-    public void viewRoomsClicked(View v) {
-        startActivity(new Intent(this, ViewRooms.class));
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
