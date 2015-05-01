@@ -1,12 +1,16 @@
 package com.smartx.cookies.smartx;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +37,9 @@ import retrofit.client.Response;
  * Purpose: view devices in a certain room
  * @author maggiemoheb
  */
-public class viewDevices extends ListActivity {
+public class viewDevices extends ListActivity implements AdapterView.OnItemSelectedListener {
 
+    Spinner roomsSpinner;
     int userID;
     int roomID;
     String roomName;
@@ -82,6 +88,7 @@ public class viewDevices extends ListActivity {
                 startActivity(new Intent(viewDevices.this, addDevices.class));
             }
         });
+
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         Log.d(userID + "", roomID + "");
@@ -146,6 +153,7 @@ public class viewDevices extends ListActivity {
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
             }
+
             @Override
             public void failure(RetrofitError error) {
                 throw error;
@@ -171,6 +179,7 @@ public class viewDevices extends ListActivity {
         menu.add(0, v.getId(), 0, "Add To Favorites");
         menu.add(0, v.getId(), 0, "Delete Device");
         menu.add(0, v.getId(), 0, "View Notes");
+        menu.add(0, v.getId(), 0, "Move Device");
     }
 
     /**
@@ -188,7 +197,11 @@ public class viewDevices extends ListActivity {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "View Notes") {
             renderViewNotes(itemPosition, userID, roomID);
-        }else
+        } else if(item.getTitle() == "Move Device")
+        {
+                showPopUp();
+        }
+        else
         {
             return false;
         }
@@ -213,12 +226,44 @@ public class viewDevices extends ListActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("deviceID", devices.get(0).getId());
                 editor.commit();
-                startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
+                startActivity(new Intent(viewDevices.this, ViewNotesActivity.class));
             }
+
             @Override
             public void failure(RetrofitError error) {
             }
         });
         message = "Selected Successfully";
+    }
+
+    public void showPopUp()
+    {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.popup_spinner);
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        Context mContext = getApplicationContext();
+
+        builderSingle.setTitle("Move To\n");
+        ArrayList <String> Rooms = new ArrayList<String>();
+        Rooms.add("ahmad");
+        roomsSpinner = (Spinner) findViewById(R.id.spinner2);
+        roomsSpinner.setOnItemSelectedListener(this);
+        ArrayAdapter<String> dataAdapter =
+                new ArrayAdapter<String>(viewDevices.this, android.R.layout.simple_spinner_item, Rooms);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //roomsSpinner.setAdapter(dataAdapter);
+        dialog.show();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        parent.setSelection(position);
+        String item = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
