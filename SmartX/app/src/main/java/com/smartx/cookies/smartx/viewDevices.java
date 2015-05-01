@@ -43,11 +43,7 @@ public class viewDevices extends ListActivity {
     private int itemPosition;
     ArrayList<String> deviceNames;
     String message = "";
-    String deviceIDTest =""; //for test
 
-    public String getDeviceIDTest() {
-        return deviceIDTest;
-    }
 
     /**
      * A getter to the user ID
@@ -229,7 +225,6 @@ public class viewDevices extends ListActivity {
             @Override
             public void success(List<Device> devices, Response response) {
                 String id = devices.get(0).getId();
-                deviceIDTest = id;
                 api.deleteDevice(userID + "", roomID + "", id, new Callback<Device>() {
                     @Override
                     public void success(Device device, Response response) {
