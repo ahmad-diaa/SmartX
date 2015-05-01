@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430091606) do
+ActiveRecord::Schema.define(version: 20150430170209) do
 
   create_table "api_keys", force: true do |t|
     t.integer  "user_id"
@@ -65,6 +65,12 @@ ActiveRecord::Schema.define(version: 20150430091606) do
   add_index "notes", ["user_id"], name: "index_notes_on_user_id"
 
   create_table "plugs", force: true do |t|
+    t.string   "name"
+    t.string   "plug_id"
+    t.string   "user_id"
+    t.string   "room_id"
+    t.string   "status"
+    t.string   "photo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
