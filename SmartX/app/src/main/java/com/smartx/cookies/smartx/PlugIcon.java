@@ -137,7 +137,7 @@ public class PlugIcon extends Activity {
                         break;
 
                     case 8:
-                        plugPhoto = "food";
+                        plugPhoto = "home";
                         break;
 
                     case 9:

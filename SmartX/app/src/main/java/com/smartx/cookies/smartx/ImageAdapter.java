@@ -89,7 +89,7 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.phone,
             R.drawable.washmachine,
             R.drawable.stereo,
-            R.drawable.food,
+            R.drawable.home,
             R.drawable.computer,
             R.drawable.router,
             R.drawable.microwave,

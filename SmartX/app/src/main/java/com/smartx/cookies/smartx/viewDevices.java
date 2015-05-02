@@ -24,22 +24,19 @@ import java.util.Iterator;
 import java.util.List;
 
 import models.Device;
+import models.Type;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
-<<<<<<< HEAD
- *SE Sprint2
- *viewDevices.java
- *Purpose: Display list of devices.
+ * SE Sprint2
+ * viewDevices.java
+ * Purpose: Display list of devices & view devices in a certain room
  *
  * @author Amir
-=======
- * Purpose: view devices in a certain room
  * @author maggiemoheb
->>>>>>> origin/Sprint_Two
  */
 public class viewDevices extends ListActivity {
 
@@ -116,7 +113,7 @@ public class viewDevices extends ListActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.d("ERROR ", error.getMessage());
-                Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_SHORT).show();
             }
         });
         api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
@@ -151,20 +148,44 @@ public class viewDevices extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Object o = this.getListAdapter().getItem(position);
-        String device = o.toString();
-        Toast.makeText(getApplicationContext(), device, Toast.LENGTH_LONG).show();
+        final String device = o.toString();
+        Toast.makeText(getApplicationContext(), device, Toast.LENGTH_SHORT).show();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = ADAPTER.create(myAPI.class);
+        final myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(userID + "", roomID + "", device, new Callback<List<Device>>() {
             @Override
-            public void success(List<Device> devices, Response response) {
+            public void success(final List<Device> devices, Response response) {
                 SharedPreferences prefs =
                         PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("deviceID", devices.get(0).getDeviceID() + "");
                 editor.commit();
-                startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
+                Toast.makeText(getApplicationContext(), devices.get(0).getName(), Toast.LENGTH_SHORT).show();
+                api.findClickerType(devices.get(0).getName(), new Callback<List<Type>>() {
+                    @Override
+                    public void success(List<Type> types, Response response) {
+                        int type = types.get(0).getId();
+                        if (type == 1 || type == 4 || type == 5) {
+                            startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
+                        } else {
+                            if (type == 2) {
+                                startActivity(new Intent(getApplicationContext(), LampClickerActivity.class));
+                            } else {
+                                if (type == 3) {
+                                    startActivity(new Intent(getApplicationContext(), CurtainClickerActivity.class));
+
+                                } else {
+                                    startActivity(new Intent(getApplicationContext(), defaultClickerActivity.class));
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                    }
+                });
             }
 
             @Override
@@ -216,21 +237,18 @@ public class viewDevices extends ListActivity {
                     editor.putString("deviceID", devices.get(0).getDeviceID());
                     editor.commit();
                     startActivity(new Intent(getApplicationContext(), AddToFavorites.class));
-
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-
                 }
+
             });
         } else if (item.getTitle() == "Delete Device") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "View Notes") {
             renderViewNotes(itemPosition, userID, roomID);
-        }else
-        {
-
+        } else {
             return false;
         }
         return true;
@@ -249,6 +267,7 @@ public class viewDevices extends ListActivity {
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(user + "", room + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+
             @Override
             public void success(List<Device> devices, Response response) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
@@ -261,6 +280,7 @@ public class viewDevices extends ListActivity {
             @Override
             public void failure(RetrofitError error) {
             }
+
         });
         message = "Selected Successfully";
     }
