@@ -26,7 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/reportProblemBp"
-        android:layout_above="@+id/viewBy" />
+        android:layout_above="@+id/button9" />
 
     <Button
         android:layout_width="fill_parent"
@@ -82,4 +82,16 @@
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn all plugs off"
+        android:id="@+id/plugsOffB"
+        android:layout_above="@+id/viewBy"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:onClick="turnPlugsOff" />
 </RelativeLayout>

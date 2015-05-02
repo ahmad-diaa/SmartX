@@ -163,5 +163,14 @@ public interface myAPI {
     @FormUrlEncoded
     @PUT("/users/{userID}/rooms/{roomID}/devices/{deviceID}")
     void addToFavorites(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, @Field("device[favorite]") String favorite, Callback<Device> callback);
+
+    @GET("/users/{userId}/rooms/{roomId}/plugs/")
+    void getPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback <List<Plug>> callback);
+
+    @FormUrlEncoded
+    @PUT("/users/{userId}/rooms/{roomID}/plugs/{plugID}")
+    void changePlugStatus(@Path("userId") String userId, @Path("roomID") String roomID, @Path("plugID") String plugID, @Field("plug[status]") String status, Callback<Plug> callback);
+
+
 }
 

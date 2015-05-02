@@ -18,7 +18,22 @@ def index
 	    end
 	  end
 
-	  def show
+#Updates plug    parameters with given id knowing he belongs to which user and room.
+  # PATCH/PUT /plug/1
+  # PATCH/PUT /plug/1.json
+  def update
+    @user=User.find(params[:user_id])
+    @room=@user.rooms.find(params[:room_id])
+    @plug= @room.plugs.find(params[:id])
+    if @plug.update(plug_params)
+      @plug.status = params[:status]
+      head :no_content
+    else
+      render json: @plug.errors, status: :unprocessable_entity
+    end
+  end
+
+    def show
     @user=User.find(params[:user_id])
     @room=@user.rooms.find(params[:room_id])
     @plug= @room.plugs.find(params[:id])
