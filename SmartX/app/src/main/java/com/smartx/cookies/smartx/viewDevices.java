@@ -20,11 +20,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import models.Device;
 import models.Room;
 import retrofit.Callback;
@@ -36,10 +34,11 @@ import retrofit.client.Response;
  * Purpose: view devices in a certain room
  *
  * @author maggiemoheb
+ * @author ahmaddiaa
  */
 public class viewDevices extends ListActivity {
 
-    String DeviceName;
+    String deviceName;
     ArrayList<String> Rooms = new ArrayList<String>();
     Dialog dialog;
     Spinner roomsSpinner;
@@ -51,7 +50,7 @@ public class viewDevices extends ListActivity {
     ArrayList<String> deviceNames;
     String message = "";
     myAPI api;
-    String sp_selected;
+    String spSelected;
 
     /**
      * A getter to the user ID
@@ -182,8 +181,8 @@ public class viewDevices extends ListActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         itemPosition = info.position;
-        DeviceName = getListView().getItemAtPosition(itemPosition).toString();
-        DeviceName = DeviceName.replace("%20", " ");
+        deviceName = getListView().getItemAtPosition(itemPosition).toString();
+        deviceName = deviceName.replace("%20", " ");
         menu.setHeaderTitle("Context menu");
         menu.add(0, v.getId(), 0, "Add To Favorites");
         menu.add(0, v.getId(), 0, "Delete Device");
@@ -243,6 +242,10 @@ public class viewDevices extends ListActivity {
         message = "Selected Successfully";
     }
 
+    /**
+     * This method displays a popup window containing a dropdown list of all rooms
+     * where the user chooses the room to move the selected device to.
+     */
     public void showPopUp() {
         dialog = new Dialog(viewDevices.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -256,70 +259,82 @@ public class viewDevices extends ListActivity {
         api = ADAPTER.create(myAPI.class);
         api.viewRooms(userID + "", new Callback<List<models.Room>>() {
 
+            /**
+             * this method sets the dropdownlist's elements to the user's rooms
+             * @param rooms user's rooms returned from Rails server
+             * @param response
+             */
+            @Override
+            public void success(List<Room> rooms, Response response) {
+
+                Iterator<Room> iterator = rooms.iterator();
+                int i = rooms.size() - 1;
+                Log.d("SIZE ", i + "");
+                while (i >= 0 & iterator.hasNext()) {
+                    String x = iterator.next().getName().replace("%20", " ");
+                    Rooms.add(x);
+                    i--;
+                }
+                ArrayAdapter<String> dataAdapter =
+                        new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, Rooms);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                roomsSpinner.setAdapter(dataAdapter);
+                roomsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    /**
+                     * set the spSelected to the last selected item from the dropdown list
+                     */
                     @Override
-                    public void success(List<Room> rooms, Response response) {
+                    public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                               int arg2, long arg3) {
+                        spSelected = roomsSpinner.getSelectedItem().toString();
+                    }
 
-                        Iterator<Room> iterator = rooms.iterator();
+                    @Override
+                    public void onNothingSelected(AdapterView<?> arg0) {
 
-                        int i = rooms.size() - 1;
-                        Log.d("SIZE ", i + "");
-                        while (i >= 0 & iterator.hasNext()) {
-                            String x = iterator.next().getName().replace("%20", " ");
-                            Rooms.add(x);
-                            i--;
-                        }
-
-                        ArrayAdapter<String> dataAdapter =
-                                new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, Rooms);
-                        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        roomsSpinner.setAdapter(dataAdapter);
-                        roomsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+                    }
+                });
+                final Button btn0 = (Button) dialog.findViewById(R.id.btn0);
+                btn0.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        final RestAdapter ADAPTER =
+                                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+                        myAPI api2 = ADAPTER.create(myAPI.class);
+                        api2.findRoom(userID + "", spSelected, new Callback<List<Room>>() {
+                            /**
+                             * Gets the id of the selected room.
+                             * @param rooms
+                             * @param response
+                             */
                             @Override
-                            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                                       int arg2, long arg3) {
-                                sp_selected = roomsSpinner.getSelectedItem().toString();
-
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> arg0) {
-                                // TODO Auto-generated method stub
-
-                            }
-                        });
-                        final Button btn0 = (Button) dialog.findViewById(R.id.btn0);
-                        btn0.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View arg0) {
+                            public void success(List<Room> rooms, Response response) {
+                                final String newID = rooms.get(0).getId() + "";
                                 final RestAdapter ADAPTER =
                                         new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
                                 myAPI api2 = ADAPTER.create(myAPI.class);
-                                api2.findRoom(userID + "", sp_selected, new Callback<List<Room>>() {
+                                api2.findDevice(userID + "", roomID + "", deviceName, new Callback<List<Device>>() {
+                                    /**
+                                     * Sets deviceID to the id of the device to be moved.
+                                     * @param devices a list of containing the device which has name = deviceName
+                                     * @param response
+                                     */
                                     @Override
-                                    public void success(List<Room> rooms, Response response) {
-                                        final String newID = rooms.get(0).getId() + "";
+                                    public void success(List<Device> devices, Response response) {
+                                        final String deviceID = devices.get(0).getDeviceID();
                                         final RestAdapter ADAPTER =
                                                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
                                         myAPI api2 = ADAPTER.create(myAPI.class);
-                                        api2.findDevice(userID + "", roomID + "", DeviceName, new Callback<List<Device>>() {
-                                            @Override
-                                            public void success(List<Device> devices, Response response) {
-                                                final String DeviceID = devices.get(0).getDeviceID();
-                                                final RestAdapter ADAPTER =
-                                                        new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-                                                myAPI api2 = ADAPTER.create(myAPI.class);
-                                                api2.editDeviceRoom(userID + "", roomID + "", DeviceID, newID, new Callback<Device>() {
-                                                    @Override
-                                                    public void success(Device device, Response response) {
-                                                        startActivity(new Intent(getApplicationContext(), viewDevices.class));
-                                                    }
 
-                                                    @Override
-                                                    public void failure(RetrofitError error) {
-                                                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
+                                        api2.editDeviceRoom(userID + "", roomID + "", deviceID, newID, new Callback<Device>() {
+                                            /**
+                                             * changes the device room_id to the chosen room_id
+                                             * @param device the device to be moved
+                                             * @param response
+                                             */
+                                            @Override
+                                            public void success(Device device, Response response) {
+                                                startActivity(new Intent(getApplicationContext(), viewDevices.class));
                                             }
 
                                             @Override
@@ -335,17 +350,21 @@ public class viewDevices extends ListActivity {
                                     }
                                 });
                             }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         });
-                        dialog.show();
                     }
+                });
+                dialog.show();
+            }
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Log.d("", error.getMessage());
-                        throw error;
-                    }
-                }
-
-        );
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
