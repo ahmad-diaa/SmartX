@@ -168,8 +168,25 @@ public interface myAPI {
     @PUT("/users/{userID}/rooms/{roomID}/devices/{deviceID}")
     void addToFavorites(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, @Field("device[favorite]") String favorite, Callback<Device> callback);
 
+    /**
+        This method requests a list of all plugs within a certain room.
+     *
+     * @param userID
+     * @param roomID
+     * @param callback
+     */
     @GET("/users/{userId}/rooms/{roomId}/plugs/")
     void getPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback <List<Plug>> callback);
+
+    /**
+    This method changes the status of a plug.
+     *
+     * @param userId
+     * @param roomID
+     * @param callback
+     * @param plugID
+     * @param status the status you want to change to
+     */
 
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomID}/plugs/{plugID}")
