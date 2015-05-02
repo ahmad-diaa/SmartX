@@ -441,9 +441,17 @@ public class ViewRooms extends ListActivity {
         }
         return true;
     }
+    /*
+    This method is called when the user clicks on Turn Off All Plugs button
+    @param v View
+     */
     public void turnPlugsOff(View v){
         turnThemOff();
     }
+
+    /*
+    This method turns all plugs off by using myAPI
+     */
     public void turnThemOff(){
         api.viewRooms(userID + "", new Callback<List<Room>>() {
             @Override
@@ -454,7 +462,7 @@ public class ViewRooms extends ListActivity {
                         @Override
                         public void success(List<Plug> plugs, Response response) {
                             for (int j = 0; j<plugs.size();j++){
-                                api.changePlugStatus(userID+"", id +"", plugs.get(j).getPlugID(), "ok", new Callback<Plug>() {
+                                api.changePlugStatus(userID+"", id +"", plugs.get(j).getPlugID(), "off", new Callback<Plug>() {
                                     @Override
                                     public void success(Plug plug, Response response) {
                                         Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
