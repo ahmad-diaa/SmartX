@@ -41,6 +41,9 @@ public interface myAPI {
     @DELETE("/session/{token}")
     void logout(@Path("token") String access_token, Callback<Session> callback);
 
+    @GET("/v/types/{name}")
+    void findClickerType(@Path("name") String deviceName, Callback<List<Type>> callback);
+
     @FormUrlEncoded
     @POST("/session")
     void login(@Field("session[name]") String username, @Field("session[password]") String password, Callback<Session> callback);
@@ -107,6 +110,12 @@ public interface myAPI {
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
     void editDeviceStatus(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[status]") String status, Callback<Device> callback);
+
+
+    @FormUrlEncoded
+    @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
+    void editDeviceType(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[type]") String type, Callback<Device> callback);
+
 
     @GET("/users/{userId}/")
     void getUser(@Path("userId") String id, Callback<User> callback);

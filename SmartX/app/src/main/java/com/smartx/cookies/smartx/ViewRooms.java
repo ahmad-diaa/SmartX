@@ -138,7 +138,6 @@ public class ViewRooms extends ListActivity {
                 this, android.R.layout.select_dialog_singlechoice);
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-
         api.requestTypes(new Callback<List<Type>>() {
             @Override
             public void success(List<Type> types, Response response) {
@@ -252,7 +251,6 @@ public class ViewRooms extends ListActivity {
                 }
         );
     }
-
     /**
      * This method will be called when an item in the list is selected.
      * The name of the room clicked will be used as parameter to
@@ -265,9 +263,19 @@ public class ViewRooms extends ListActivity {
      * @param id       the row id of the item that was clicked.
      */
 
+    /**
+     * This method will be called when an item in the list is selected.
+     * The name of the room clicked will be used as parameter to
+     * findRoom method which retrieves from rails the room with given name.
+     * The devices inside this room will show up.
+     *
+     * @param l        the ListView where the click happened.
+     * @param v        the view that was clicked within the ListView.
+     * @param position the position of the view in the list.
+     * @param id       the row id of the item that was clicked.
+     */
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-
         Object o = this.getListAdapter().getItem(position);
         String room = o.toString();
         room = room.replace(" ", "%20");
@@ -351,7 +359,6 @@ public class ViewRooms extends ListActivity {
      *
      * @param v the view of the activity
      */
-
     public void reportProblemE(View v) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
