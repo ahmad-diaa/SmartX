@@ -30,9 +30,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- *SE Sprint2
- *viewDevices.java
- *Purpose: Display list of devices & view devices in a certain room
+ * SE Sprint2
+ * viewDevices.java
+ * Purpose: Display list of devices & view devices in a certain room
+ *
  * @author Amir
  * @author maggiemoheb
  */
@@ -140,7 +141,7 @@ public class viewDevices extends ListActivity {
         Toast.makeText(getApplicationContext(), device, Toast.LENGTH_SHORT).show();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-       final myAPI api = ADAPTER.create(myAPI.class);
+        final myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(userID + "", roomID + "", device, new Callback<List<Device>>() {
             @Override
             public void success(final List<Device> devices, Response response) {
@@ -149,17 +150,14 @@ public class viewDevices extends ListActivity {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("deviceID", devices.get(0).getDeviceID() + "");
                 editor.commit();
-                Toast.makeText(getApplicationContext(), devices.get(0).getName() , Toast.LENGTH_SHORT).show();
-
-                api.findClickerType(devices.get(0).getName() , new Callback<List<Type>>() {
+                Toast.makeText(getApplicationContext(), devices.get(0).getName(), Toast.LENGTH_SHORT).show();
+                api.findClickerType(devices.get(0).getName(), new Callback<List<Type>>() {
                     @Override
                     public void success(List<Type> types, Response response) {
-                       int  type = types.get(0).getId();
+                        int type = types.get(0).getId();
                         if (type == 1 || type == 4 || type == 5) {
                             startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
-
-                        }
-                        else {
+                        } else {
                             if (type == 2) {
                                 startActivity(new Intent(getApplicationContext(), LampClickerActivity.class));
                             } else {
@@ -167,28 +165,23 @@ public class viewDevices extends ListActivity {
                                     startActivity(new Intent(getApplicationContext(), CurtainClickerActivity.class));
 
                                 } else {
-
                                     startActivity(new Intent(getApplicationContext(), defaultClickerActivity.class));
-
                                 }
                             }
-                            }
                         }
-
+                    }
 
                     @Override
                     public void failure(RetrofitError error) {
-
                     }
                 });
-
-
-        }
+            }
 
             @Override
             public void failure(RetrofitError error) {
                 throw error;
-            }});
+            }
+        });
     }
 
     /**
@@ -233,21 +226,18 @@ public class viewDevices extends ListActivity {
                     editor.putString("deviceID", devices.get(0).getDeviceID());
                     editor.commit();
                     startActivity(new Intent(getApplicationContext(), AddToFavorites.class));
-
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-
                 }
+
             });
         } else if (item.getTitle() == "Delete Device") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "View Notes") {
             renderViewNotes(itemPosition, userID, roomID);
-        }else
-        {
-
+        } else {
             return false;
         }
         return true;
@@ -266,6 +256,7 @@ public class viewDevices extends ListActivity {
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(user + "", room + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+
             @Override
             public void success(List<Device> devices, Response response) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
@@ -278,6 +269,7 @@ public class viewDevices extends ListActivity {
             @Override
             public void failure(RetrofitError error) {
             }
+
         });
         message = "Selected Successfully";
     }
