@@ -253,6 +253,7 @@ public class viewDevices extends ListActivity {
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(user + "", room + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+
             @Override
             public void success(List<Device> devices, Response response) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
@@ -269,5 +270,3 @@ public class viewDevices extends ListActivity {
         message = "Selected Successfully";
     }
 }
-
-

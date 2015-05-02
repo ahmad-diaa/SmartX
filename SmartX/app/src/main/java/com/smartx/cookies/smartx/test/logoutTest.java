@@ -6,7 +6,6 @@ import com.smartx.cookies.smartx.ViewRooms;
 import com.smartx.cookies.smartx.myAPI;
 
 import models.Session;
-import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -19,7 +18,7 @@ public class logoutTest extends ActivityInstrumentationTestCase2<ViewRooms> {
     private int userID;
     private String ENDPOINT;
     private ViewRooms myActivity;
-    private Session session = new Session() ;
+    private Session session = new Session();
 
     public logoutTest() {
         super(ViewRooms.class);
@@ -40,25 +39,24 @@ public class logoutTest extends ActivityInstrumentationTestCase2<ViewRooms> {
     public void testLogoutSuccess() throws Exception {
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
-                        }
+            }
         });
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         api.logout(userID + "", new Callback<Session>() {
-            @Override
-            public void success(Session s, Response response) {
-                if (s == null) {
-                    assertEquals(true, true);
-                }
-                else {
-                    assertEquals(1, session.getId());
-                }
-            }
+                    @Override
+                    public void success(Session s, Response response) {
+                        if (s == null) {
+                            assertEquals(true, true);
+                        } else {
+                            assertEquals(1, session.getId());
+                        }
+                    }
 
-                @Override
-                public void failure (RetrofitError error){
+                    @Override
+                    public void failure(RetrofitError error) {
+                    }
                 }
-            }
-            );
-        }
+        );
     }
+}

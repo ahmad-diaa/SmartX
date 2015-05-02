@@ -26,10 +26,12 @@ public class Device {
      * The primary key of device.
      */
     String device_id;
+
     /**
      * true if device exits in favorites list, false otherwise.
      */
     String favorite;
+
     /**
      * Constructor to create a device with given parameters.
      *
@@ -143,7 +145,10 @@ public class Device {
     public void setFavorite(String favorite) {
         this.favorite=favorite;
     }
+
+
     public String getId() {
         return device_id;
     }
+
 }

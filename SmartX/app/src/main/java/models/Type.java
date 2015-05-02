@@ -1,8 +1,8 @@
-
 package models;
+
 /**
- *SE Sprint1
- *Type.java
+ * SE Sprint1
+ * Type.java
  *
  * @author Amir
  * @author youmna
@@ -16,19 +16,22 @@ public class Type {
      * The id for device.
      */
     private int id;
+
     /**
      * creates new instance of Types model
      */
-    public Type(String name ){
+    public Type(String name) {
         this.name = name;
     }
+
     /**
      * set id of device.
-     *
      */
+
     public void setId(int id) {
         this.id = id;
     }
+
     /**
      * get available id for device.
      *
@@ -37,6 +40,7 @@ public class Type {
     public int getId() {
         return id;
     }
+
     /**
      * get available type for device.
      *
@@ -45,6 +49,7 @@ public class Type {
     public String getName() {
         return name;
     }
+
     /**
      * set available type for device.
      *
