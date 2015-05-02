@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class viewDevices extends ListActivity {
     int roomID;
     String roomName;
     Button addDevice;
+    Button addPlug;
     int itemPosition;
     ArrayList<String> deviceNames;
     String message = "";
@@ -74,6 +76,7 @@ public class viewDevices extends ListActivity {
         return this.message;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +84,14 @@ public class viewDevices extends ListActivity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
+        addPlug = (Button) findViewById(R.id.addplug);
+        addPlug.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(viewDevices.this, AddPlug.class));
+            }
+        });
+
         addDevice = (Button) findViewById(R.id.addDevice);
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override

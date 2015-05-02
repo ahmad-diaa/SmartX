@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:text="View By.."
         android:id="@+id/viewBy"
-        android:layout_above="@+id/changeInfoB"
+        android:layout_above="@+id/nextbutton"
         android:layout_centerHorizontal="true"
         android:onClick="viewByType" />
     <EditText
@@ -53,7 +53,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:text="Edit Information"
-    android:id="@+id/changeInfoB"
+    android:id="@+id/nextbutton"
     android:onClick="changeInfo"
     android:layout_above="@+id/changePasswordB"
     android:layout_alignParentLeft="true"
