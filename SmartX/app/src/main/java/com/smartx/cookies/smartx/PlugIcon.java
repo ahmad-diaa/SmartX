@@ -21,6 +21,10 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+/**
+ * Created by zamzamy on 1/5/15.
+ * The purpose of this activity is to allow the user to choose the icon of the plug to be added.
+ */
 
 public class PlugIcon extends Activity {
 
@@ -35,7 +39,6 @@ public class PlugIcon extends Activity {
     String plugID;
     String plugPhoto = "";
     private SharedPreferences prefs;
-
 
     /**
      * Called when the activity starts. it gets the plug name and id from the previous activity

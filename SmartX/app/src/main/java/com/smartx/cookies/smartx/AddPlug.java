@@ -19,7 +19,10 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-
+/**
+ *  The purpose of this class is to get the ID and the name of the plug to be added.
+ *  Created by zamzamy on 1/5/15.
+ */
 public class AddPlug extends Activity {
 
     private EditText plugName;

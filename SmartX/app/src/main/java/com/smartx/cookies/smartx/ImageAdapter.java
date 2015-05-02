@@ -10,13 +10,14 @@ import android.widget.ListAdapter;
 
 /**
  * Created by zamzamy on 4/30/15.
+ * The purpose of this class is to initialize the photos of the plug icons in the PlugIcon.class
  */
 public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
 
     /**
-     * Constructor thhat initializes the Context of the adapter the given context
+     * Constructor that initializes the Context of the adapter the given context
      *
      * @param c
      */
@@ -47,7 +48,10 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
+    /**
+     * create a new ImageView for each item initialized by the Adapter which is
+     * used to render photos of the grid in PlugICon.class
+     */
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if (convertView == null) {
