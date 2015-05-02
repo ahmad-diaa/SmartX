@@ -2,11 +2,7 @@ package com.smartx.cookies.smartx;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,13 +13,18 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import models.*;
 import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+/**
+ * answerSecurityQuestion.java
+ * Purpose:It loads user's security question, if he answer it right it redirect him to change password.
+ *
+ * @author Ahmad Abdalraheem
+ */
 
 public class answerSecurityQuestion extends Activity {
     private String securityA;
@@ -42,31 +43,35 @@ public class answerSecurityQuestion extends Activity {
         question.setText(getIntent().getExtras().getString("securityQuestion"));
     }
 
-
+    /**
+     * it takes the answer od the security question of the user, if it's right it redirect him to change password other wise toast and error message,
+     *
+     * @param v the view of the activity.
+     */
     public void submitAnswer(View v) {
         userID = getIntent().getExtras().getInt("id");
         securityA = answerTxt.getText().toString();
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.checkUser(userID + "", securityA, new Callback<List<User>>()  {
+        api.checkUser(userID + "", securityA, new Callback<List<User>>() {
             @Override
             public void success(List<User> user, Response response) {
-                if (user.get(0).getID() == userID) {
+                if (user.get(0).getGetSecurityA().equals(securityA)) {
                     Intent rs = new Intent(getApplicationContext(), changePassword.class);
                     rs.putExtra("id", userID);
-                    rs.putExtra("flag",1);
+                    rs.putExtra("flag", 1);
                     startActivity(rs);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Answer is Incorrect", Toast.LENGTH_LONG);
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please check your answer", Toast.LENGTH_LONG).show();
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -104,8 +109,9 @@ public class answerSecurityQuestion extends Activity {
     public void setUserID(int userID) {
         this.userID = userID;
     }
+
     /**
-     * get id of the user.
+     * get security answer of the user.
      *
      * @return the answer of the security question of the user.
      */
@@ -115,7 +121,7 @@ public class answerSecurityQuestion extends Activity {
     }
 
     /**
-     * set id of the user.
+     * set security answer of the user.
      *
      * @param a the new answer for the security question.
      */

@@ -11,20 +11,25 @@ class UsersController < ApplicationController
   # GET /v1/user/name
 # GET /v1/user/name.json
 def security
-    
-@user = User.where( :name => params[:name] )
-array = []
-array = Array.new
-array = {'securityQ' => @user.last.securityQ, 'id' => @user.last.id}  
-render json:  array
-end
-  
+  @user = User.where( :name => params[:name] )
+  if(@user.blank?)
+  render json: array.errors, status: :unprocessable_entity
+  else
+  array = []
+  array = Array.new
+  array = {'securityQ' => @user.last.securityQ, 'id' => @user.last.id}
+  render json:  array
+  end
+end  
   # GET /v1/user/id/answer
 # GET /v1/user/id/answer.json
 def answer 
-    
     @user = User.where( :id => params[:id], :securityA =>params[:securityA])
-    render json:  @user 
+    if(@user.blank?)
+     render json: @user.errors, status: :unprocessable_entity
+      else
+         render json:  @user
+    end
 end
 
 

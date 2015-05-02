@@ -42,7 +42,7 @@ public class getQuestionTest extends ActivityInstrumentationTestCase2<LoginActiv
     public void testGetQuestion() throws Exception {
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
-                txtUserName.setText("ahdiaa");
+                txtUserName.setText("ahaa");
                 name = txtUserName.getText().toString();
             }
         });
@@ -60,7 +60,7 @@ public class getQuestionTest extends ActivityInstrumentationTestCase2<LoginActiv
 
             @Override
             public void failure(RetrofitError error) {
-                assertEquals("email", "eh");
+                assertEquals(1, 2);
             }
         });
     }

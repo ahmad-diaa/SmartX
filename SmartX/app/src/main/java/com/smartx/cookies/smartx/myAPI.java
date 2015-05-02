@@ -20,13 +20,11 @@ import retrofit.http.Path;
 
 public interface myAPI {
 
-
     @GET("/v/users/{name}")
     void getSecurityQuestion(@Path("name") String name, Callback<securityQuestion> callback);
 
     @GET("/v/users/{id}/{securityA}")
     void checkUser(@Path("id") String id, @Path("securityA") String securityA, Callback<List<User>> cb);
-
 
     @GET("/v/users/{userID}/rooms/{roomName}")
     void findRoom(@Path("userID") String id, @Path("roomName") String name, Callback<List<Room>> callback);
@@ -44,15 +42,12 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/{id}")
     void getRoom(@Path("userID") String userID, @Path("id") String roomID, Callback<String> callback);
 
-
     @GET("/users/{userID}/rooms/{id}")
     void getRoom2(@Path("userID") String userID, @Path("id") String roomID, Callback<Room> callback);
-
 
     @FormUrlEncoded
     @PUT("/users/{userID}/")
     void changeInfo(@Path("userID") String id, @Field("user[email]") String email, @Field("user[password]") String password, @Field("user[phone]") String phone, Callback<User> callback);
-
 
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/clickers/{clickerId}/")
@@ -76,14 +71,11 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/{roomID}/devices")
     void viewDevices(@Path("userID") String id, @Path("roomID") String rid, Callback<List<Device>> callback);
 
-
     @GET("/types")
     void requestTypes(Callback<List<Type>> types);
 
-
     @GET("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
     void getDevice(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, Callback<Device> callback);
-
 
     @FormUrlEncoded
     @POST("/users/{userId}/rooms/{roomId}/devices/")
@@ -114,6 +106,5 @@ public interface myAPI {
 
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
-
 }
 

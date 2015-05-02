@@ -72,7 +72,7 @@ public class answerSecurityQuestionTest extends ActivityInstrumentationTestCase2
 
             @Override
             public void failure(RetrofitError error) {
-                assertEquals("email", "eh");
+                assertEquals(1, 2);
             }
         });
     }

@@ -90,7 +90,7 @@ public class changeInfo extends Activity {
     /**
      * it takes the input from the user to change his information,it toast whether the information is updated or not,
      *
-     * @param v the view of the activity, it take the
+     * @param v the view of the activity.
      */
     public void changeInfo(View v) {
         email = emailTxt.getText().toString();

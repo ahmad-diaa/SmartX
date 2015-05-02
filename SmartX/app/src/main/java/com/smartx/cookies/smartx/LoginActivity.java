@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,14 +25,28 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+/**
+ * LoginActivity.java
+ * Purpose: It allows user to login using his name or password, also to reset his password and it gives him an access to about us page
+ *
+ * @author Ahmad Abdalraheem
+ */
+
 public class LoginActivity extends Activity {
     public static final String sharedPrefs = "MySharedPrefs";
     Button btnLogin;
     TextView resetPasswordB;
     List<User> userList;
+    String name;
     SharedPreferences Data;
     //TextView aboutlogin;
     private String Pass;
+
+    /**
+     * it takes username and password from the user to give him an access token,
+     *
+     * @param savedInstanceState to save the user's state after login
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,40 +110,40 @@ public class LoginActivity extends Activity {
                                 Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
                             }
                         });
-
                     }
 
-
-
-
-                            @Override
-                            public void failure (RetrofitError error){
-                                if (error.getMessage().contains("401 Unauthorized")) {
-                                    Toast.makeText(getApplicationContext(), "Wrong Username/Password", Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
+                    @Override
+                    public void failure(RetrofitError error) {
+                        if (error.getMessage().contains("401 Unauthorized")) {
+                            Toast.makeText(getApplicationContext(), "Wrong Username/Password", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }
+        });
+    }
 
-            public String getPass() {
-                return this.Pass;
-            }
+    public String getPass() {
+        return this.Pass;
+    }
 
-            public void setPass(String Pass) {
-                this.Pass = Pass;
-            }
+    // @param String for the password
+    public void setPass(String Pass) {
+        this.Pass = Pass;
+    }
 
-
+    /**
+     * it takes the username and request the security question of this user and pass it to answerSecurityQuestion,
+     *
+     * @param v the view of the activity.
+     */
     public void getSecurityQuestion(View v) {
         EditText username = (EditText) findViewById(R.id.txtUserName);
-        String  name = username.getText().toString();
+        name = username.getText().toString();
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-
         api.getSecurityQuestion(name, new Callback<securityQuestion>() {
             @Override
             public void success(securityQuestion securityQuestion, Response response) {
@@ -144,33 +157,32 @@ public class LoginActivity extends Activity {
 
             @Override
             public void failure(RetrofitError error) {
-
+                if (name.equals("Name"))
+                    Toast.makeText(getApplicationContext(), "Please type your username at username field", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(getApplicationContext(), "Make sure you are online", Toast.LENGTH_LONG).show();
             }
         });
     }
 
-            @Override
-            public boolean onCreateOptionsMenu(Menu menu) {
-                // Inflate the menu; this adds items to the action bar if it is present.
-                getMenuInflater().inflate(R.menu.menu_login, menu);
-                return true;
-            }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_login, menu);
+        return true;
+    }
 
-            @Override
-            public boolean onOptionsItemSelected(MenuItem item) {
-                // Handle action bar item clicks here. The action bar will
-                // automatically handle clicks on the Home/Up button, so long
-                // as you specify a parent activity in AndroidManifest.xml.
-                int id = item.getItemId();
-                //noinspection SimplifiableIfStatement
-                if (id == R.id.action_settings) {
-                    return true;
-                }
-                return super.onOptionsItemSelected(item);
-            }
-
-            private void requestData(String uri) {
-                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-                myAPI api = adapter.create(myAPI.class);
-            }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+}
