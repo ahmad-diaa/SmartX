@@ -38,7 +38,7 @@ public class ViewRoomsActivityTest extends ActivityInstrumentationTestCase2<View
         super.setUp();
         myActivity = getActivity();
         userID = 1;
-        ENDPOINT = "http://50.0.32.231:3000/";
+        ENDPOINT = "http://172.20.10.3:3000/";
     }
 
     public void testPreconditions() {

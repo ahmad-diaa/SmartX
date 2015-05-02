@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150430170209) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.string   "favorite"
   end
 
   add_index "devices", ["device_id"], name: "index_devices_on_device_id", unique: true

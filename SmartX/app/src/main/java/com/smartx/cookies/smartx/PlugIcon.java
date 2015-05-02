@@ -22,7 +22,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by zamzamy on 1/5/15.
+ * @author  zamzamy on 1/5/15.
  * The purpose of this activity is to allow the user to choose the icon of the plug to be added.
  */
 
