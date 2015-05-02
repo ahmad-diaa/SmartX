@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smartx.cookies.smartx"
-    >
+    package="com.smartx.cookies.smartx" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-<<<<<<< HEAD
-=======
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
->>>>>>> origin/Sprint_Two
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -20,20 +16,17 @@
         <activity
             android:name=".viewDevices"
             android:exported="true"
-            android:label="@string/title_activity_view_devices"
-             >
+            android:label="@string/title_activity_view_devices" >
         </activity>
         <activity
             android:name=".deviceList"
-            android:label="@string/title_activity_device_list"
-             >
+            android:label="@string/title_activity_device_list" >
         </activity>
         <activity
             android:name=".LoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-             >
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,8 +37,7 @@
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait"
-             >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".About_us"
@@ -54,22 +46,19 @@
             android:name=".addRoomsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".addDevices"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_add_devices"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ViewRooms"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="View Rooms"
-            android:screenOrientation="portrait"
-             >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Settings"
@@ -77,20 +66,17 @@
         </activity>
         <activity
             android:name=".ViewDeviceActivity"
-            android:label="@string/title_activity_view_device"
-             >
+            android:label="@string/title_activity_view_device" >
         </activity>
         <activity
             android:name=".ViewNotesActivity"
             android:label="@string/title_activity_view_notes" >
         </activity>
-        <activity
-            android:name=".AddToFavorites">
+        <activity android:name=".AddToFavorites" >
         </activity>
         <activity
             android:name=".AddNoteActivity"
-            android:label="@string/title_activity_add_note"
-             >
+            android:label="@string/title_activity_add_note" >
         </activity>
         <activity
             android:name=".changePassword"
@@ -100,8 +86,7 @@
         </activity>
         <activity
             android:name=".renameRoomActivity"
-            android:label="@string/title_activity_rename_room"
-             >
+            android:label="@string/title_activity_rename_room" >
         </activity>
         <activity
             android:name=".changeInfo"
@@ -112,7 +97,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_tv_clicker"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".AddPlug"
             android:label="@string/title_activity_add_plug" >
@@ -120,6 +104,10 @@
         <activity
             android:name=".PlugIcon"
             android:label="@string/title_activity_plug_icon" >
+        </activity>
+        <activity
+            android:name=".ViewPlugs"
+            android:label="@string/title_activity_view_plugs" >
         </activity>
     </application>
 

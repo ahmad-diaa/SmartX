@@ -54,7 +54,6 @@ public class AddPlug extends Activity {
                 roomID = prefs.getInt("roomID", 1);
                 userID = prefs.getInt("userID", 1);
 
-
                 if (plugNameField.trim().equals("") && plugNameField.trim().equals("")) {
                     Toast.makeText(AddPlug.this, "Plug ID and name required", Toast.LENGTH_SHORT).show();
                 } else if (plugNameField.trim().equals("")) {
@@ -69,9 +68,7 @@ public class AddPlug extends Activity {
             }
         });
 
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
