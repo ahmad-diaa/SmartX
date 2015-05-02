@@ -14,6 +14,7 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
 /**
  * purpose:This class creates an instance of a clicker that will allow the user to control a device.
  *
@@ -35,7 +36,7 @@ public class CurtainClickerActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curtain_clicker);
-        image =(ImageButton)findViewById(R.id.imageButton);
+        image = (ImageButton) findViewById(R.id.imageButton);
         image.setBackgroundResource(R.drawable.curtainsoff);
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
@@ -62,12 +63,11 @@ public class CurtainClickerActivity extends ActionBarActivity {
      */
     public void ShadeSun(View v) {
         on = !on;
-        if (on){
+        if (on) {
             image.setBackgroundResource(R.drawable.curtainsonb);
-            command = new String(deviceID+"/cur/0");
-        }
-        else {
-           image.setBackgroundResource(R.drawable.curtainsoff);
+            command = new String(deviceID + "/cur/0");
+        } else {
+            image.setBackgroundResource(R.drawable.curtainsoff);
             command = new String(deviceID + "/cur/1");
         }
         sendCommand();
@@ -79,13 +79,12 @@ public class CurtainClickerActivity extends ActionBarActivity {
      * @param v
      */
     public void Shade(View v) {
-           if(count == 10) {
-               image.setBackgroundResource(R.drawable.curtainsoff);
-           }
-        else{
-               count++;
-           }
-        command = new String(deviceID+"/shade/1");
+        if (count == 10) {
+            image.setBackgroundResource(R.drawable.curtainsoff);
+        } else {
+            count++;
+        }
+        command = new String(deviceID + "/shade/1");
         sendCommand();
     }
 
@@ -95,13 +94,12 @@ public class CurtainClickerActivity extends ActionBarActivity {
      * @param v
      */
     public void Sunny(View v) {
-        if(count == 0) {
+        if (count == 0) {
             image.setBackgroundResource(R.drawable.curtainsonb);
-        }
-        else{
+        } else {
             count--;
         }
-        command = new String(deviceID+"/sun/0");
+        command = new String(deviceID + "/sun/0");
         sendCommand();
     }
 
@@ -109,9 +107,9 @@ public class CurtainClickerActivity extends ActionBarActivity {
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
     public void sendCommand() {
-        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "",command, new Callback<Clicker>() {
+        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("cur/1")) {
@@ -120,7 +118,7 @@ public class CurtainClickerActivity extends ActionBarActivity {
                 if (command.contains("cur/0")) {
                     Toast.makeText(getApplicationContext(), "Have a sunny day", Toast.LENGTH_SHORT).show();
                 }
-                         }
+            }
 
             @Override
             public void failure(RetrofitError error) {

@@ -12,6 +12,7 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
 /**
  * purpose:This class creates an instance of a clicker that will allow the user to control a device.
  *
@@ -108,11 +109,12 @@ public class defaultClickerActivity extends ActionBarActivity {
      * called  if the Switch "on/off" button in clicker layout is clicked.
      * It updates the current device status to either on or off
      * it will send the current command to the Clicker
+     *
      * @param v
      */
     public void TurnOnOff(View v) {
         on = !on;
-        command = new String(deviceID+"/" + on + "");
+        command = new String(deviceID + "/" + on + "");
         sendCommand();
     }
 
@@ -120,10 +122,10 @@ public class defaultClickerActivity extends ActionBarActivity {
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
     public void sendCommand() {
-        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();;
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         //call Plug controller
-        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "",command, new Callback<Clicker>() {
+        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
             }

@@ -43,9 +43,12 @@ public class TvClickerActivity extends Activity {
 
     /**
      * ENDPOINT getter
+     *
      * @return ENDPOINT
      */
-    public String getENDPOINT() {return getResources().getString(R.string.ENDPOINT);}
+    public String getENDPOINT() {
+        return getResources().getString(R.string.ENDPOINT);
+    }
 
     /**
      * userId getter
@@ -131,7 +134,7 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void volumeUP(View v) {
-        command = new String(deviceID+"/V/1");
+        command = new String(deviceID + "/V/1");
         if (on)
             sendCommand();
         else
@@ -145,7 +148,7 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void volumeDown(View v) {
-        command = new String(deviceID+"/V/0");
+        command = new String(deviceID + "/V/0");
         if (on)
             sendCommand();
         else
@@ -159,7 +162,7 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void nextChannel(View v) {
-        command = new String(deviceID+"/C/1");
+        command = new String(deviceID + "/C/1");
         if (on)
             sendCommand();
         else
@@ -173,7 +176,7 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void previousChannel(View v) {
-        command = new String(deviceID+"/C/0");
+        command = new String(deviceID + "/C/0");
         if (on)
             sendCommand();
         else
@@ -190,17 +193,17 @@ public class TvClickerActivity extends Activity {
      */
     public void TurnOnOff(View v) {
         on = !on;
-        command = new String(deviceID+"/" + on + "");
+        command = new String(deviceID + "/" + on + "");
         sendCommand();
         mySwitch.setEnabled(false);
         runOnUiThread(new Runnable() {
             public void run() {
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
                 mySwitch.setEnabled(true);
             }
         });
@@ -217,12 +220,12 @@ public class TvClickerActivity extends Activity {
 
             @Override
             public void success(Device device, Response response) {
-                Switch on_off = (Switch) findViewById(R.id.switch1);
+                Switch onOff = (Switch) findViewById(R.id.switch1);
                 if (device.getStatus().contains("true")) {
-                    on_off.setChecked(true);
+                    onOff.setChecked(true);
                     on = true;
                 } else {
-                    on_off.setChecked(false);
+                    onOff.setChecked(false);
                     on = false;
                 }
             }
@@ -237,9 +240,9 @@ public class TvClickerActivity extends Activity {
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
     public void sendCommand() {
-        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "",command, new Callback<Clicker>() {
+        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", command, new Callback<Clicker>() {
 
             @Override
             public void success(Clicker clicker, Response response) {

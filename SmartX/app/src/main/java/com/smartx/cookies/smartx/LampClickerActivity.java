@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
