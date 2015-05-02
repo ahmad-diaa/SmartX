@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -131,7 +132,6 @@ public class ViewRooms extends ListActivity {
                 android.R.layout.select_dialog_singlechoice);
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
-
         api.requestTypes(new Callback<List<Type>>() {
             @Override
             public void success(List<Type> types, Response response) {
@@ -256,7 +256,6 @@ public class ViewRooms extends ListActivity {
 
         );
     }
-
     /**
      * This method will be called when an item in the list is selected.
      * The name of the room clicked will be used as parameter to
@@ -269,9 +268,19 @@ public class ViewRooms extends ListActivity {
      * @param id       the row id of the item that was clicked.
      */
 
+    /**
+     * This method will be called when an item in the list is selected.
+     * The name of the room clicked will be used as parameter to
+     * findRoom method which retrieves from rails the room with given name.
+     * The devices inside this room will show up.
+     *
+     * @param l        the ListView where the click happened.
+     * @param v        the view that was clicked within the ListView.
+     * @param position the position of the view in the list.
+     * @param id       the row id of the item that was clicked.
+     */
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-
         Object o = this.getListAdapter().getItem(position);
         String room = o.toString();
         room = room.replace(" ", "%20");
@@ -339,6 +348,39 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
+     * It allows the user to email his problem,
+     *
+     * @param v the view of the activity
+     */
+    public void reportProblemE(View v) {
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"ahmaddiaa93@gmail.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "My problem is regarding");
+        i.putExtra(Intent.EXTRA_TEXT, "Explain Your problem here");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * It allows the user to call the company in order to report his problem,
+     *
+     * @param v the view of the activity
+     */
+
+    public void reportProblemP(View v) {
+
+        String number = "01117976333";
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + number));
+        startActivity(intent);
+    }
+
+    /**
+>>>>>>> 31aa6111cb78ebb229014473fda82a305398b368
      * Creates the initial menu state
      *
      * @param menu Menu to be populated

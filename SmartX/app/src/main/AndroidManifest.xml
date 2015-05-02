@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smartx.cookies.smartx">
-
+    package="com.smartx.cookies.smartx" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="true" />
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <application
         android:allowBackup="true"
         android:configChanges="keyboardHidden|orientation"
@@ -95,12 +100,34 @@
             android:name=".TvClickerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_tv_clicker"
-            android:screenOrientation="portrait" />
-        <!--<activity-->
-            <!--android:name=".Add_clicker_Activity"-->
-            <!--android:label="@string/title_activity_add_clicker_" >-->
-        <!--</activity>-->
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat"/>
+        <!-- android:name=".Add_clicker_Activity" -->
+        <!-- android:label="@string/title_activity_add_clicker_" > -->
+        <!-- </activity> -->
+        <activity
+            android:name=".defaultClickerActivity"
+            android:label="@string/title_activity_default_clicker"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+        <activity
+            android:name=".LampClickerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_lamp_clicker"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+        </intent-filter>
+
+        <activity
+            android:name=".CurtainClickerActivity"
+            android:label="@string/title_activity_curtain_clicker"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
     </application>
 
 </manifest>
-
