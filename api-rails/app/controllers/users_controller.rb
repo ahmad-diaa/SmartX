@@ -13,10 +13,13 @@ class UsersController < ApplicationController
 def security
     
 @user = User.where( :name => params[:name] )
+unless @user.nil?
 array = []
 array = Array.new
 array = {'securityQ' => @user.last.securityQ, 'id' => @user.last.id}  
 render json:  array
+head :no_content
+end
 end
   
   # GET /v1/user/id/answer

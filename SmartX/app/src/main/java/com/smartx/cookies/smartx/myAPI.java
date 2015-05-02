@@ -22,11 +22,10 @@ public interface myAPI {
 
 
     @GET("/v/users/{name}")
-     void getSecurityQuestion(@Path("name") String name, Callback<securityQuestion> callback);
+    void getSecurityQuestion(@Path("name") String name, Callback<securityQuestion> callback);
 
-             @GET("/v/users/{id}/{securityA}")
-     void checkUser(@Path("id") String id,@Path("securityA") String securityA, Callback<List<User>> cb);
-
+    @GET("/v/users/{id}/{securityA}")
+    void checkUser(@Path("id") String id, @Path("securityA") String securityA, Callback<List<User>> cb);
 
 
     @GET("/v/users/{userID}/rooms/{roomName}")
