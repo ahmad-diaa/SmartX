@@ -30,12 +30,12 @@ import java.util.Locale;
 
 import models.Plug;
 import models.Room;
+import models.Session;
 import models.Type;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
 
 /**
  * ViewRooms.java
@@ -45,9 +45,8 @@ import retrofit.client.Response;
  * @author Ahmad Abdalraheem
  */
 
-
 public class ViewRooms extends ListActivity {
-
+    Button renameRoom;
     private EditText editSearch;
     private int userID;
     Button addRoomB;
@@ -64,7 +63,6 @@ public class ViewRooms extends ListActivity {
     /**
      * @param adapter2 CustomListAdapter to set
      */
-
     public void setAdapter2(CustomListAdapter adapter2) {
         this.adapter2 = adapter2;
     }
@@ -72,7 +70,6 @@ public class ViewRooms extends ListActivity {
     /**
      * @param photos Array  of photos to set
      */
-
     public void setPhotos(int[] photos) {
         this.photos = photos;
     }
@@ -80,7 +77,6 @@ public class ViewRooms extends ListActivity {
     /**
      * @return the customListAdapter
      */
-
     public CustomListAdapter getAdapter2() {
         return adapter2;
     }
@@ -88,7 +84,6 @@ public class ViewRooms extends ListActivity {
     /**
      * @return ArrayList of all rooms
      */
-
     public ArrayList<String> getRoomNames() {
         return roomNames;
     }
@@ -96,16 +91,13 @@ public class ViewRooms extends ListActivity {
     /**
      * @return ArrayList of all devices
      */
-
     public ArrayList<Integer> getIconRooms() {
         return iconRooms;
     }
 
-
     /**
      * @param iconRooms Arraylist of Rooms photos ids
      */
-
     public void setIconRooms(ArrayList<Integer> iconRooms) {
         this.iconRooms = iconRooms;
     }
@@ -113,7 +105,6 @@ public class ViewRooms extends ListActivity {
     /**
      * @param roomNames ArrayList of all rooms
      */
-
     public void setRoomNames(ArrayList<String> roomNames) {
         this.roomNames = roomNames;
     }
@@ -138,7 +129,8 @@ public class ViewRooms extends ListActivity {
                 this);
         builderSingle.setTitle("Select a device type");
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.select_dialog_singlechoice);
+                this,
+                android.R.layout.select_dialog_singlechoice);
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.requestTypes(new Callback<List<Type>>() {
@@ -220,7 +212,12 @@ public class ViewRooms extends ListActivity {
                         adapter2 = new CustomListAdapter(ViewRooms.this, roomNames, iconRooms);
                         setListAdapter(adapter2);
                         editSearch = (EditText) findViewById(R.id.search);
+
+
+                        // Capture Text in EditText
+
                         editSearch.addTextChangedListener(new
+
                                                                   TextWatcher() {
 
                                                                       @Override
@@ -242,9 +239,14 @@ public class ViewRooms extends ListActivity {
                                                                           // TODO Auto-generated method stub
                                                                       }
                                                                   }
+
                         );
-                        registerForContextMenu(getListView());
+
+                        registerForContextMenu(getListView()
+
+                        );
                     }
+
 
                     @Override
                     public void failure(RetrofitError error) {
@@ -252,8 +254,20 @@ public class ViewRooms extends ListActivity {
                         throw error;
                     }
                 }
+
         );
     }
+    /**
+     * This method will be called when an item in the list is selected.
+     * The name of the room clicked will be used as parameter to
+     * findRoom method which retrieves from rails the room with given name.
+     * The devices inside this room will show up.
+     *
+     * @param l        the ListView where the click happened.
+     * @param v        the view that was clicked within the ListView.
+     * @param position the position of the view in the list.
+     * @param id       the row id of the item that was clicked.
+     */
 
     /**
      * This method will be called when an item in the list is selected.
@@ -294,6 +308,30 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
+     * When the user click on logout, this method is called, it sends a request to delete the user's session after it succeed it renders login View after it sends
+     *
+     * @param v it takes the view
+     */
+    public void logout(View v) {
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String token = (mSharedPreference.getString("token", "222245asa"));
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
+        api.logout(userID + "", new Callback<Session>() {
+            @Override
+            public void success(Session session, Response response) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+
+    }
+
+    /**
      * Starts the activity (addRoomsActivity) to create a new room
      *
      * @param view add room button
@@ -302,21 +340,9 @@ public class ViewRooms extends ListActivity {
         startActivity(new Intent(this, addRoomsActivity.class));
     }
 
-    /**
-     * Starts the Activity (changePassword) to change user's  password,
-     *
-     * @param v the view of the activity
-     */
-
     public void changePassword(View v) {
         startActivity(new Intent(this, changePassword.class));
     }
-
-    /**
-     * Starts the Activity (changeInfo) to change user's information,
-     *
-     * @param v the view of the activity
-     */
 
     public void changeInfo(View v) {
         startActivity(new Intent(this, changeInfo.class));
@@ -327,7 +353,6 @@ public class ViewRooms extends ListActivity {
      *
      * @param v the view of the activity
      */
-    
     public void reportProblemE(View v) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
@@ -356,6 +381,7 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
+     * >>>>>>> 31aa6111cb78ebb229014473fda82a305398b368
      * Creates the initial menu state
      *
      * @param menu Menu to be populated
@@ -404,6 +430,7 @@ public class ViewRooms extends ListActivity {
         menu.add(0, v.getId(), 0, "Delete Room");
     }
 
+
     /**
      * Executes commands found in the context menu
      *
@@ -432,7 +459,9 @@ public class ViewRooms extends ListActivity {
                 @Override
                 public void failure(RetrofitError error) {
                 }
+
             });
+
 
         } else if (item.getTitle() == "Delete Room") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();

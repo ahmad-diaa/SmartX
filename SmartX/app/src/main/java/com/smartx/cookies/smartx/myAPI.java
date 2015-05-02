@@ -1,6 +1,7 @@
 package com.smartx.cookies.smartx;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import models.Device;
 import models.Note;
@@ -10,12 +11,14 @@ import models.Session;
 import models.Type;
 import models.User;
 import retrofit.Callback;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
+
 
 /*
  *SE Sprint2
@@ -32,6 +35,9 @@ public interface myAPI {
 
     @GET("/users/{userID}/rooms/1/devices/1/devices")
     void allDevices(@Path("userID") String id, Callback<List<Device>> callback);
+
+    @DELETE ("/session/{token}")
+    void logout(@Path("token") String access_token,Callback<Session> callback);
 
     @GET("/v/types/{name}")
     void findClickerType(@Path("name") String deviceName, Callback<List<Type>> callback);
@@ -137,7 +143,6 @@ public interface myAPI {
      */
     @GET("/users/{userId}/rooms/{roomId}/plugs/{plugId}")
     void getPlug(@Path("userId") String userID, @Path("roomId") String roomID, @Field("plugId") String plugID, Callback<Plug> callback);
-
     /**
      * It returns the value of favorite attribute of a specific device given its id,
      * the id of user to which the device belongs and the id of room where the device exists.
@@ -149,7 +154,6 @@ public interface myAPI {
      */
     @GET("/f/users/{userID}/rooms/{roomID}/devices/{deviceID}")
     void findFavorite(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<String> callback);
-
     /**
      * It changes the value of favorite attribute of a specific device given its id,
      * the id of user to which the device belongs and the id of room where the device exists.
@@ -173,4 +177,5 @@ public interface myAPI {
 
 
 }
+
 

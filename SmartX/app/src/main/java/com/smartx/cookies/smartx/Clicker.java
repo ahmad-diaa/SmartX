@@ -18,10 +18,10 @@ public class Clicker {
     /**
      * clicker constructor creates a Clicker object
      *
-     * @param userID,
-     * @param RoomID    ,
-     * @param deviceID,
-     * @param ClickerId ,
+     * @param userId,
+     * @param roomId    ,
+     * @param deviceId,
+     * @param clickerId ,
      * @param command
      */
 
@@ -36,7 +36,7 @@ public class Clicker {
     /**
      * ClickerId setter
      *
-     * @param clickerID
+     * @param clickerId
      */
     public void setClickerId(int clickerId) {
 
@@ -56,7 +56,7 @@ public class Clicker {
     /**
      * userId setter
      *
-     * @param userID
+     * @param userId
      */
     public void setUserId(int userId) {
         this.userId = userId;
@@ -65,7 +65,7 @@ public class Clicker {
     /**
      * roomId setter
      *
-     * @param roomID
+     * @param roomId
      */
     public void setRoomId(int roomId) {
         this.roomId = roomId;

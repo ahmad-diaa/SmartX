@@ -20,7 +20,6 @@ import retrofit.client.Response;
  * purpose:This class creates an instance of a clicker that will allow the user to control a device.
  *
  * @author youmna
- * @author maggiemoheb
  */
 public class TvClickerActivity extends Activity {
     int userID; //store the current userID
@@ -30,6 +29,7 @@ public class TvClickerActivity extends Activity {
     String command;//store the current command
     boolean on;//initial current state of device
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
+    Clicker tvClicker;
     Switch mySwitch;// the Switch instance of this activity
 
     /**
@@ -98,23 +98,27 @@ public class TvClickerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tvClicker = new Clicker();
         setContentView(R.layout.activity_tv_clicker);
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
         deviceID = (mSharedPreference.getString("deviceID", "1"));
-        mySwitch = (Switch) findViewById(R.id.switch1);
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
+                tvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
                 clickerID = clicker.getClickerId();
                 checkPreviousState();
+
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         checkPreviousState();
@@ -139,6 +143,7 @@ public class TvClickerActivity extends Activity {
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
+
     }
 
     /**
@@ -148,11 +153,13 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void volumeDown(View v) {
+
         command = new String(deviceID + "/V/0");
         if (on)
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
+
     }
 
     /**
@@ -162,11 +169,14 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void nextChannel(View v) {
+
         command = new String(deviceID + "/C/1");
         if (on)
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
+
+
     }
 
     /**
@@ -181,6 +191,8 @@ public class TvClickerActivity extends Activity {
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
+
+
     }
 
     /**
@@ -227,7 +239,28 @@ public class TvClickerActivity extends Activity {
                 } else {
                     onOff.setChecked(false);
                     on = false;
+//                TvClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
                 }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+    }
+
+    /**
+     * changes the status of the device when switch is turned on/off
+     *
+     * @param on
+     */
+    public void changeDeviceStatus(boolean on) {
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = adapter.create(myAPI.class);
+        api.editDeviceStatus(userID + "", roomID + "", deviceID, on + "", new Callback<Device>() {
+            @Override
+            public void success(Device device, Response response) {
+
             }
 
             @Override
@@ -243,7 +276,6 @@ public class TvClickerActivity extends Activity {
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", command, new Callback<Clicker>() {
-
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("V/0")) {
@@ -273,10 +305,12 @@ public class TvClickerActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 

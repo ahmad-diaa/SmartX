@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/reportProblemBp"
-        android:layout_above="@+id/button9" />
+        android:layout_below="@+id/search"
+        android:layout_above="@+id/plugsOffB" />
 
     <Button
         android:layout_width="fill_parent"
@@ -63,21 +63,10 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Report a problem by mail"
-        android:id="@+id/reportProblemBemail"
-        android:onClick="reportProblemE"
-        android:layout_above="@+id/changeInfoB"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerHorizontal="true"
-        />
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Call us to report a problem "
-        android:id="@+id/reportProblemBp"
-        android:onClick="reportProblemP"
-        android:layout_above="@+id/reportProblemBp"
+        android:text="logout"
+        android:id="@+id/logoutB"
+        android:onClick="logout"
+        android:layout_above="@+id/viewBy"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
@@ -88,10 +77,10 @@
         android:layout_height="wrap_content"
         android:text="Turn all plugs off"
         android:id="@+id/plugsOffB"
-        android:layout_above="@+id/viewBy"
+        android:onClick="turnPlugsOff"
+        android:layout_above="@+id/logoutB"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:onClick="turnPlugsOff" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

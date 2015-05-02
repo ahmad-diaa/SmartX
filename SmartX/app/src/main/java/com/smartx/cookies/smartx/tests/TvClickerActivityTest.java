@@ -21,9 +21,9 @@ import retrofit.client.Response;
  * Pupose:The purpose of this class is to test TVClickerActivity
  *
  * @author youmna
- * @author maggiemoheb 
  */
 public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvClickerActivity> {
+
     private TvClickerActivity myActivity;//TvClickerACtivity
     private Switch onOff;//On and off switch
     private Button volumeUp;//Volume"+" control
@@ -37,6 +37,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     private String ENDPOINT = "192.168.1.5";
 
     public TvClickerActivityTest() {
+
         super(TvClickerActivity.class);
     }
 
@@ -48,48 +49,56 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     protected void setUp() throws Exception {
         super.setUp();
         myActivity = getActivity();
+        onOff = (Switch) myActivity.findViewById(R.id.switch1);
         previousChannel = (Button) myActivity.findViewById(R.id.button);
         nextChannel = (Button) myActivity.findViewById(R.id.button2);
         volumeUp = (Button) myActivity.findViewById(R.id.button3);
         volumeDown = (Button) myActivity.findViewById(R.id.button4);
-        onOff = (Switch) myActivity.findViewById(R.id.switch1);
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
         api.login("ahdiaa", "123456", new Callback<Session>() {
             @Override
             public void success(Session session, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         api.addRoom("1", "Kitchen", new Callback<Room>() {
             @Override
             public void success(Room room, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
-        api.addDevice("1", "1", "1", "1", "0", new Callback<Device>() {
 
+        api.addDevice("1", "1", "1", "1", "0", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         api.addClicker("1", "1", "1", "1", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
     }
@@ -104,32 +113,24 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     }
 
     /**
-     * verifies that the protection is set correctly
-     *
-     * @throws Exception
-     */
-    public void testTurnOnOff() throws Exception {
-                myActivity.TurnOnOff(myActivity.getWindow().getDecorView());
-                onOff = (Switch) myActivity.findViewById(R.id.switch1);
-                assertEquals(false, onOff.isEnabled());
-    }
-
-    /**
      * used to test if the clicker's current command changes when the channel "+" button is clicked
      * and the device is turned on
      *
      * @throws Exception
      */
+
     public void testNextChannelSuccess() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
         api.editDeviceStatus("1", "1", "1", "1", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         myActivity.runOnUiThread(new Runnable() {
@@ -137,15 +138,19 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
                 onOff.setChecked(true);
             }
         });
+
         myActivity.nextChannel(myActivity.getWindow().getDecorView());
+
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("1/C/1", clicker.getCommand());
+                assertEquals("Tv/C/1", clicker.getCommand());
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
     }
@@ -162,10 +167,12 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.editDeviceStatus("1", "1", "1", "1", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         myActivity.runOnUiThread(new Runnable() {
@@ -173,15 +180,19 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
                 onOff.setChecked(true);
             }
         });
+
         myActivity.previousChannel(myActivity.getWindow().getDecorView());
+
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("1/C/0", clicker.getCommand());
+                assertEquals("Tv/C/0", clicker.getCommand());
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
     }
@@ -198,10 +209,12 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.editDeviceStatus("1", "1", "1", "0", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         myActivity.runOnUiThread(new Runnable() {
@@ -210,15 +223,19 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
             }
         });
+
         myActivity.volumeUP(myActivity.getWindow().getDecorView());
+
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("1/V/1", clicker.getCommand());
+                assertEquals("Tv/V/1", clicker.getCommand());
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
     }
@@ -235,15 +252,16 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.editDeviceStatus("1", "1", "1", "0", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
-                onOff = (Switch) myActivity.findViewById(R.id.switch1);
                 onOff.setChecked(false);
             }
         });
@@ -262,7 +280,8 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
 
                     }
                 });
-                assertNotSame(clicker.getCommand(), "1/V/0");
+                assertNotSame(clicker.getCommand(), "TV/V/0");
+
             }
 
             @Override
@@ -284,10 +303,12 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.editDeviceStatus("1", "1", "1", "0", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         myActivity.runOnUiThread(new Runnable() {
@@ -295,15 +316,19 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
                 onOff.setChecked(false);
             }
         });
+
         myActivity.nextChannel(myActivity.getWindow().getDecorView());
+
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("1/C/1", clicker.getCommand());
+                assertEquals("Tv/C/1", clicker.getCommand());
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
     }
@@ -320,10 +345,12 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.editDeviceStatus("1", "1", "1", "0", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         myActivity.runOnUiThread(new Runnable() {
@@ -331,11 +358,14 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
                 onOff.setChecked(false);
             }
         });
+
         myActivity.previousChannel(myActivity.getWindow().getDecorView());
+
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertNotSame("1/C/0", clicker.getCommand());
+                assertNotSame("Tv/C/0", clicker.getCommand());
+
             }
 
             @Override
@@ -357,10 +387,12 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.editDeviceStatus("1", "1", "1", "1", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         myActivity.runOnUiThread(new Runnable() {
@@ -368,16 +400,20 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
                 onOff.setChecked(true);
             }
         });
+
         myActivity.volumeUP(myActivity.getWindow().getDecorView());
+
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("1/V/1", clicker.getCommand());
+                assertEquals("Tv/V/1", clicker.getCommand());
+
             }
 
             @Override
             public void failure(RetrofitError error) {
                 assertEquals("error", "error");
+
             }
         });
     }
@@ -394,10 +430,12 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
         api.editDeviceStatus("1", "1", "1", "1", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         myActivity.runOnUiThread(new Runnable() {
@@ -405,16 +443,21 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
                 onOff.setChecked(true);
             }
         });
+
         myActivity.volumeDown(myActivity.getWindow().getDecorView());
+
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
-                assertEquals("1/V/0", clicker.getCommand());
+                assertEquals("Tv/V/0", clicker.getCommand());
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
     }
+
 }
