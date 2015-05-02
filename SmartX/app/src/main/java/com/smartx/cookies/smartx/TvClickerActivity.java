@@ -30,7 +30,7 @@ public class TvClickerActivity extends Activity {
     String command;//store the current command
     boolean on;//initial current state of device
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
-    Clicker TvClicker;
+    Clicker tvClicker;
 
     /**
      * clickerId getter
@@ -89,7 +89,7 @@ public class TvClickerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TvClicker = new Clicker();
+        tvClicker = new Clicker();
         setContentView(R.layout.activity_tv_clicker);
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
@@ -100,7 +100,7 @@ public class TvClickerActivity extends Activity {
         api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
-                TvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
+                tvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
                 clickerID = clicker.getClickerId();
                 checkPreviousState();
 
@@ -126,7 +126,7 @@ public class TvClickerActivity extends Activity {
      * called  if the Volume "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void volumeUP(View v) {
         command = new String("/V/1");
@@ -141,7 +141,7 @@ public class TvClickerActivity extends Activity {
      * called  if the Volume "-" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void volumeDown(View v) {
         command = new String("/V/0");
@@ -156,7 +156,7 @@ public class TvClickerActivity extends Activity {
      * called  if the channel "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void nextChannel(View v) {
         command = new String("/C/1");
@@ -172,7 +172,7 @@ public class TvClickerActivity extends Activity {
      * called  if the channel "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param View
+     * @param v
      */
     public void previousChannel(View v) {
         command = new String("/C/0");
@@ -190,7 +190,7 @@ public class TvClickerActivity extends Activity {
      * if the device was turned off then the command wont be sent otherwise sendCommand method
      * will send the current command to the Clicker
      *
-     * @param View
+     * @param v
      */
     public void TurnOnOff(View v) {
         on = !on;
@@ -257,7 +257,8 @@ public class TvClickerActivity extends Activity {
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
     public void sendCommand() {
-        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();;
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        ;
         myAPI api = adapter.create(myAPI.class);
         api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", clickerID + command, new Callback<Clicker>() {
             @Override

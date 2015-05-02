@@ -30,7 +30,7 @@ public class logoutTest extends ActivityInstrumentationTestCase2<ViewRooms> {
         myActivity = getActivity();
         userID = 1;
         session.setId(1);
-        ENDPOINT = "http://172.20.10.2:3000/";
+        ENDPOINT = "http://192.168.1.8:3000/";
     }
 
     public void testPreconditions() {
