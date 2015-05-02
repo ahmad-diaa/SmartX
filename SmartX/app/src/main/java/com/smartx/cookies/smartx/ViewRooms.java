@@ -381,7 +381,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     * >>>>>>> 31aa6111cb78ebb229014473fda82a305398b368
      * Creates the initial menu state
      *
      * @param menu Menu to be populated
@@ -474,6 +473,7 @@ public class ViewRooms extends ListActivity {
     This method is called when the user clicks on Turn Off All Plugs button
     @param v View
      */
+        
     public void turnPlugsOff(View v){
         turnThemOff();
     }
