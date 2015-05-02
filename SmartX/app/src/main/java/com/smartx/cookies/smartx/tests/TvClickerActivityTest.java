@@ -34,7 +34,7 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
     private int roomID;//current room id
     private int deviceID;//current device id
     private int clickerID;//current Clicker id
-    private String ENDPOINT = "192.168.1.5";
+    private String ENDPOINT = "192.168.1.3";
 
     public TvClickerActivityTest() {
         super(TvClickerActivity.class);
@@ -74,7 +74,6 @@ public class TvClickerActivityTest extends ActivityInstrumentationTestCase2<TvCl
             }
         });
         api.addDevice("1", "1", "1", "1", "0", new Callback<Device>() {
-
             @Override
             public void success(Device device, Response response) {
             }

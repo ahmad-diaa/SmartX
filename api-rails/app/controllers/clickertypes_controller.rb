@@ -1,2 +1,0 @@
-class ClickertypesController < ApplicationController
-end
