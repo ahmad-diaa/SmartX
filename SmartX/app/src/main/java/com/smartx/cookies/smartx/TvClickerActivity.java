@@ -21,7 +21,6 @@ import retrofit.client.Response;
  * purpose:This class creates an instance of a clicker that will allow the user to control a device.
  *
  * @author youmna
- * @author maggiemoheb
  */
 public class TvClickerActivity extends Activity {
     int userID; //store the current userID
@@ -31,8 +30,7 @@ public class TvClickerActivity extends Activity {
     String command;//store the current command
     boolean on;//initial current state of device
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
-    Clicker tvClicker;
-    Switch mySwitch;// the Switch instance of this activity
+    Clicker TvClicker;
 
     /**
      * clickerId getter
@@ -41,15 +39,6 @@ public class TvClickerActivity extends Activity {
      */
     public int getClickerID() {
         return clickerID;
-    }
-
-    /**
-     * ENDPOINT getter
-     *
-     * @return ENDPOINT
-     */
-    public String getENDPOINT() {
-        return getResources().getString(R.string.ENDPOINT);
     }
 
     /**
@@ -100,25 +89,27 @@ public class TvClickerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tvClicker = new Clicker();
+        TvClicker = new Clicker();
         setContentView(R.layout.activity_tv_clicker);
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
         deviceID = (mSharedPreference.getString("deviceID", "1"));
-        mySwitch = (Switch) findViewById(R.id.switch1);
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
-                tvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
+                TvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
                 clickerID = clicker.getClickerId();
                 checkPreviousState();
+
+
             }
 
             @Override
             public void failure(RetrofitError error) {
+
             }
         });
         checkPreviousState();
@@ -135,56 +126,62 @@ public class TvClickerActivity extends Activity {
      * called  if the Volume "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param v
+     * @param View
      */
     public void volumeUP(View v) {
-        command = new String(deviceID + "/V/1");
+        command = new String("/V/1");
         if (on)
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
+
     }
 
     /**
      * called  if the Volume "-" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param v
+     * @param View
      */
     public void volumeDown(View v) {
-        command = new String(deviceID + "/V/0");
+        command = new String("/V/0");
         if (on)
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
+
     }
 
     /**
      * called  if the channel "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param v
+     * @param View
      */
     public void nextChannel(View v) {
-        command = new String(deviceID + "/C/1");
+        command = new String("/C/1");
         if (on)
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
+
+
     }
 
     /**
      * called  if the channel "+" button in tv_clicker layout is clicked.
      * It updates the current clicker command to the recently entered one by calling sendCommand method
      *
-     * @param v
+     * @param View
      */
     public void previousChannel(View v) {
-        command = new String(deviceID + "/C/0");
+        command = new String("/C/0");
         if (on)
             sendCommand();
         else
             Toast.makeText(getApplicationContext(), "Device is turned off", Toast.LENGTH_LONG).show();
+
+
     }
 
     /**
@@ -193,25 +190,14 @@ public class TvClickerActivity extends Activity {
      * if the device was turned off then the command wont be sent otherwise sendCommand method
      * will send the current command to the Clicker
      *
-     * @param v
+     * @param View
      */
     public void TurnOnOff(View v) {
         on = !on;
-        command = new String(deviceID + "/" + on + "");
+        command = new String("/" + on + "");
         sendCommand();
         changeDeviceStatus(on);
-        mySwitch.setEnabled(false);
-        runOnUiThread(new Runnable() {
-            public void run() {
-                for (int i = 0; i < 1000000000; i++) ;
-                for (int i = 0; i < 1000000000; i++) ;
-                for (int i = 0; i < 1000000000; i++) ;
-                for (int i = 0; i < 1000000000; i++) ;
-                for (int i = 0; i < 1000000000; i++) ;
-                for (int i = 0; i < 1000000000; i++) ;
-                mySwitch.setEnabled(true);
-            }
-        });
+
     }
 
     /**
@@ -224,14 +210,18 @@ public class TvClickerActivity extends Activity {
         api.getDevice(userID + "", roomID + "", deviceID + "", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
                 Switch on_off = (Switch) findViewById(R.id.switch1);
+
                 if (device.getStatus().contains("true")) {
                     on_off.setChecked(true);
                     on = true;
+
+
                 } else {
                     on_off.setChecked(false);
                     on = false;
-//                plugClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
+//                TvClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
                 }
             }
 
@@ -252,6 +242,7 @@ public class TvClickerActivity extends Activity {
         api.editDeviceStatus(userID + "", roomID + "", deviceID, on + "", new Callback<Device>() {
             @Override
             public void success(Device device, Response response) {
+
             }
 
             @Override
@@ -266,10 +257,9 @@ public class TvClickerActivity extends Activity {
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
     public void sendCommand() {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        ;
+        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();;
         myAPI api = adapter.create(myAPI.class);
-        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", command, new Callback<Clicker>() {
+        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", clickerID + command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("V/0")) {
@@ -284,7 +274,7 @@ public class TvClickerActivity extends Activity {
                 if (command.contains("C/1")) {
                     Toast.makeText(getApplicationContext(), "Next Channel", Toast.LENGTH_LONG).show();
                 }
-//                plugClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
+//                TvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
             }
 
 
@@ -301,10 +291,12 @@ public class TvClickerActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

@@ -10,6 +10,7 @@ class SessionController < ApplicationController
     end
   end
 
+
   #Index, it returns all sessions keys of all users.
 def index
 @keys = ApiKey.all

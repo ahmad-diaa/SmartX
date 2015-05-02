@@ -1,6 +1,7 @@
 package com.smartx.cookies.smartx;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import models.Device;
 import models.Note;
@@ -17,14 +18,6 @@ import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
 
-/**
- * SE Sprint2
- * myAPI.java
- * Purpose: api interface to interact with rails.
- *
- * @author Amir
- * @author Ahmad Abdalraheem
- */
 
 public interface myAPI {
 
@@ -34,13 +27,8 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/1/devices/1/devices")
     void allDevices(@Path("userID") String id, Callback<List<Device>> callback);
 
-    /**
-     * It takes the user's access token and destroys user's session so that all of his operations will be disabled.
-     *
-     * @param access_token
-     */
-    @DELETE("/session/{token}")
-    void logout(@Path("token") String access_token, Callback<Session> callback);
+    @DELETE ("/session/{token}")
+    void logout(@Path("token") String access_token,Callback<Session> callback);
 
     @FormUrlEncoded
     @POST("/session")
@@ -52,12 +40,15 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/{id}")
     void getRoom(@Path("userID") String userID, @Path("id") String roomID, Callback<String> callback);
 
+
     @GET("/users/{userID}/rooms/{id}")
     void getRoom2(@Path("userID") String userID, @Path("id") String roomID, Callback<Room> callback);
+
 
     @FormUrlEncoded
     @PUT("/users/{userID}/")
     void changeInfo(@Path("userID") String id, @Field("user[email]") String email, @Field("user[password]") String password, @Field("user[phone]") String phone, Callback<User> callback);
+
 
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/clickers/{clickerId}/")
@@ -89,6 +80,7 @@ public interface myAPI {
     @GET("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
     void getDevice(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, Callback<Device> callback);
 
+
     @FormUrlEncoded
     @POST("/users/{userId}/rooms/{roomId}/devices/")
     void addDevice(@Path("userId") String userId, @Path("roomId") String roomId, @Field("device[device_id]") String deviceId, @Field("device[name]") String name, @Field("device[status]") String status, Callback<Device> callback);
@@ -119,30 +111,5 @@ public interface myAPI {
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
 
-    /**
-     * It returns the value of favorite attribute of a specific device given its id,
-     * the id of user to which the device belongs and the id of room where the device exists.
-     *
-     * @param userID
-     * @param roomID
-     * @param deviceID
-     * @param callback
-     */
-    @GET("/f/users/{userID}/rooms/{roomID}/devices/{deviceID}")
-    void findFavorite(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<String> callback);
-
-    /**
-     * It changes the value of favorite attribute of a specific device given its id,
-     * the id of user to which the device belongs and the id of room where the device exists.
-     *
-     * @param userID
-     * @param roomID
-     * @param deviceID
-     * @param favorite
-     * @param callback
-     */
-    @FormUrlEncoded
-    @PUT("/users/{userID}/rooms/{roomID}/devices/{deviceID}")
-    void addToFavorites(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, @Field("device[favorite]") String favorite, Callback<Device> callback);
 }
 

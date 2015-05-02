@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428182139) do
+ActiveRecord::Schema.define(version: 20150407115340) do
 
   create_table "api_keys", force: true do |t|
     t.integer  "user_id"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 20150428182139) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
-    t.string   "favorite"
   end
 
   add_index "devices", ["device_id"], name: "index_devices_on_device_id", unique: true

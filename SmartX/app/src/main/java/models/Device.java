@@ -34,10 +34,6 @@ public class Device {
      */
     String device_id;
 
-    /**
-     * true if device exits in favorites list, false otherwise.
-     */
-    String favorite;
 
     /**
      * Constructor to create a device with given parameters.
@@ -55,7 +51,6 @@ public class Device {
         this.user_id = userID;
         this.status = status;
         this.device_id = deviceID;
-        this.favorite="false";
     }
 
     /**
@@ -149,27 +144,5 @@ public class Device {
         this.room_id = roomID;
     }
 
-    /**
-     * get the value that shows if the device exits in favorites list or not.
-     *
-     * @return favorite flag.
-     */
-    public String getFavorite() {
-        return favorite;
-    }
-
-    /**
-     * set the value that shows if the device exits in favorites list or not.
-     *
-     * @param favorite
-     */
-    public void setFavorite(String favorite) {
-        this.favorite=favorite;
-    }
-
-
-    public String getId() {
-        return device_id;
-    }
-
 }
+
