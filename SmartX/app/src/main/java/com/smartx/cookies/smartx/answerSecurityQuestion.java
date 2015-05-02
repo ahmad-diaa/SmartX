@@ -51,7 +51,7 @@ public class answerSecurityQuestion extends Activity {
         api.checkUser(userID + "", securityA, new Callback<List<User>>()  {
             @Override
             public void success(List<User> user, Response response) {
-                if (!user.isEmpty()) {
+                if (user.get(0).getID() == userID) {
                     Intent rs = new Intent(getApplicationContext(), changePassword.class);
                     rs.putExtra("id", userID);
                     rs.putExtra("flag",1);

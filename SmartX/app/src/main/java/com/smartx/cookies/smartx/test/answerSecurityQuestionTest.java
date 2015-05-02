@@ -29,43 +29,45 @@ public class answerSecurityQuestionTest extends ActivityInstrumentationTestCase2
     EditText answerTxt;
     Button answerB;
     TextView question;
-    private int userID=1;
+    private int userID = 1;
     String answer;
     String ENDPOINT = "http://192.168.1.8:3000/";
 
     public answerSecurityQuestionTest() {
-        super( answerSecurityQuestion.class);
+        super(answerSecurityQuestion.class);
     }
+
     protected void setUp() throws Exception {
         super.setUp();
         a = new Intent(getInstrumentation().getTargetContext(), answerSecurityQuestion.class);
         a.putExtra("id", 1);
         a.putExtra("securityQuestion", "what?");
         setActivityIntent(a);
-        myActivity=getActivity();
+        myActivity = getActivity();
         answerTxt = (EditText) myActivity.findViewById(R.id.answerTxt);
     }
 
     public void testPreconditions() {
         assertNotNull("myActivity is null", myActivity);
     }
+
     public void testGetQuestion() throws Exception {
         myActivity.runOnUiThread(new Runnable() {
             public void run() {
+                userID = myActivity.getIntent().getExtras().getInt("id");
                 answerTxt.setText("w");
                 answer = answerTxt.getText().toString();
             }
         });
         myActivity.submitAnswer(myActivity.getWindow().getDecorView());
-        Log.d("Answer ", answer);
+        Log.d("answer ", answer);
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         myAPI api = adapter.create(myAPI.class);
-        api.checkUser(userID + "", securityA, new Callback<List<User>>()  {
+        api.checkUser(userID + "", answer, new Callback<List<User>>() {
 
             @Override
-            public void success(List<User> u, Response response) {
-                assertEquals(1, u.get(0).getID());
-                assertEquals(true,false);
+            public void success(List<User> users, Response response) {
+                    assertEquals(users.get(0).getID(),userID);
             }
 
             @Override
