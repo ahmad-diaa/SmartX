@@ -163,5 +163,16 @@ public interface myAPI {
     @FormUrlEncoded
     @PUT("/users/{userID}/rooms/{roomID}/devices/{deviceID}")
     void addToFavorites(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, @Field("device[favorite]") String favorite, Callback<Device> callback);
+
+    /**
+     * View all the plugs in the given roomID for the given userID
+     *
+     * @param userID   the given userID
+     * @param roomID   the given roomID
+     * @param callback the callback from the rails
+     */
+    @GET("/users/{userId}/rooms/{roomId}/plugs/")
+    void viewPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback<List<Plug>> callback);
+
 }
 
