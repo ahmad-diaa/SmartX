@@ -31,7 +31,7 @@ public class TvClickerActivity extends Activity {
     String command;//store the current command
     boolean on;//initial current state of device
     SharedPreferences mSharedPreference;//Used to get data from previous sessions
-    Clicker TvClicker;
+    Clicker tvClicker;
     Switch mySwitch;// the Switch instance of this activity
 
     /**
@@ -45,9 +45,13 @@ public class TvClickerActivity extends Activity {
 
     /**
      * ENDPOINT getter
+     *
      * @return ENDPOINT
      */
-    public String getENDPOINT() {return getResources().getString(R.string.ENDPOINT);}
+    public String getENDPOINT() {
+        return getResources().getString(R.string.ENDPOINT);
+    }
+
     /**
      * userId getter
      *
@@ -96,7 +100,7 @@ public class TvClickerActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TvClicker = new Clicker();
+        tvClicker = new Clicker();
         setContentView(R.layout.activity_tv_clicker);
         mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
@@ -108,7 +112,7 @@ public class TvClickerActivity extends Activity {
         api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
-                TvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
+                tvClicker = new Clicker(clicker.getUserId(), clicker.getRoomId(), clicker.getDeviceId(), clicker.getClickerId(), clicker.getCommand());
                 clickerID = clicker.getClickerId();
                 checkPreviousState();
             }
@@ -134,7 +138,7 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void volumeUP(View v) {
-        command = new String(deviceID+"/V/1");
+        command = new String(deviceID + "/V/1");
         if (on)
             sendCommand();
         else
@@ -148,7 +152,7 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void volumeDown(View v) {
-        command = new String(deviceID+"/V/0");
+        command = new String(deviceID + "/V/0");
         if (on)
             sendCommand();
         else
@@ -162,7 +166,7 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void nextChannel(View v) {
-        command = new String(deviceID+"/C/1");
+        command = new String(deviceID + "/C/1");
         if (on)
             sendCommand();
         else
@@ -176,7 +180,7 @@ public class TvClickerActivity extends Activity {
      * @param v
      */
     public void previousChannel(View v) {
-        command = new String(deviceID+"/C/0");
+        command = new String(deviceID + "/C/0");
         if (on)
             sendCommand();
         else
@@ -193,18 +197,18 @@ public class TvClickerActivity extends Activity {
      */
     public void TurnOnOff(View v) {
         on = !on;
-        command = new String(deviceID+"/" + on + "");
+        command = new String(deviceID + "/" + on + "");
         sendCommand();
         changeDeviceStatus(on);
         mySwitch.setEnabled(false);
         runOnUiThread(new Runnable() {
             public void run() {
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
-                for(int i = 0; i<1000000000; i++);
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
+                for (int i = 0; i < 1000000000; i++) ;
                 mySwitch.setEnabled(true);
             }
         });
@@ -230,6 +234,7 @@ public class TvClickerActivity extends Activity {
 //                plugClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
                 }
             }
+
             @Override
             public void failure(RetrofitError error) {
             }
@@ -261,9 +266,10 @@ public class TvClickerActivity extends Activity {
      * called if the device was switched on ,it updates the current clicker command to the recently entered one
      */
     public void sendCommand() {
-        RestAdapter adapter =new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();;
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        ;
         myAPI api = adapter.create(myAPI.class);
-        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "",command, new Callback<Clicker>() {
+        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
                 if (command.contains("V/0")) {

@@ -29,16 +29,13 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
-<<<<<<< HEAD
- *SE Sprint2
- *viewDevices.java
- *Purpose: Display list of devices.
+ * SE Sprint2
+ * viewDevices.java
+ * Purpose: Display list of devices.
  *
  * @author Amir
-=======
- * Purpose: view devices in a certain room
+ *         Purpose: view devices in a certain room
  * @author maggiemoheb
->>>>>>> origin/Sprint_Two
  */
 public class viewDevices extends ListActivity {
 
@@ -217,8 +214,7 @@ public class viewDevices extends ListActivity {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "View Notes") {
             renderViewNotes(itemPosition, userID, roomID);
-        }else
-        {
+        } else {
 
             return false;
         }
