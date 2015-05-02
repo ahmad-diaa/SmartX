@@ -28,7 +28,8 @@ public class ViewPlugsTest extends ActivityInstrumentationTestCase2<ViewPlugs> {
 
     private ViewPlugs myActivity;
     String ENDPOINT;
-    public ViewPlugsTest(){
+
+    public ViewPlugsTest() {
         super(ViewPlugs.class);
     }
 
@@ -43,7 +44,6 @@ public class ViewPlugsTest extends ActivityInstrumentationTestCase2<ViewPlugs> {
         int userID = myActivity.getUserID();
         int roomID = myActivity.getRoomID();
         ENDPOINT = "http://172.20.10.4:3000/";
-
     }
 
     public void testPreconditions() {
@@ -54,17 +54,15 @@ public class ViewPlugsTest extends ActivityInstrumentationTestCase2<ViewPlugs> {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
         api.addPlug("1", "1", "456", "zamzamys tablet", "off", "playstation", new Callback<Plug>() {
-
-                    @Override
-                    public void success(Plug plug, Response response) {
-                         //Will test on the created plug in the next method along witb the other plug.
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                    throw error;
-                    }
-                });
+            @Override
+            public void success(Plug plug, Response response) {
+                //Will test on the created plug in the next method along witb the other plug.
+            }
+            @Override
+            public void failure(RetrofitError error) {
+                throw error;
+            }
+        });
         api.addPlug("1", "1", "123", "zamzamys phone", "off", "computer", new Callback<Plug>() {
             @Override
             public void success(Plug plug, Response response) {
@@ -95,6 +93,5 @@ public class ViewPlugsTest extends ActivityInstrumentationTestCase2<ViewPlugs> {
 
             }
         });
-        }
-
+    }
 }
