@@ -82,7 +82,9 @@ public class changeInfo extends Activity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         changeInfoB = (Button) findViewById(R.id.changeInfoB);
         emailTxt = (EditText) findViewById(R.id.email);
+        emailTxt.setText(mSharedPreference.getString("email", ""));
         phoneTxt = (EditText) findViewById(R.id.phone);
+        phoneTxt.setText(mSharedPreference.getString("phone", ""));
         userID = (mSharedPreference.getInt("userID", 1));
         originalPass = (mSharedPreference.getString("password", "123456"));
     }

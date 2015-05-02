@@ -1,5 +1,7 @@
 
 Rails.application.routes.draw do
+  
+
 	get 'v/users/:user_id/rooms/:name'=>'rooms#find'
   get 'v/users/:user_id/rooms/:room_id/devices/:name'=>'devices#find'
 
@@ -26,4 +28,11 @@ Rails.application.routes.draw do
         end
       end
       end
+
+      resources :users do
+       resources :rooms do 
+        resources :plugs
+      end
+    end
+
 end

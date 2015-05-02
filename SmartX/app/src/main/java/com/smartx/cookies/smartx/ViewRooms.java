@@ -380,7 +380,7 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
->>>>>>> 31aa6111cb78ebb229014473fda82a305398b368
+     * >>>>>>> 31aa6111cb78ebb229014473fda82a305398b368
      * Creates the initial menu state
      *
      * @param menu Menu to be populated
