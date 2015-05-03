@@ -96,39 +96,39 @@ public class viewFavoritesActivity extends ListActivity {
     public void setList(int UserID) {
         api.allDevices(userID + "", new Callback<List<Device>>() {
 
-                    @Override
-                    public void success(List<Device> devices, Response response) {
-                        Iterator<Device> iterator = devices.iterator();
-                        while (iterator.hasNext()) {
-                            final Device current = iterator.next();
-                            if (current.getFavorite().equals("true")) {
-                                int roomid = current.getRoomID();
+            @Override
+            public void success(List<Device> devices, Response response) {
+                Iterator<Device> iterator = devices.iterator();
+                while (iterator.hasNext()) {
+                    final Device current = iterator.next();
+                    if (current.getFavorite().equals("true")) {
+                        int roomid = current.getRoomID();
 
-                                api.getRoom(userID + "", roomid + "", new Callback<String>() {
-                                    @Override
-                                    public void success(String room, Response response) {
-                                        room = room.replace("%20", " ");
-                                        roomNameList.add( current.getName()+  "-" + room );
-                                        setListAdapter(adapter2);
+                        api.getRoom(userID + "", roomid + "", new Callback<String>() {
+                            @Override
+                            public void success(String room, Response response) {
+                                room = room.replace("%20", " ");
+                                roomNameList.add(current.getName() + "-" + room);
+                                setListAdapter(adapter2);
 
-                                    }
-                                    @Override
-                                    public void failure(RetrofitError error) {
-                                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                                    }
-                                });
                             }
-                            ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomNameList);
-                            setListAdapter(adapter2);
 
-                        }
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
+                    ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomNameList);
+                    setListAdapter(adapter2);
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                    }
                 }
-        );
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
 
     }
 
