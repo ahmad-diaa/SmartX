@@ -71,14 +71,14 @@ public class moveDeviceTest extends ActivityInstrumentationTestCase2<ViewDeviceA
 
                     @Override
                     public void failure(RetrofitError error) {
-                        assertEquals("Device was not moved", 1, 0);
+                        assertEquals("Device was not Found", 1, 0);
                     }
                 });
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Log.d("ERROR ", error.getMessage());
+                assertEquals("Device was not moved", 1, 0);
             }
         });
     }
