@@ -39,6 +39,9 @@ public class CustomGrid extends BaseAdapter {
         // TODO Auto-generated method stub
         return plugNames.size();
     }
+    public ArrayList<String> getPlugNames() {
+        return this.plugNames;
+    }
     /**
      * @param position the position of a certain element in the grid.
      * @return the object found at the given position.

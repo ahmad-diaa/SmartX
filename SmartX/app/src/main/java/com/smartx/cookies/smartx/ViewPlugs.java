@@ -55,6 +55,14 @@ public class ViewPlugs extends Activity {
     ArrayList<Integer> photoID;
     Button addPlug;
     private SharedPreferences prefs;
+
+    public void setPlugNames(ArrayList<String> plugNames) {
+        this.plugNames = plugNames;
+    }
+
+    public ArrayList<String> getPlugNames() {
+        return this.plugNames;
+    }
     /**
      *
      * @param savedInstanceState The previous state of the activity in case the activity crashes and
