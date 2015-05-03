@@ -125,7 +125,7 @@
         <activity
             android:name=".ViewPlugs"
             android:label="@string/title_activity_view_plugs"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"></activity>
+         ></activity>
     </application>
 
 </manifest>
