@@ -31,5 +31,4 @@
     <string name= "title_activity_default_clicker">defaultClicker</string>
     <string name= "title_activity_lamp_clicker">LampClicker</string>
     <string name= "title_activity_curtain_clicker">CurtainsClicker</string>
-
 </resources>

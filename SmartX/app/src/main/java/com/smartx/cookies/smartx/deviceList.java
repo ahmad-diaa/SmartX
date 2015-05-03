@@ -32,7 +32,7 @@ public class deviceList extends ListActivity {
     private ArrayAdapter<String> adapter2;
     private myAPI api;
     private SharedPreferences mSharedPreference;
-
+    private String dName;
     /*
     @return mSharedPreferences Shared Preference used in app
      */
@@ -134,10 +134,8 @@ public class deviceList extends ListActivity {
     }
 
     /*
-
     This method gets all the rooms that have an ID number matching that of a device's room ID with a selected
     type
-
     @params UserID user Id of current user
      */
     public void setList(int UserID) {
@@ -145,16 +143,18 @@ public class deviceList extends ListActivity {
 
                     @Override
                     public void success(List<Device> devices, Response response) {
-                        Iterator<Device> iterator = devices.iterator();
-                        Iterator<Device> iterator2 = devices.iterator();
-                        while (iterator.hasNext()) {
-                            if (type.equalsIgnoreCase(iterator2.next().getName())) {
-                                int roomid = iterator.next().getRoomID();
+                        Iterator<Device> deviceRooms = devices.iterator();
+                        Iterator<Device> deviceLoop = devices.iterator();
+                        Iterator<Device> deviceNames = devices.iterator();
+                        while (deviceRooms.hasNext()) {
+                            if (type.equalsIgnoreCase(deviceLoop.next().getName())) {
+                                int roomid = deviceRooms.next().getRoomID();
+                                dName = deviceNames.next().getName();
                                 api.getRoom(userID + "", roomid + "", new Callback<String>() {
                                     @Override
                                     public void success(String room, Response response) {
                                         room = room.replace("%20", " ");
-                                        roomNameList.add(room);
+                                        roomNameList.add(room + " - " + dName);
                                         setListAdapter(adapter2);
 
                                     }
@@ -167,7 +167,8 @@ public class deviceList extends ListActivity {
                                     }
                                 });
                             } else {
-                                iterator.next();
+                                deviceRooms.next();
+                                deviceNames.next();
                             }
                             ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomNameList);
                             setListAdapter(adapter2);
