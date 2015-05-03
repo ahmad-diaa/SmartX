@@ -1,6 +1,7 @@
 package com.smartx.cookies.smartx;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import models.Device;
 import models.Note;
@@ -20,8 +21,18 @@ import retrofit.http.Path;
 /*
     Purpose: This class is responsible for sending commands to rails and receiving Callbacks.
 
+<<<<<<< HEAD
      @author Amir
      @author Dalia Maarek
+=======
+
+/*
+ *SE Sprint2
+ *myAPI.java
+ *Purpose: api interface to interact with rails.
+ *
+ *@author Amir, zamzamy
+>>>>>>> origin/Sprint_Two
  */
 
 public interface myAPI {
@@ -31,6 +42,12 @@ public interface myAPI {
 
     @GET("/users/{userID}/rooms/1/devices/1/devices")
     void allDevices(@Path("userID") String id, Callback<List<Device>> callback);
+
+    @DELETE ("/session/{token}")
+    void logout(@Path("token") String access_token,Callback<Session> callback);
+
+    @GET("/v/types/{name}")
+    void findClickerType(@Path("name") String deviceName, Callback<List<Type>> callback);
 
     @FormUrlEncoded
     @POST("/session")
@@ -103,6 +120,12 @@ public interface myAPI {
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
     void editDeviceStatus(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[status]") String status, Callback<Device> callback);
 
+
+    @FormUrlEncoded
+    @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
+    void editDeviceType(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[type]") String type, Callback<Device> callback);
+
+
     @GET("/users/{userId}/")
     void getUser(@Path("userId") String id, Callback<User> callback);
 
@@ -113,7 +136,16 @@ public interface myAPI {
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
 
-    //deletes a room
+
+    /**
+     * deletes device
+     *
+     * @param userID   the given userID
+     * @param roomID   the given roomID
+     * @param deviceID the given deviceID
+     * @param callback the callback from the rails
+     */
+
     @DELETE("/v/users/{userID}/rooms/{roomID}/devices/{deviceID}/")
     void deleteDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<Device> callback);
 
@@ -122,10 +154,11 @@ public interface myAPI {
     void addPlug(@Path("userId") String userId, @Path("roomId") String roomId, @Field("plug[plug_id]") String plugId, @Field("plug[name]") String name, @Field("plug[status]") String status, @Field("plug[photo]") String photo, Callback<Plug> callback);
 
     /**
-     * Gets the plug with the 
-     * @param userID the given userID
-     * @param roomID the given roomID
-     * @param plugID the given plugID
+     * Gets the plug with the
+     *
+     * @param userID   the given userID
+     * @param roomID   the given roomID
+     * @param plugID   the given plugID
      * @param callback the callback from the rails
      */
     @GET("/users/{userId}/rooms/{roomId}/plugs/{plugId}")
@@ -133,7 +166,7 @@ public interface myAPI {
 
     /**
      * It returns the value of favorite attribute of a specific device given its id,
-     the id of user to which the device belongs and the id of room where the device exists.
+     * the id of user to which the device belongs and the id of room where the device exists.
      *
      * @param userID
      * @param roomID
@@ -142,10 +175,9 @@ public interface myAPI {
      */
     @GET("/f/users/{userID}/rooms/{roomID}/devices/{deviceID}")
     void findFavorite(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<String> callback);
-
     /**
      * It changes the value of favorite attribute of a specific device given its id,
-     the id of user to which the device belongs and the id of room where the device exists.
+     * the id of user to which the device belongs and the id of room where the device exists.
      *
      * @param userID
      * @param roomID
@@ -158,4 +190,5 @@ public interface myAPI {
     void addToFavorites(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, @Field("device[favorite]") String favorite, Callback<Device> callback);
 
 }
+
 

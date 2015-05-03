@@ -9,4 +9,9 @@ class SessionControllerTest < ActionController::TestCase
     assert results['access_token'] =~ /\S{32}/
     assert results['user_id'] == larry.id
   end
+
+  	test "#session's index" do
+    get :index
+  	assert_response :success
+     end
 end
