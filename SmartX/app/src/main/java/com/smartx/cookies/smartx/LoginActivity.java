@@ -10,6 +10,7 @@ import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         Data = getSharedPreferences(sharedPrefs, 0);
         setContentView(R.layout.activity_login);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         TextView aboutlogin = (TextView) findViewById(R.id.aboutlogin);
         username = (EditText) findViewById(R.id.txtUserName);
         password = (EditText) findViewById(R.id.txtPassword);
