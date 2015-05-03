@@ -27,10 +27,12 @@
     <string name="title_activity_add_clicker_">Add_clicker_Activity</string>
     <string name="openDrawer">drawer_open</string>
     <string name="closeDrawer">drawer_close</string>
-    <string name="ENDPOINT">http://192.168.43.116:3000/</string>
+    <string name="ENDPOINT">http://172.20.10.4:3000/</string>
     <string name="title_activity_add_plug">Add_clicker_Activity</string>
     <string name="title_activity_plug_icon">Add_clicker_Activity</string>
     <string name= "title_activity_default_clicker">defaultClicker</string>
     <string name= "title_activity_lamp_clicker">LampClicker</string>
     <string name= "title_activity_curtain_clicker">CurtainsClicker</string>
+    <string name="title_activity_view_plugs">ViewPlugs</string>
+
 </resources>

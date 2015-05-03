@@ -27,8 +27,9 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- *  The purpose of this class is to get the ID and the name of the plug to be added.
- *  @author zamzamy on 1/5/15.
+ * The purpose of this class is to get the ID and the name of the plug to be added.
+ *
+ * @author zamzamy on 1/5/15.
  */
 public class AddPlug extends Activity {
 
@@ -77,11 +78,12 @@ public class AddPlug extends Activity {
                     Toast.makeText(AddPlug.this, "Plug name required", Toast.LENGTH_SHORT).show();
                 } else if (plugNameField.trim().equals("")) {
                     Toast.makeText(AddPlug.this, "Plug ID required", Toast.LENGTH_SHORT).show();
+                } else {
+                    editor.putString("plugName", plugName.getText().toString());
+                    editor.putString("plugID", plugID.getText().toString());
+                    editor.commit();
+                    startActivity(new Intent(AddPlug.this, PlugIcon.class));
                 }
-                editor.putString("plugName", plugName.getText().toString());
-                editor.putString("plugID", plugID.getText().toString());
-                editor.commit();
-                startActivity(new Intent(AddPlug.this, PlugIcon.class));
             }
         });
 

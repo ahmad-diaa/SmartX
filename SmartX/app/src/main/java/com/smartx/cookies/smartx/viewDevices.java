@@ -106,14 +106,6 @@ public class viewDevices extends ListActivity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
-        addPlug = (Button) findViewById(R.id.addplug);
-        addPlug.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(viewDevices.this, AddPlug.class));
-            }
-        });
-
         addDevice = (Button) findViewById(R.id.addDevice);
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -160,6 +152,7 @@ public class viewDevices extends ListActivity {
                 startActivity(new Intent(getApplicationContext(), viewDevices.class));
             }
         });
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -232,6 +225,13 @@ public class viewDevices extends ListActivity {
         };
         Drawer.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
+        Button viewPlugs = (Button) findViewById(R.id.viewplugs);
+        viewPlugs.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(viewDevices.this, ViewPlugs.class));
+            }
+        });
     }
 
     @Override

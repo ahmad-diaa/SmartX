@@ -1,12 +1,13 @@
 package com.smartx.cookies.smartx;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,8 +16,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import models.Device;
+import models.Plug;
 import models.Session;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -24,19 +35,16 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * purpose:This class creates an instance of a clicker that will allow the user to control a device.
- *
- * @author youmna
+ * Renders all the plugs found in the room the user selected.
+ * It allows control over the plugs such as turning on/off, deletion, renaming, and searching.
+ * @author zamzamy 1/5/2015
  */
-public class LampClickerActivity extends ActionBarActivity {
-    int userID; //store the current userID
-    int roomID;//store the current roomID
-    String deviceID;//store the current deviceID
-    static int clickerID;//store the current clickerID
-    String command;//store the current command
-    boolean on;//initial current state of device
-    int brightness;//controls the brightness level
-    SharedPreferences mSharedPreference;//Used to get data from previous sessions
+
+public class ViewPlugs extends Activity {
+
+    GridView grid;
+    RestAdapter adapter;
+    myAPI api;
     String titles[] = {"View Favorites", "View Rooms", "Edit Information", "Change Password", "Contact us", "Report a problem", "About us", "Logout"};
     int icons[] = {R.mipmap.star, R.mipmap.room, R.mipmap.pencil, R.mipmap.lock, R.mipmap.call, R.mipmap.help, R.mipmap.home, R.mipmap.bye};
     String name;
@@ -46,68 +54,87 @@ public class LampClickerActivity extends ActionBarActivity {
     RecyclerView.LayoutManager mLayoutManager;
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
-
     /**
-     * userId getter
-     *
-     * @return userID
+     * @return the userID.
      */
     public int getUserID() {
         return userID;
     }
 
     /**
-     * roomId getter
      *
-     * @return RoomID
+     * @return the roomID.
      */
     public int getRoomID() {
         return roomID;
     }
 
-    /**
-     * deviceId getter
-     *
-     * @return deviceID
-     */
-    public String getDeviceID() {
-        return deviceID;
-    }
+    SharedPreferences.Editor editor;
+    private int userID;
+    private int roomID;
+    String plugPhoto = "";
+    String[] plugNames;
+    String[] photos;
+    int[] photoID;
+    Button addPlug;
+    private SharedPreferences prefs;
 
     /**
-     * current status getter
      *
-     * @return status
+     * @param savedInstanceState The previous state of the activity in case the activity crashes and
+     *                           is rendered once again.
      */
-    public boolean getOn() {
-        return on;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lamp_clicker);
-        mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID = (mSharedPreference.getInt("userID", 1));
-        roomID = (mSharedPreference.getInt("roomID", 1));
-        deviceID = (mSharedPreference.getString("deviceID", "1"));
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = adapter.create(myAPI.class);
-        api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
-
+        setContentView(R.layout.activity_view_plugs);
+        prefs = PreferenceManager.getDefaultSharedPreferences(ViewPlugs.this);
+        editor = prefs.edit();
+        grid = (GridView) findViewById(R.id.icongrid);
+        adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        api = adapter.create(myAPI.class);
+        userID = prefs.getInt("userID", 1);
+        roomID = prefs.getInt("roomID", 1);
+        api.viewPlugs(userID + "", roomID + "", new Callback<List<Plug>>() {
             @Override
-            public void success(Clicker clicker, Response response) {
-                clickerID = clicker.getClickerId();
-
+            public void success(List<Plug> plugs, Response response) {
+                plugNames = new String[plugs.size()];
+                photos = new String[plugs.size()];
+                Iterator<Plug> iterator = plugs.iterator();
+                int i = 0;
+                while (i < plugs.size() & iterator.hasNext()) {
+                    Plug cur = iterator.next();
+                    plugNames[i] = cur.getName();
+                    photos[i] = cur.getPhoto();
+                    i++;
+                }
+                initGrid();
             }
 
             @Override
             public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "An error has occurred\n Please try again later", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        addPlug = (Button) findViewById(R.id.plugadd);
+        addPlug.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AddPlug.class));
+            }
+        });
+
+        Button viewDevices = (Button) findViewById(R.id.viewdevices);
+        viewDevices.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), viewDevices.class));
             }
         });
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         name = (mSharedPreference.getString("Name", ""));
         mAdapter = new SideBarAdapter(titles, icons, name, profile, this);
         mRecyclerView.setAdapter(mAdapter);
@@ -179,10 +206,67 @@ public class LampClickerActivity extends ActionBarActivity {
         mDrawerToggle.syncState();
     }
 
+    /**
+     * Initializes the grid icons to their corresponding images.
+     */
+    public void initGrid() {
+        photoID = new int[photos.length];
+
+        for (int i = 0; i < photos.length; i++) {
+            if (photos[i].equals("plugin")) {
+                photoID[i] = R.drawable.plugin;
+
+            } else if (photos[i].equals("switcher")) {
+                photoID[i] = R.drawable.switcher;
+
+            } else if (photos[i].equals("fridge")) {
+                photoID[i] = R.drawable.fridge;
+
+            } else if (photos[i].equals("lamp")) {
+                photoID[i] = R.drawable.lamp;
+
+            } else if (photos[i].equals("fan")) {
+                photoID[i] = R.drawable.fan;
+
+            } else if (photos[i].equals("phone")) {
+                photoID[i] = R.drawable.phone;
+
+            } else if (photos[i].equals("washmachine")) {
+                photoID[i] = R.drawable.washmachine;
+
+            } else if (photos[i].equals("stereo")) {
+                photoID[i] = R.drawable.stereo;
+
+            } else if (photos[i].equals("food")) {
+                photoID[i] = R.drawable.food;
+
+            } else if (photos[i].equals("computer")) {
+                photoID[i] = R.drawable.computer;
+
+            } else if (photos[i].equals("router")) {
+                photoID[i] = R.drawable.router;
+
+            } else if (photos[i].equals("microwave")) {
+                photoID[i] = R.drawable.microwave;
+
+            } else if (photos[i].equals("playstation")) {
+                photoID[i] = R.drawable.playstation;
+
+            }
+
+        }
+        CustomGrid adapter = new CustomGrid(ViewPlugs.this, plugNames, photoID);
+        grid = (GridView) findViewById(R.id.gridicons);
+        grid.setAdapter(adapter);
+
+
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_lamp_clicker, menu);
+        getMenuInflater().inflate(R.menu.menu_view_plugs, menu);
         return true;
     }
 
@@ -192,88 +276,16 @@ public class LampClickerActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * called  if the Switch "on/off" in lamp_clicker layout is clicked.
-     * will send the current command to the Clicker
-     *
-     * @param v
-     */
-    public void LampOnOff(View v) {
-        on = !on;
-        if (on) {
-            command = new String(deviceID + "/lamp/0");
-        } else {
-            command = new String(deviceID + "/lamp/1");
-        }
-        sendCommand();
-    }
 
-    /**
-     * called  if the button '+' in lamp_clicker layout is clicked.
-     * will send the current command to the Clicker
-     *
-     * @param v
-     */
-    public void dim(View v) {
-        if (brightness == 0) {
-            Toast.makeText(getApplicationContext(), "Lamp is off", Toast.LENGTH_SHORT).show();
-
-        } else {
-            brightness--;
-            Toast.makeText(getApplicationContext(), "decrease brightness"+deviceID, Toast.LENGTH_SHORT).show();
-        }
-        command = new String(deviceID + "/dim/1");
-        sendCommand();
-
-
-    }
-
-    /**
-     * called  if the button '-' in lamp_clicker layout is clicked.
-     * will send the current command to the Clicker
-     *
-     * @param v
-     */
-    public void bright(View v) {
-        if (brightness == 10) {
-            Toast.makeText(getApplicationContext(), " max brightness", Toast.LENGTH_SHORT).show();
-
-        } else {
-            brightness++;
-            Toast.makeText(getApplicationContext(), "increase brightness"+deviceID, Toast.LENGTH_SHORT).show();
-        }
-        command = new String(deviceID + "/bright/1");
-        sendCommand();
-
-
-    }
-
-    /**
-     * called if the device was switched on ,it updates the current clicker command to the recently entered one
-     */
-    public void sendCommand() {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = adapter.create(myAPI.class);
-        api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", command, new Callback<Clicker>() {
-            @Override
-            public void success(Clicker clicker, Response response) {
-                Toast.makeText(getApplicationContext(), "Command sent", Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Toast.makeText(getApplicationContext(), "Something went wrong with the clicker!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
     /**
      * It allows the user to email his problem,
      *
