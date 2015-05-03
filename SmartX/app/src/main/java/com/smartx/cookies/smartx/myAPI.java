@@ -20,12 +20,14 @@ import retrofit.http.PUT;
 import retrofit.http.Path;
 
 /*
-<<<<<<< HEAD
 *SE Sprint2
 *myAPI.java
 *Purpose: api interface to interact with rails.
 *
-*@author Amir, zamzamy, Dalia, Ahmad Abdalraheem
+*@author Amir,
+*@aurthor zamzamy
+*@author Dalia
+*@author Ahmad Abdalraheem
 */
 
 public interface myAPI {
@@ -196,7 +198,16 @@ public interface myAPI {
     void addToFavorites(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, @Field("device[favorite]") String favorite, Callback<Device> callback);
 
     /**
-     * This method requests a list of all plugs within a certain room.
+     * View all the plugs in the given roomID for the given userID
+     *
+     * @param userID   the given userID
+     * @param roomID   the given roomID
+     * @param callback the callback from the rails
+     */
+    @GET("/users/{userId}/rooms/{roomId}/plugs/")
+    void viewPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback<List<Plug>> callback);
+
+    /**1
      *
      * @param userID
      * @param roomID
@@ -214,7 +225,6 @@ public interface myAPI {
      * @param plugID
      * @param status   the status you want to change to
      */
-
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomID}/plugs/{plugID}")
     void changePlugStatus(@Path("userId") String userId, @Path("roomID") String roomID, @Path("plugID") String plugID, @Field("plug[status]") String status, Callback<Plug> callback);

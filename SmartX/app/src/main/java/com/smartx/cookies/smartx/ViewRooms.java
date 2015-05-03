@@ -8,21 +8,27 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,14 +48,17 @@ import retrofit.client.Response;
  * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
  *
  * @author Dalia Maarek
+ *         <<<<<<< HEAD
+ * @author Amir
+ *         =======
  * @author Ahmad Abdalraheem
+ *         >>>>>>> origin/Sprint_Two
  */
 
 public class ViewRooms extends ListActivity {
     Button renameRoom;
     private EditText editSearch;
     private int userID;
-    Button addRoomB;
     static int count = -1;
     private CustomListAdapter adapter2;
     private int[] photos = new int[]{R.drawable.one,
@@ -59,6 +68,16 @@ public class ViewRooms extends ListActivity {
     private ArrayList<Integer> iconRooms;
     private myAPI api;
     private int itemPosition;
+    String titles[] = {"View Favorites", "View Rooms", "Edit Information", "Change Password", "Contact us", "Report a problem", "About us", "Logout"};
+    int icons[] = {R.mipmap.star, R.mipmap.room, R.mipmap.pencil, R.mipmap.lock, R.mipmap.call, R.mipmap.help, R.mipmap.home, R.mipmap.bye};
+    String name;
+    int profile = R.mipmap.smartorange2;
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
+    RecyclerView.LayoutManager mLayoutManager;
+    DrawerLayout Drawer;
+    ActionBarDrawerToggle mDrawerToggle;
+    View child;
 
     /**
      * @param adapter2 CustomListAdapter to set
@@ -134,9 +153,9 @@ public class ViewRooms extends ListActivity {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.requestTypes(new Callback<List<Type>>() {
+
             @Override
             public void success(List<Type> types, Response response) {
-
                 Iterator<Type> iterator = types.iterator();
                 while (iterator.hasNext()) {
                     String s = iterator.next().getName();
@@ -148,7 +167,6 @@ public class ViewRooms extends ListActivity {
             public void failure(RetrofitError error) {
             }
         });
-
         builderSingle.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
 
@@ -157,7 +175,6 @@ public class ViewRooms extends ListActivity {
                         dialog.dismiss();
                     }
                 });
-
         builderSingle.setAdapter(arrayAdapter,
                 new DialogInterface.OnClickListener() {
 
@@ -179,6 +196,9 @@ public class ViewRooms extends ListActivity {
     /**
      * Called when the activity is starting.
      * It shows list of rooms belonging to the user signed in.
+     * It creates an instance of side bar and handling the selection of options
+     * available within the side bar, each title if clicked renders a specific Activity
+     * to visit it.
      *
      * @param savedInstanceState if the activity is being
      *                           re-initialized after previously being shut down then
@@ -188,6 +208,7 @@ public class ViewRooms extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_rooms);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         final SharedPreferences SHARED_PREFERENCE =
                 PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (SHARED_PREFERENCE.getInt("userID", 1));
@@ -247,16 +268,91 @@ public class ViewRooms extends ListActivity {
                         );
                     }
 
-
                     @Override
                     public void failure(RetrofitError error) {
                         Log.d("", error.getMessage());
                         throw error;
                     }
                 }
-
         );
+        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        name = (mSharedPreference.getString("Name", ""));
+        mAdapter = new SideBarAdapter(titles, icons, name, profile, this);
+        mRecyclerView.setAdapter(mAdapter);
+        final GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
+                return true;
+            }
+
+        });
+        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
+                    Drawer.closeDrawers();
+                    switch (recyclerView.getChildPosition(child)) {
+                        case 1:
+                            startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));
+                            break;
+                        case 2:
+                            startActivity(new Intent(getApplicationContext(), ViewRooms.class));
+                            break;
+                        case 3:
+                            startActivity(new Intent(getApplicationContext(), changeInfo.class));
+                            break;
+                        case 4:
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                            rs.putExtra("id", userID);
+                            rs.putExtra("flag",0);
+                            startActivity(rs);
+                            break;
+                        case 5:
+                            reportProblemP(child);
+                            break;
+                        case 6:
+                            reportProblemE(child);
+                            break;
+                        case 7:
+                            startActivity(new Intent(getApplicationContext(), About_us.class));
+                            break;
+                        case 8:
+                            logout(child);
+                            break;
+                    }
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+            }
+        });
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, R.string.openDrawer, R.string.closeDrawer) {
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+        Drawer.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
     }
+
     /**
      * This method will be called when an item in the list is selected.
      * The name of the room clicked will be used as parameter to
@@ -289,6 +385,7 @@ public class ViewRooms extends ListActivity {
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = ADAPTER.create(myAPI.class);
         api.findRoom(userID + "", room, new Callback<List<Room>>() {
+
             @Override
             public void success(List<Room> rooms, Response response) {
                 SharedPreferences prefs =
@@ -443,11 +540,7 @@ public class ViewRooms extends ListActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Rename Room") {
-
-
             String roomSelected = getListView().getItemAtPosition(itemPosition).toString();
-
-
             api.findRoom(userID + "", roomSelected.replace(" ", "%20"), new Callback<List<Room>>() {
                 @Override
                 public void success(List<Room> rooms, Response response) {
@@ -464,7 +557,6 @@ public class ViewRooms extends ListActivity {
 
             });
 
-
         } else if (item.getTitle() == "Delete Room") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else {
@@ -474,27 +566,27 @@ public class ViewRooms extends ListActivity {
     }
     /*
     This method is called when the user clicks on Turn Off All Plugs button
-    @param v View
+    @param v View}
      */
-        
-    public void turnPlugsOff(View v){
+
+    public void turnPlugsOff(View v) {
         turnThemOff();
     }
 
     /*
     This method turns all plugs off by using myAPI
      */
-    public void turnThemOff(){
+    public void turnThemOff() {
         api.viewRooms(userID + "", new Callback<List<Room>>() {
             @Override
             public void success(List<Room> rooms, Response response) {
-                for (int i = 0; i < rooms.size(); i++){
-                    final int id= rooms.get(i).getId();
+                for (int i = 0; i < rooms.size(); i++) {
+                    final int id = rooms.get(i).getId();
                     api.getPlugs(userID + "", id + "", new Callback<List<Plug>>() {
                         @Override
                         public void success(List<Plug> plugs, Response response) {
-                            for (int j = 0; j<plugs.size();j++){
-                                api.changePlugStatus(userID+"", id +"", plugs.get(j).getPlugID(), "off", new Callback<Plug>() {
+                            for (int j = 0; j < plugs.size(); j++) {
+                                api.changePlugStatus(userID + "", id + "", plugs.get(j).getPlugID(), "off", new Callback<Plug>() {
                                     @Override
                                     public void success(Plug plug, Response response) {
                                         Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
@@ -525,6 +617,19 @@ public class ViewRooms extends ListActivity {
 
             }
         });
+
+    }
+
+    public View getChild() {
+        return child;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return mRecyclerView;
+    }
+
+    public SideBarAdapter getMAdapter() {
+        return (SideBarAdapter) mAdapter;
     }
 }
 
