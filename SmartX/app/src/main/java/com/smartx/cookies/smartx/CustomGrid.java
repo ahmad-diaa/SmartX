@@ -101,6 +101,10 @@ public class CustomGrid extends BaseAdapter {
         return grid;
     }
 
+    /**
+     * this method filters what appears in te grid depending on what is written in the search bar
+     * @param charText text in search bar
+     */
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
         plugNames.clear();
