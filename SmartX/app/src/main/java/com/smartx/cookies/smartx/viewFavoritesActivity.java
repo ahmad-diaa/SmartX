@@ -88,6 +88,9 @@ public class viewFavoritesActivity extends ListActivity {
     }
 
     /**
+     * Gets a list of all devices that are added to favorites by the user
+     * and show it in a listView.
+     *
      * @params UserID user Id of current user
      */
     public void setList(int UserID) {
