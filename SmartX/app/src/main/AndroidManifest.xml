@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-    package="com.smartx.cookies.smartx" >
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-=======
     package="com.smartx.cookies.smartx">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-
->>>>>>> origin/Sprint_Two
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-feature
@@ -22,10 +13,7 @@
     <uses-feature
         android:name="android.software.leanback"
         android:required="true" />
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/Sprint_Two
     <application
         android:allowBackup="true"
         android:configChanges="keyboardHidden|orientation"
@@ -36,28 +24,15 @@
         <activity
             android:name=".viewDevices"
             android:exported="true"
-<<<<<<< HEAD
-            android:label="@string/title_activity_view_devices" >
-        </activity>
-        <activity
-            android:name=".deviceList"
-            android:label="@string/title_activity_device_list" >
-        </activity>
-=======
             android:label="@string/title_activity_view_devices"></activity>
         <activity
             android:name=".deviceList"
             android:label="@string/title_activity_device_list"></activity>
->>>>>>> origin/Sprint_Two
         <activity
             android:name=".LoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-<<<<<<< HEAD
-            android:screenOrientation="portrait" >
-=======
             android:screenOrientation="portrait">
->>>>>>> origin/Sprint_Two
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -68,12 +43,8 @@
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_main"
-<<<<<<< HEAD
-            android:screenOrientation="portrait" >
-        </activity>
-=======
             android:screenOrientation="portrait"></activity>
->>>>>>> origin/Sprint_Two
+
         <activity
             android:name=".About_us"
             android:label="@string/app_name" />
@@ -81,51 +52,22 @@
             android:name=".addRoomsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-<<<<<<< HEAD
-            android:screenOrientation="portrait" >
-        </activity>
-=======
             android:screenOrientation="portrait"></activity>
->>>>>>> origin/Sprint_Two
         <activity
             android:name=".addDevices"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_add_devices"
-<<<<<<< HEAD
-            android:screenOrientation="portrait" >
-        </activity>
-=======
             android:screenOrientation="portrait"></activity>
->>>>>>> origin/Sprint_Two
         <activity
             android:name=".ViewRooms"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="View Rooms"
-<<<<<<< HEAD
-            android:screenOrientation="portrait" >
-        </activity>
-=======
             android:screenOrientation="portrait"></activity>
->>>>>>> origin/Sprint_Two
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings"></activity>
         <activity
             android:name=".ViewDeviceActivity"
-<<<<<<< HEAD
-            android:label="@string/title_activity_view_device" >
-        </activity>
-        <activity
-            android:name=".ViewNotesActivity"
-            android:label="@string/title_activity_view_notes" >
-        </activity>
-        <activity android:name=".AddToFavorites" >
-        </activity>
-        <activity
-            android:name=".AddNoteActivity"
-            android:label="@string/title_activity_add_note" >
-        </activity>
-=======
             android:label="@string/title_activity_view_device"></activity>
         <activity
             android:name=".ViewNotesActivity"
@@ -133,7 +75,6 @@
         <activity
             android:name=".AddNoteActivity"
             android:label="@string/title_activity_add_note"></activity>
->>>>>>> origin/Sprint_Two
         <activity
             android:name=".changePassword"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -141,12 +82,7 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".renameRoomActivity"
-<<<<<<< HEAD
-            android:label="@string/title_activity_rename_room" >
-        </activity>
-=======
             android:label="@string/title_activity_rename_room"></activity>
->>>>>>> origin/Sprint_Two
         <activity
             android:name=".changeInfo"
             android:label="@string/title_activity_change_info"></activity>
@@ -169,22 +105,12 @@
         <activity
             android:name=".defaultClickerActivity"
             android:label="@string/title_activity_default_clicker"
-<<<<<<< HEAD
-            android:theme="@style/Theme.AppCompat" >
-        </activity>
-=======
             android:theme="@style/Theme.AppCompat"></activity>
->>>>>>> origin/Sprint_Two
         <activity
             android:name=".LampClickerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_lamp_clicker"
-<<<<<<< HEAD
-            android:theme="@style/Theme.AppCompat" >
-        </activity>
-=======
             android:theme="@style/Theme.AppCompat"></activity>
->>>>>>> origin/Sprint_Two
 
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -195,18 +121,11 @@
         <activity
             android:name=".CurtainClickerActivity"
             android:label="@string/title_activity_curtain_clicker"
-<<<<<<< HEAD
-            android:theme="@style/Theme.AppCompat" >
-        </activity>
+            android:theme="@style/Theme.AppCompat"></activity>
         <activity
             android:name=".ViewPlugs"
             android:label="@string/title_activity_view_plugs"
-            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
-            >
-        </activity>
-=======
-            android:theme="@style/Theme.AppCompat"></activity>
->>>>>>> origin/Sprint_Two
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"></activity>
     </application>
 
 </manifest>

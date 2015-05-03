@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="5dp"
     android:weightSum="1"
-    android:id="@+id/">
+    >
 
     <ImageView
         android:id="@+id/grid_image"
