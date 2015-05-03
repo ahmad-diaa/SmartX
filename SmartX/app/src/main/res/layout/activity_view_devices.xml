@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/addDevice"
-        android:layout_below="@+id/textView6">
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentBottom="true">
 
     </ListView>
 
@@ -36,11 +36,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Plug"
-        android:id="@+id/addplug"
+        android:text="View Plugs"
+        android:id="@+id/viewplugs"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="70dp"
-        android:layout_marginEnd="70dp" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
