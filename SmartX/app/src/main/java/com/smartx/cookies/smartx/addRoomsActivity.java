@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -179,5 +180,23 @@ public void setUserID(int userID){
         this.userID=userID;
         }
 
-
+    /**
+     *
+     * @param keyCode The value in event.getKeyCode().
+     * @param event Description of the key event.
+     * @return If you handled the event, return true. If you want to allow the event
+     *          to be handled by the next receiver, return false.
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent i = new Intent(addRoomsActivity.this, ViewRooms.class);
+            startActivity(i);
+            return true;
         }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+
+}

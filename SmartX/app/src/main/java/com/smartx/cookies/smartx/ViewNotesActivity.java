@@ -3,6 +3,7 @@ package com.smartx.cookies.smartx;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,5 +48,14 @@ public class ViewNotesActivity extends Activity {
     public void addNote(View view) {
         startActivity(new Intent(getApplicationContext(), AddNoteActivity.class));
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            Intent i = new Intent(ViewNotesActivity.this, viewDevices.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
