@@ -112,6 +112,15 @@ public interface myAPI {
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
     void editDeviceStatus(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[status]") String status, Callback<Device> callback);
 
+    /**
+     * updates the device's room_id to new id
+     *
+     * @param userId current userId
+     * @param roomId current roomId
+     * @param deviceId  curremt deviceID
+     * @param newID new roomId
+     * @param callback the updated device
+     */
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
     void editDeviceRoom(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[room_id]") String newID, Callback<Device> callback);
