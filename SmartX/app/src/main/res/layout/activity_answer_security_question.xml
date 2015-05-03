@@ -37,7 +37,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:textColor="#ffff4608"
         android:id="@+id/question"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/answerTxt" />
