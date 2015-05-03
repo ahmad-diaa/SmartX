@@ -75,7 +75,7 @@ public class LampClickerActivityTest extends ActivityInstrumentationTestCase2<La
     public void OnOff() throws Exception {
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
         final myAPI api = adapter.create(myAPI.class);
-        myActivity.TurnOnOff(myActivity.getWindow().getDecorView());
+        myActivity.LampOnOff(myActivity.getWindow().getDecorView());
         api.getClicker("1", "1", "1", new Callback<com.smartx.cookies.smartx.Clicker>() {
             @Override
             public void success(com.smartx.cookies.smartx.Clicker clicker, Response response) {
