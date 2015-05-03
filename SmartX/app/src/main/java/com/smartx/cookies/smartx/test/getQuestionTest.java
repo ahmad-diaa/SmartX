@@ -15,7 +15,9 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by ahmad on 02/05/15.
+ * Purpose:This class is to test getQuestion method.
+ *
+ * @author Ahmad Abdalraheem
  */
 public class getQuestionTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private LoginActivity myActivity;

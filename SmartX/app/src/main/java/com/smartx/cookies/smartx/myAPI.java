@@ -17,12 +17,32 @@ import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
 
+/*
+*SE Sprint2
+*myAPI.java
+*Purpose: api interface to interact with rails.
+*
+*@author Amir, zamzamy, Dalia, Ahmad Abdalraheem
+*/
 
 public interface myAPI {
 
+    /**
+     * gets the security question and the id of a certain user by his name
+     *
+     * @param name     the given username
+     * @param callback the callback from the rails
+     */
     @GET("/v/users/{name}")
     void getSecurityQuestion(@Path("name") String name, Callback<securityQuestion> callback);
 
+    /**
+     * gets the user by his id and security answer
+     *
+     * @param id        ,user id
+     * @param securityA user's security answer
+     * @param cb        the callback from the rails
+     */
     @GET("/v/users/{id}/{securityA}")
     void checkUser(@Path("id") String id, @Path("securityA") String securityA, Callback<List<User>> cb);
 
