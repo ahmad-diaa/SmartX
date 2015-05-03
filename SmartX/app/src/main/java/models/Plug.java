@@ -6,7 +6,7 @@ public class Plug {
         /**
          * The id of the user having the plug.
          */
-        int userID;
+        int user_id;
         /**
          * The name of the plug.
          */
@@ -18,11 +18,11 @@ public class Plug {
         /**
          * The id of the room to which the plug belongs.
          */
-        int roomID;
+        int room_id;
         /**
          * The primary key of the plug.
          */
-        String plugID;
+        String plug_id;
         /**
          * The name of the photo belonging to the plug.
          */
@@ -47,10 +47,10 @@ public class Plug {
          */
         public Plug(String name, int roomID, int userID, String plugID, String status, String photo) {
             this.name = name;
-            this.roomID = roomID;
-            this.userID = userID;
+            this.room_id = roomID;
+            this.user_id = userID;
             this.status = status;
-            this.plugID = plugID;
+            this.plug_id = plugID;
             this.photo = photo;
         }
 
@@ -60,7 +60,7 @@ public class Plug {
          * @return the id of the user.
          */
         public int getUserID() {
-            return userID;
+            return user_id;
         }
 
         /**
@@ -69,7 +69,7 @@ public class Plug {
          * @param userID the id of the user.
          */
         public void setUserID(int userID) {
-            this.userID = userID;
+            this.user_id = userID;
         }
 
         /**
@@ -78,7 +78,7 @@ public class Plug {
          * @return id of the plug.
          */
         public String getPlugID() {
-            return plugID;
+            return plug_id;
         }
 
         /**
@@ -87,7 +87,7 @@ public class Plug {
          * @param plugID the id of plug.
          */
         public void setPlugID(String plugID) {
-            this.plugID = plugID;
+            this.plug_id = plugID;
         }
 
         /**
@@ -132,7 +132,7 @@ public class Plug {
          * @return id of the room.
          */
         public int getRoomID() {
-            return roomID;
+            return room_id;
         }
 
         /**
@@ -141,7 +141,7 @@ public class Plug {
          * @param roomID the id of the room.
          */
         public void setRoomID(int roomID) {
-            this.roomID = roomID;
+            this.room_id = roomID;
         }
     }
 

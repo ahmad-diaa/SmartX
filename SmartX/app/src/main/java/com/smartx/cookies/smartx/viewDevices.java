@@ -1,6 +1,8 @@
 package com.smartx.cookies.smartx;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -37,13 +39,15 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * SE Sprint2
- * viewDevices.java
- * Purpose: Display list of devices & view devices in a certain room
+ *SE Sprint2
+ *viewDevices.java
+ *Purpose: Display list of device in a certain room
  *
  * @author Amir
  * @author maggiemoheb
+ * @author Dalia Maarek
  */
+
 public class viewDevices extends ListActivity {
     int userID;
     int roomID;
@@ -51,7 +55,6 @@ public class viewDevices extends ListActivity {
     Button addDevice;
     Button addPlug;
     int itemPosition;
-    String message = "";
     ArrayList<String> deviceNames;
     String titles[] = {"View Favorites", "View Rooms", "Edit Information", "Change Password", "Contact us", "Report a problem", "About us", "Logout"};
     int icons[] = {R.mipmap.star, R.mipmap.room, R.mipmap.pencil, R.mipmap.lock, R.mipmap.call, R.mipmap.help, R.mipmap.home, R.mipmap.bye};
@@ -62,7 +65,29 @@ public class viewDevices extends ListActivity {
     RecyclerView.LayoutManager mLayoutManager;
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
+    String message = "";
+    String deviceIDTest =""; //for test
 
+    public String getDeviceIDTest() {
+        return deviceIDTest;
+    }
+
+    /**
+     * A getter to the room ID
+     *
+     * @return the room ID of the activity
+     */
+    public int getRoomID() {
+        return this.roomID;
+    }
+    /**
+     * A getter to the errorMessage
+     *
+     * @return the errorMessage of the activity
+     */
+    public String getErrorMessage() {
+        return this.message;
+    }
 
     /**
      * A getter to the user ID
@@ -122,7 +147,7 @@ public class viewDevices extends ListActivity {
                 Iterator<Device> iterator = devices.iterator();
                 int i = devices.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
-
+                    registerForContextMenu(getListView());
                     deviceNames.add(iterator.next().getName());
                     i--;
                 }
@@ -130,7 +155,6 @@ public class viewDevices extends ListActivity {
                 setListAdapter(adapter);
                 registerForContextMenu(getListView());
             }
-
             @Override
             public void failure(RetrofitError error) {
                 startActivity(new Intent(getApplicationContext(), viewDevices.class));
@@ -210,14 +234,12 @@ public class viewDevices extends ListActivity {
         mDrawerToggle.syncState();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_view_devices, menu);
         return true;
     }
-
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Object o = this.getListAdapter().getItem(position);
@@ -268,7 +290,6 @@ public class viewDevices extends ListActivity {
 
         );
     }
-
     /**
      * Called when the context menu for this view is being built.
      *
@@ -288,7 +309,6 @@ public class viewDevices extends ListActivity {
         menu.add(0, v.getId(), 0, "Delete Device");
         menu.add(0, v.getId(), 0, "View Notes");
     }
-
     /**
      * Executes commands found in the context menu
      *
@@ -318,7 +338,25 @@ public class viewDevices extends ListActivity {
                 }
             });
         } else if (item.getTitle() == "Delete Device") {
-            Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder confirmationDialog = new AlertDialog.Builder(
+                    this);
+            confirmationDialog.setMessage("Are you sure you want to delete this device?");
+            confirmationDialog.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            confirmationDialog.setPositiveButton("Confirm",   new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    deleteDevice(userID, roomID, itemPosition);
+                }
+            });
+            confirmationDialog.show();
         } else if (item.getTitle() == "View Notes") {
             renderViewNotes(itemPosition, userID, roomID);
         } else {
@@ -326,7 +364,42 @@ public class viewDevices extends ListActivity {
         }
         return true;
     }
+    /*
+ @param userID user's ID
+ @param roomID room's ID
+ @param itemPosition position of item in list
 
+ This method deletes the device that is selected, after the user has confirmed deletion
+  */
+    public void deleteDevice(final int userID, final int roomID, int itemPosition ){
+        final String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        final myAPI api = ADAPTER.create(myAPI.class);
+        api.findDevice(userID + "", roomID + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+            @Override
+            public void success(List<Device> devices, Response response) {
+                String id = devices.get(0).getId();
+                deviceIDTest = id;
+                api.deleteDevice(userID + "", roomID + "", id, new Callback<Device>() {
+                    @Override
+                    public void success(Device device, Response response) {
+                        Toast.makeText(getApplicationContext(), deviceSelected + " has been successfully deleted!", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(getIntent());
+                    }
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     /**
      * Renders view notes view for the device of the context menu
      *
@@ -334,28 +407,27 @@ public class viewDevices extends ListActivity {
      * @param user
      * @param room
      */
-    public void renderViewNotes(int itemPosition, int user, int room) {
+
+    public void renderViewNotes (int itemPosition, int user, int room) {
         String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(user + "", room + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
-
             @Override
             public void success(List<Device> devices, Response response) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("deviceID", devices.get(0).getId());
                 editor.commit();
-                startActivity(new Intent(viewDevices.this, ViewNotesActivity.class));
+                startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
             }
 
             @Override
-
             public void failure(RetrofitError error) {
-                throw error;
             }
         });
+        message = "Selected Successfully";
     }
 
     /**

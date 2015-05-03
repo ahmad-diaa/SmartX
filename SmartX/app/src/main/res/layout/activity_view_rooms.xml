@@ -3,18 +3,79 @@
     android:id="@+id/DrawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <!--<Button-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="View By.."-->
+            <!--android:id="@+id/viewBy"-->
+            <!--android:layout_above="@+id/addRoomB"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:onClick="viewByType" />-->
+        <!--<EditText-->
+            <!--android:id="@+id/search"-->
+            <!--android:singleLine="true"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content">-->
+        <!--</EditText>-->
+
+        <!--<ListView-->
+            <!--android:id="@+id/android:list"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_below="@+id/plugsOffB"-->
+            <!--/>-->
+
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Turn all plugs off"-->
+            <!--android:id="@+id/plugsOffB"-->
+            <!--android:onClick="turnPlugsOff"-->
+
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true" />-->
+
+        <!--<Button-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Add Room"-->
+            <!--android:id="@+id/addRoomB"-->
+            <!--android:onClick="addRoom"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_below="@+id/viewBy"-->
+            <!--/>-->
+
+
+
+
+
+
+
+
+
+
+
+
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="View By.."
             android:id="@+id/viewBy"
-            android:layout_above="@+id/addRoomB"
             android:layout_centerHorizontal="true"
-            android:onClick="viewByType" />
+            android:onClick="viewByType"
+            android:layout_above="@+id/changePasswordB" />
         <EditText
             android:id="@+id/search"
             android:singleLine="true"
@@ -28,8 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/search"
-            android:layout_above="@+id/viewBy" />
+            android:layout_above="@+id/viewBy"
+            android:layout_below="@+id/search" />
 
         <Button
             android:layout_width="fill_parent"
@@ -43,6 +104,16 @@
             android:layout_alignParentRight="true"
             />
 
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Turn all plugs off"
+            android:id="@+id/changePasswordB"
+            android:onClick="turnPlugsOff"
+            android:layout_above="@+id/addRoomB"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerView"
@@ -53,4 +124,5 @@
         android:scrollbars="vertical">
     </android.support.v7.widget.RecyclerView>
 </android.support.v4.widget.DrawerLayout>
+
 

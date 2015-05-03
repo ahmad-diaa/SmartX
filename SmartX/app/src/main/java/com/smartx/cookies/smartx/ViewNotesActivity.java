@@ -57,12 +57,10 @@ public class ViewNotesActivity extends ListActivity {
     /**
      * gets the user's id , room's id and device's id to be used in intializing the list of devices.
      */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_notes);
-
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         final SharedPreferences sharedPreference =
                 PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -173,6 +171,7 @@ public class ViewNotesActivity extends ListActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -191,7 +190,6 @@ public class ViewNotesActivity extends ListActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -202,8 +200,8 @@ public class ViewNotesActivity extends ListActivity {
      */
     public void addNote(View view) {
         startActivity(new Intent(getApplicationContext(), AddNoteActivity.class));
-
     }
+
     /**
      *It allows the user to email his problem,
      * @param v the view of the activity
@@ -258,3 +256,6 @@ public class ViewNotesActivity extends ListActivity {
 
     }
 }
+
+
+

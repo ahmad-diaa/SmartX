@@ -125,6 +125,7 @@ public class TvClickerActivity extends Activity {
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
         deviceID = (mSharedPreference.getString("deviceID", "1"));
+        mySwitch = (Switch)findViewById(R.id.switch1);
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         api.getClicker(userID + "", roomID + "", deviceID + "", new Callback<Clicker>() {
@@ -280,11 +281,15 @@ public class TvClickerActivity extends Activity {
      *
      * @param v
      */
-    public void TurnOnOff(View v) {
+    public void TVOnOff(View v) {
         on = !on;
         command = new String(deviceID + "/" + on + "");
         sendCommand();
+        if(on)
         mySwitch.setEnabled(false);
+        else
+            mySwitch.setEnabled(true);
+
         runOnUiThread(new Runnable() {
             public void run() {
                 for (int i = 0; i < 1000000000; i++) ;
@@ -309,16 +314,7 @@ public class TvClickerActivity extends Activity {
 
             @Override
             public void success(Device device, Response response) {
-                Switch onOff = (Switch) findViewById(R.id.switch1);
-                if (device.getStatus().contains("true")) {
-                    onOff.setChecked(true);
-                    on = true;
-                } else {
-                    onOff.setChecked(false);
-                    on = false;
-//                TvClicker = new Clicker(device.getUserID(), device.getRoomID(), Integer.parseInt(device.getDeviceId()), 0, "");
-                }
-            }
+                          }
 
             @Override
             public void failure(RetrofitError error) {
@@ -326,25 +322,8 @@ public class TvClickerActivity extends Activity {
         });
     }
 
-    /**
-     * changes the status of the device when switch is turned on/off
-     *
-     * @param on
-     */
-    public void changeDeviceStatus(boolean on) {
-        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = adapter.create(myAPI.class);
-        api.editDeviceStatus(userID + "", roomID + "", deviceID, on + "", new Callback<Device>() {
-            @Override
-            public void success(Device device, Response response) {
 
-            }
 
-            @Override
-            public void failure(RetrofitError error) {
-            }
-        });
-    }
 
     /**
      * called if the device was switched on ,it updates the current clicker command to the recently entered one

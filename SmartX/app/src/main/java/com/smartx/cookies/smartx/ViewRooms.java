@@ -34,6 +34,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import models.Plug;
 import models.Room;
 import models.Session;
 import models.Type;
@@ -47,11 +48,11 @@ import retrofit.client.Response;
  * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
  *
  * @author Dalia Maarek
-<<<<<<< HEAD
+ *         <<<<<<< HEAD
  * @author Amir
-=======
+ *         =======
  * @author Ahmad Abdalraheem
->>>>>>> origin/Sprint_Two
+ *         >>>>>>> origin/Sprint_Two
  */
 
 public class ViewRooms extends ListActivity {
@@ -67,9 +68,9 @@ public class ViewRooms extends ListActivity {
     private ArrayList<Integer> iconRooms;
     private myAPI api;
     private int itemPosition;
-    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","Report a problem","About us","Logout"};
-    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.call,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
-    String name ;
+    String titles[] = {"View Favorites", "View Rooms", "Edit Information", "Change Password", "Contact us", "Report a problem", "About us", "Logout"};
+    int icons[] = {R.mipmap.star, R.mipmap.room, R.mipmap.pencil, R.mipmap.lock, R.mipmap.call, R.mipmap.help, R.mipmap.home, R.mipmap.bye};
+    String name;
     int profile = R.mipmap.smartorange2;
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
@@ -195,9 +196,9 @@ public class ViewRooms extends ListActivity {
     /**
      * Called when the activity is starting.
      * It shows list of rooms belonging to the user signed in.
-     *It creates an instance of side bar and handling the selection of options
-     available within the side bar, each title if clicked renders a specific Activity
-     to visit it.
+     * It creates an instance of side bar and handling the selection of options
+     * available within the side bar, each title if clicked renders a specific Activity
+     * to visit it.
      *
      * @param savedInstanceState if the activity is being
      *                           re-initialized after previously being shut down then
@@ -273,16 +274,17 @@ public class ViewRooms extends ListActivity {
                         throw error;
                     }
                 }
-            );
+        );
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         name = (mSharedPreference.getString("Name", ""));
-        mAdapter = new SideBarAdapter(titles,icons,name,profile,this);
+        mAdapter = new SideBarAdapter(titles, icons, name, profile, this);
         mRecyclerView.setAdapter(mAdapter);
         final GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 
-            @Override public boolean onSingleTapUp(MotionEvent e) {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
                 return true;
             }
 
@@ -291,18 +293,34 @@ public class ViewRooms extends ListActivity {
 
             @Override
             public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-                child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
-                if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
+                child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     Drawer.closeDrawers();
-                    switch (recyclerView.getChildPosition(child)){
-                        case 1: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 2: startActivity(new Intent(getApplicationContext(), ViewRooms.class));break;
-                        case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
-                        case 4: startActivity(new Intent(getApplicationContext(), changePassword.class));break;
-                        case 5: reportProblemP(child);break;
-                        case 6: reportProblemE(child);break;
-                        case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 8: logout(child);break;
+                    switch (recyclerView.getChildPosition(child)) {
+                        case 1:
+                            startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));
+                            break;
+                        case 2:
+                            startActivity(new Intent(getApplicationContext(), ViewRooms.class));
+                            break;
+                        case 3:
+                            startActivity(new Intent(getApplicationContext(), changeInfo.class));
+                            break;
+                        case 4:
+                            startActivity(new Intent(getApplicationContext(), changePassword.class));
+                            break;
+                        case 5:
+                            reportProblemP(child);
+                            break;
+                        case 6:
+                            reportProblemE(child);
+                            break;
+                        case 7:
+                            startActivity(new Intent(getApplicationContext(), About_us.class));
+                            break;
+                        case 8:
+                            logout(child);
+                            break;
                     }
                     return true;
                 }
@@ -316,7 +334,7 @@ public class ViewRooms extends ListActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
-        mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,R.string.openDrawer,R.string.closeDrawer){
+        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -330,7 +348,7 @@ public class ViewRooms extends ListActivity {
         };
         Drawer.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
-        }
+    }
 
     /**
      * This method will be called when an item in the list is selected.
@@ -457,7 +475,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     * >>>>>>> 31aa6111cb78ebb229014473fda82a305398b368
      * Creates the initial menu state
      *
      * @param menu Menu to be populated
@@ -541,16 +558,72 @@ public class ViewRooms extends ListActivity {
         }
         return true;
     }
+    /*
+    This method is called when the user clicks on Turn Off All Plugs button
+    @param v View}
+     */
 
-    public View getChild(){
+    public void turnPlugsOff(View v) {
+        turnThemOff();
+    }
+
+    /*
+    This method turns all plugs off by using myAPI
+     */
+    public void turnThemOff() {
+        api.viewRooms(userID + "", new Callback<List<Room>>() {
+            @Override
+            public void success(List<Room> rooms, Response response) {
+                for (int i = 0; i < rooms.size(); i++) {
+                    final int id = rooms.get(i).getId();
+                    api.getPlugs(userID + "", id + "", new Callback<List<Plug>>() {
+                        @Override
+                        public void success(List<Plug> plugs, Response response) {
+                            for (int j = 0; j < plugs.size(); j++) {
+                                api.changePlugStatus(userID + "", id + "", plugs.get(j).getPlugID(), "off", new Callback<Plug>() {
+                                    @Override
+                                    public void success(Plug plug, Response response) {
+                                        Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        Toast.makeText(getApplicationContext(), "Failed to turn off some plugs.", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(getApplicationContext(), "Failed to some devices off", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "Failed to turn all devices off", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    public View getChild() {
         return child;
     }
 
-    public RecyclerView getRecyclerView(){
+    public RecyclerView getRecyclerView() {
         return mRecyclerView;
     }
-    public SideBarAdapter getMAdapter(){
-        return (SideBarAdapter)mAdapter;
+
+    public SideBarAdapter getMAdapter() {
+        return (SideBarAdapter) mAdapter;
     }
 }
 

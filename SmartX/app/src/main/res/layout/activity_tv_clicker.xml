@@ -17,11 +17,11 @@
         android:layout_height="wrap_content"
         android:text="On/Off"
         android:id="@+id/switch1"
-        android:onClick="TurnOnOff"
         android:checked="false"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
+        android:layout_toEndOf="@+id/textView2"
+        android:onClick="LampOnOff" />
 
     <ImageView
         android:layout_width="wrap_content"

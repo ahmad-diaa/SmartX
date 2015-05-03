@@ -32,7 +32,7 @@ public class LampClickerActivity extends ActionBarActivity {
     int userID; //store the current userID
     int roomID;//store the current roomID
     String deviceID;//store the current deviceID
-    int clickerID;//store the current clickerID
+    static int clickerID;//store the current clickerID
     String command;//store the current command
     boolean on;//initial current state of device
     int brightness;//controls the brightness level
@@ -205,12 +205,13 @@ public class LampClickerActivity extends ActionBarActivity {
      *
      * @param v
      */
-    public void TurnOnOff(View v) {
-        on = !on;
-        if (on)
-            command = new String(deviceID + "/1");
-        else
-            command = new String(deviceID + "/0");
+    public void LampOnOff(View v) {
+        on = !on; 
+        if (on) {
+            command = new String(deviceID + "/lamp/0");
+        } else {
+            command = new String(deviceID + "/lamp/1");
+        }
         sendCommand();
     }
 
@@ -221,14 +222,17 @@ public class LampClickerActivity extends ActionBarActivity {
      * @param v
      */
     public void dim(View v) {
-        if (brightness > 0) {
-            brightness--;
-            command = new String(deviceID + "d/1");
-            Toast.makeText(getApplicationContext(), "dimming", Toast.LENGTH_SHORT).show();
+        if (brightness == 0) {
+            Toast.makeText(getApplicationContext(), "Lamp is off", Toast.LENGTH_SHORT).show();
+
         } else {
-            Toast.makeText(getApplicationContext(), "lights are off", Toast.LENGTH_SHORT).show();
+            brightness--;
+            Toast.makeText(getApplicationContext(), "decrease brightness"+deviceID, Toast.LENGTH_SHORT).show();
         }
+        command = new String(deviceID + "/dim/1");
         sendCommand();
+
+
     }
 
     /**
@@ -238,14 +242,17 @@ public class LampClickerActivity extends ActionBarActivity {
      * @param v
      */
     public void bright(View v) {
-        if (brightness < 10) {
-            brightness++;
-            command = new String(deviceID + "b/1");
-            Toast.makeText(getApplicationContext(), "increase brightness", Toast.LENGTH_SHORT).show();
-        } else {
+        if (brightness == 10) {
             Toast.makeText(getApplicationContext(), " max brightness", Toast.LENGTH_SHORT).show();
+
+        } else {
+            brightness++;
+            Toast.makeText(getApplicationContext(), "increase brightness"+deviceID, Toast.LENGTH_SHORT).show();
         }
+        command = new String(deviceID + "/bright/1");
         sendCommand();
+
+
     }
 
     /**
@@ -257,6 +264,8 @@ public class LampClickerActivity extends ActionBarActivity {
         api.sendClickerCommand(userID + "", roomID + "", deviceID, clickerID + "", command, new Callback<Clicker>() {
             @Override
             public void success(Clicker clicker, Response response) {
+                Toast.makeText(getApplicationContext(), "Command sent", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

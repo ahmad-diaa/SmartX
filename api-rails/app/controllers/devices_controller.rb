@@ -80,7 +80,7 @@ end
   def destroy
     @user=User.find(params[:user_id])
     @room=@user.rooms.find(params[:room_id])
-    @device= @room.devices.find(params[:device_id])
+    @device= @room.devices.find(params[:name])
     @device.destroy
     head :no_content
   end
