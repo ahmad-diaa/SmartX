@@ -1,14 +1,12 @@
 
 class DevicesController < ApplicationController
-  
-  #Returns device with given name. 
   def find 
     @user = User.find(params[:user_id])
     @room = @user.rooms.find(params[:room_id])
     @device = @room.devices.where(:name => params[:name])
     render json: @device if stale?(etag: @device.all, last_modified: @device.maximum(:updated_at))
   end
-  
+
   #Returns the value of favorite attribute of a specific device.
   def findFavorite
     @user = User.find(params[:user_id])

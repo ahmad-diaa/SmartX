@@ -29,31 +29,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import models.Device;
+import models.Session;
+import models.Type;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- *SE Sprint2
- *viewDevices.java
- *Purpose: Display list of devices.
+ * SE Sprint2
+ * viewDevices.java
+ * Purpose: Display list of devices & view devices in a certain room
  *
  * @author Amir
  * @author maggiemoheb
  */
 public class viewDevices extends ListActivity {
-
     int userID;
     int roomID;
     String roomName;
     Button addDevice;
+    Button addPlug;
     int itemPosition;
     String message = "";
     ArrayList<String> deviceNames;
-    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","Report a problem","About us","Logout"};
-    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.call,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
-    String name ;
+    String titles[] = {"View Favorites", "View Rooms", "Edit Information", "Change Password", "Contact us", "Report a problem", "About us", "Logout"};
+    int icons[] = {R.mipmap.star, R.mipmap.room, R.mipmap.pencil, R.mipmap.lock, R.mipmap.call, R.mipmap.help, R.mipmap.home, R.mipmap.bye};
+    String name;
     int profile = R.mipmap.smartorange2;
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
@@ -71,25 +73,6 @@ public class viewDevices extends ListActivity {
         return this.userID;
     }
 
-    /**
-     * A getter to the room ID
-     *
-     * @return the room ID of the activity
-     */
-    public int getRoomID() {
-        return this.roomID;
-    }
-
-    /**
-     * A getter to the errorMessage
-     *
-     * @return the errorMessage of the activity
-     */
-    public String getErrorMessage() {
-        return this.message;
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +81,14 @@ public class viewDevices extends ListActivity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
+        addPlug = (Button) findViewById(R.id.addplug);
+        addPlug.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(viewDevices.this, AddPlug.class));
+            }
+        });
+
         addDevice = (Button) findViewById(R.id.addDevice);
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -105,6 +96,7 @@ public class viewDevices extends ListActivity {
                 startActivity(new Intent(viewDevices.this, addDevices.class));
             }
         });
+
         final RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = adapter.create(myAPI.class);
         Log.d(userID + "", roomID + "");
@@ -119,16 +111,18 @@ public class viewDevices extends ListActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.d("ERROR ", error.getMessage());
-                Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_SHORT).show();
             }
         });
         api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
+
             @Override
             public void success(List<Device> devices, Response response) {
                 deviceNames = new ArrayList<String>();
                 Iterator<Device> iterator = devices.iterator();
                 int i = devices.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
+
                     deviceNames.add(iterator.next().getName());
                     i--;
                 }
@@ -146,11 +140,12 @@ public class viewDevices extends ListActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
         name = (mSharedPreference.getString("Name", ""));
-        mAdapter = new SideBarAdapter(titles,icons,name,profile,this);
+        mAdapter = new SideBarAdapter(titles, icons, name, profile, this);
         mRecyclerView.setAdapter(mAdapter);
         final GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 
-            @Override public boolean onSingleTapUp(MotionEvent e) {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
                 return true;
             }
 
@@ -159,18 +154,33 @@ public class viewDevices extends ListActivity {
 
             @Override
             public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-                View child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
-                if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     Drawer.closeDrawers();
-                    switch (recyclerView.getChildPosition(child)){
-                        case 1: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 2: startActivity(new Intent(getApplicationContext(), ViewRooms.class));break;
-                        case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
-                        case 4: startActivity(new Intent(getApplicationContext(), changePassword.class));break;
-                        case 5: reportProblemP(child);break;
-                        case 6: reportProblemE(child);break;
-                        case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 8: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                    switch (recyclerView.getChildPosition(child)) {
+                        case 1:
+                            startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));
+                            break;
+                        case 2:
+                            startActivity(new Intent(getApplicationContext(), ViewRooms.class));
+                            break;
+                        case 3:
+                            startActivity(new Intent(getApplicationContext(), changeInfo.class));
+                            break;
+                        case 4:
+                            startActivity(new Intent(getApplicationContext(), changePassword.class));
+                            break;
+                        case 5:
+                            reportProblemP(child);
+                            break;
+                        case 6:
+                            reportProblemE(child);
+                            break;
+                        case 7:
+                            startActivity(new Intent(getApplicationContext(), About_us.class));
+                            break;
+                        case 8: logout(child);break;
+
                     }
                     return true;
                 }
@@ -184,7 +194,7 @@ public class viewDevices extends ListActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
-        mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,R.string.openDrawer,R.string.closeDrawer){
+        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -200,6 +210,7 @@ public class viewDevices extends ListActivity {
         mDrawerToggle.syncState();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -210,27 +221,52 @@ public class viewDevices extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Object o = this.getListAdapter().getItem(position);
-        String device = o.toString();
-        Toast.makeText(getApplicationContext(), device, Toast.LENGTH_LONG).show();
+        final String device = o.toString();
+        Toast.makeText(getApplicationContext(), device, Toast.LENGTH_SHORT).show();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = ADAPTER.create(myAPI.class);
+        final myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(userID + "", roomID + "", device, new Callback<List<Device>>() {
-            @Override
-            public void success(List<Device> devices, Response response) {
-                SharedPreferences prefs =
-                        PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("deviceID", devices.get(0).getDeviceID() + "");
-                editor.commit();
-                startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
-            }
+                    @Override
+                    public void success(final List<Device> devices, Response response) {
+                        SharedPreferences prefs =
+                                PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("deviceID", devices.get(0).getDeviceID() + "");
+                        editor.commit();
+                        Toast.makeText(getApplicationContext(), devices.get(0).getName(), Toast.LENGTH_SHORT).show();
+                        api.findClickerType(devices.get(0).getName(), new Callback<List<Type>>() {
+                            @Override
+                            public void success(List<Type> types, Response response) {
+                                int type = types.get(0).getId();
+                                if (type == 1 || type == 4 || type == 5) {
+                                    startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
+                                } else {
+                                    if (type == 2) {
+                                        startActivity(new Intent(getApplicationContext(), LampClickerActivity.class));
+                                    } else {
+                                        if (type == 3) {
+                                            startActivity(new Intent(getApplicationContext(), CurtainClickerActivity.class));
+                                        } else {
+                                            startActivity(new Intent(getApplicationContext(), defaultClickerActivity.class));
+                                        }
+                                    }
+                                }
+                            }
 
-            @Override
-            public void failure(RetrofitError error) {
-                throw error;
-            }
-        });
+                            @Override
+                            public void failure(RetrofitError error) {
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+
+                    }
+                }
+
+        );
     }
 
     /**
@@ -275,21 +311,17 @@ public class viewDevices extends ListActivity {
                     editor.putString("deviceID", devices.get(0).getDeviceID());
                     editor.commit();
                     startActivity(new Intent(getApplicationContext(), AddToFavorites.class));
-
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-
                 }
             });
         } else if (item.getTitle() == "Delete Device") {
             Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
         } else if (item.getTitle() == "View Notes") {
             renderViewNotes(itemPosition, userID, roomID);
-        }else
-        {
-
+        } else {
             return false;
         }
         return true;
@@ -308,6 +340,7 @@ public class viewDevices extends ListActivity {
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(user + "", room + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+
             @Override
             public void success(List<Device> devices, Response response) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
@@ -318,22 +351,25 @@ public class viewDevices extends ListActivity {
             }
 
             @Override
+
             public void failure(RetrofitError error) {
+                throw error;
             }
         });
-        message = "Selected Successfully";
     }
+
     /**
-     *It allows the user to email his problem,
+     * It allows the user to email his problem,
+     *
      * @param v the view of the activity
      */
 
-    public void reportProblemE(View v){
+    public void reportProblemE(View v) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"ahmaddiaa93@gmail.com"});
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"ahmaddiaa93@gmail.com"});
         i.putExtra(Intent.EXTRA_SUBJECT, "My problem is regarding");
-        i.putExtra(Intent.EXTRA_TEXT   , "Explain Your problem here");
+        i.putExtra(Intent.EXTRA_TEXT, "Explain Your problem here");
         try {
             startActivity(Intent.createChooser(i, "Send mail..."));
         } catch (android.content.ActivityNotFoundException ex) {
@@ -342,15 +378,42 @@ public class viewDevices extends ListActivity {
     }
 
     /**
-     *It allows the user to call the company in order to report his problem,
+     * It allows the user to call the company in order to report his problem,
+     *
      * @param v the view of the activity
      */
 
-    public void reportProblemP(View v){
+    public void reportProblemP(View v) {
 
         String number = "01117976333";
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + number));
         startActivity(intent);
     }
+
+    /**
+     * When the user click on logout, this method is called, it sends a request to delete the user's session after it succeed it renders login View after it sends
+     *
+     * @param v it takes the view
+     */
+    public void logout(View v) {
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String token = (mSharedPreference.getString("token", "222245asa"));
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
+        api.logout(userID + "", new Callback<Session>() {
+            @Override
+            public void success(Session session, Response response) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+
+    }
 }
+
+

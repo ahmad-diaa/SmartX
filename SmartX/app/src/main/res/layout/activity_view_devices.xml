@@ -27,7 +27,20 @@
         android:text="Add Device"
         android:id="@+id/addDevice"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Plug"
+            android:id="@+id/addplug"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="70dp"
+            android:layout_marginEnd="70dp" />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -36,6 +49,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         />
+
 </RelativeLayout>
 <android.support.v7.widget.RecyclerView
 android:id="@+id/RecyclerView"
@@ -47,3 +61,4 @@ android:scrollbars="vertical">
 </android.support.v7.widget.RecyclerView>
 
     </android.support.v4.widget.DrawerLayout>
+

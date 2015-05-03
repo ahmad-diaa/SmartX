@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import models.Device;
+import models.Session;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -51,7 +52,6 @@ public class deviceList extends ListActivity {
     RecyclerView.LayoutManager mLayoutManager;
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
-
 
     /*
     @return mSharedPreferences Shared Preference used in app
@@ -180,7 +180,7 @@ public class deviceList extends ListActivity {
                         case 5: reportProblemP(child);break;
                         case 6: reportProblemE(child);break;
                         case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 8: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 8: logout(child);break;
                     }
                     return true;
                 }
@@ -222,33 +222,33 @@ public class deviceList extends ListActivity {
 
                     @Override
                     public void success(List<Device> devices, Response response) {
-                        Iterator<Device> deviceRooms = devices.iterator();
-                        Iterator<Device> deviceLoop = devices.iterator();
-                        Iterator<Device> deviceNames = devices.iterator();
-                        while (deviceRooms.hasNext()) {
-                            if (type.equalsIgnoreCase(deviceLoop.next().getName())) {
-                                int roomid = deviceRooms.next().getRoomID();
-                                dName = deviceNames.next().getName();
+                        Iterator<Device> iterator = devices.iterator();
+                        Iterator<Device> iterator2 = devices.iterator();
+                        while (iterator.hasNext()) {
+                            if (type.equalsIgnoreCase(iterator2.next().getName())) {
+                                int roomid = iterator.next().getRoomID();
                                 api.getRoom(userID + "", roomid + "", new Callback<String>() {
                                     @Override
                                     public void success(String room, Response response) {
                                         room = room.replace("%20", " ");
-                                        roomNameList.add(room + " - " + dName);
+                                        roomNameList.add(room);
                                         setListAdapter(adapter2);
+
                                     }
 
                                     @Override
                                     public void failure(RetrofitError error) {
                                         //add toast
                                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+
                                     }
                                 });
                             } else {
-                                deviceRooms.next();
-                                deviceNames.next();
+                                iterator.next();
                             }
                             ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomNameList);
                             setListAdapter(adapter2);
+
                         }
                     }
 
@@ -275,6 +275,7 @@ public class deviceList extends ListActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     /**
      *It allows the user to email his problem,
      * @param v the view of the activity
@@ -304,5 +305,29 @@ public class deviceList extends ListActivity {
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + number));
         startActivity(intent);
+    }
+
+    /**
+     * When the user click on logout, this method is called, it sends a request to delete the user's session after it succeed it renders login View after it sends
+     *
+     * @param v it takes the view
+     */
+    public void logout(View v) {
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String token = (mSharedPreference.getString("token", "222245asa"));
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
+        api.logout(userID + "", new Callback<Session>() {
+            @Override
+            public void success(Session session, Response response) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+
     }
 }

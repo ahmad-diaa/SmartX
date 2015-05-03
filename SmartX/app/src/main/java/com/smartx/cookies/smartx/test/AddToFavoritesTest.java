@@ -74,30 +74,30 @@ public class AddToFavoritesTest extends ActivityInstrumentationTestCase2<AddToFa
         });
     }
 
-public void testAddToFavorites() throws Exception {
-    RestAdapter adapter=new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
-    myAPI api=adapter.create(myAPI.class);
-    api.addToFavorites(userID + "", roomID + "", deviceID, "false", new Callback<Device>() {
+    public void testAddToFavorites() throws Exception {
+        RestAdapter adapter=new RestAdapter.Builder().setEndpoint(ENDPOINT).build();
+        myAPI api=adapter.create(myAPI.class);
+        api.addToFavorites(userID + "", roomID + "", deviceID, "false", new Callback<Device>() {
 
-        @Override
-        public void success(Device device, Response response) {
-            assertEquals(device.getFavorite(),"false");
-        }
+            @Override
+            public void success(Device device, Response response) {
+                assertEquals(device.getFavorite(),"false");
+            }
 
-        @Override
-        public void failure(RetrofitError error) {
-        }
-    });
-    api.addToFavorites(userID + "", roomID + "", deviceID, "true", new Callback<Device>() {
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+        api.addToFavorites(userID + "", roomID + "", deviceID, "true", new Callback<Device>() {
 
-        @Override
-        public void success(Device device, Response response) {
-         assertEquals(device.getFavorite(),"true");
-        }
+            @Override
+            public void success(Device device, Response response) {
+                assertEquals(device.getFavorite(),"true");
+            }
 
-        @Override
-        public void failure(RetrofitError error) {
-        }
-    });
-}
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+    }
 }

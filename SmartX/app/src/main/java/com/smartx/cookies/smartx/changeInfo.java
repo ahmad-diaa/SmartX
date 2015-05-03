@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import models.Session;
 import models.User;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -100,7 +101,9 @@ public class changeInfo extends Activity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         changeInfoB = (Button) findViewById(R.id.changeInfoB);
         emailTxt = (EditText) findViewById(R.id.email);
+        emailTxt.setText(mSharedPreference.getString("email", ""));
         phoneTxt = (EditText) findViewById(R.id.phone);
+        phoneTxt.setText(mSharedPreference.getString("phone", ""));
         userID = (mSharedPreference.getInt("userID", 1));
         originalPass = (mSharedPreference.getString("password", "123456"));
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
@@ -130,7 +133,7 @@ public class changeInfo extends Activity {
                         case 5: reportProblemP(child);break;
                         case 6: reportProblemE(child);break;
                         case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 8: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
+                        case 8: logout(child);break;
                     }
                     return true;
                 }
@@ -244,5 +247,29 @@ public class changeInfo extends Activity {
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + number));
         startActivity(intent);
+    }
+
+    /**
+     * When the user click on logout, this method is called, it sends a request to delete the user's session after it succeed it renders login View after it sends
+     *
+     * @param v it takes the view
+     */
+    public void logout(View v) {
+        final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String token = (mSharedPreference.getString("token", "222245asa"));
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = ADAPTER.create(myAPI.class);
+        api.logout(userID + "", new Callback<Session>() {
+            @Override
+            public void success(Session session, Response response) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+            }
+        });
+
     }
 }

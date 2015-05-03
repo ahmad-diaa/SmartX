@@ -43,8 +43,6 @@
             android:layout_alignParentRight="true"
             />
 
-
-
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerView"

@@ -24,13 +24,14 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Add Note"
         android:id="@+id/button3"
         android:onClick="AddNote"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/noteText"/>
 </RelativeLayout>
 <android.support.v7.widget.RecyclerView
 android:id="@+id/RecyclerView"

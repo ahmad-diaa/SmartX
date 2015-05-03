@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:id="@+id/DrawerLayout"
     tools:context="com.smartx.cookies.smartx.ViewNotesActivity">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,14 +24,13 @@
         >
     </ListView>
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Note"
         android:id="@+id/button2"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:onClick="addNote"/>
 </RelativeLayout>
 <android.support.v7.widget.RecyclerView
