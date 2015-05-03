@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 public class About_us extends Activity {
@@ -20,6 +21,7 @@ public class About_us extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         SharedPreferences settings = getSharedPreferences(sharedPrefs, 0);
         fbview = (ImageView) findViewById(R.id.fbview);
         fbview.setOnClickListener(new View.OnClickListener() {

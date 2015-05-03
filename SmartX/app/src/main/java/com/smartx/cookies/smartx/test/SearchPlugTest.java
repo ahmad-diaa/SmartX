@@ -1,12 +1,8 @@
 package com.smartx.cookies.smartx.test;
-
 import android.test.ActivityInstrumentationTestCase2;
-
 import com.smartx.cookies.smartx.CustomGrid;
 import com.smartx.cookies.smartx.ViewPlugs;
-
 import java.util.ArrayList;
-
 
 /**
  * Purpose: to test the search of the plugs by name

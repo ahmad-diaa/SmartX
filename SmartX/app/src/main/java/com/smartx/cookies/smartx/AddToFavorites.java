@@ -36,6 +36,7 @@ public class AddToFavorites extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         int userID = mSharedPreference.getInt("userID", 1);

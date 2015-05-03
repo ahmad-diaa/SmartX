@@ -100,7 +100,7 @@ public class CustomGrid extends BaseAdapter {
         }
         return grid;
     }
-    
+
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
         plugNames.clear();
