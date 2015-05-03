@@ -26,6 +26,7 @@ import retrofit.client.Response;
  * Renders all the plugs found in the room the user selected.
  * It allows control over the plugs such as turning on/off, deletion, renaming, and searching.
  * @author zamzamy 1/5/2015
+ * @author maggiemoheb
  */
 public class ViewPlugs extends Activity {
     GridView grid;
@@ -33,19 +34,6 @@ public class ViewPlugs extends Activity {
     myAPI api;
     EditText editSearch;
     CustomGrid adapter2;
-    /**
-     * @return the userID.
-     */
-    public int getUserID() {
-        return userID;
-    }
-    /**
-     *
-     * @return the roomID.
-     */
-    public int getRoomID() {
-        return roomID;
-    }
     SharedPreferences.Editor editor;
     private int userID;
     private int roomID;
@@ -56,13 +44,38 @@ public class ViewPlugs extends Activity {
     Button addPlug;
     private SharedPreferences prefs;
 
+
+    /**
+     * @return the userID.
+     */
+    public int getUserID() {
+        return userID;
+    }
+
+    /**
+     *
+     * @return the roomID.
+     */
+    public int getRoomID() {
+        return roomID;
+    }
+
+    /**
+     * a setter for plug names
+     * @param plugNames
+     */
     public void setPlugNames(ArrayList<String> plugNames) {
         this.plugNames = plugNames;
     }
 
+    /**
+     * A getter for plug names
+     * @return plugNames which is names of plugs in grid
+     */
     public ArrayList<String> getPlugNames() {
         return this.plugNames;
     }
+
     /**
      *
      * @param savedInstanceState The previous state of the activity in case the activity crashes and
@@ -138,6 +151,7 @@ public class ViewPlugs extends Activity {
             }
         });
     }
+
     /**
      * Initializes the grid icons to their corresponding images.
      */
@@ -176,12 +190,14 @@ public class ViewPlugs extends Activity {
         grid = (GridView) findViewById(R.id.gridicons);
         grid.setAdapter(adapter);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_view_plugs, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

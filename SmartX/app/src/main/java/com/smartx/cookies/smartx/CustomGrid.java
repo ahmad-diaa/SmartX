@@ -18,6 +18,7 @@ public class CustomGrid extends BaseAdapter {
     private ArrayList<Integer> plugPhotos;
     private ArrayList<String> tempPlugNames;
     private ArrayList<Integer> tempPlugPhotos;
+
     public CustomGrid(Context c, ArrayList<String> names, ArrayList<Integer> photos) {
         mContext = c;
         plugPhotos = new ArrayList<Integer>(100);
@@ -29,6 +30,7 @@ public class CustomGrid extends BaseAdapter {
         tempPlugPhotos = new ArrayList<Integer>(100);
         tempPlugPhotos.addAll(plugPhotos);
     }
+
     /**
      * This methid returns the number of plugs found in the array of plugs.
      *
@@ -39,9 +41,15 @@ public class CustomGrid extends BaseAdapter {
         // TODO Auto-generated method stub
         return plugNames.size();
     }
+
+    /**
+     * a getter for plug names
+     * @return the plugnames in the grid
+     */
     public ArrayList<String> getPlugNames() {
         return this.plugNames;
     }
+
     /**
      * @param position the position of a certain element in the grid.
      * @return the object found at the given position.
@@ -51,6 +59,7 @@ public class CustomGrid extends BaseAdapter {
     public Object getItem(int position) {
         return null;
     }
+
     /**
      * @param position the position of a certain element in the grid.
      * @return the id of the element found at the given position.
@@ -61,6 +70,7 @@ public class CustomGrid extends BaseAdapter {
         // TODO Auto-generated method stub
         return 0;
     }
+
     /**
      * create a new ImageView for each item initialized by the Adapter which is
      * used to render photos of the grid in ViewPlugs.class
@@ -90,6 +100,7 @@ public class CustomGrid extends BaseAdapter {
         }
         return grid;
     }
+    
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
         plugNames.clear();
