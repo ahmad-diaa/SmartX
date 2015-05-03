@@ -3,6 +3,7 @@ package com.smartx.cookies.smartx;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +57,7 @@ public class answerSecurityQuestion extends Activity {
         api.checkUser(userID + "", securityA, new Callback<List<User>>() {
             @Override
             public void success(List<User> user, Response response) {
+                Log.d("ya raaab", "123465");
                 Intent rs = new Intent(getApplicationContext(), changePassword.class);
                 rs.putExtra("id", userID);
                 rs.putExtra("flag", 1);
