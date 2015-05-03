@@ -18,21 +18,13 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
-/*
-    Purpose: This class is responsible for sending commands to rails and receiving Callbacks.
-
-<<<<<<< HEAD
-     @author Amir
-     @author Dalia Maarek
-=======
 
 /*
  *SE Sprint2
  *myAPI.java
  *Purpose: api interface to interact with rails.
  *
- *@author Amir, zamzamy
->>>>>>> origin/Sprint_Two
+ *@author Amir, zamzamy, Dalia
  */
 
 public interface myAPI {
@@ -188,6 +180,30 @@ public interface myAPI {
     @FormUrlEncoded
     @PUT("/users/{userID}/rooms/{roomID}/devices/{deviceID}")
     void addToFavorites(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, @Field("device[favorite]") String favorite, Callback<Device> callback);
+
+    /**
+        This method requests a list of all plugs within a certain room.
+     *
+     * @param userID
+     * @param roomID
+     * @param callback
+     */
+    @GET("/users/{userId}/rooms/{roomId}/plugs/")
+    void getPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback <List<Plug>> callback);
+
+    /**
+    This method changes the status of a plug.
+     *
+     * @param userId
+     * @param roomID
+     * @param callback
+     * @param plugID
+     * @param status the status you want to change to
+     */
+
+    @FormUrlEncoded
+    @PUT("/users/{userId}/rooms/{roomID}/plugs/{plugID}")
+    void changePlugStatus(@Path("userId") String userId, @Path("roomID") String roomID, @Path("plugID") String plugID, @Field("plug[status]") String status, Callback<Plug> callback);
 
 }
 

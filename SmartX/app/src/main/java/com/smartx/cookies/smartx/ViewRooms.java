@@ -28,6 +28,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import models.Plug;
 import models.Room;
 import models.Session;
 import models.Type;
@@ -380,7 +381,6 @@ public class ViewRooms extends ListActivity {
     }
 
     /**
-     * >>>>>>> 31aa6111cb78ebb229014473fda82a305398b368
      * Creates the initial menu state
      *
      * @param menu Menu to be populated
@@ -469,7 +469,60 @@ public class ViewRooms extends ListActivity {
         }
         return true;
     }
+    /*
+    This method is called when the user clicks on Turn Off All Plugs button
+    @param v View
+     */
+        
+    public void turnPlugsOff(View v){
+        turnThemOff();
+    }
 
+    /*
+    This method turns all plugs off by using myAPI
+     */
+    public void turnThemOff(){
+        api.viewRooms(userID + "", new Callback<List<Room>>() {
+            @Override
+            public void success(List<Room> rooms, Response response) {
+                for (int i = 0; i < rooms.size(); i++){
+                    final int id= rooms.get(i).getId();
+                    api.getPlugs(userID + "", id + "", new Callback<List<Plug>>() {
+                        @Override
+                        public void success(List<Plug> plugs, Response response) {
+                            for (int j = 0; j<plugs.size();j++){
+                                api.changePlugStatus(userID+"", id +"", plugs.get(j).getPlugID(), "off", new Callback<Plug>() {
+                                    @Override
+                                    public void success(Plug plug, Response response) {
+                                        Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        Toast.makeText(getApplicationContext(), "Failed to turn off some plugs.", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Toast.makeText(getApplicationContext(), "Failed to some devices off", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "Failed to turn all devices off", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
 }
 
 

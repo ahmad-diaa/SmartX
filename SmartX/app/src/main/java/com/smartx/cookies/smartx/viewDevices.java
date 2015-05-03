@@ -319,28 +319,26 @@ public class viewDevices extends ListActivity {
      * @param user
      * @param room
      */
-    public void renderViewNotes(int itemPosition, int user, int room) {
+
+    public void renderViewNotes (int itemPosition, int user, int room) {
         String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
         myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(user + "", room + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
-
             @Override
             public void success(List<Device> devices, Response response) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("deviceID", devices.get(0).getId());
                 editor.commit();
-                startActivity(new Intent(viewDevices.this, ViewNotesActivity.class));
+                startActivity(new Intent (viewDevices.this, ViewNotesActivity.class));
             }
-
-           @Override
-
+            @Override
             public void failure(RetrofitError error) {
-                throw error;
             }
         });
+        message = "Selected Successfully";
     }
 }
 
