@@ -6,7 +6,7 @@ import com.smartx.cookies.smartx.R;
 import com.smartx.cookies.smartx.viewDevices;
 
 /**
- * @author maggiemoheb 
+ * @author maggiemoheb
  */
 public class viewDevicesTest extends ActivityInstrumentationTestCase2<viewDevices> {
     private viewDevices myActivity;//An instance of the viewDevices

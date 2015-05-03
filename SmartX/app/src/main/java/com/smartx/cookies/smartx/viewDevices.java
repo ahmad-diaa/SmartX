@@ -1,7 +1,9 @@
 package com.smartx.cookies.smartx;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,37 +22,51 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import models.Device;
 import models.Room;
+import models.Type;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Purpose: view devices in a certain room
+ * SE Sprint2
+ * viewDevices.java
+ * Purpose: Display list of devices in a certain room
  *
+ * @author Amir
  * @author maggiemoheb
+ * @author Dalia Maarek
  * @author ahmaddiaa
  */
-public class viewDevices extends ListActivity {
 
-    String deviceName;
-    ArrayList<String> Rooms = new ArrayList<String>();
-    Dialog dialog;
-    Spinner roomsSpinner;
+
+public class viewDevices extends ListActivity {
     int userID;
     int roomID;
     String roomName;
     Button addDevice;
-    private int itemPosition;
+    Button addPlug;
+    int itemPosition;
+    String deviceName;
+    ArrayList<String> Rooms = new ArrayList<String>();
+    Dialog dialog;
+    Spinner roomsSpinner;
     ArrayList<String> deviceNames;
     String message = "";
     myAPI api;
     String spSelected;
+    String deviceIDTest = ""; //for test
+
+    public String getDeviceIDTest() {
+        return deviceIDTest;
+    }
 
     /**
      * A getter to the user ID
@@ -80,6 +96,7 @@ public class viewDevices extends ListActivity {
     }
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -87,6 +104,14 @@ public class viewDevices extends ListActivity {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         userID = (mSharedPreference.getInt("userID", 1));
         roomID = (mSharedPreference.getInt("roomID", 1));
+        addPlug = (Button) findViewById(R.id.addplug);
+        addPlug.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(viewDevices.this, AddPlug.class));
+            }
+        });
+
         addDevice = (Button) findViewById(R.id.addDevice);
         addDevice.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -109,22 +134,23 @@ public class viewDevices extends ListActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.d("ERROR ", error.getMessage());
-                Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Something went wrong with room name, please try again", Toast.LENGTH_SHORT).show();
             }
         });
         api.viewDevices(userID + "", roomID + "", new Callback<List<Device>>() {
+
             @Override
             public void success(List<Device> devices, Response response) {
                 deviceNames = new ArrayList<String>();
                 Iterator<Device> iterator = devices.iterator();
                 int i = devices.size() - 1;
                 while (i >= 0 & iterator.hasNext()) {
+                    registerForContextMenu(getListView());
                     deviceNames.add(iterator.next().getName());
                     i--;
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, deviceNames);
                 setListAdapter(adapter);
-                registerForContextMenu(getListView());
             }
 
             @Override
@@ -144,11 +170,11 @@ public class viewDevices extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Object o = this.getListAdapter().getItem(position);
-        String device = o.toString();
-        Toast.makeText(getApplicationContext(), device, Toast.LENGTH_LONG).show();
+        final String device = o.toString();
+        Toast.makeText(getApplicationContext(), device, Toast.LENGTH_SHORT).show();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-        myAPI api = ADAPTER.create(myAPI.class);
+        final myAPI api = ADAPTER.create(myAPI.class);
         api.findDevice(userID + "", roomID + "", device, new Callback<List<Device>>() {
             @Override
             public void success(List<Device> devices, Response response) {
@@ -163,6 +189,47 @@ public class viewDevices extends ListActivity {
             @Override
             public void failure(RetrofitError error) {
                 throw error;
+            }
+        });
+
+
+        api.findDevice(userID + "", roomID + "", device, new Callback<List<Device>>() {
+            @Override
+            public void success(final List<Device> devices, Response response) {
+                SharedPreferences prefs =
+                        PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("deviceID", devices.get(0).getDeviceID() + "");
+                editor.commit();
+                Toast.makeText(getApplicationContext(), devices.get(0).getName(), Toast.LENGTH_SHORT).show();
+                api.findClickerType(devices.get(0).getName(), new Callback<List<Type>>() {
+                    @Override
+                    public void success(List<Type> types, Response response) {
+                        int type = types.get(0).getId();
+                        if (type == 1 || type == 4 || type == 5) {
+                            startActivity(new Intent(getApplicationContext(), TvClickerActivity.class));
+                        } else {
+                            if (type == 2) {
+                                startActivity(new Intent(getApplicationContext(), LampClickerActivity.class));
+                            } else {
+                                if (type == 3) {
+                                    startActivity(new Intent(getApplicationContext(), CurtainClickerActivity.class));
+                                } else {
+                                    startActivity(new Intent(getApplicationContext(), defaultClickerActivity.class));
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                    }
+                });
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
             }
         });
     }
@@ -200,9 +267,44 @@ public class viewDevices extends ListActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Add To Favorites") {
-            Toast.makeText(this, "Add To Favorites Action should be invoked", Toast.LENGTH_SHORT).show();
+            String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
+            final RestAdapter ADAPTER =
+                    new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+            myAPI api = ADAPTER.create(myAPI.class);
+            api.findDevice(userID + "", roomID + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+                @Override
+                public void success(List<Device> devices, Response response) {
+                    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(viewDevices.this);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("deviceID", devices.get(0).getDeviceID());
+                    editor.commit();
+                    startActivity(new Intent(getApplicationContext(), AddToFavorites.class));
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                }
+            });
         } else if (item.getTitle() == "Delete Device") {
-            Toast.makeText(this, "Delete Action should be invoked", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder confirmationDialog = new AlertDialog.Builder(
+                    this);
+            confirmationDialog.setMessage("Are you sure you want to delete this device?");
+            confirmationDialog.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            confirmationDialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    deleteDevice(userID, roomID, itemPosition);
+                }
+            });
+            confirmationDialog.show();
         } else if (item.getTitle() == "View Notes") {
             renderViewNotes(itemPosition, userID, roomID);
         } else if (item.getTitle() == "Move Device") {
@@ -213,6 +315,45 @@ public class viewDevices extends ListActivity {
         return true;
     }
 
+    /*
+ @param userID user's ID
+ @param roomID room's ID
+ @param itemPosition position of item in list
+
+ This method deletes the device that is selected, after the user has confirmed deletion
+  */
+    public void deleteDevice(final int userID, final int roomID, int itemPosition) {
+        final String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
+        final RestAdapter ADAPTER =
+                new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        final myAPI api = ADAPTER.create(myAPI.class);
+        api.findDevice(userID + "", roomID + "", deviceSelected.replace(" ", "%20"), new Callback<List<Device>>() {
+            @Override
+            public void success(List<Device> devices, Response response) {
+                String id = devices.get(0).getId();
+                deviceIDTest = id;
+                api.deleteDevice(userID + "", roomID + "", id, new Callback<Device>() {
+                    @Override
+                    public void success(Device device, Response response) {
+                        Toast.makeText(getApplicationContext(), deviceSelected + " has been successfully deleted!", Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(getIntent());
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(getApplicationContext(), "Could not delete.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     /**
      * Renders view notes view for the device of the context menu
      *
@@ -221,6 +362,7 @@ public class viewDevices extends ListActivity {
      * @param room
      */
     public void renderViewNotes(int itemPosition, int user, int room) {
+
         String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
@@ -368,3 +510,4 @@ public class viewDevices extends ListActivity {
         });
     }
 }
+

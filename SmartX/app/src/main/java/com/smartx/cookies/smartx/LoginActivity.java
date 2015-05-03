@@ -29,8 +29,10 @@ public class LoginActivity extends Activity {
     Button btnLogin;
     List<User> userList;
     SharedPreferences Data;
-    //TextView aboutlogin;
+    String token;
     private String Pass;
+    EditText username;
+    EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,11 @@ public class LoginActivity extends Activity {
         Data = getSharedPreferences(sharedPrefs, 0);
         setContentView(R.layout.activity_login);
         TextView aboutlogin = (TextView) findViewById(R.id.aboutlogin);
+        username = (EditText) findViewById(R.id.txtUserName);
+        password = (EditText) findViewById(R.id.txtPassword);
+        password.setHint("Password");
+        username.setHint("Username");
+
         SpannableString content = new SpannableString("About");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         aboutlogin.setText(content);
@@ -52,8 +59,6 @@ public class LoginActivity extends Activity {
         btnLogin.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText username = (EditText) findViewById(R.id.txtUserName);
-                EditText password = (EditText) findViewById(R.id.txtPassword);
                 String Name = username.getText().toString();
                 setPass(password.getText().toString());
                 RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
@@ -65,6 +70,8 @@ public class LoginActivity extends Activity {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putInt("userID", session.getId());
+                        token = session.getToken();
+                        editor.putString("accessToken", session.getToken());
                         editor.commit();
                         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
                         myAPI api = adapter.create(myAPI.class);
@@ -82,6 +89,7 @@ public class LoginActivity extends Activity {
                                 editor.putString("password", getPass());
                                 editor.putString("email", email);
                                 editor.putString("phone", phone);
+                                editor.putString("token", token);
                                 editor.commit();
                                 startActivity(new Intent(getApplicationContext(), ViewRooms.class));
                             }
@@ -96,51 +104,49 @@ public class LoginActivity extends Activity {
                     }
 
 
-
-
-                            @Override
-                            public void failure (RetrofitError error){
-                                if (error.getMessage().contains("401 Unauthorized")) {
-                                    Toast.makeText(getApplicationContext(), "Wrong Username/Password", Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
+                    @Override
+                    public void failure(RetrofitError error) {
+                        if (error.getMessage().contains("401 Unauthorized")) {
+                            Toast.makeText(getApplicationContext(), "Wrong Username/Password", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Make sure you are online.\nIf this problem proceeds, contact us.", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }
+        });
+    }
 
-            public String getPass() {
-                return this.Pass;
-            }
+    public String getPass() {
+        return this.Pass;
+    }
 
-            public void setPass(String Pass) {
-                this.Pass = Pass;
-            }
+    public void setPass(String Pass) {
+        this.Pass = Pass;
+    }
 
-            @Override
-            public boolean onCreateOptionsMenu(Menu menu) {
-                // Inflate the menu; this adds items to the action bar if it is present.
-                getMenuInflater().inflate(R.menu.menu_login, menu);
-                return true;
-            }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_login, menu);
+        return true;
+    }
 
-            @Override
-            public boolean onOptionsItemSelected(MenuItem item) {
-                // Handle action bar item clicks here. The action bar will
-                // automatically handle clicks on the Home/Up button, so long
-                // as you specify a parent activity in AndroidManifest.xml.
-                int id = item.getItemId();
-                //noinspection SimplifiableIfStatement
-                if (id == R.id.action_settings) {
-                    return true;
-                }
-                return super.onOptionsItemSelected(item);
-            }
-
-            private void requestData(String uri) {
-                RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-                myAPI api = adapter.create(myAPI.class);
-            }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void requestData(String uri) {
+        RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
+        myAPI api = adapter.create(myAPI.class);
+    }
+}

@@ -1,9 +1,11 @@
 package com.smartx.cookies.smartx;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import models.Device;
 import models.Note;
+import models.Plug;
 import models.Room;
 import models.Session;
 import models.Type;
@@ -17,6 +19,13 @@ import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
 
+/*
+ *SE Sprint2
+ *myAPI.java
+ *Purpose: api interface to interact with rails.
+ *
+ *@author Amir, zamzamy, Dalia
+ */
 
 public interface myAPI {
 
@@ -25,6 +34,12 @@ public interface myAPI {
 
     @GET("/users/{userID}/rooms/1/devices/1/devices")
     void allDevices(@Path("userID") String id, Callback<List<Device>> callback);
+
+    @DELETE ("/session/{token}")
+    void logout(@Path("token") String access_token,Callback<Session> callback);
+
+    @GET("/v/types/{name}")
+    void findClickerType(@Path("name") String deviceName, Callback<List<Type>> callback);
 
     @FormUrlEncoded
     @POST("/session")
@@ -101,8 +116,9 @@ public interface myAPI {
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
     void editDeviceRoom(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[room_id]") String newID, Callback<Device> callback);
 
-    @DELETE("/users/{userID}/rooms/{roomID}/devices/{deviceID}/")
-    void deleteDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<Device> callback);
+    @FormUrlEncoded
+    @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
+    void editDeviceType(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, @Field("device[type]") String type, Callback<Device> callback);
 
     @GET("/users/{userId}/")
     void getUser(@Path("userId") String id, Callback<User> callback);
@@ -114,5 +130,83 @@ public interface myAPI {
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
 
+
+    /**
+     * deletes device
+     *
+     * @param userID   the given userID
+     * @param roomID   the given roomID
+     * @param deviceID the given deviceID
+     * @param callback the callback from the rails
+     */
+
+    @DELETE("/v/users/{userID}/rooms/{roomID}/devices/{deviceID}/")
+    void deleteDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<Device> callback);
+
+    @FormUrlEncoded
+    @POST("/users/{userId}/rooms/{roomId}/plugs/")
+    void addPlug(@Path("userId") String userId, @Path("roomId") String roomId, @Field("plug[plug_id]") String plugId, @Field("plug[name]") String name, @Field("plug[status]") String status, @Field("plug[photo]") String photo, Callback<Plug> callback);
+
+    /**
+     * Gets the plug with the
+     *
+     * @param userID   the given userID
+     * @param roomID   the given roomID
+     * @param plugID   the given plugID
+     * @param callback the callback from the rails
+     */
+    @GET("/users/{userId}/rooms/{roomId}/plugs/{plugId}")
+    void getPlug(@Path("userId") String userID, @Path("roomId") String roomID, @Field("plugId") String plugID, Callback <Plug> callback);
+
+    /**
+     * It returns the value of favorite attribute of a specific device given its id,
+     * the id of user to which the device belongs and the id of room where the device exists.
+     *
+     * @param userID
+     * @param roomID
+     * @param deviceID
+     * @param callback
+     */
+    @GET("/f/users/{userID}/rooms/{roomID}/devices/{deviceID}")
+    void findFavorite(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<String> callback);
+    /**
+     * It changes the value of favorite attribute of a specific device given its id,
+     * the id of user to which the device belongs and the id of room where the device exists.
+     *
+     * @param userID
+     * @param roomID
+     * @param deviceID
+     * @param favorite
+     * @param callback
+     */
+    @FormUrlEncoded
+    @PUT("/users/{userID}/rooms/{roomID}/devices/{deviceID}")
+    void addToFavorites(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, @Field("device[favorite]") String favorite, Callback<Device> callback);
+
+    /**
+        This method requests a list of all plugs within a certain room.
+     *
+     * @param userID
+     * @param roomID
+     * @param callback
+     */
+    @GET("/users/{userId}/rooms/{roomId}/plugs/")
+    void getPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback <List<Plug>> callback);
+
+    /**
+    This method changes the status of a plug.
+     *
+     * @param userId
+     * @param roomID
+     * @param callback
+     * @param plugID
+     * @param status the status you want to change to
+     */
+
+    @FormUrlEncoded
+    @PUT("/users/{userId}/rooms/{roomID}/plugs/{plugID}")
+    void changePlugStatus(@Path("userId") String userId, @Path("roomID") String roomID, @Path("plugID") String plugID, @Field("plug[status]") String status, Callback<Plug> callback);
+
 }
+
 
