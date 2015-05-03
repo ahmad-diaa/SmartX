@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 
 /**
  * @author zamzamy on 4/30/15.
@@ -58,7 +57,7 @@ public class ImageAdapter extends BaseAdapter {
             // if it's not recycled, initialize some attributes
 
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(150, 150));
+            imageView.setLayoutParams(new GridView.LayoutParams(170, 170));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(23, 23, 23, 23);
 
