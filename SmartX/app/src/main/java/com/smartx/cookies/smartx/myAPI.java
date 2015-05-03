@@ -1,6 +1,7 @@
 package com.smartx.cookies.smartx;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import models.Device;
 import models.Note;
@@ -10,6 +11,7 @@ import models.Session;
 import models.Type;
 import models.User;
 import retrofit.Callback;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -22,7 +24,7 @@ import retrofit.http.Path;
  *myAPI.java
  *Purpose: api interface to interact with rails.
  *
- *@author Amir, zamzamy
+ *@author Amir, zamzamy, Dalia
  */
 
 public interface myAPI {
@@ -32,6 +34,9 @@ public interface myAPI {
 
     @GET("/users/{userID}/rooms/1/devices/1/devices")
     void allDevices(@Path("userID") String id, Callback<List<Device>> callback);
+
+    @DELETE ("/session/{token}")
+    void logout(@Path("token") String access_token,Callback<Session> callback);
 
     @GET("/v/types/{name}")
     void findClickerType(@Path("name") String deviceName, Callback<List<Type>> callback);
@@ -123,6 +128,19 @@ public interface myAPI {
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
 
+
+    /**
+     * deletes device
+     *
+     * @param userID   the given userID
+     * @param roomID   the given roomID
+     * @param deviceID the given deviceID
+     * @param callback the callback from the rails
+     */
+
+    @DELETE("/v/users/{userID}/rooms/{roomID}/devices/{deviceID}/")
+    void deleteDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<Device> callback);
+
     @FormUrlEncoded
     @POST("/users/{userId}/rooms/{roomId}/plugs/")
     void addPlug(@Path("userId") String userId, @Path("roomId") String roomId, @Field("plug[plug_id]") String plugId, @Field("plug[name]") String name, @Field("plug[status]") String status, @Field("plug[photo]") String photo, Callback<Plug> callback);
@@ -136,7 +154,7 @@ public interface myAPI {
      * @param callback the callback from the rails
      */
     @GET("/users/{userId}/rooms/{roomId}/plugs/{plugId}")
-    void getPlug(@Path("userId") String userID, @Path("roomId") String roomID, @Field("plugId") String plugID, Callback<Plug> callback);
+    void getPlug(@Path("userId") String userID, @Path("roomId") String roomID, @Field("plugId") String plugID, Callback <Plug> callback);
 
     /**
      * It returns the value of favorite attribute of a specific device given its id,
@@ -149,7 +167,6 @@ public interface myAPI {
      */
     @GET("/f/users/{userID}/rooms/{roomID}/devices/{deviceID}")
     void findFavorite(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<String> callback);
-
     /**
      * It changes the value of favorite attribute of a specific device given its id,
      * the id of user to which the device belongs and the id of room where the device exists.
@@ -174,5 +191,28 @@ public interface myAPI {
     @GET("/users/{userId}/rooms/{roomId}/plugs/")
     void viewPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback<List<Plug>> callback);
 
+    /**
+     *
+     * @param userID
+     * @param roomID
+     * @param callback
+     */
+    @GET("/users/{userId}/rooms/{roomId}/plugs/")
+    void getPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback <List<Plug>> callback);
+
+    /**
+    This method changes the status of a plug.
+     *
+     * @param userId
+     * @param roomID
+     * @param callback
+     * @param plugID
+     * @param status the status you want to change to
+     */
+    @FormUrlEncoded
+    @PUT("/users/{userId}/rooms/{roomID}/plugs/{plugID}")
+    void changePlugStatus(@Path("userId") String userId, @Path("roomID") String roomID, @Path("plugID") String plugID, @Field("plug[status]") String status, Callback<Plug> callback);
+
 }
+
 

@@ -1,23 +1,11 @@
 
 class DevicesController < ApplicationController
-  
-  #Returns device with given name. 
   def find 
     @user = User.find(params[:user_id])
     @room = @user.rooms.find(params[:room_id])
     @device = @room.devices.where(:name => params[:name])
     render json: @device if stale?(etag: @device.all, last_modified: @device.maximum(:updated_at))
   end
-  
-  #Returns the value of favorite attribute of a specific device.
-  def findFavorite
-    @user = User.find(params[:user_id])
-    @room = @user.rooms.find(params[:room_id])
-    @device = @room.devices.find(params[:device_id])
-    @favorite=@device.favorite
-    render json: @favorite if stale?(@favorite)
-  end
-
   #Returns list of devices in a specific room knowing she belongs to which user. 
   # GET /devices
   # GET /devices.json
@@ -82,7 +70,7 @@ end
   def destroy
     @user=User.find(params[:user_id])
     @room=@user.rooms.find(params[:room_id])
-    @device= @room.devices.find(params[:device_id])
+    @device= @room.devices.find(params[:name])
     @device.destroy
     head :no_content
   end
@@ -90,6 +78,6 @@ end
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def device_params
-    params.require(:device).permit(:name,:device_id,:user_id,:room_id, :status, :favorite)
+    params.require(:device).permit(:name,:device_id,:user_id,:room_id, :status)
   end
 end
