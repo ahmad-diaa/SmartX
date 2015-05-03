@@ -7,7 +7,8 @@ class Device < ActiveRecord::Base
 	belongs_to :rooms
 	has_one :clicker
 	has_many :notes,dependent: :destroy
-def to_param
-    device_id.parameterize
-  end
+	validates :name, :uniqueness => {:scope => [:user_id, :room_id]}
+	def to_param
+    	device_id.parameterize
+  	end
 end
