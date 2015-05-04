@@ -1,4 +1,5 @@
 package com.smartx.cookies.smartx;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,10 +21,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
 import models.Plug;
 import models.Session;
 import retrofit.Callback;
@@ -34,6 +37,7 @@ import retrofit.client.Response;
 /**
  * Renders all the plugs found in the room the user selected.
  * It allows control over the plugs such as turning on/off, deletion, renaming, and searching.
+ *
  * @author zamzamy 1/5/2015
  * @author maggiemoheb
  */
@@ -72,7 +76,6 @@ public class ViewPlugs extends Activity {
     }
 
     /**
-     *
      * @return the roomID.
      */
 
@@ -82,6 +85,7 @@ public class ViewPlugs extends Activity {
 
     /**
      * a setter for plug names
+     *
      * @param plugNames
      */
 
@@ -91,6 +95,7 @@ public class ViewPlugs extends Activity {
 
     /**
      * A getter for plug names
+     *
      * @return plugNames which is names of plugs in grid
      */
 
@@ -99,7 +104,6 @@ public class ViewPlugs extends Activity {
     }
 
     /**
-     *
      * @param savedInstanceState The previous state of the activity in case the activity crashes and
      *                           is rendered once again.
      */
@@ -141,11 +145,13 @@ public class ViewPlugs extends Activity {
                                                           adapter2.filter(text);
                                                           adapter2.notifyDataSetChanged();
                                                       }
+
                                                       @Override
                                                       public void beforeTextChanged(CharSequence arg0, int arg1,
                                                                                     int arg2, int arg3) {
                                                           // TODO Auto-generated method stub
                                                       }
+
                                                       @Override
                                                       public void onTextChanged(CharSequence arg0, int arg1, int arg2,
                                                                                 int arg3) {
@@ -154,6 +160,7 @@ public class ViewPlugs extends Activity {
                                                   }
                 );
             }
+
             @Override
             public void failure(RetrofitError error) {
                 Toast.makeText(getApplicationContext(), "An error has occurred\n Please try again later", Toast.LENGTH_SHORT).show();
@@ -205,7 +212,10 @@ public class ViewPlugs extends Activity {
                             startActivity(new Intent(getApplicationContext(), changeInfo.class));
                             break;
                         case 4:
-                            startActivity(new Intent(getApplicationContext(), changePassword.class));
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                            rs.putExtra("id", userID);
+                            rs.putExtra("flag", 0);
+                            startActivity(rs);
                             break;
                         case 5:
                             reportProblemP(child);
@@ -216,7 +226,9 @@ public class ViewPlugs extends Activity {
                         case 7:
                             startActivity(new Intent(getApplicationContext(), About_us.class));
                             break;
-                        case 8: logout(child);break;
+                        case 8:
+                            logout(child);
+                            break;
 
                     }
                     return true;
@@ -255,7 +267,7 @@ public class ViewPlugs extends Activity {
         photoID = new ArrayList<Integer>();
         for (int i = 0; i < photos.length; i++) {
             if (photos[i].equals("plugin")) {
-                photoID.add(i , R.drawable.plugin);
+                photoID.add(i, R.drawable.plugin);
             } else if (photos[i].equals("switcher")) {
                 photoID.add(i, R.drawable.switcher);
             } else if (photos[i].equals("fridge")) {
@@ -267,7 +279,7 @@ public class ViewPlugs extends Activity {
             } else if (photos[i].equals("phone")) {
                 photoID.add(i, R.drawable.phone);
             } else if (photos[i].equals("washmachine")) {
-                photoID.add(i,R.drawable.washmachine);
+                photoID.add(i, R.drawable.washmachine);
             } else if (photos[i].equals("stereo")) {
                 photoID.add(i, R.drawable.stereo);
             } else if (photos[i].equals("food")) {
@@ -306,7 +318,6 @@ public class ViewPlugs extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     /**

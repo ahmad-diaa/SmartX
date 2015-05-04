@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -119,7 +118,10 @@ public class AddPlug extends Activity {
                             startActivity(new Intent(getApplicationContext(), changeInfo.class));
                             break;
                         case 4:
-                            startActivity(new Intent(getApplicationContext(), changePassword.class));
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                            rs.putExtra("id", userID);
+                            rs.putExtra("flag", 0);
+                            startActivity(rs);
                             break;
                         case 5:
                             reportProblemP(child);
@@ -130,7 +132,9 @@ public class AddPlug extends Activity {
                         case 7:
                             startActivity(new Intent(getApplicationContext(), About_us.class));
                             break;
-                        case 8: logout(child);break;
+                        case 8:
+                            logout(child);
+                            break;
 
                     }
                     return true;

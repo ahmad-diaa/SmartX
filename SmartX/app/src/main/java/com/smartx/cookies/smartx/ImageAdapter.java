@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 /**
  * @author zamzamy on 4/30/15.
- * The purpose of this class is to initialize the photos of the plug icons in the PlugIcon.class
+ *         The purpose of this class is to initialize the photos of the plug icons in the PlugIcon.class
  */
 public class ImageAdapter extends BaseAdapter {
 

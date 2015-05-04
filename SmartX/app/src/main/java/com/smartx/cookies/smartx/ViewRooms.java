@@ -48,11 +48,8 @@ import retrofit.client.Response;
  * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
  *
  * @author Dalia Maarek
- *         <<<<<<< HEAD
  * @author Amir
- *         =======
  * @author Ahmad Abdalraheem
- *         >>>>>>> origin/Sprint_Two
  */
 
 public class ViewRooms extends ListActivity {
@@ -307,7 +304,10 @@ public class ViewRooms extends ListActivity {
                             startActivity(new Intent(getApplicationContext(), changeInfo.class));
                             break;
                         case 4:
-                            startActivity(new Intent(getApplicationContext(), changePassword.class));
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                            rs.putExtra("id", userID);
+                            rs.putExtra("flag",0);
+                            startActivity(rs);
                             break;
                         case 5:
                             reportProblemP(child);
@@ -435,7 +435,10 @@ public class ViewRooms extends ListActivity {
     }
 
     public void changePassword(View v) {
-        startActivity(new Intent(this, changePassword.class));
+        Intent rs = new Intent(getApplicationContext(), changePassword.class);
+        rs.putExtra("id", userID);
+        rs.putExtra("flag",0);
+        startActivity(rs);
     }
 
     public void changeInfo(View v) {

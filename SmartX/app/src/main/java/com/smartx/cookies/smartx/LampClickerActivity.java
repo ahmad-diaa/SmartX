@@ -137,7 +137,10 @@ public class LampClickerActivity extends ActionBarActivity {
                             startActivity(new Intent(getApplicationContext(), changeInfo.class));
                             break;
                         case 4:
-                            startActivity(new Intent(getApplicationContext(), changePassword.class));
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                            rs.putExtra("id", userID);
+                            rs.putExtra("flag", 0);
+                            startActivity(rs);
                             break;
                         case 5:
                             reportProblemP(child);
@@ -148,7 +151,9 @@ public class LampClickerActivity extends ActionBarActivity {
                         case 7:
                             startActivity(new Intent(getApplicationContext(), About_us.class));
                             break;
-                        case 8: logout(child);break;
+                        case 8:
+                            logout(child);
+                            break;
 
                     }
                     return true;
@@ -227,7 +232,7 @@ public class LampClickerActivity extends ActionBarActivity {
 
         } else {
             brightness--;
-            Toast.makeText(getApplicationContext(), "decrease brightness"+deviceID, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "decrease brightness" + deviceID, Toast.LENGTH_SHORT).show();
         }
         command = new String(deviceID + "/dim/1");
         sendCommand();
@@ -247,7 +252,7 @@ public class LampClickerActivity extends ActionBarActivity {
 
         } else {
             brightness++;
-            Toast.makeText(getApplicationContext(), "increase brightness"+deviceID, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "increase brightness" + deviceID, Toast.LENGTH_SHORT).show();
         }
         command = new String(deviceID + "/bright/1");
         sendCommand();
@@ -274,6 +279,7 @@ public class LampClickerActivity extends ActionBarActivity {
             }
         });
     }
+
     /**
      * It allows the user to email his problem,
      *

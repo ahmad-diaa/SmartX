@@ -16,7 +16,9 @@
         android:ems="10"
         android:id="@+id/txtPassword"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:password="false"
+        android:selectAllOnFocus="true" />
 
     <Button
         android:layout_width="200dp"
@@ -37,7 +39,8 @@
         android:layout_alignStart="@+id/txtPassword"
         android:layout_alignRight="@+id/txtPassword"
         android:layout_alignEnd="@+id/txtPassword"
-        android:onClick="setContentView(&quot;&quot;)" />
+        android:onClick="setContentView(&quot;&quot;)"
+        android:selectAllOnFocus="true" />
 
     <ImageView
         android:layout_width="170dp"
@@ -76,6 +79,20 @@
         android:layout_centerHorizontal="true"
         android:onClick="OnClick"
         android:textColor="#ffff4608" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:text="@string/reset_password"
+        android:id="@+id/resetPasswordB"
+        android:layout_gravity="center_horizontal"
+        android:onClick="getSecurityQuestion"
+        android:layout_below="@+id/btnLogin"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:textColor="#ffff4608" />
+    />
+
 
 
 </RelativeLayout>

@@ -1,7 +1,6 @@
 package com.smartx.cookies.smartx;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import models.Device;
 import models.Note;
@@ -10,6 +9,7 @@ import models.Room;
 import models.Session;
 import models.Type;
 import models.User;
+import models.securityQuestion;
 import retrofit.Callback;
 import retrofit.http.DELETE;
 import retrofit.http.Field;
@@ -20,14 +20,36 @@ import retrofit.http.PUT;
 import retrofit.http.Path;
 
 /*
- *SE Sprint2
- *myAPI.java
- *Purpose: api interface to interact with rails.
- *
- *@author Amir, zamzamy, Dalia
- */
+*SE Sprint2
+*myAPI.java
+*Purpose: api interface to interact with rails.
+*
+*@author Amir,
+*@aurthor zamzamy
+*@author Dalia
+*@author Ahmad Abdalraheem
+*/
 
 public interface myAPI {
+
+    /**
+     * gets the security question and the id of a certain user by his name
+     *
+     * @param name     the given username
+     * @param callback the callback from the rails
+     */
+    @GET("/v/users/{name}")
+    void getSecurityQuestion(@Path("name") String name, Callback<securityQuestion> callback);
+
+    /**
+     * gets the user by his id and security answer
+     *
+     * @param id        ,user id
+     * @param securityA user's security answer
+     * @param cb        the callback from the rails
+     */
+    @GET("/v/users/{id}/{securityA}")
+    void checkUser(@Path("id") String id, @Path("securityA") String securityA, Callback<List<User>> cb);
 
     @GET("/v/users/{userID}/rooms/{roomName}")
     void findRoom(@Path("userID") String id, @Path("roomName") String name, Callback<List<Room>> callback);
@@ -35,8 +57,8 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/1/devices/1/devices")
     void allDevices(@Path("userID") String id, Callback<List<Device>> callback);
 
-    @DELETE ("/session/{token}")
-    void logout(@Path("token") String access_token,Callback<Session> callback);
+    @DELETE("/session/{token}")
+    void logout(@Path("token") String access_token, Callback<Session> callback);
 
     @GET("/v/types/{name}")
     void findClickerType(@Path("name") String deviceName, Callback<List<Type>> callback);
@@ -51,15 +73,12 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/{id}")
     void getRoom(@Path("userID") String userID, @Path("id") String roomID, Callback<String> callback);
 
-
     @GET("/users/{userID}/rooms/{id}")
     void getRoom2(@Path("userID") String userID, @Path("id") String roomID, Callback<Room> callback);
-
 
     @FormUrlEncoded
     @PUT("/users/{userID}/")
     void changeInfo(@Path("userID") String id, @Field("user[email]") String email, @Field("user[password]") String password, @Field("user[phone]") String phone, Callback<User> callback);
-
 
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomId}/devices/{deviceId}/clickers/{clickerId}/")
@@ -83,14 +102,11 @@ public interface myAPI {
     @GET("/users/{userID}/rooms/{roomID}/devices")
     void viewDevices(@Path("userID") String id, @Path("roomID") String rid, Callback<List<Device>> callback);
 
-
     @GET("/types")
     void requestTypes(Callback<List<Type>> types);
 
-
     @GET("/users/{userId}/rooms/{roomId}/devices/{deviceId}/")
     void getDevice(@Path("userId") String userId, @Path("roomId") String roomId, @Path("deviceId") String deviceId, Callback<Device> callback);
-
 
     @FormUrlEncoded
     @POST("/users/{userId}/rooms/{roomId}/devices/")
@@ -115,10 +131,10 @@ public interface myAPI {
     /**
      * updates the device's room_id to new id
      *
-     * @param userId current userId
-     * @param roomId current roomId
-     * @param deviceId  curremt deviceID
-     * @param newID new roomId
+     * @param userId   current userId
+     * @param roomId   current roomId
+     * @param deviceId curremt deviceID
+     * @param newID    new roomId
      * @param callback the updated device
      */
     @FormUrlEncoded
@@ -138,7 +154,6 @@ public interface myAPI {
 
     @GET("/v/users/{userID}/rooms/{roomID}/devices/{deviceName}")
     void findDevice(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceName") String name, Callback<List<Device>> callback);
-
 
     /**
      * deletes device
@@ -165,7 +180,7 @@ public interface myAPI {
      * @param callback the callback from the rails
      */
     @GET("/users/{userId}/rooms/{roomId}/plugs/{plugId}")
-    void getPlug(@Path("userId") String userID, @Path("roomId") String roomID, @Field("plugId") String plugID, Callback <Plug> callback);
+    void getPlug(@Path("userId") String userID, @Path("roomId") String roomID, @Field("plugId") String plugID, Callback<Plug> callback);
 
     /**
      * It returns the value of favorite attribute of a specific device given its id,
@@ -178,6 +193,7 @@ public interface myAPI {
      */
     @GET("/f/users/{userID}/rooms/{roomID}/devices/{deviceID}")
     void findFavorite(@Path("userID") String userID, @Path("roomID") String roomID, @Path("deviceID") String deviceID, Callback<String> callback);
+
     /**
      * It changes the value of favorite attribute of a specific device given its id,
      * the id of user to which the device belongs and the id of room where the device exists.
@@ -203,22 +219,23 @@ public interface myAPI {
     void viewPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback<List<Plug>> callback);
 
     /**
+     * 1
      *
      * @param userID
      * @param roomID
      * @param callback
      */
     @GET("/users/{userId}/rooms/{roomId}/plugs/")
-    void getPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback <List<Plug>> callback);
+    void getPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback<List<Plug>> callback);
 
     /**
-    This method changes the status of a plug.
+     * This method changes the status of a plug.
      *
      * @param userId
      * @param roomID
      * @param callback
      * @param plugID
-     * @param status the status you want to change to
+     * @param status   the status you want to change to
      */
     @FormUrlEncoded
     @PUT("/users/{userId}/rooms/{roomID}/plugs/{plugID}")

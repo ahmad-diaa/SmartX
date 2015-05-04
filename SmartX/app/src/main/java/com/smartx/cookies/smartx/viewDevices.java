@@ -203,7 +203,10 @@ public class viewDevices extends ListActivity {
                             startActivity(new Intent(getApplicationContext(), changeInfo.class));
                             break;
                         case 4:
-                            startActivity(new Intent(getApplicationContext(), changePassword.class));
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                            rs.putExtra("id", userID);
+                            rs.putExtra("flag", 0);
+                            startActivity(rs);
                             break;
                         case 5:
                             reportProblemP(child);
@@ -456,7 +459,6 @@ public class viewDevices extends ListActivity {
      * @param room
      */
     public void renderViewNotes(int itemPosition, int user, int room) {
-
         String deviceSelected = getListView().getItemAtPosition(itemPosition).toString();
         final RestAdapter ADAPTER =
                 new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();

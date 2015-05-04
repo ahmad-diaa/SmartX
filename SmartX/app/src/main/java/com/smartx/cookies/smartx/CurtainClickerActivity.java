@@ -103,7 +103,10 @@ public class CurtainClickerActivity extends ActionBarActivity {
                             startActivity(new Intent(getApplicationContext(), changeInfo.class));
                             break;
                         case 4:
-                            startActivity(new Intent(getApplicationContext(), changePassword.class));
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                            rs.putExtra("id", userID);
+                            rs.putExtra("flag", 0);
+                            startActivity(rs);
                             break;
                         case 5:
                             reportProblemP(child);
@@ -114,7 +117,9 @@ public class CurtainClickerActivity extends ActionBarActivity {
                         case 7:
                             startActivity(new Intent(getApplicationContext(), About_us.class));
                             break;
-                        case 8: logout(child);break;
+                        case 8:
+                            logout(child);
+                            break;
 
                     }
                     return true;

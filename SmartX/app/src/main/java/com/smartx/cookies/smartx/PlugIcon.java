@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,8 +28,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * @author  zamzamy on 1/5/15.
- * The purpose of this activity is to allow the user to choose the icon of the plug to be added.
+ * @author zamzamy on 1/5/15.
+ *         The purpose of this activity is to allow the user to choose the icon of the plug to be added.
  */
 
 public class PlugIcon extends Activity {
@@ -56,13 +54,15 @@ public class PlugIcon extends Activity {
     RecyclerView.LayoutManager mLayoutManager;
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
+
     /**
      * Called when the activity starts. it gets the plug name and id from the previous activity
      * through the shared preferences and waits for the user to choose an icon for the plug and
      * then initiates the new plug and returns back to viewDevices.class
+     *
      * @param savedInstanceState if the activity is being
-    re-initialized after previously being shut down then
-    this Bundle  contains the data it most recently supplied.
+     *                           re-initialized after previously being shut down then
+     *                           this Bundle  contains the data it most recently supplied.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +139,10 @@ public class PlugIcon extends Activity {
                             startActivity(new Intent(getApplicationContext(), changeInfo.class));
                             break;
                         case 4:
-                            startActivity(new Intent(getApplicationContext(), changePassword.class));
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                            rs.putExtra("id", userID);
+                            rs.putExtra("flag", 0);
+                            startActivity(rs);
                             break;
                         case 5:
                             reportProblemP(child);
@@ -150,7 +153,9 @@ public class PlugIcon extends Activity {
                         case 7:
                             startActivity(new Intent(getApplicationContext(), About_us.class));
                             break;
-                        case 8: logout(child);break;
+                        case 8:
+                            logout(child);
+                            break;
 
                     }
                     return true;
@@ -179,7 +184,7 @@ public class PlugIcon extends Activity {
         };
         Drawer.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
-}
+    }
 
     /**
      * Initializes the grid icons to their corresbonding images.

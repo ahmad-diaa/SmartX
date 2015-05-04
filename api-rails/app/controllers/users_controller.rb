@@ -7,13 +7,37 @@ class UsersController < ApplicationController
     @users = User.all
     render json: @users if stale?(etag: @users.all, last_modified: @users.maximum(:updated_at))
   end
-  
+
+# GET /v1/user/name
+# GET /v1/user/name.json
+  def security
+    @user = User.where( :name => params[:name] )
+    if(@user.blank?)
+      render json: array.errors, status: :unprocessable_entity
+      else
+        array = []
+        array = Array.new
+        array = {'securityQ' => @user.last.securityQ, 'id' => @user.last.id}
+        render json:  array
+    end
+  end  
+    # GET /v1/user/id/answer
+  # GET /v1/user/id/answer.json
+  def answer 
+      @user = User.where( :id => params[:id], :securityA =>params[:securityA])
+      if(@user.blank?)
+       render json: @user.errors, status: :unprocessable_entity
+       else
+         render json:  @user
+      end
+  end
+
+
   #Returns user with a given id. 
   # GET /users/1
   # GET /users/1.json
   def show
-    
-    render json: @user if stale?(@user)
+        render json: @user if stale?(@user)
   end
 
   #Creates user with given parameters.
@@ -47,6 +71,7 @@ class UsersController < ApplicationController
     head :no_content
   end
 
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
@@ -55,6 +80,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:name, :password, :email, :phone)
+    params.require(:user).permit(:name, :password, :email, :phone, :securityQ , :securityA)
   end
 end

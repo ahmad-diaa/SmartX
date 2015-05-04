@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.smartx.cookies.smartx">
+    package="com.smartx.cookies.smartx" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-feature
@@ -20,19 +20,19 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:theme="@android:style/Theme.Holo.NoActionBar">
+        android:theme="@android:style/Theme.Holo.NoActionBar" >
         <activity
             android:name=".viewDevices"
             android:exported="true"
-            android:label="@string/title_activity_view_devices"></activity>
+            android:label="@string/title_activity_view_devices" />
         <activity
             android:name=".deviceList"
-            android:label="@string/title_activity_device_list"></activity>
+            android:label="@string/title_activity_device_list" />
         <activity
             android:name=".LoginActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,8 +43,7 @@
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_main"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".About_us"
             android:label="@string/app_name" />
@@ -55,40 +54,46 @@
             android:name=".addRoomsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".addDevices"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_add_devices"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ViewRooms"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="View Rooms"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Settings"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".ViewDeviceActivity"
-            android:label="@string/title_activity_view_device"></activity>
+            android:label="@string/title_activity_view_device" />
         <activity
             android:name=".ViewNotesActivity"
-            android:label="@string/title_activity_view_notes"></activity>
+            android:label="@string/title_activity_view_notes" />
         <activity
             android:name=".AddNoteActivity"
-            android:label="@string/title_activity_add_note"></activity>
+            android:label="@string/title_activity_add_note" />
         <activity
             android:name=".changePassword"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="Change Password"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".answerSecurityQuestion"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_answer_security_question"
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".renameRoomActivity"
-            android:label="@string/title_activity_rename_room"></activity>
+            android:label="@string/title_activity_rename_room" />
         <activity
             android:name=".changeInfo"
-            android:label="@string/title_activity_change_info"></activity>
+            android:label="@string/title_activity_change_info" />
         <activity
             android:name=".TvClickerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -96,7 +101,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".AddPlug"
-            android:label="@string/title_activity_add_plug"></activity>
+            android:label="@string/title_activity_add_plug" />
         <activity
             android:name=".PlugIcon"
             android:label="@string/title_activity_plug_icon"
@@ -108,12 +113,12 @@
         <activity
             android:name=".defaultClickerActivity"
             android:label="@string/title_activity_default_clicker"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".LampClickerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_lamp_clicker"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat" />
 
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -124,11 +129,14 @@
         <activity
             android:name=".CurtainClickerActivity"
             android:label="@string/title_activity_curtain_clicker"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".ViewPlugs"
-            android:label="@string/title_activity_view_plugs"
-         ></activity>
+            android:label="@string/title_activity_view_plugs" />
+        <activity
+            android:name=".resetPassword"
+            android:label="@string/title_activity_reset_password" >
+        </activity>
     </application>
 
 </manifest>

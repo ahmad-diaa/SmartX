@@ -42,15 +42,16 @@ public class changeInfo extends Activity {
     private String phone;
     private String originalPass;
     private int userID;
-    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","Report a problem","About us","Logout"};
-    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.call,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
-    String name ;
+    String titles[] = {"View Favorites", "View Rooms", "Edit Information", "Change Password", "Contact us", "Report a problem", "About us", "Logout"};
+    int icons[] = {R.mipmap.star, R.mipmap.room, R.mipmap.pencil, R.mipmap.lock, R.mipmap.call, R.mipmap.help, R.mipmap.home, R.mipmap.bye};
+    String name;
     int profile = R.mipmap.smartorange2;
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
+
     public String getEmail() {
         return email;
     }
@@ -109,11 +110,12 @@ public class changeInfo extends Activity {
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
         name = (mSharedPreference.getString("Name", ""));
-        mAdapter = new SideBarAdapter(titles,icons,name,profile,this);
+        mAdapter = new SideBarAdapter(titles, icons, name, profile, this);
         mRecyclerView.setAdapter(mAdapter);
         final GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 
-            @Override public boolean onSingleTapUp(MotionEvent e) {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
                 return true;
             }
 
@@ -122,18 +124,37 @@ public class changeInfo extends Activity {
 
             @Override
             public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-                View child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
-                if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     Drawer.closeDrawers();
-                    switch (recyclerView.getChildPosition(child)){
-                        case 1: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 2: startActivity(new Intent(getApplicationContext(), ViewRooms.class));break;
-                        case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
-                        case 4: startActivity(new Intent(getApplicationContext(), changePassword.class));break;
-                        case 5: reportProblemP(child);break;
-                        case 6: reportProblemE(child);break;
-                        case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 8: logout(child);break;
+                    switch (recyclerView.getChildPosition(child)) {
+                        case 1:
+                            startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));
+                            break;
+                        case 2:
+                            startActivity(new Intent(getApplicationContext(), ViewRooms.class));
+                            break;
+                        case 3:
+                            startActivity(new Intent(getApplicationContext(), changeInfo.class));
+                            break;
+                        case 4:
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                            rs.putExtra("id", userID);
+                            rs.putExtra("flag", 0);
+                            startActivity(rs);
+                            break;
+                        case 5:
+                            reportProblemP(child);
+                            break;
+                        case 6:
+                            reportProblemE(child);
+                            break;
+                        case 7:
+                            startActivity(new Intent(getApplicationContext(), About_us.class));
+                            break;
+                        case 8:
+                            logout(child);
+                            break;
                     }
                     return true;
                 }
@@ -147,7 +168,7 @@ public class changeInfo extends Activity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
-        mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,R.string.openDrawer,R.string.closeDrawer){
+        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -166,7 +187,7 @@ public class changeInfo extends Activity {
     /**
      * it takes the input from the user to change his information,it toast whether the information is updated or not,
      *
-     * @param v the view of the activity, it take the
+     * @param v the view of the activity.
      */
     public void changeInfo(View v) {
         email = emailTxt.getText().toString();
@@ -218,17 +239,19 @@ public class changeInfo extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     /**
-     *It allows the user to email his problem,
+     * It allows the user to email his problem,
+     *
      * @param v the view of the activity
      */
 
-    public void reportProblemE(View v){
+    public void reportProblemE(View v) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"ahmaddiaa93@gmail.com"});
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"ahmaddiaa93@gmail.com"});
         i.putExtra(Intent.EXTRA_SUBJECT, "My problem is regarding");
-        i.putExtra(Intent.EXTRA_TEXT   , "Explain Your problem here");
+        i.putExtra(Intent.EXTRA_TEXT, "Explain Your problem here");
         try {
             startActivity(Intent.createChooser(i, "Send mail..."));
         } catch (android.content.ActivityNotFoundException ex) {
@@ -237,11 +260,12 @@ public class changeInfo extends Activity {
     }
 
     /**
-     *It allows the user to call the company in order to report his problem,
+     * It allows the user to call the company in order to report his problem,
+     *
      * @param v the view of the activity
      */
 
-    public void reportProblemP(View v){
+    public void reportProblemP(View v) {
 
         String number = "01117976333";
         Intent intent = new Intent(Intent.ACTION_CALL);
