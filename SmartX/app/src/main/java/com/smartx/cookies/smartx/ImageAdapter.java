@@ -6,11 +6,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 
 /**
  * @author zamzamy on 4/30/15.
- * The purpose of this class is to initialize the photos of the plug icons in the PlugIcon.class
+ *         The purpose of this class is to initialize the photos of the plug icons in the PlugIcon.class
  */
 public class ImageAdapter extends BaseAdapter {
 

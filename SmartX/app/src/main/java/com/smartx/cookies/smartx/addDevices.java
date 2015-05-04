@@ -34,8 +34,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- *SE Sprint1
- *addDevices.java
+ * SE Sprint1
+ * addDevices.java
  * Purpose: Add devices to rooms.
  *
  * @author Amir
@@ -71,25 +71,26 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
      * Instance of class myApi.
      */
     private myAPI api;
-    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","Report a problem","About us","Logout"};
-    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.call,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
-    String name ;
+    String titles[] = {"View Favorites", "View Rooms", "Edit Information", "Change Password", "Contact us", "Report a problem", "About us", "Logout"};
+    int icons[] = {R.mipmap.star, R.mipmap.room, R.mipmap.pencil, R.mipmap.lock, R.mipmap.call, R.mipmap.help, R.mipmap.home, R.mipmap.bye};
+    String name;
     int profile = R.mipmap.smartorange2;
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
     RecyclerView.LayoutManager mLayoutManager;
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
+
     /**
-     *Called when the activity is starting.
-     It requests from rails list of available types for devices
-     and shows them in the spinner. AddDevice method posts to rails a new device to be created
-     for current user in a specific room then Activity ViewDevices
-     starts showing all user's devices in this room including the new one.
+     * Called when the activity is starting.
+     * It requests from rails list of available types for devices
+     * and shows them in the spinner. AddDevice method posts to rails a new device to be created
+     * for current user in a specific room then Activity ViewDevices
+     * starts showing all user's devices in this room including the new one.
      *
      * @param savedInstanceState if the activity is being
-    re-initialized after previously being shut down then
-    this Bundle  contains the data it most recently supplied.
+     *                           re-initialized after previously being shut down then
+     *                           this Bundle  contains the data it most recently supplied.
      */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,12 +98,10 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         final SharedPreferences SHARED_PREFERENCE =
                 PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        userID = (SHARED_PREFERENCE .getInt("userID", 1));
-        roomID = (SHARED_PREFERENCE .getInt("roomID", 1));
+        userID = (SHARED_PREFERENCE.getInt("userID", 1));
+        roomID = (SHARED_PREFERENCE.getInt("roomID", 1));
         deviceID = (EditText) findViewById(R.id.device_id);
-
         RestAdapter adapter = new RestAdapter.Builder().setEndpoint(getResources().getString(R.string.ENDPOINT)).build();
-
         api = adapter.create(myAPI.class);
         deviceSpinner = (Spinner) findViewById(R.id.device_spinner);
         deviceSpinner.setOnItemSelectedListener(this);
@@ -117,31 +116,26 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
                     devices.add(s);
                 }
             }
-
             @Override
             public void failure(RetrofitError error) {
                 throw error;
             }
         });
-
         devices.add("None");
-
         ArrayAdapter<String> dataAdapter =
                 new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, devices);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         deviceSpinner.setAdapter(dataAdapter);
-
         addDeviceButton = (Button) findViewById(R.id.addDeviceButton);
         addDeviceButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if ((deviceSpinner.getSelectedItem().toString().equals("None")) ||
                         deviceID.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "Please Fill in the Blank spaces", Toast.LENGTH_LONG).show();
                 } else {
                     Device device = new Device(deviceSpinner.getSelectedItem().toString(), roomID, userID, deviceID.getText().toString(), "off");
-                    api.addDevice(device.getUserID() + " ", device.getRoomID() + "",device.getDeviceID() ,device.getName(), device.getStatus(), new Callback<Device>() {
+                    api.addDevice(device.getUserID() + " ", device.getRoomID() + "", device.getDeviceID(), device.getName(), device.getStatus(), new Callback<Device>() {
                         @Override
                         public void success(Device device, Response response) {
                             SharedPreferences prefs =
@@ -149,47 +143,35 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
                             SharedPreferences.Editor editor = prefs.edit();
                             editor.putString("deviceID", deviceID.getText().toString());
                             editor.commit();
-                            api.addClicker(device.getUserID() + " ", device.getRoomID() + "",device.getDeviceID(),device.getDeviceID()+"/false",new Callback<Clicker>() {
+                            api.addClicker(device.getUserID() + " ", device.getRoomID() + "", device.getDeviceID(), device.getDeviceID() + "/false", new Callback<Clicker>() {
                                 @Override
                                 public void success(Clicker clicker, Response response) {
                                     startActivity(new Intent(getApplicationContext(), viewDevices.class));
-
                                 }
-
                                 @Override
                                 public void failure(RetrofitError error) {
                                     Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-
-
                                 }
                             });
-
                         }
-
                         @Override
                         public void failure(RetrofitError error) {
                             Toast.makeText(getApplicationContext(), "Cannot Add A Device!", Toast.LENGTH_LONG).show();
-
                         }
-
-
                     });
-
-
                 }
             }
-
         });
-
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
         mRecyclerView.setHasFixedSize(true);
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         name = (mSharedPreference.getString("Name", ""));
-        mAdapter = new SideBarAdapter(titles,icons,name,profile,this);
+        mAdapter = new SideBarAdapter(titles, icons, name, profile, this);
         mRecyclerView.setAdapter(mAdapter);
         final GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
 
-            @Override public boolean onSingleTapUp(MotionEvent e) {
+            @Override
+            public boolean onSingleTapUp(MotionEvent e) {
                 return true;
             }
 
@@ -198,22 +180,37 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
 
             @Override
             public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-                View child = recyclerView.findChildViewUnder(motionEvent.getX(),motionEvent.getY());
-                if(child!=null && mGestureDetector.onTouchEvent(motionEvent)){
+                View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+                if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     Drawer.closeDrawers();
-                    switch (recyclerView.getChildPosition(child)){
-                        case 1: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 2: startActivity(new Intent(getApplicationContext(), ViewRooms.class));break;
-                        case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
-                        case 4: Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                    switch (recyclerView.getChildPosition(child)) {
+                        case 1:
+                            startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));
+                            break;
+                        case 2:
+                            startActivity(new Intent(getApplicationContext(), ViewRooms.class));
+                            break;
+                        case 3:
+                            startActivity(new Intent(getApplicationContext(), changeInfo.class));
+                            break;
+                        case 4:
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
                             rs.putExtra("id", userID);
-                            rs.putExtra("flag",0);
+                            rs.putExtra("flag", 0);
                             startActivity(rs);
                             break;
-                        case 5: reportProblemP(child);break;
-                        case 6: reportProblemE(child);break;
-                        case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 8: logout(child);break;
+                        case 5:
+                            reportProblemP(child);
+                            break;
+                        case 6:
+                            reportProblemE(child);
+                            break;
+                        case 7:
+                            startActivity(new Intent(getApplicationContext(), About_us.class));
+                            break;
+                        case 8:
+                            logout(child);
+                            break;
                     }
                     return true;
                 }
@@ -227,7 +224,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         Drawer = (DrawerLayout) findViewById(R.id.DrawerLayout);
-        mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,R.string.openDrawer,R.string.closeDrawer){
+        mDrawerToggle = new ActionBarDrawerToggle(this, Drawer, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -244,22 +241,22 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *This method will be called when no type for the device is selected.
+     * This method will be called when no type for the device is selected.
      *
      * @param arg0 the AdapterView where the click happened.
      */
     public void onNothingSelected(AdapterView arg0) {
-        Toast.makeText(arg0.getContext(),"Nothing Selected" , Toast.LENGTH_LONG).show();
+        Toast.makeText(arg0.getContext(), "Nothing Selected", Toast.LENGTH_LONG).show();
     }
 
     /**
-     *This method will be called when a type for the device is selected.
-     The name of the type clicked will show up.
+     * This method will be called when a type for the device is selected.
+     * The name of the type clicked will show up.
      *
-     * @param parent the AdapterView where the click happened.
-     * @param view the view that was clicked within the ListView.
+     * @param parent   the AdapterView where the click happened.
+     * @param view     the view that was clicked within the ListView.
      * @param position the position of the view in the list.
-     * @param id the row id of the item that was clicked.
+     * @param id       the row id of the item that was clicked.
      */
 
     @Override
@@ -268,15 +265,10 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         parent.setSelection(position);
         String item = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-
     }
 
-
-
-
-
     /**
-     *get the button clicked to add a device.
+     * get the button clicked to add a device.
      *
      * @return button
      */
@@ -285,16 +277,16 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *set the button clicked to add a device.
+     * set the button clicked to add a device.
      *
      * @param addDeviceButton
      */
-    public void setButton(Button  addDeviceButton) {
-        this. addDeviceButton =  addDeviceButton;
+    public void setButton(Button addDeviceButton) {
+        this.addDeviceButton = addDeviceButton;
     }
 
     /**
-     *get api.
+     * get api.
      *
      * @return api
      */
@@ -303,7 +295,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *set api.
+     * set api.
      *
      * @param api
      */
@@ -312,8 +304,8 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *get the endpoint composed of the ip address of network
-     plus the port number of server.
+     * get the endpoint composed of the ip address of network
+     * plus the port number of server.
      *
      * @return the endpoint
      */
@@ -321,9 +313,8 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
         return getResources().getString(R.string.ENDPOINT);
     }
 
-
     /**
-     *get id of the user.
+     * get id of the user.
      *
      * @return primary key of the user.
      */
@@ -332,7 +323,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *set id of the user.
+     * set id of the user.
      *
      * @param userID the primary key of the user.
      */
@@ -341,7 +332,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *get id of the room where a device is to be added.
+     * get id of the room where a device is to be added.
      *
      * @return primary key of the room.
      */
@@ -350,7 +341,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *set id of the room where a device is to be added.
+     * set id of the room where a device is to be added.
      *
      * @param roomID the primary key of the room.
      */
@@ -359,7 +350,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *get the spinner that shows different types of devices.
+     * get the spinner that shows different types of devices.
      *
      * @return spinner
      */
@@ -368,7 +359,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *set the spinner that shows different types of devices.
+     * set the spinner that shows different types of devices.
      *
      * @param deviceSpinner
      */
@@ -377,7 +368,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *get the EditText that holds controller id.
+     * get the EditText that holds controller id.
      *
      * @return EditText
      */
@@ -386,7 +377,7 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *set the EditText that holds controller id.
+     * set the EditText that holds controller id.
      *
      * @param deviceID
      */
@@ -395,16 +386,17 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *It allows the user to email his problem,
+     * It allows the user to email his problem,
+     *
      * @param v the view of the activity
      */
 
-    public void reportProblemE(View v){
+    public void reportProblemE(View v) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"ahmaddiaa93@gmail.com"});
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"ahmaddiaa93@gmail.com"});
         i.putExtra(Intent.EXTRA_SUBJECT, "My problem is regarding");
-        i.putExtra(Intent.EXTRA_TEXT   , "Explain Your problem here");
+        i.putExtra(Intent.EXTRA_TEXT, "Explain Your problem here");
         try {
             startActivity(Intent.createChooser(i, "Send mail..."));
         } catch (android.content.ActivityNotFoundException ex) {
@@ -413,11 +405,12 @@ public class addDevices extends Activity implements AdapterView.OnItemSelectedLi
     }
 
     /**
-     *It allows the user to call the company in order to report his problem,
+     * It allows the user to call the company in order to report his problem,
+     *
      * @param v the view of the activity
      */
 
-    public void reportProblemP(View v){
+    public void reportProblemP(View v) {
 
         String number = "01117976333";
         Intent intent = new Intent(Intent.ACTION_CALL);

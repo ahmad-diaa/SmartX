@@ -3,6 +3,7 @@ package com.smartx.cookies.smartx;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -11,7 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
-import android.graphics.Color;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,9 +21,11 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import models.Note;
 import models.Session;
 import retrofit.Callback;
@@ -44,9 +46,9 @@ public class ViewNotesActivity extends ListActivity {
     private int roomID;
     private int userID;
     private String deviceID;
-    String titles[] = {"View Favorites","View Rooms","Edit Information","Change Password","Contact us","Report a problem","About us","Logout"};
-    int icons[] = {R.mipmap.star,R.mipmap.room,R.mipmap.pencil,R.mipmap.lock,R.mipmap.call,R.mipmap.help,R.mipmap.home,R.mipmap.bye};
-    String name ;
+    String titles[] = {"View Favorites", "View Rooms", "Edit Information", "Change Password", "Contact us", "Report a problem", "About us", "Logout"};
+    int icons[] = {R.mipmap.star, R.mipmap.room, R.mipmap.pencil, R.mipmap.lock, R.mipmap.call, R.mipmap.help, R.mipmap.home, R.mipmap.bye};
+    String name;
     int profile = R.mipmap.smartorange2;
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
@@ -90,18 +92,33 @@ public class ViewNotesActivity extends ListActivity {
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     Drawer.closeDrawers();
                     switch (recyclerView.getChildPosition(child)) {
-                        case 1: startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));break;
-                        case 2: startActivity(new Intent(getApplicationContext(), ViewRooms.class));break;
-                        case 3: startActivity(new Intent(getApplicationContext(), changeInfo.class));break;
-                        case 4:  Intent rs = new Intent(getApplicationContext(), changePassword.class);
+                        case 1:
+                            startActivity(new Intent(getApplicationContext(), addRoomsActivity.class));
+                            break;
+                        case 2:
+                            startActivity(new Intent(getApplicationContext(), ViewRooms.class));
+                            break;
+                        case 3:
+                            startActivity(new Intent(getApplicationContext(), changeInfo.class));
+                            break;
+                        case 4:
+                            Intent rs = new Intent(getApplicationContext(), changePassword.class);
                             rs.putExtra("id", userID);
-                            rs.putExtra("flag",0);
+                            rs.putExtra("flag", 0);
                             startActivity(rs);
                             break;
-                        case 5: reportProblemP(child);break;
-                        case 6: reportProblemE(child);break;
-                        case 7: startActivity(new Intent(getApplicationContext(), About_us.class));break;
-                        case 8: logout(child);break;
+                        case 5:
+                            reportProblemP(child);
+                            break;
+                        case 6:
+                            reportProblemE(child);
+                            break;
+                        case 7:
+                            startActivity(new Intent(getApplicationContext(), About_us.class));
+                            break;
+                        case 8:
+                            logout(child);
+                            break;
                     }
                     return true;
                 }
@@ -132,7 +149,7 @@ public class ViewNotesActivity extends ListActivity {
     }
 
     /**
-     *  Gets notes from rails server and adds it to the list to be viewed.
+     * Gets notes from rails server and adds it to the list to be viewed.
      */
     public void setList() {
         final RestAdapter adapter =
@@ -207,16 +224,17 @@ public class ViewNotesActivity extends ListActivity {
     }
 
     /**
-     *It allows the user to email his problem,
+     * It allows the user to email his problem,
+     *
      * @param v the view of the activity
      */
 
-    public void reportProblemE(View v){
+    public void reportProblemE(View v) {
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
-        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"ahmaddiaa93@gmail.com"});
+        i.putExtra(Intent.EXTRA_EMAIL, new String[]{"ahmaddiaa93@gmail.com"});
         i.putExtra(Intent.EXTRA_SUBJECT, "My problem is regarding");
-        i.putExtra(Intent.EXTRA_TEXT   , "Explain Your problem here");
+        i.putExtra(Intent.EXTRA_TEXT, "Explain Your problem here");
         try {
             startActivity(Intent.createChooser(i, "Send mail..."));
         } catch (android.content.ActivityNotFoundException ex) {
@@ -225,17 +243,19 @@ public class ViewNotesActivity extends ListActivity {
     }
 
     /**
-     *It allows the user to call the company in order to report his problem,
+     * It allows the user to call the company in order to report his problem,
+     *
      * @param v the view of the activity
      */
 
-    public void reportProblemP(View v){
+    public void reportProblemP(View v) {
 
         String number = "01117976333";
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + number));
         startActivity(intent);
     }
+
     /**
      * When the user click on logout, this method is called, it sends a request to delete the user's session after it succeed it renders login View after it sends
      *

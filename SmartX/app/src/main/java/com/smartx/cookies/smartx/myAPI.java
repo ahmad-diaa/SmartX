@@ -131,10 +131,10 @@ public interface myAPI {
     /**
      * updates the device's room_id to new id
      *
-     * @param userId current userId
-     * @param roomId current roomId
-     * @param deviceId  curremt deviceID
-     * @param newID new roomId
+     * @param userId   current userId
+     * @param roomId   current roomId
+     * @param deviceId curremt deviceID
+     * @param newID    new roomId
      * @param callback the updated device
      */
     @FormUrlEncoded
@@ -218,7 +218,8 @@ public interface myAPI {
     @GET("/users/{userId}/rooms/{roomId}/plugs/")
     void viewPlugs(@Path("userId") String userID, @Path("roomId") String roomID, Callback<List<Plug>> callback);
 
-    /**1
+    /**
+     * 1
      *
      * @param userID
      * @param roomID

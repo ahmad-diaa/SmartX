@@ -4,10 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,17 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import models.Device;
 import models.Plug;
 import models.Session;
 import retrofit.Callback;
@@ -37,6 +32,7 @@ import retrofit.client.Response;
 /**
  * Renders all the plugs found in the room the user selected.
  * It allows control over the plugs such as turning on/off, deletion, renaming, and searching.
+ *
  * @author zamzamy 1/5/2015
  */
 
@@ -54,6 +50,7 @@ public class ViewPlugs extends Activity {
     RecyclerView.LayoutManager mLayoutManager;
     DrawerLayout Drawer;
     ActionBarDrawerToggle mDrawerToggle;
+
     /**
      * @return the userID.
      */
@@ -62,7 +59,6 @@ public class ViewPlugs extends Activity {
     }
 
     /**
-     *
      * @return the roomID.
      */
     public int getRoomID() {
@@ -80,7 +76,6 @@ public class ViewPlugs extends Activity {
     private SharedPreferences prefs;
 
     /**
-     *
      * @param savedInstanceState The previous state of the activity in case the activity crashes and
      *                           is rendered once again.
      */
@@ -166,9 +161,10 @@ public class ViewPlugs extends Activity {
                         case 4:
                             Intent rs = new Intent(getApplicationContext(), changePassword.class);
                             rs.putExtra("id", userID);
-                            rs.putExtra("flag",0);
+                            rs.putExtra("flag", 0);
                             startActivity(rs);
-                            break;                        case 5:
+                            break;
+                        case 5:
                             reportProblemP(child);
                             break;
                         case 6:
@@ -177,7 +173,9 @@ public class ViewPlugs extends Activity {
                         case 7:
                             startActivity(new Intent(getApplicationContext(), About_us.class));
                             break;
-                        case 8: logout(child);break;
+                        case 8:
+                            logout(child);
+                            break;
 
                     }
                     return true;

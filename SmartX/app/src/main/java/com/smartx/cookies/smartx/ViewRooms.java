@@ -48,11 +48,8 @@ import retrofit.client.Response;
  * Purpose: viewing all the rooms of the user as well as searching for a certain room by name
  *
  * @author Dalia Maarek
- *         <<<<<<< HEAD
  * @author Amir
- *         =======
  * @author Ahmad Abdalraheem
- *         >>>>>>> origin/Sprint_Two
  */
 
 public class ViewRooms extends ListActivity {

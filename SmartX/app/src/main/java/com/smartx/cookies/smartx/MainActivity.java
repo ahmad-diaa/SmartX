@@ -1,5 +1,3 @@
-
-
 package com.smartx.cookies.smartx;
 
 import android.app.Activity;
