@@ -29,14 +29,15 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_above="@+id/viewdevices"
-        android:layout_alignParentTop="true"
         android:columnWidth="70dp"
         android:numColumns="auto_fit"
         android:verticalSpacing="20dp"
         android:horizontalSpacing="20dp"
         android:stretchMode="columnWidth"
         android:gravity="center"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editSearch" />
 
     <Button
         android:layout_width="wrap_content"
@@ -46,6 +47,20 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editSearch"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/gridicons"
+        android:layout_alignEnd="@+id/gridicons"
+        android:hint="Search for plug..."  >
+        <requestFocus />
+    </EditText>
+
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerView"
@@ -57,3 +72,4 @@
     </android.support.v7.widget.RecyclerView>
 
 </android.support.v4.widget.DrawerLayout>
+

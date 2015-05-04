@@ -32,7 +32,7 @@
     <string name= "title_activity_default_clicker">defaultClicker</string>
     <string name= "title_activity_lamp_clicker">LampClicker</string>
     <string name= "title_activity_curtain_clicker">CurtainsClicker</string>
-    <string name="ENDPOINT">http://172.20.10.3:3000/</string>
+    <string name="ENDPOINT">http://192.168.43.249:3000/</string>
     <string name="title_activity_view_plugs">ViewPlugs</string>
 
 </resources>
