@@ -20,24 +20,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
 import models.Plug;
 import models.Session;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+
 /**
  * Renders all the plugs found in the room the user selected.
  * It allows control over the plugs such as turning on/off, deletion, renaming, and searching.
  * @author zamzamy 1/5/2015
  * @author maggiemoheb
  */
+
 public class ViewPlugs extends Activity {
     GridView grid;
     RestAdapter adapter;
@@ -66,6 +66,7 @@ public class ViewPlugs extends Activity {
     /**
      * @return the userID.
      */
+
     public int getUserID() {
         return userID;
     }
@@ -74,6 +75,7 @@ public class ViewPlugs extends Activity {
      *
      * @return the roomID.
      */
+
     public int getRoomID() {
         return roomID;
     }
@@ -82,6 +84,7 @@ public class ViewPlugs extends Activity {
      * a setter for plug names
      * @param plugNames
      */
+
     public void setPlugNames(ArrayList<String> plugNames) {
         this.plugNames = plugNames;
     }
@@ -90,6 +93,7 @@ public class ViewPlugs extends Activity {
      * A getter for plug names
      * @return plugNames which is names of plugs in grid
      */
+
     public ArrayList<String> getPlugNames() {
         return this.plugNames;
     }
@@ -99,6 +103,7 @@ public class ViewPlugs extends Activity {
      * @param savedInstanceState The previous state of the activity in case the activity crashes and
      *                           is rendered once again.
      */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -245,6 +250,7 @@ public class ViewPlugs extends Activity {
     /**
      * Initializes the grid icons to their corresponding images.
      */
+
     public void initGrid() {
         photoID = new ArrayList<Integer>();
         for (int i = 0; i < photos.length; i++) {
@@ -341,6 +347,7 @@ public class ViewPlugs extends Activity {
      *
      * @param v it takes the view
      */
+
     public void logout(View v) {
         final SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String token = (mSharedPreference.getString("token", "222245asa"));
@@ -357,7 +364,6 @@ public class ViewPlugs extends Activity {
             public void failure(RetrofitError error) {
             }
         });
-
     }
 }
 

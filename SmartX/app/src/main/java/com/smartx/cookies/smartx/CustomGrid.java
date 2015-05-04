@@ -36,6 +36,7 @@ public class CustomGrid extends BaseAdapter {
      *
      * @return the number of plugs in the grid.
      */
+
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
@@ -46,6 +47,7 @@ public class CustomGrid extends BaseAdapter {
      * a getter for plug names
      * @return the plugnames in the grid
      */
+
     public ArrayList<String> getPlugNames() {
         return this.plugNames;
     }
@@ -55,6 +57,7 @@ public class CustomGrid extends BaseAdapter {
      * @return the object found at the given position.
      * This method is useless to us so it returns a null by default.
      */
+
     @Override
     public Object getItem(int position) {
         return null;
@@ -65,6 +68,7 @@ public class CustomGrid extends BaseAdapter {
      * @return the id of the element found at the given position.
      * This method is useless so it returns a 0 by default.
      */
+
     @Override
     public long getItemId(int position) {
         // TODO Auto-generated method stub
@@ -80,6 +84,7 @@ public class CustomGrid extends BaseAdapter {
      * @param parent      parent of the element to be initialized
      * @return the view of the initialized elements
      */
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
@@ -105,6 +110,7 @@ public class CustomGrid extends BaseAdapter {
      * this method filters what appears in te grid depending on what is written in the search bar
      * @param charText text in search bar
      */
+
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
         plugNames.clear();
